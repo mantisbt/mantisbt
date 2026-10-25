@@ -2,7 +2,7 @@
 /** MantisBT - a php based bugtracking system
  *
  * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2016  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * Copyright (C) 2002 - 2026  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  *
  * MantisBT is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -43,36 +43,33 @@
  * @author Nerogaf
  * @author Red Winged Duck
  * @author Renessaince
+ * @author Ucukor
  */
 
 $s_plugin_MantisGraph_title = 'Графікі MantisBT';
 $s_plugin_MantisGraph_description = 'Афіцыйнае дапаўненьне для графікаў.';
 $s_plugin_MantisGraph_config = 'Канфігурацыя';
 $s_plugin_MantisGraph_tab_label = 'Графікі';
-$s_plugin_MantisGraph_status_link = 'Па статусе';
+$s_plugin_MantisGraph_status_link = 'Водле статуса';
 $s_plugin_MantisGraph_priority_link = 'Па прыярытэце';
 $s_plugin_MantisGraph_severity_link = 'Па сур’ёзнасьці';
 $s_plugin_MantisGraph_category_link = 'Па катэгорыі';
-$s_plugin_MantisGraph_resolution_link = 'Па вырашэньні';
+$s_plugin_MantisGraph_resolution_link = 'Водле рашэньня';
 $s_plugin_MantisGraph_issue_trends_link = 'Тэндэнцыі праблемаў';
 $s_plugin_MantisGraph_graph_imp_status_title = 'Паводле графікаў статусаў';
 $s_plugin_MantisGraph_graph_imp_priority_title = 'Паводле прыярытэту графікаў';
 $s_plugin_MantisGraph_graph_imp_severity_title = 'Паводле сур’ёзнасьці графікаў';
 $s_plugin_MantisGraph_graph_imp_category_title = 'Паводле катэгорыі графікаў';
-$s_plugin_MantisGraph_graph_imp_resolution_title = 'Паводле вырашэньня графікаў';
+$s_plugin_MantisGraph_graph_imp_resolution_title = 'Ґрафікі паводле рашэньняў';
+$s_plugin_MantisGraph_graph_project_title = 'Ґрафікі водле праектаў';
 $s_plugin_MantisGraph_graph_developer_title = 'Паводле распрацоўнікаў графікаў';
 $s_plugin_MantisGraph_graph_reporter_title = 'Дыяграмы паводле ініцыятараў';
-$s_plugin_MantisGraph_graph_issues_trend_title = 'Адкрытыя, вырашаныя і астатнія праблемы';
-$s_plugin_MantisGraph_by_status_pct = 'Па статусе ў адсотках';
-$s_plugin_MantisGraph_by_priority_pct = 'Па прыярытэце ў адсотках';
-$s_plugin_MantisGraph_by_severity_pct = 'Па сур’ёзнасьці ў адсотках';
-$s_plugin_MantisGraph_by_category_pct = 'Па катэгорыях у адсотках';
-$s_plugin_MantisGraph_by_resolution_pct = 'Па вырашэньні ў адсотках';
+$s_plugin_MantisGraph_graph_issues_trend_title = 'Адкрытыя, разьвязаныя і астатнія праблемы';
 $s_plugin_MantisGraph_by_severity_mix = 'Па сур’ёзнасьці і статусе';
 $s_plugin_MantisGraph_by_priority_mix = 'Па прыярытэце і статусе';
-$s_plugin_MantisGraph_by_resolution_mix = 'Па вырашэньні і статусе';
+$s_plugin_MantisGraph_by_resolution_mix = 'Водле рашэньня і статусу';
 $s_plugin_MantisGraph_legend_still_open = 'Адкрытыя';
-$s_plugin_MantisGraph_legend_resolved = 'Вырашаныя';
+$s_plugin_MantisGraph_legend_resolved = 'Разьвязаныя';
 $s_plugin_MantisGraph_legend_reported = 'Ініцыяваныя';
 $s_plugin_MantisGraph_period_none = 'Няма';
 $s_plugin_MantisGraph_period_this_week = 'Гэты тыдзень';
@@ -86,7 +83,8 @@ $s_plugin_MantisGraph_period_year_to_date = 'З пачатку году';
 $s_plugin_MantisGraph_period_select = 'Адвольныя даты';
 $s_plugin_MantisGraph_period_last_year = 'Папярэдні год';
 $s_plugin_MantisGraph_graph_page = 'Графік гісторыі праблемаў';
-$s_plugin_MantisGraph_graph_topdev = 'Найлепшыя распрацоўнікі паводле вырашаных праблемаў';
+$s_plugin_MantisGraph_graph_topdev = 'Найлепшыя распрацоўнікі паводле выпраўленых праблемаў';
 $s_plugin_MantisGraph_graph_opendev = 'Распрацоўнікі паводле адкрытых праблемаў';
 $s_plugin_MantisGraph_graph_topreporter_fixed = 'Найлепшыя дакладчыкі паводле выпраўленых праблемаў';
 $s_plugin_MantisGraph_other_categories = 'іншыя катэгорыі (%d)';
+$s_plugin_MantisGraph_other_projects = 'іншыя праекты (%d)';

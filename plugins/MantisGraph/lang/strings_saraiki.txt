@@ -2,7 +2,7 @@
 /** MantisBT - a php based bugtracking system
  *
  * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2016  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * Copyright (C) 2002 - 2026  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  *
  * MantisBT is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -47,6 +47,8 @@ $s_plugin_MantisGraph_config = 'کنفگریشن';
 $s_plugin_MantisGraph_tab_label = 'گراف';
 $s_plugin_MantisGraph_priority_link = 'ترجیح نال';
 $s_plugin_MantisGraph_category_link = 'ونکی نال';
+$s_plugin_MantisGraph_data = 'ڈیٹا';
+$s_plugin_MantisGraph_period = 'دورانیہ';
 $s_plugin_MantisGraph_period_none = 'کوئی وی کائنی';
 $s_plugin_MantisGraph_period_this_week = 'ایں ہفتے';
 $s_plugin_MantisGraph_period_last_week = 'پچھلا ہفتہ';
@@ -56,3 +58,4 @@ $s_plugin_MantisGraph_period_last_month = 'پچھلے مہینے';
 $s_plugin_MantisGraph_period_this_quarter = 'ایہ تماہی';
 $s_plugin_MantisGraph_period_last_quarter = 'چھیکڑی چوتھائی';
 $s_plugin_MantisGraph_period_last_year = 'پچھلے سال';
+$s_plugin_MantisGraph_date = 'تریخ';

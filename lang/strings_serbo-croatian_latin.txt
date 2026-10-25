@@ -2,7 +2,7 @@
 /** MantisBT - a php based bugtracking system
  *
  * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2016  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * Copyright (C) 2002 - 2026  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  *
  * MantisBT is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -176,8 +176,6 @@ $s_update_severity_title = 'Ažuriraj ozbiljnost';
 $s_update_severity_msg = 'Odaberite ozbiljnost problema';
 $s_update_severity_button = 'Ažuriraj ozbiljnost';
 $s_hide_button = 'Prikaži samo izabrano';
-$s_printing_preferences_title = 'Izaberite polja za štampanje';
-$s_printing_options_link = 'Podešavanja štampanja';
 $s_bugnote_title = 'Zabeležio';
 $s_bugnote_date = 'Datum beleške';
 $s_bugnote_description = 'Opis beleške';
@@ -189,7 +187,6 @@ $s_prefix_for_deleted_users = 'korisnik';
 $s_administrator = 'administrator';
 $s_myself = 'Ja';
 $s_default_access_level = 'Podrazumevani stepen pristupa';
-$s_issue_status_percentage = 'Stanje problema (%)';
 $s_access_levels_enum_string = '10:posmatrač,25:izvjestilac,40:dograđivač,55:programer,70:rukovodilac,90:administrator';
 $s_no_access = 'nema pristupa';
 $s_project_status_enum_string = '10:u razvoju,30:izdan,50:stabilan,70:zastario';

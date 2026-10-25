@@ -2,7 +2,7 @@
 /** MantisBT - a php based bugtracking system
  *
  * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2016  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * Copyright (C) 2002 - 2026  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  *
  * MantisBT is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -191,8 +191,6 @@ $s_update_severity_title = 'Cập nhật mức độ nghiêm trọng';
 $s_update_severity_msg = 'Chọn các issue độ nghiêm trọng';
 $s_update_severity_button = 'Cập nhật mức độ nghiêm trọng';
 $s_hide_button = 'Chỉ hiển thị lựa chọn';
-$s_printing_preferences_title = 'Chọn các trường để in';
-$s_printing_options_link = 'Các lựa chọn in';
 $s_bugnote_title = 'Ghi chú handler';
 $s_bugnote_date = 'Ngày ghi chú';
 $s_bugnote_description = 'Mô tả ghi chú';
@@ -204,7 +202,6 @@ $s_prefix_for_deleted_users = 'người dùng';
 $s_administrator = 'người quản trị';
 $s_myself = 'Bản thân mình';
 $s_default_access_level = 'Mức độ truy cập mặc định';
-$s_issue_status_percentage = 'Tỷ lệ trạng thái issue';
 $s_access_levels_enum_string = '10:người xem, 25:người báo cáo, 40:người cập nhật, 55:người phát triển, 70:người quản lý, 90:người quản trị';
 $s_no_access = 'không truy cập';
 $s_project_status_enum_string = '10: phát triển, 30: phát hành, 50: ổn định, 70: lỗi thời';

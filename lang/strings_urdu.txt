@@ -2,7 +2,7 @@
 /** MantisBT - a php based bugtracking system
  *
  * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2016  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * Copyright (C) 2002 - 2026  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  *
  * MantisBT is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -147,8 +147,6 @@ $s_set_sticky_group_bugs_button = ' سیٹ کرو / سیٹ نا کرو نی ھو
 $s_fixed_in_version_group_bugs_button = ' نئ تبدیلی مین تبدیلی ھو گی ھے';
 $s_target_version_group_bugs_button = '  نئ تبدیلی ھو گی ھے';
 $s_hide_button = 'صرف منتحب دکھاو';
-$s_printing_preferences_title = 'جو چیز چھاپنی ھے منتحب کرو';
-$s_printing_options_link = ' چھاپنے کے اختیار';
 $s_bugnote_title = 'معلومات کو سنبھالنے والہ';
 $s_bugnote_date = '  معلومات کی تاریخ';
 $s_bugnote_description = ' معلومات کی وضاحت';
@@ -160,7 +158,6 @@ $s_prefix_for_deleted_users = 'استہمال کرنے والہ';
 $s_administrator = 'منتظم';
 $s_myself = 'میرے طور پر';
 $s_default_access_level = 'یہ استہمال ھونے والہ لیول ڈیفالٹ ھے';
-$s_issue_status_percentage = 'ایشوذ کے مقام کی فی صد';
 $s_access_levels_enum_string = '10:دیکھنے والے,25:    رپورٹ کرنے وال     ,40:نیا بنا نے والہ  ,55:بنا نے  والہ,70:مینجر,90:انتظا میہ';
 $s_project_status_enum_string = '10:فروغ,30:رھای,50:مضبوط,70:منسوخ';
 $s_project_view_state_enum_string = '10: آزاد,50:غیر آزاد';

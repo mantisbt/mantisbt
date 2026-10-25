@@ -177,6 +177,16 @@ function string_display_line_links( $p_string ) {
 }
 
 /**
+ * Prepare a single-line string for display in HTML, like the string_display_line_links()
+ * function does, but exclude any anchor tags to ensure that it can safely be used as a link.
+ * @param string $p_string String to be processed.
+ * @return string
+ */
+function string_display_line_without_links( $p_string ) {
+	return preg_replace( '/<a\s[^>]*>|<\/a>/is', '', string_display_line_links( $p_string ) );
+}
+
+/**
  * Prepare a string for display in rss
  * @param string $p_string String to be processed.
  * @return string
@@ -265,7 +275,7 @@ function string_sanitize_url( $p_url, $p_return_absolute = false ) {
 	if( preg_match( '@^(?P<path>' . preg_quote( $t_path, '@' ) . ')' . $t_pattern . '$@', $t_url, $t_matches ) ) {
 		$t_type = 1;
 	} else if( !empty( $t_short_path )
-			&& preg_match( '@^(?P<path>' . preg_quote( $t_short_path, '@' ) . ')' . $t_pattern . '$@', $t_url, $t_matches )
+			&& preg_match( '@^/*(?P<path>' . preg_quote( $t_short_path, '@' ) . ')' . $t_pattern . '$@', $t_url, $t_matches )
 	) {
 		$t_type = 2;
 	} else if( preg_match( '@^(?P<path>)' . $t_pattern . '$@', $t_url, $t_matches ) ) {
@@ -274,7 +284,7 @@ function string_sanitize_url( $p_url, $p_return_absolute = false ) {
 
 	# Check for URL's pointing to other domains
 	if( 0 == $t_type || empty( $t_matches['script'] ) ||
-		3 == $t_type && preg_match( '@(?:[^:]*)?:/*@', $t_url ) > 0 ) {
+		2 <= $t_type && preg_match( '@(?:[^:]*)?:/*@', $t_url ) > 0 ) {
 
 		return ( $p_return_absolute ? $t_path . '/' : '' ) . 'index.php';
 	}
@@ -314,10 +324,13 @@ function string_sanitize_url( $p_url, $p_return_absolute = false ) {
 	}
 
 	# Return an appropriate re-combined URL string
+	$t_result = ( str_starts_with( $p_url, '/' ) ? '/' : '' ) . $t_script . $t_query . $t_anchor;
 	if( $p_return_absolute ) {
-		return $t_path . '/' . $t_script . $t_query . $t_anchor;
+		return $t_path . '/' . ltrim( $t_result, '/' );
+	} elseif( !empty( $t_script_path ) ) {
+		return $t_script_path . '/' . ltrim( $t_result, '/' );
 	} else {
-		return ( !empty( $t_script_path ) ? $t_script_path . '/' : '' ) . $t_script . $t_query . $t_anchor;
+		return $t_result;
 	}
 }
 
@@ -632,10 +645,13 @@ function string_restore_valid_html_tags( $p_string, $p_multiline = true ) {
 }
 
 /**
- * return the name of a bug page
- * $p_action should be something like 'view', 'update', or 'report'
- * @param string  $p_action  A valid action being performed - currently one of view, update or report.
+ * Return the name of a bug page.
+ *
+ * @param string $p_action A valid action being performed - currently one of
+ *                         'view', 'update' or 'report'.
+ *
  * @return string
+ * @throws Exception
  */
 function string_get_bug_page( $p_action ) {
 	switch( $p_action ) {
@@ -647,7 +663,7 @@ function string_get_bug_page( $p_action ) {
 			return 'bug_report_page.php';
 	}
 
-	trigger_error( ERROR_GENERIC, ERROR );
+	throw new Exception( __FUNCTION__ . ": Invalid action '$p_action'" );
 }
 
 /**
@@ -971,14 +987,17 @@ function string_truncate( $p_string, $p_length, $p_marker = '') {
 /**
  * Replacement for str_pad. $padStr may contain multi-byte characters.
  *
- * @author Oliver Saunders <oliver (a) osinternetservices.com>
  * @param string $input
- * @param int $length
+ * @param int    $length
  * @param string $padStr
- * @param int $type ( same constants as str_pad )
+ * @param int    $type ( same constants as str_pad )
+ *
  * @return string
- * @see http://www.php.net/str_pad
- * @see utf8_substr
+ * @throws Exception
+ *
+ * @see    http://www.php.net/str_pad
+ * @see    utf8_substr
+ * @author Oliver Saunders <oliver (a) osinternetservices.com>
  */
 function utf8_str_pad( $input, $length, $padStr = ' ', $type = STR_PAD_RIGHT ) {
 
@@ -1013,7 +1032,7 @@ function utf8_str_pad( $input, $length, $padStr = ' ', $type = STR_PAD_RIGHT ) {
         return $paddingLeft . $input . $paddingRight;
     }
 
-    trigger_error('utf8_str_pad: Unknown padding type (' . $type . ')',E_USER_ERROR);
+	throw new Exception( __FUNCTION__ . ": Unknown padding type ($type)" );
 }
 
 /**

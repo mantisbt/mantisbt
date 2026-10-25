@@ -4,25 +4,99 @@
 openapi: 3.0.3
 info:
   title: Mantis Bug Tracker REST API
-  version: 2.28.4
+  version: 2.29.0-dev
   description: |-
     REST API calls have to be authenticated by creating an API token for the user doing the calls,
     and then passing the API token in the 'Authorization' header.  However, for anonymous access,
     the API key and header are not needed.
+
+    The token is passed using the standard RFC 6750 bearer scheme
+    (`Authorization: Bearer <token>`); the scheme name is matched case-insensitively.
+    For backwards compatibility, the legacy, bare form (`Authorization: <token>`) is 
+    still accepted, but this usage is deprecated and will be removed in a future
+    release.
 
     There has been significant improvements and feature additions for REST API in each of the
     recent releases.  Hence, it is highly recommended to use latest release when leveraging the
     REST APIs.
 
     REST API is enabled by default since MantisBT 2.8.0 release.
+
+    ## Getting started
+
+    All paths in this document are relative to the MantisBT installation. For example, an
+    installation at `https://mantis.example.com` serves this API at
+    `https://mantis.example.com/api/rest`. Use the non-trailing-slash form shown in
+    this document. Requests and responses use JSON unless an endpoint explicitly documents a
+    different format.
+
+    Create an API token in MantisBT, then send the token value directly in the `Authorization`
+    header:
+
+    ```http
+    Authorization: Bearer <api-token>
+    Content-Type: application/json
+    ```
+
+    Browser requests authenticated with a MantisBT session cookie are also supported. When
+    anonymous access is enabled, read operations may be available without either credential;
+    permissions still apply in every case.
+
+    ## Common request conventions
+
+    Object references generally accept an `id` or `name`, allowing clients to use stable numeric
+    identifiers while still supporting readable payloads. List endpoints that expose `page` and
+    `page_size` use one-based page numbers. The `select` query parameter accepts a comma-separated
+    list of fields, which is useful for reducing response size when only a subset is required.
+
+    File uploads are JSON payloads: each entry in `files` has a filename in `name` and base64-encoded
+    data in `content`.
+
+    ## Conditional issue updates
+
+    Issue reads return an `ETag`. Send it in `If-Match` on issue updates or deletes to prevent
+    overwriting a newer version; a stale value produces `412 Precondition Failed` and returns the
+    current `ETag`. Send the same value in `If-None-Match` on a read to receive `304 Not Modified`
+    when the issue has not changed.
+
+    ## Errors and response headers
+
+    Successful responses identify the effective user and authentication method in
+    `X-Mantis-Username` and `X-Mantis-LoginMethod`; `X-Mantis-Version` reports the running
+    MantisBT version. A `204` response intentionally has no response body. Errors use the HTTP
+    status code and may include JSON fields such as `message`, `code`, and `localized`.
+
+    ## Impersonation
+
+    Users with the access level defined by `$g_impersonate_user_threshold` (default: ADMINISTRATOR)
+    can execute REST API calls on behalf of another user by adding the `X-Mantis-Username` request
+    header containing the target username.  Impersonation requires API token authentication;
+    it is not available with cookie or anonymous access.
+
+    Constraints:
+    - The caller must authenticate with an API token.
+    - The caller must have at least the `$g_impersonate_user_threshold` access level.
+    - A user cannot impersonate themselves.
+    - A user cannot impersonate a user with a higher access level than their own.
+    - The target user must be a valid, enabled user.
+
+    ## Response Headers
+
+    Every API response includes the following informational headers:
+    - `X-Mantis-Username` – The username under which the request was executed (the impersonated
+      user's name when impersonation is active).
+    - `X-Mantis-LoginMethod` – The authentication method used: `api-token`, `cookie`, or `anonymous`.
   license:
     name: GPL-2.0-or-later
+    url: https://www.gnu.org/licenses/old-licenses/gpl-2.0.html
   contact:
     name: MantisBT Team
     email: mantisbt-dev@lists.sourceforge.net
     url: https://mantisbt.org
 paths:
-  '/api/rest/filters/{filter_id}':
+  '/api/rest/filters/{id}':
+    parameters:
+      - $ref: '#/components/parameters/X-Mantis-Username'
     get:
       summary: Get a filter
       operationId: FilterGet
@@ -36,15 +110,51 @@ paths:
           $ref: '#/components/responses/BadRequest'
         '404':
           $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
       parameters:
         - $ref: '#/components/parameters/filter_id'
+    delete:
+      summary: Delete a filter
+      operationId: FilterDelete
+      description: ''
+      tags:
+        - 'Filters'
+      parameters:
+        - $ref: '#/components/parameters/filter_id'
+      responses:
+        '204':
+          $ref: '#/components/responses/NoContent'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
   '/api/rest/filters':
+    parameters:
+      - $ref: '#/components/parameters/X-Mantis-Username'
     get:
       summary: Get all filters
       operationId: FilterGetAll
       description: ''
       tags:
         - 'Filters'
+      parameters:
+        - name: project_id
+          in: query
+          schema:
+            type: integer
+          description: Return filters available in the specified project.
+          required: false
       responses:
         '200':
           $ref: '#/components/responses/Success'
@@ -52,7 +162,15 @@ paths:
           $ref: '#/components/responses/BadRequest'
         '404':
           $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
   '/api/rest/config':
+    parameters:
+      - $ref: '#/components/parameters/X-Mantis-Username'
     get:
       summary: Get Configuration Option
       operationId: ConfigGet
@@ -66,6 +184,18 @@ paths:
             type: string
           description: ''
           required: true
+        - name: project_id
+          in: query
+          schema:
+            type: integer
+          description: ''
+          required: false
+        - name: user_id
+          in: query
+          schema:
+            type: integer
+          description: ''
+          required: false
       responses:
         '200':
           $ref: '#/components/responses/Success'
@@ -73,6 +203,12 @@ paths:
           $ref: '#/components/responses/BadRequest'
         '404':
           $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
     patch:
       summary: Set Configs
       operationId: ConfigSet
@@ -83,16 +219,32 @@ paths:
         $ref: '#/components/requestBodies/ConfigSet'
       responses:
         '200':
-          $ref: '#/components/responses/Success'
+          $ref: '#/components/responses/NoContent'
         '400':
           $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
   '/api/rest/users/me':
+    parameters:
+      - $ref: '#/components/parameters/X-Mantis-Username'
     get:
       summary: Get My User Info
       operationId: UserGetMe
       description: ''
       tags:
         - 'Users'
+      parameters:
+        - name: select
+          in: query
+          schema:
+            type: string
+          description: Comma-separated list of user fields to return.
+          required: false
+          example: id,name,real_name,email,access_level
       responses:
         '200':
           $ref: '#/components/responses/Success'
@@ -100,7 +252,15 @@ paths:
           $ref: '#/components/responses/BadRequest'
         '404':
           $ref: '#/components/responses/NotFound'
-  '/api/rest/issues/{issue_id}/files':
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+  '/api/rest/issues/{id}/files':
+    parameters:
+      - $ref: '#/components/parameters/X-Mantis-Username'
     post:
       summary: Add attachments to issue
       operationId: IssueFilesAdd
@@ -112,12 +272,18 @@ paths:
       requestBody:
         $ref: '#/components/requestBodies/IssueFilesAdd'
       responses:
-        '200':
-          $ref: '#/components/responses/Success'
+        '201':
+          $ref: '#/components/responses/CreatedNoContent'
         '400':
           $ref: '#/components/responses/BadRequest'
         '404':
           $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
     get:
       summary: Get issue files
       operationId: IssueFilesGet
@@ -128,12 +294,31 @@ paths:
         - $ref: '#/components/parameters/issue_id'
       responses:
         '200':
-          $ref: '#/components/responses/Success'
+          description: Issue files returned successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FileCollection'
+          headers:
+            X-Mantis-Username:
+              $ref: '#/components/headers/X-Mantis-Username'
+            X-Mantis-LoginMethod:
+              $ref: '#/components/headers/X-Mantis-LoginMethod'
+            X-Mantis-Version:
+              $ref: '#/components/headers/X-Mantis-Version'
         '400':
           $ref: '#/components/responses/BadRequest'
         '404':
           $ref: '#/components/responses/NotFound'
-  '/api/rest/issues/{issue_id}/notes':
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+  '/api/rest/issues/{id}/notes':
+    parameters:
+      - $ref: '#/components/parameters/X-Mantis-Username'
     post:
       summary: Create an issue note
       operationId: IssueNotesAdd
@@ -145,13 +330,23 @@ paths:
       requestBody:
         $ref: '#/components/requestBodies/IssueNotesAdd'
       responses:
-        '200':
-          $ref: '#/components/responses/Success'
+        '201':
+          $ref: '#/components/responses/Created'
+        '202':
+          $ref: '#/components/responses/Accepted'
         '400':
           $ref: '#/components/responses/BadRequest'
         '404':
           $ref: '#/components/responses/NotFound'
-  '/api/rest/issues/{issue_id}/notes/{issue_note_id}':
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+  '/api/rest/issues/{id}/notes/{note_id}':
+    parameters:
+      - $ref: '#/components/parameters/X-Mantis-Username'
     delete:
       summary: Delete an issue note
       operationId: IssueNotesDelete
@@ -160,14 +355,12 @@ paths:
         - 'Issue Notes'
       parameters:
         - $ref: '#/components/parameters/issue_id'
-        - name: issue_note_id
+        - name: note_id
           in: path
           schema:
             type: integer
           description: ''
           required: true
-      requestBody:
-        $ref: '#/components/requestBodies/IssueNotesDelete'
       responses:
         '200':
           $ref: '#/components/responses/Success'
@@ -175,7 +368,15 @@ paths:
           $ref: '#/components/responses/BadRequest'
         '404':
           $ref: '#/components/responses/NotFound'
-  '/api/rest/issues/{issue_id}/relationships':
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+  '/api/rest/issues/{id}/relationships':
+    parameters:
+      - $ref: '#/components/parameters/X-Mantis-Username'
     post:
       summary: Add an issue relationship
       operationId: IssueRelationshipsAdd
@@ -187,13 +388,21 @@ paths:
       requestBody:
         $ref: '#/components/requestBodies/IssueRelationshipsAdd'
       responses:
-        '200':
-          $ref: '#/components/responses/Success'
+        '201':
+          $ref: '#/components/responses/Created'
         '400':
           $ref: '#/components/responses/BadRequest'
         '404':
           $ref: '#/components/responses/NotFound'
-  '/api/rest/issues/{issue_id}/tags':
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+  '/api/rest/issues/{id}/tags':
+    parameters:
+      - $ref: '#/components/parameters/X-Mantis-Username'
     post:
       summary: Attach a tag to issue
       operationId: IssueTagsAdd
@@ -205,13 +414,21 @@ paths:
       requestBody:
         $ref: '#/components/requestBodies/IssueTagsAdd'
       responses:
-        '200':
-          $ref: '#/components/responses/Success'
+        '201':
+          $ref: '#/components/responses/Created'
         '400':
           $ref: '#/components/responses/BadRequest'
         '404':
           $ref: '#/components/responses/NotFound'
-  '/api/rest/issues/{issue_id}/relationships/{relationship_id}':
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+  '/api/rest/issues/{id}/relationships/{relationship_id}':
+    parameters:
+      - $ref: '#/components/parameters/X-Mantis-Username'
     delete:
       summary: Delete an issue relationship
       operationId: IssueRelationshipsDelete
@@ -233,7 +450,15 @@ paths:
           $ref: '#/components/responses/BadRequest'
         '404':
           $ref: '#/components/responses/NotFound'
-  '/api/rest/issues/{issue_id}/tags/{tag_id}':
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+  '/api/rest/issues/{id}/tags/{tag_id}':
+    parameters:
+      - $ref: '#/components/parameters/X-Mantis-Username'
     delete:
       summary: Detach a tag from an issue
       operationId: IssueTagsDelete
@@ -255,11 +480,23 @@ paths:
           $ref: '#/components/responses/BadRequest'
         '404':
           $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
   '/api/rest/issues':
+    parameters:
+      - $ref: '#/components/parameters/X-Mantis-Username'
     get:
       summary: Get issues
       operationId: IssueGetAll
-      description: ''
+      description: |-
+        Returns issues visible to the effective user. Use `project_id` to scope the search and
+        `filter_id` for a built-in or saved filter. Results are paginated; omit `select` to use
+        the default issue fields. The response includes an `ETag`; send it in `If-None-Match`
+        to receive `304 Not Modified` when the result has not changed.
       tags:
         - 'Issues'
       parameters:
@@ -271,7 +508,7 @@ paths:
           description: ''
           required: false
           example: 1
-        - $ref: '#/components/parameters/filter_id'
+        - $ref: '#/components/parameters/issues_filter_id'
         - name: page_size
           in: query
           schema:
@@ -293,13 +530,22 @@ paths:
           description: ''
           required: false
           example: id,summary,description
+        - $ref: '#/components/parameters/If-None-Match'
       responses:
         '200':
           $ref: '#/components/responses/Success'
+        '304':
+          $ref: '#/components/responses/NotModified'
         '400':
           $ref: '#/components/responses/BadRequest'
         '404':
           $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
     post:
       summary: Create an issue
       operationId: IssueAdd
@@ -312,17 +558,56 @@ paths:
       requestBody:
         $ref: '#/components/requestBodies/IssueAdd'
       responses:
-        '200':
-          $ref: '#/components/responses/Success'
+        '201':
+          $ref: '#/components/responses/Created'
+        '202':
+          $ref: '#/components/responses/Accepted'
         '400':
           $ref: '#/components/responses/BadRequest'
         '404':
           $ref: '#/components/responses/NotFound'
-  '/api/rest/issues/{issue_id}':
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+    delete:
+      summary: Delete issues
+      operationId: IssueDeleteAll
+      description: Deletes the issues selected by the request's issue parameters.
+      tags:
+        - 'Issues'
+      parameters:
+        - name: id
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+          description: ID of the issue to delete.
+          required: true
+      responses:
+        '204':
+          $ref: '#/components/responses/NoContent'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+  '/api/rest/issues/{id}':
+    parameters:
+      - $ref: '#/components/parameters/X-Mantis-Username'
     get:
       summary: Get an issue
       operationId: IssueGet
-      description: ''
+      description: |-
+        Returns one visible issue. The response includes an `ETag`; use it with `If-Match` when
+        subsequently updating or deleting the issue.
       tags:
         - 'Issues'
       parameters:
@@ -334,21 +619,33 @@ paths:
           description: ''
           required: false
           example: id,summary,description
+        - $ref: '#/components/parameters/If-None-Match'
       responses:
         '200':
           $ref: '#/components/responses/Success'
+        '304':
+          $ref: '#/components/responses/NotModified'
         '400':
           $ref: '#/components/responses/BadRequest'
         '404':
           $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
     patch:
       summary: Update an issue
       operationId: IssueUpdate
-      description: ''
+      description: |-
+        Applies the supplied fields to an existing issue. For optimistic concurrency, first read
+        the issue and send its `ETag` in `If-Match`. A mismatch returns `412 Precondition Failed`.
       tags:
         - 'Issues'
       parameters:
         - $ref: '#/components/parameters/issue_id'
+        - $ref: '#/components/parameters/If-Match'
       requestBody:
         $ref: '#/components/requestBodies/IssueUpdate'
       responses:
@@ -358,7 +655,78 @@ paths:
           $ref: '#/components/responses/BadRequest'
         '404':
           $ref: '#/components/responses/NotFound'
-  '/api/rest/issues/{issue_id}/files/{file_id}':
+        '412':
+          $ref: '#/components/responses/PreconditionFailed'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+    delete:
+      summary: Delete an issue
+      operationId: IssueDelete
+      description: |-
+        Deletes an issue. Supply the current `ETag` in `If-Match` to ensure that the issue was
+        not changed after it was read.
+      tags:
+        - 'Issues'
+      parameters:
+        - $ref: '#/components/parameters/issue_id'
+        - $ref: '#/components/parameters/If-Match'
+      responses:
+        '204':
+          $ref: '#/components/responses/NoContentWithETag'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '412':
+          $ref: '#/components/responses/PreconditionFailed'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+  '/api/rest/issues/{id}/move':
+    parameters:
+      - $ref: '#/components/parameters/X-Mantis-Username'
+      - $ref: '#/components/parameters/issue_id'
+    post:
+      summary: Move an issue
+      operationId: IssueMove
+      description: Moves an issue to another project and optionally adds a note.
+      tags:
+        - 'Issues'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [project]
+              properties:
+                project:
+                  $ref: '#/components/schemas/ObjectRef'
+                note:
+                  $ref: '#/components/schemas/IssueNotesAdd'
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+  '/api/rest/issues/{id}/files/{file_id}':
+    parameters:
+      - $ref: '#/components/parameters/X-Mantis-Username'
     get:
       summary: Get file from issue
       operationId: IssueFileGet
@@ -376,12 +744,59 @@ paths:
           example: 567
       responses:
         '200':
+          description: File returned successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FileCollection'
+          headers:
+            X-Mantis-Username:
+              $ref: '#/components/headers/X-Mantis-Username'
+            X-Mantis-LoginMethod:
+              $ref: '#/components/headers/X-Mantis-LoginMethod'
+            X-Mantis-Version:
+              $ref: '#/components/headers/X-Mantis-Version'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+    delete:
+      summary: Delete an attachment from an issue
+      operationId: IssueFileDelete
+      description: Deletes an attachment when the authenticated user has permission to do so.
+      tags:
+        - 'Issue Attachments'
+      parameters:
+        - $ref: '#/components/parameters/issue_id'
+        - name: file_id
+          in: path
+          schema:
+            type: integer
+          description: ID of the attachment to delete.
+          required: true
+          example: 567
+      responses:
+        '200':
           $ref: '#/components/responses/Success'
         '400':
           $ref: '#/components/responses/BadRequest'
         '404':
           $ref: '#/components/responses/NotFound'
-  '/api/rest/issues/{issue_id}/monitors':
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+  '/api/rest/issues/{id}/monitors':
+    parameters:
+      - $ref: '#/components/parameters/X-Mantis-Username'
     post:
       summary: Monitor an issue
       operationId: IssueMonitor
@@ -390,14 +805,24 @@ paths:
         - 'Issue Monitoring'
       parameters:
         - $ref: '#/components/parameters/issue_id'
+      requestBody:
+        $ref: '#/components/requestBodies/IssueMonitor'
       responses:
-        '200':
-          $ref: '#/components/responses/Success'
+        '201':
+          $ref: '#/components/responses/Created'
         '400':
           $ref: '#/components/responses/BadRequest'
         '404':
           $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
   '/api/rest/lang':
+    parameters:
+      - $ref: '#/components/parameters/X-Mantis-Username'
     get:
       summary: Get multiple localized strings
       operationId: StringGet
@@ -405,7 +830,7 @@ paths:
       tags:
         - 'Localized Strings'
       parameters:
-        - name: string[]
+        - name: string
           in: query
           schema:
             type: string
@@ -419,7 +844,15 @@ paths:
           $ref: '#/components/responses/BadRequest'
         '404':
           $ref: '#/components/responses/NotFound'
-  '/api/rest/pages/issues/view/{issue_id}':
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+  '/api/rest/pages/issues/view/{id}':
+    parameters:
+      - $ref: '#/components/parameters/X-Mantis-Username'
     get:
       summary: Get Issue View Page
       operationId: IssueGetViewPage
@@ -435,37 +868,69 @@ paths:
           $ref: '#/components/responses/BadRequest'
         '404':
           $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
   '/api/rest/users/me/token':
+    parameters:
+      - $ref: '#/components/parameters/X-Mantis-Username'
     post:
       summary: Create token for me
       operationId: TokenCreateForMe
-      description: ''
+      description: |-
+        Creates a token for the authenticated user. Store the returned token securely: it is the
+        credential sent in the `Authorization` header for subsequent API calls.
       tags:
         - 'API Tokens'
+      requestBody:
+        $ref: '#/components/requestBodies/TokenCreate'
       responses:
-        '200':
-          $ref: '#/components/responses/Success'
+        '201':
+          $ref: '#/components/responses/Created'
         '400':
           $ref: '#/components/responses/BadRequest'
         '404':
           $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
   '/api/rest/users/{user_id}/token':
+    parameters:
+      - $ref: '#/components/parameters/X-Mantis-Username'
     post:
       summary: Create token for user
       operationId: TokenCreateForUser
-      description: ''
+      description: |-
+        Creates a token for another user. This requires permission to impersonate that user and
+        cannot target a user with a higher access level than the caller.
       tags:
         - 'API Tokens'
       parameters:
         - $ref: '#/components/parameters/user_id'
+      requestBody:
+        $ref: '#/components/requestBodies/TokenCreate'
       responses:
-        '200':
-          $ref: '#/components/responses/Success'
+        '201':
+          $ref: '#/components/responses/Created'
         '400':
           $ref: '#/components/responses/BadRequest'
         '404':
           $ref: '#/components/responses/NotFound'
-  '/api/rest/users/me/token/{id}':
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+  '/api/rest/users/me/token/{token_id}':
+    parameters:
+      - $ref: '#/components/parameters/X-Mantis-Username'
     delete:
       summary: Delete token for me
       operationId: TokenDeleteForMe
@@ -473,22 +938,28 @@ paths:
       tags:
         - 'API Tokens'
       parameters:
-        - name: id
+        - name: token_id
           in: path
           schema:
             type: integer
           description: ''
           required: true
-      requestBody:
-        $ref: '#/components/requestBodies/TokenDeleteForMe'
       responses:
-        '200':
-          $ref: '#/components/responses/Success'
+        '204':
+          $ref: '#/components/responses/NoContent'
         '400':
           $ref: '#/components/responses/BadRequest'
         '404':
           $ref: '#/components/responses/NotFound'
-  '/api/rest/users/{user_id}/token/{id}':
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+  '/api/rest/users/{user_id}/token/{token_id}':
+    parameters:
+      - $ref: '#/components/parameters/X-Mantis-Username'
     delete:
       summary: Delete token for user
       operationId: TokenDeleteForUser
@@ -497,20 +968,28 @@ paths:
         - 'API Tokens'
       parameters:
         - $ref: '#/components/parameters/user_id'
-        - name: id
+        - name: token_id
           in: path
           schema:
             type: integer
           description: ''
           required: true
       responses:
-        '200':
-          $ref: '#/components/responses/Success'
+        '204':
+          $ref: '#/components/responses/NoContent'
         '400':
           $ref: '#/components/responses/BadRequest'
         '404':
           $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
   '/api/rest/projects':
+    parameters:
+      - $ref: '#/components/parameters/X-Mantis-Username'
     post:
       summary: Create a project
       operationId: ProjectAdd
@@ -520,12 +999,18 @@ paths:
       requestBody:
         $ref: '#/components/requestBodies/ProjectAdd'
       responses:
-        '200':
-          $ref: '#/components/responses/Success'
+        '201':
+          $ref: '#/components/responses/Created'
         '400':
           $ref: '#/components/responses/BadRequest'
         '404':
           $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
     get:
       summary: Get all projects
       operationId: ProjectGetAll
@@ -539,7 +1024,15 @@ paths:
           $ref: '#/components/responses/BadRequest'
         '404':
           $ref: '#/components/responses/NotFound'
-  '/api/rest/projects/{project_id}':
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+  '/api/rest/projects/{id}':
+    parameters:
+      - $ref: '#/components/parameters/X-Mantis-Username'
     get:
       summary: Get a project
       operationId: ProjectGet
@@ -555,6 +1048,12 @@ paths:
           $ref: '#/components/responses/BadRequest'
         '404':
           $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
     patch:
       summary: Update a project
       operationId: ProjectUpdate
@@ -572,7 +1071,167 @@ paths:
           $ref: '#/components/responses/BadRequest'
         '404':
           $ref: '#/components/responses/NotFound'
-  '/api/rest/projects/{project_id}/versions/{version_id}':
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+    delete:
+      summary: Delete a project
+      operationId: ProjectDelete
+      description: ''
+      tags:
+        - 'Projects'
+      parameters:
+        - $ref: '#/components/parameters/project_id'
+      responses:
+        '204':
+          $ref: '#/components/responses/NoContent'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+  '/api/rest/projects/{id}/categories/{category_id}':
+    parameters:
+      - $ref: '#/components/parameters/X-Mantis-Username'
+      - $ref: '#/components/parameters/project_id'
+      - name: category_id
+        in: path
+        schema:
+          type: integer
+          minimum: 1
+        required: true
+    get:
+      summary: Get a project category
+      operationId: ProjectCategoriesGet
+      tags: ['Project Categories']
+      responses:
+        '200': { $ref: '#/components/responses/Success' }
+        '400': { $ref: '#/components/responses/BadRequest' }
+        '404': { $ref: '#/components/responses/NotFound' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '403': { $ref: '#/components/responses/Forbidden' }
+    patch:
+      summary: Update a project category
+      operationId: ProjectCategoriesUpdate
+      tags: ['Project Categories']
+      requestBody:
+        $ref: '#/components/requestBodies/ProjectCategoriesUpdate'
+      responses:
+        '200': { $ref: '#/components/responses/Success' }
+        '400': { $ref: '#/components/responses/BadRequest' }
+        '404': { $ref: '#/components/responses/NotFound' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '403': { $ref: '#/components/responses/Forbidden' }
+    delete:
+      summary: Delete a project category
+      operationId: ProjectCategoriesDelete
+      tags: ['Project Categories']
+      responses:
+        '204': { $ref: '#/components/responses/NoContent' }
+        '400': { $ref: '#/components/responses/BadRequest' }
+        '404': { $ref: '#/components/responses/NotFound' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '403': { $ref: '#/components/responses/Forbidden' }
+  '/api/rest/projects/{id}/categories':
+    parameters:
+      - $ref: '#/components/parameters/X-Mantis-Username'
+      - $ref: '#/components/parameters/project_id'
+    get:
+      summary: Get project categories
+      operationId: ProjectCategoriesGetAll
+      tags: ['Project Categories']
+      responses:
+        '200': { $ref: '#/components/responses/Success' }
+        '400': { $ref: '#/components/responses/BadRequest' }
+        '404': { $ref: '#/components/responses/NotFound' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '403': { $ref: '#/components/responses/Forbidden' }
+    post:
+      summary: Create a project category
+      operationId: ProjectCategoriesAdd
+      tags: ['Project Categories']
+      requestBody:
+        $ref: '#/components/requestBodies/ProjectCategoriesAdd'
+      responses:
+        '201': { $ref: '#/components/responses/Created' }
+        '400': { $ref: '#/components/responses/BadRequest' }
+        '404': { $ref: '#/components/responses/NotFound' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '403': { $ref: '#/components/responses/Forbidden' }
+  '/api/rest/projects/{id}/fields/{field_id}':
+    parameters:
+      - $ref: '#/components/parameters/X-Mantis-Username'
+    post:
+      summary: Link a custom field to a project
+      operationId: ProjectFieldLink
+      description: Links the custom field to the project. The optional sequence controls its order.
+      tags:
+        - 'Projects'
+      parameters:
+        - $ref: '#/components/parameters/project_id'
+        - name: field_id
+          in: path
+          schema:
+            type: integer
+          required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                sequence:
+                  type: integer
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+    delete:
+      summary: Unlink a custom field from a project
+      operationId: ProjectFieldUnlink
+      description: Removes the custom field link from the project without deleting its values.
+      tags:
+        - 'Projects'
+      parameters:
+        - $ref: '#/components/parameters/project_id'
+        - name: field_id
+          in: path
+          schema:
+            type: integer
+          required: true
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+  '/api/rest/projects/{id}/versions/{version_id}':
+    parameters:
+      - $ref: '#/components/parameters/X-Mantis-Username'
     delete:
       summary: Delete a project version
       operationId: ProjectVersionsDelete
@@ -588,12 +1247,18 @@ paths:
           description: ''
           required: true
       responses:
-        '200':
-          $ref: '#/components/responses/Success'
+        '204':
+          $ref: '#/components/responses/NoContent'
         '400':
           $ref: '#/components/responses/BadRequest'
         '404':
           $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
     get:
       summary: Get a Project Version
       operationId: ProjectVersionsGet
@@ -616,6 +1281,12 @@ paths:
           $ref: '#/components/responses/BadRequest'
         '404':
           $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
     patch:
       summary: Update project version
       operationId: ProjectVersionsUpdate
@@ -640,7 +1311,15 @@ paths:
           $ref: '#/components/responses/BadRequest'
         '404':
           $ref: '#/components/responses/NotFound'
-  '/api/rest/projects/{project_id}/versions':
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+  '/api/rest/projects/{id}/versions':
+    parameters:
+      - $ref: '#/components/parameters/X-Mantis-Username'
     get:
       summary: Get Project Versions
       operationId: ProjectVersionsGetAll
@@ -656,6 +1335,12 @@ paths:
           $ref: '#/components/responses/BadRequest'
         '404':
           $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
     post:
       summary: Create a project version
       operationId: ProjectVersionsAdd
@@ -667,13 +1352,21 @@ paths:
       requestBody:
         $ref: '#/components/requestBodies/ProjectVersionsAdd'
       responses:
-        '200':
-          $ref: '#/components/responses/Success'
+        '201':
+          $ref: '#/components/responses/Created'
         '400':
           $ref: '#/components/responses/BadRequest'
         '404':
           $ref: '#/components/responses/NotFound'
-  '/api/rest/projects/{project_id}/subprojects':
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+  '/api/rest/projects/{id}/subprojects':
+    parameters:
+      - $ref: '#/components/parameters/X-Mantis-Username'
     post:
       summary: Add a sub-project
       operationId: ProjectSubprojectsAdd
@@ -685,13 +1378,21 @@ paths:
       requestBody:
         $ref: '#/components/requestBodies/ProjectSubprojectsAdd'
       responses:
-        '200':
-          $ref: '#/components/responses/Success'
+        '204':
+          $ref: '#/components/responses/NoContent'
         '400':
           $ref: '#/components/responses/BadRequest'
         '404':
           $ref: '#/components/responses/NotFound'
-  '/api/rest/projects/{project_id}/subprojects/{subproject_id}':
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+  '/api/rest/projects/{id}/subprojects/{subproject_id}':
+    parameters:
+      - $ref: '#/components/parameters/X-Mantis-Username'
     patch:
       summary: Update a subproject
       operationId: ProjectSubprojectsUpdate
@@ -706,17 +1407,53 @@ paths:
             type: integer
           description: ''
           required: true
-          example: '2'
+          example: 2
       requestBody:
         $ref: '#/components/requestBodies/ProjectSubprojectsUpdate'
       responses:
-        '200':
-          $ref: '#/components/responses/Success'
+        '204':
+          $ref: '#/components/responses/NoContent'
         '400':
           $ref: '#/components/responses/BadRequest'
         '404':
           $ref: '#/components/responses/NotFound'
-  '/api/rest/projects/{project_id}/handlers':
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+    delete:
+      summary: Delete a subproject relationship
+      operationId: ProjectSubprojectsDelete
+      description: ''
+      tags:
+        - 'Projects'
+      parameters:
+        - $ref: '#/components/parameters/project_id'
+        - name: subproject_id
+          in: path
+          schema:
+            type: integer
+          description: ''
+          required: true
+          example: 2
+      responses:
+        '204':
+          $ref: '#/components/responses/NoContent'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+  '/api/rest/projects/{id}/handlers':
+    parameters:
+      - $ref: '#/components/parameters/X-Mantis-Username'
     get:
       summary: Get Project Users that can be assigned issues
       operationId: ProjectUsersCanHandleIssues
@@ -732,7 +1469,15 @@ paths:
           $ref: '#/components/responses/BadRequest'
         '404':
           $ref: '#/components/responses/NotFound'
-  '/api/rest/projects/{project_id}/users':
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+  '/api/rest/projects/{id}/users':
+    parameters:
+      - $ref: '#/components/parameters/X-Mantis-Username'
     get:
       summary: Get Project Users
       operationId: ProjectUsersGetAll
@@ -759,6 +1504,19 @@ paths:
           description: ''
           required: false
           example: 0
+        - name: page_size
+          in: query
+          schema:
+            type: integer
+          description: ''
+          required: false
+        - name: page
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+          description: ''
+          required: false
       responses:
         '200':
           $ref: '#/components/responses/Success'
@@ -766,6 +1524,12 @@ paths:
           $ref: '#/components/responses/BadRequest'
         '404':
           $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
     put:
       summary: Project Add-Update User
       operationId: ProjectUsersUpsert
@@ -777,13 +1541,44 @@ paths:
       requestBody:
         $ref: '#/components/requestBodies/ProjectUsersUpsert'
       responses:
-        '200':
-          $ref: '#/components/responses/Success'
+        '204':
+          $ref: '#/components/responses/NoContent'
         '400':
           $ref: '#/components/responses/BadRequest'
         '404':
           $ref: '#/components/responses/NotFound'
-  '/api/rest/projects/{project_id}/users/{user_id}':
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+    post:
+      summary: Add or update a project user
+      operationId: ProjectUsersAdd
+      description: ''
+      tags:
+        - 'Project Users'
+      parameters:
+        - $ref: '#/components/parameters/project_id'
+      requestBody:
+        $ref: '#/components/requestBodies/ProjectUsersUpsert'
+      responses:
+        '204':
+          $ref: '#/components/responses/NoContent'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+  '/api/rest/projects/{id}/users/{user_id}':
+    parameters:
+      - $ref: '#/components/parameters/X-Mantis-Username'
     delete:
       summary: Project Delete User
       operationId: ProjectUsersDelete
@@ -793,8 +1588,36 @@ paths:
       parameters:
         - $ref: '#/components/parameters/project_id'
         - $ref: '#/components/parameters/user_id'
-      requestBody:
-        $ref: '#/components/requestBodies/ProjectUsersDelete'
+      responses:
+        '204':
+          $ref: '#/components/responses/NoContent'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+  '/api/rest/users':
+    parameters:
+      - $ref: '#/components/parameters/X-Mantis-Username'
+    get:
+      summary: Get users
+      operationId: UserGetAll
+      description: Returns users visible to the effective user.
+      tags:
+        - 'Users'
+      parameters:
+        - name: select
+          in: query
+          schema:
+            type: string
+          description: Comma-separated list of user fields to return.
+          required: false
+          example: id,name,real_name,email,access_level
       responses:
         '200':
           $ref: '#/components/responses/Success'
@@ -802,7 +1625,12 @@ paths:
           $ref: '#/components/responses/BadRequest'
         '404':
           $ref: '#/components/responses/NotFound'
-  '/api/rest/users':
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
     post:
       summary: Create a user
       operationId: UserAdd
@@ -812,13 +1640,21 @@ paths:
       requestBody:
         $ref: '#/components/requestBodies/UserAdd'
       responses:
-        '200':
-          $ref: '#/components/responses/Success'
+        '201':
+          $ref: '#/components/responses/Created'
         '400':
           $ref: '#/components/responses/BadRequest'
         '404':
           $ref: '#/components/responses/NotFound'
-  '/api/rest/users/{id}':
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+  '/api/rest/users/{user_id}':
+    parameters:
+      - $ref: '#/components/parameters/X-Mantis-Username'
     get:
       summary: Get User By Id
       operationId: UserGet
@@ -826,13 +1662,7 @@ paths:
       tags:
         - 'Users'
       parameters:
-        - name: id
-          in: path
-          schema:
-            type: integer
-          description: ''
-          required: true
-          example: 1
+        - $ref: '#/components/parameters/user_id'
         - name: select
           in: query
           schema:
@@ -847,7 +1677,59 @@ paths:
           $ref: '#/components/responses/BadRequest'
         '404':
           $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+    patch:
+      summary: Update User
+      operationId: UserUpdate
+      description: ''
+      tags:
+        - 'Users'
+      parameters:
+        - $ref: '#/components/parameters/user_id'
+      requestBody:
+        $ref: '#/components/requestBodies/UserUpdate'
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+    delete:
+      summary: Delete a user
+      operationId: UserDelete
+      description: ''
+      tags:
+        - 'Users'
+      parameters:
+        - $ref: '#/components/parameters/user_id'
+      responses:
+        '204':
+          $ref: '#/components/responses/NoContent'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
   '/api/rest/users/username/{username}':
+    parameters:
+      - $ref: '#/components/parameters/X-Mantis-Username'
     get:
       summary: Get User By Username
       operationId: UserGetByUsername
@@ -875,7 +1757,15 @@ paths:
           $ref: '#/components/responses/BadRequest'
         '404':
           $ref: '#/components/responses/NotFound'
-  '/api/rest/users/{user_id}/reset':
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+  '/api/rest/users/{id}/reset':
+    parameters:
+      - $ref: '#/components/parameters/X-Mantis-Username'
     put:
       summary: Reset user password
       operationId: UserResetPassword
@@ -883,36 +1773,30 @@ paths:
       tags:
         - 'Users'
       parameters:
-        - $ref: '#/components/parameters/user_id'
+        - name: id
+          in: path
+          schema:
+            type: integer
+            minimum: 1
+          description: The user ID.
+          required: true
       responses:
-        '200':
-          $ref: '#/components/responses/Success'
+        '204':
+          $ref: '#/components/responses/NoContent'
         '400':
           $ref: '#/components/responses/BadRequest'
         '404':
           $ref: '#/components/responses/NotFound'
-  '/api/rest/users/{user_id}':
-    patch:
-      summary: Update User
-      operationId: UserUpdate
-      description: ''
-      tags:
-        - 'Users'
-      parameters:
-        - $ref: '#/components/parameters/user_id'
-      requestBody:
-        $ref: '#/components/requestBodies/UserUpdate'
-      responses:
-        '200':
-          $ref: '#/components/responses/Success'
-        '400':
-          $ref: '#/components/responses/BadRequest'
-        '404':
-          $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
 servers:
-  - url: https://mantisbt.org/bugs/
+  - url: https://mantisbt.org/bugs
     description: MantisBT Official Bugtracker
-  - url: '{protocol}://{hostname}:{port}/{basePath}/'
+  - url: '{protocol}://{hostname}:{port}/{basePath}'
     description: Your MantisBT instance
     variables:
       protocol:
@@ -928,18 +1812,54 @@ servers:
       basePath:
         description: The path where MantisBT is installed, without trailing `/`
         default: mantisbt
+security:
+  - api_key: []
 components:
   securitySchemes:
     api_key:
-      type: apiKey
-      in: header
-      name: Authorization
+      type: http
+      scheme: bearer
+      description: |-
+        The user's API token, sent with the RFC 6750 bearer scheme (`Bearer <token>`).
+        
+        The legacy bare form (`<token>`) is still accepted for backwards compatibility,
+        but this usage is deprecated and will be removed in a future release.
+  headers:
+    ETag:
+      description: Entity tag for the response representation, when conditional requests are supported.
+      schema:
+        type: string
+    WWW-Authenticate:
+      description: Authentication challenge indicating that a bearer API token is accepted.
+      schema:
+        type: string
+        example: Bearer
+    X-Mantis-Username:
+      description: |-
+        The username under which the request was executed.
+        When impersonation is active, this reflects the impersonated user's username.
+      schema:
+        type: string
+    X-Mantis-LoginMethod:
+      description: |-
+        The authentication method used for the request.
+        Possible values: `api-token`, `cookie`, `anonymous`.
+      schema:
+        type: string
+        enum:
+          - api-token
+          - cookie
+          - anonymous
+    X-Mantis-Version:
+      description: Version of the MantisBT instance that processed the request.
+      schema:
+        type: string
   schemas:
     ObjectRef:
       type: object
       properties:
         id:
-          type: number
+          type: integer
           example: 1
         name:
           type: string
@@ -949,18 +1869,21 @@ components:
         - $ref: '#/components/schemas/ObjectRef'
       properties:
         name:
+          type: string
           example: MantisBT
     CategoryRef:
       allOf:
         - $ref: '#/components/schemas/ObjectRef'
       properties:
         name:
+          type: string
           example: Authn
     UserRef:
       allOf:
         - $ref: '#/components/schemas/ObjectRef'
       properties:
         name:
+          type: string
           example: John Doe
         email:
           type: string
@@ -981,40 +1904,52 @@ components:
         - $ref: '#/components/schemas/Enum'
       properties:
         id:
+          type: number
           example: 10
         name:
+          type: string
           example: public
         label:
+          type: string
           example: Public
     PriorityEnum:
       allOf:
         - $ref: '#/components/schemas/Enum'
       properties:
         id:
+          type: number
           example: 40
         name:
+          type: string
           example: high
         label:
+          type: string
           example: High
     SeverityEnum:
       allOf:
         - $ref: '#/components/schemas/Enum'
       properties:
         id:
+          type: number
           example: 60
         name:
+          type: string
           example: major
         label:
+          type: string
           example: Major
     ReproducibilityEnum:
       allOf:
         - $ref: '#/components/schemas/Enum'
       properties:
         id:
+          type: number
           example: 10
         name:
+          type: string
           example: always
         label:
+          type: string
           example: Always
     AccessLevel:
       allOf:
@@ -1022,6 +1957,8 @@ components:
     User:
       type: object
       properties:
+        id:
+          type: integer
         name:
           type: string
         real_name:
@@ -1034,13 +1971,13 @@ components:
           type: boolean
         protected:
           type: boolean
-    UserWithId:
-      allOf:
-        - $ref: '#/components/schemas/User'
-        - type: object
-          properties:
-            id:
-              type: number
+        language:
+          type: string
+        timezone:
+          type: string
+        created_at:
+          type: string
+          format: date-time
     UserWithPassword:
       allOf:
         - $ref: '#/components/schemas/User'
@@ -1051,6 +1988,8 @@ components:
     Issue:
       type: object
       properties:
+        id:
+          type: integer
         summary:
           type: string
           example: 'This is a summary'
@@ -1075,6 +2014,16 @@ components:
           $ref: '#/components/schemas/CategoryRef'
         handler:
           $ref: '#/components/schemas/UserRef'
+        reporter:
+          $ref: '#/components/schemas/UserRef'
+        status:
+          $ref: '#/components/schemas/Enum'
+        resolution:
+          $ref: '#/components/schemas/Enum'
+        projection:
+          $ref: '#/components/schemas/Enum'
+        eta:
+          $ref: '#/components/schemas/Enum'
         view_state:
           $ref: '#/components/schemas/ViewStateEnum'
         priority:
@@ -1083,19 +2032,80 @@ components:
           $ref: '#/components/schemas/SeverityEnum'
         reproducibility:
           $ref: '#/components/schemas/ReproducibilityEnum'
+        version:
+          $ref: '#/components/schemas/ProjectRef'
+        fixed_in_version:
+          $ref: '#/components/schemas/ProjectRef'
+        target_version:
+          $ref: '#/components/schemas/ProjectRef'
         sticky:
           type: boolean
           description: |
             sticky issues show at the top of the View Issues page.
+        due_date:
+          type: string
+          format: date
+        date_submitted:
+          type: string
+          format: date-time
+        date_updated:
+          type: string
+          format: date-time
+        os:
+          type: string
+        os_build:
+          type: string
+        build:
+          type: string
+        platform:
+          type: string
+        profile_id:
+          type: integer
+        profile:
+          type: object
+          additionalProperties: true
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        attachments:
+          type: array
+          items:
+            $ref: '#/components/schemas/File'
+        relationships:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+        tags:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+        history:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+        notes:
+          type: array
+          items:
+            $ref: '#/components/schemas/IssueNote'
+        monitors:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserRef'
         files:
           type: array
           items:
             type: object
-          properties:
-            name:
-              type: string
-            content:
-              type: string
+            properties:
+              name:
+                type: string
+              content:
+                type: string
         custom_fields:
           type: array
           items:
@@ -1113,6 +2123,45 @@ components:
     IssueNote:
       type: object
       properties:
+        id:
+          type: integer
+        text:
+          type: string
+        reporter:
+          $ref: '#/components/schemas/UserRef'
+        view_state:
+          $ref: '#/components/schemas/ViewStateEnum'
+        type:
+          type: string
+        attr:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        attachments:
+          type: array
+          items:
+            $ref: '#/components/schemas/File'
+        time_tracking:
+          type: object
+          properties:
+            duration:
+              type: string
+        files:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+              content:
+                type: string
+    IssueNotesAdd:
+      type: object
+      properties:
         text:
           type: string
         view_state:
@@ -1126,11 +2175,204 @@ components:
           type: array
           items:
             type: object
-          properties:
-            name:
-              type: string
-            content:
-              type: string
+            properties:
+              name:
+                type: string
+              content:
+                type: string
+      description: Fields accepted when creating an issue note, including attachments and time tracking.
+    IssueCollection:
+      type: object
+      required: [issues]
+      properties:
+        issues:
+          type: array
+          items:
+            $ref: '#/components/schemas/Issue'
+    IssueResponse:
+      type: object
+      required: [issue]
+      properties:
+        issue:
+          $ref: '#/components/schemas/Issue'
+    IssueNoteCollection:
+      type: object
+      required: [notes]
+      properties:
+        notes:
+          type: array
+          items:
+            $ref: '#/components/schemas/IssueNote'
+    IssueNoteResponse:
+      type: object
+      properties:
+        note:
+          $ref: '#/components/schemas/IssueNote'
+        issue:
+          $ref: '#/components/schemas/Issue'
+    File:
+      type: object
+      properties:
+        id:
+          type: integer
+        reporter:
+          $ref: '#/components/schemas/UserRef'
+        created_at:
+          type: string
+          format: date-time
+        filename:
+          type: string
+        size:
+          type: integer
+        content_type:
+          type: string
+        content:
+          type: string
+          description: Base64-encoded file content.
+          format: byte
+    FileCollection:
+      type: object
+      required: [files]
+      properties:
+        files:
+          type: array
+          items:
+            $ref: '#/components/schemas/File'
+    UserCollection:
+      type: object
+      required: [users]
+      properties:
+        users:
+          type: array
+          items:
+            $ref: '#/components/schemas/User'
+    UserResponse:
+      type: object
+      required: [user]
+      properties:
+        user:
+          $ref: '#/components/schemas/User'
+    Project:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        status:
+          $ref: '#/components/schemas/Enum'
+        description:
+          type: string
+        enabled:
+          type: boolean
+        view_state:
+          $ref: '#/components/schemas/ViewStateEnum'
+        inherit_global:
+          type: boolean
+        access_level:
+          $ref: '#/components/schemas/AccessLevel'
+        custom_fields:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+        versions:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+        categories:
+          type: array
+          items:
+            type: string
+      additionalProperties: true
+    ProjectCollection:
+      type: object
+      required: [projects]
+      properties:
+        projects:
+          type: array
+          items:
+            $ref: '#/components/schemas/Project'
+    ProjectCategory:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        project:
+          $ref: '#/components/schemas/ProjectRef'
+        handler:
+          $ref: '#/components/schemas/UserRef'
+        enabled:
+          type: boolean
+    ProjectCategoryCollection:
+      type: object
+      required: [categories]
+      properties:
+        categories:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProjectCategory'
+    ProjectCategoryResponse:
+      type: object
+      required: [category]
+      properties:
+        category:
+          $ref: '#/components/schemas/ProjectCategory'
+    ProjectResponse:
+      type: object
+      required: [project]
+      properties:
+        project:
+          $ref: '#/components/schemas/Project'
+    VersionResponse:
+      type: object
+      properties:
+        version:
+          type: object
+          additionalProperties: true
+    TokenResponse:
+      type: object
+      properties:
+        token:
+          type: string
+        name:
+          type: string
+      additionalProperties: true
+    GenericResponse:
+      type: object
+      additionalProperties: true
+    ConfigResponse:
+      type: object
+      required: [configs]
+      properties:
+        configs:
+          type: array
+          items:
+            type: object
+            required: [option, value]
+            properties:
+              option:
+                type: string
+              value: {}
+    LocalizedStringsResponse:
+      type: object
+      required: [strings, language]
+      properties:
+        strings:
+          type: array
+          items:
+            type: object
+            required: [name, localized]
+            properties:
+              name:
+                type: string
+              localized:
+                type: string
+        language:
+          type: string
     ConfigSet:
       type: object
       properties:
@@ -1160,41 +2402,6 @@ components:
                 type: string
               content:
                 type: string
-    create_an_issue_note_with_time_tracking:
-      type: object
-      properties:
-        text:
-          type: string
-        view_state:
-          type: object
-          properties:
-            name:
-              type: string
-        time_tracking:
-          type: object
-          properties:
-            duration:
-              type: string
-    IssueNotesAdd:
-      type: object
-      properties:
-        text:
-          type: string
-        view_state:
-          type: object
-          properties:
-            name:
-              type: string
-    IssueNotesDelete:
-      type: object
-      properties:
-        text:
-          type: string
-        view_state:
-          type: object
-          properties:
-            name:
-              type: string
         reporter:
           type: object
           properties:
@@ -1228,8 +2435,22 @@ components:
     IssueUpdate:
       type: object
       properties:
+        id:
+          type: integer
+        project:
+          $ref: '#/components/schemas/ProjectRef'
+        reporter:
+          $ref: '#/components/schemas/UserRef'
         summary:
           type: string
+        description:
+          type: string
+        steps_to_reproduce:
+          type: string
+        additional_information:
+          type: string
+        category:
+          $ref: '#/components/schemas/CategoryRef'
         priority:
           type: object
           properties:
@@ -1245,6 +2466,94 @@ components:
           properties:
             name:
               type: string
+        severity:
+          type: object
+          properties:
+            id:
+              type: integer
+            name:
+              type: string
+        reproducibility:
+          type: object
+          properties:
+            id:
+              type: integer
+            name:
+              type: string
+        resolution:
+          type: object
+          properties:
+            id:
+              type: integer
+            name:
+              type: string
+        projection:
+          type: object
+          properties:
+            id:
+              type: integer
+            name:
+              type: string
+        eta:
+          type: object
+          properties:
+            id:
+              type: integer
+            name:
+              type: string
+        view_state:
+          type: object
+          properties:
+            id:
+              type: integer
+            name:
+              type: string
+        version:
+          type: object
+          properties:
+            id:
+              type: integer
+            name:
+              type: string
+        fixed_in_version:
+          type: object
+          properties:
+            id:
+              type: integer
+            name:
+              type: string
+        target_version:
+          type: object
+          properties:
+            id:
+              type: integer
+            name:
+              type: string
+        sticky:
+          type: boolean
+        due_date:
+          type: string
+          format: date
+        date_submitted:
+          type: string
+          format: date-time
+        date_updated:
+          type: string
+          format: date-time
+        profile_id:
+          type: integer
+        os:
+          type: string
+        os_build:
+          type: string
+        build:
+          type: string
+        platform:
+          type: string
+        monitors:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserRef'
         custom_fields:
           type: array
           items:
@@ -1280,11 +2589,6 @@ components:
                     type: string
                   label:
                     type: string
-    TokenDeleteForMe:
-      type: object
-      properties:
-        x:
-          type: number
     ProjectAdd:
       type: object
       properties:
@@ -1310,13 +2614,31 @@ components:
       type: object
       properties:
         id:
-          type: number
+          type: integer
         name:
           type: string
+        description:
+          type: string
+        status:
+          type: object
+          properties:
+            id:
+              type: integer
+            name:
+              type: string
+        view_state:
+          type: object
+          properties:
+            id:
+              type: integer
+            name:
+              type: string
         enabled:
           type: boolean
         inherit_global:
-          type: number
+          type: integer
+        file_path:
+          type: string
     ProjectVersionsAdd:
       type: object
       properties:
@@ -1333,7 +2655,35 @@ components:
     ProjectVersionsUpdate:
       type: object
       properties:
+        name:
+          type: string
+        description:
+          type: string
+        released:
+          type: boolean
         obsolete:
+          type: boolean
+        timestamp:
+          type: string
+          format: date-time
+    ProjectCategoriesAdd:
+      type: object
+      required: [name]
+      properties:
+        name:
+          type: string
+        handler:
+          $ref: '#/components/schemas/UserRef'
+        enabled:
+          type: boolean
+    ProjectCategoriesUpdate:
+      type: object
+      properties:
+        name:
+          type: string
+        handler:
+          $ref: '#/components/schemas/UserRef'
+        enabled:
           type: boolean
     ProjectSubprojectsAdd:
       type: object
@@ -1368,14 +2718,6 @@ components:
           properties:
             name:
               type: string
-    ProjectUsersDelete:
-      type: object
-      properties:
-        user:
-          type: object
-          properties:
-            name:
-              type: string
   requestBodies:
     ConfigSet:
       content:
@@ -1391,25 +2733,33 @@ components:
             $ref: '#/components/schemas/IssueFilesAdd'
       description: ''
       required: true
-    create_an_issue_note_with_time_tracking:
+    IssueMonitor:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/create_an_issue_note_with_time_tracking'
-      description: ''
-      required: true
+            type: object
+            properties:
+              users:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UserRef'
+      description: Users to add as monitors. Omit the body to monitor the authenticated user.
+      required: false
+    TokenCreate:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              name:
+                type: string
+      description: Optional token name. The server generates a unique name when omitted.
+      required: false
     IssueNotesAdd:
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/IssueNotesAdd'
-      description: ''
-      required: true
-    IssueNotesDelete:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/IssueNotesDelete'
       description: ''
       required: true
     IssueRelationshipsAdd:
@@ -1440,13 +2790,6 @@ components:
             $ref: '#/components/schemas/IssueUpdate'
       description: ''
       required: true
-    TokenDeleteForMe:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/TokenDeleteForMe'
-      description: ''
-      required: true
     ProjectAdd:
       content:
         application/json:
@@ -1475,6 +2818,18 @@ components:
             $ref: '#/components/schemas/ProjectVersionsUpdate'
       description: ''
       required: true
+    ProjectCategoriesAdd:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ProjectCategoriesAdd'
+      required: true
+    ProjectCategoriesUpdate:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ProjectCategoriesUpdate'
+      required: true
     ProjectSubprojectsAdd:
       content:
         application/json:
@@ -1496,13 +2851,6 @@ components:
             $ref: '#/components/schemas/ProjectUsersUpsert'
       description: ''
       required: true
-    ProjectUsersDelete:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ProjectUsersDelete'
-      description: ''
-      required: true
     UserAdd:
       content:
         application/json:
@@ -1518,8 +2866,29 @@ components:
       description: ''
       required: true
   parameters:
+    If-Match:
+      name: If-Match
+      in: header
+      required: false
+      schema:
+        type: string
+      description: ETag returned by a prior issue read. The operation fails with 412 if it no longer matches.
+    If-None-Match:
+      name: If-None-Match
+      in: header
+      required: false
+      schema:
+        type: string
+      description: ETag returned by a prior issue read. A matching value returns 304 without a response body.
+    X-Mantis-Username:
+      name: X-Mantis-Username
+      in: header
+      required: false
+      schema:
+        type: string
+      description: Username to impersonate for this request. Requires an authorized API token.
     issue_id:
-      name: issue_id
+      name: id
       in: path
       schema:
         type: integer
@@ -1537,7 +2906,7 @@ components:
       example: 5
       required: true
     project_id:
-      name: project_id
+      name: id
       in: path
       schema:
         type: integer
@@ -1546,7 +2915,7 @@ components:
       required: true
       example: 1
     filter_id:
-      name: filter_id
+      name: id
       in: path
       schema:
         type: string
@@ -1561,10 +2930,133 @@ components:
           It is possible to also pass in an integer
           which is the id of a saved filter.
       required: true
+    issues_filter_id:
+      name: filter_id
+      in: query
+      schema:
+        type: string
+        description: |
+          A built-in filter name or the ID of a saved filter.
+      required: false
   responses:
+    Accepted:
+      description: 'Request accepted for moderation'
+      headers:
+        X-Mantis-Username:
+          $ref: '#/components/headers/X-Mantis-Username'
+        X-Mantis-LoginMethod:
+          $ref: '#/components/headers/X-Mantis-LoginMethod'
+        X-Mantis-Version:
+          $ref: '#/components/headers/X-Mantis-Version'
+    Unauthorized:
+      description: Authentication is required or the supplied API token is invalid.
+      headers:
+        WWW-Authenticate:
+          $ref: '#/components/headers/WWW-Authenticate'
+    Forbidden:
+      description: The authenticated user is not authorized for this operation, impersonation, or API access level.
+    ServiceUnavailable:
+      description: MantisBT is in offline mode and cannot process API requests.
+    Created:
+      description: 'Resource created successfully'
+      content:
+        application/json:
+          schema:
+            oneOf:
+              - $ref: '#/components/schemas/IssueResponse'
+              - $ref: '#/components/schemas/IssueCollection'
+              - $ref: '#/components/schemas/IssueNoteResponse'
+              - $ref: '#/components/schemas/UserResponse'
+              - $ref: '#/components/schemas/ProjectResponse'
+              - $ref: '#/components/schemas/ProjectCategoryResponse'
+              - $ref: '#/components/schemas/ProjectCategoryCollection'
+              - $ref: '#/components/schemas/VersionResponse'
+              - $ref: '#/components/schemas/TokenResponse'
+              - $ref: '#/components/schemas/ConfigResponse'
+              - $ref: '#/components/schemas/LocalizedStringsResponse'
+              - $ref: '#/components/schemas/GenericResponse'
+      headers:
+        X-Mantis-Username:
+          $ref: '#/components/headers/X-Mantis-Username'
+        X-Mantis-LoginMethod:
+          $ref: '#/components/headers/X-Mantis-LoginMethod'
+        X-Mantis-Version:
+          $ref: '#/components/headers/X-Mantis-Version'
+    CreatedNoContent:
+      description: 'Resource created successfully with no response body'
+      headers:
+        X-Mantis-Username:
+          $ref: '#/components/headers/X-Mantis-Username'
+        X-Mantis-LoginMethod:
+          $ref: '#/components/headers/X-Mantis-LoginMethod'
+        X-Mantis-Version:
+          $ref: '#/components/headers/X-Mantis-Version'
     BadRequest:
       description: 'Bad Request'
     NotFound:
       description: 'Entity not found'
+    NoContent:
+      description: 'Operation completed successfully with no response body'
+      headers:
+        X-Mantis-Username:
+          $ref: '#/components/headers/X-Mantis-Username'
+        X-Mantis-LoginMethod:
+          $ref: '#/components/headers/X-Mantis-LoginMethod'
+        X-Mantis-Version:
+          $ref: '#/components/headers/X-Mantis-Version'
+    NotModified:
+      description: 'The requested issue has not changed since the supplied ETag.'
+      headers:
+        ETag:
+          description: Current entity tag for the requested issue.
+          schema:
+            type: string
+    PreconditionFailed:
+      description: 'The supplied If-Match value does not match the current issue ETag.'
+      headers:
+        ETag:
+          description: Current entity tag for the requested issue.
+          schema:
+            type: string
     Success:
       description: 'Success'
+      content:
+        application/json:
+          schema:
+            oneOf:
+              - $ref: '#/components/schemas/IssueCollection'
+              - $ref: '#/components/schemas/IssueResponse'
+              - $ref: '#/components/schemas/IssueNoteCollection'
+              - $ref: '#/components/schemas/IssueNoteResponse'
+              - $ref: '#/components/schemas/FileCollection'
+              - $ref: '#/components/schemas/UserCollection'
+              - $ref: '#/components/schemas/UserResponse'
+              - $ref: '#/components/schemas/ProjectCollection'
+              - $ref: '#/components/schemas/ProjectResponse'
+              - $ref: '#/components/schemas/ProjectCategoryResponse'
+              - $ref: '#/components/schemas/ProjectCategoryCollection'
+              - $ref: '#/components/schemas/VersionResponse'
+              - $ref: '#/components/schemas/TokenResponse'
+              - $ref: '#/components/schemas/ConfigResponse'
+              - $ref: '#/components/schemas/LocalizedStringsResponse'
+              - $ref: '#/components/schemas/GenericResponse'
+      headers:
+        ETag:
+          $ref: '#/components/headers/ETag'
+        X-Mantis-Username:
+          $ref: '#/components/headers/X-Mantis-Username'
+        X-Mantis-LoginMethod:
+          $ref: '#/components/headers/X-Mantis-LoginMethod'
+        X-Mantis-Version:
+          $ref: '#/components/headers/X-Mantis-Version'
+    NoContentWithETag:
+      description: 'Operation completed successfully with no response body'
+      headers:
+        ETag:
+          $ref: '#/components/headers/ETag'
+        X-Mantis-Username:
+          $ref: '#/components/headers/X-Mantis-Username'
+        X-Mantis-LoginMethod:
+          $ref: '#/components/headers/X-Mantis-LoginMethod'
+        X-Mantis-Version:
+          $ref: '#/components/headers/X-Mantis-Version'

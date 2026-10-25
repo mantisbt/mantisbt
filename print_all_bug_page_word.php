@@ -46,6 +46,8 @@
  * @uses profile_api.php
  * @uses project_api.php
  * @uses string_api.php
+ *
+ * @noinspection PhpUnhandledExceptionInspection
  */
 
 require_once( 'core.php' );
@@ -99,8 +101,6 @@ if( $f_type_page != 'html' ) {
 # This is where we used to do the entire actual filter ourselves
 $t_page_number = gpc_get_int( 'page_number', 1 );
 $t_per_page = -1;
-$t_bug_count = null;
-$t_page_count = null;
 
 $t_result = filter_get_bug_rows( $t_page_number, $t_per_page, $t_page_count, $t_bug_count );
 $t_row_count = count( $t_result );
@@ -109,7 +109,8 @@ $t_row_count = count( $t_result );
 if( $f_type_page == 'html' ) {
 	layout_page_header();
 } else {
-	echo '<html xmlns:o="urn:schemas-microsoft-com:office:office"
+	echo /** @lang text */
+		'<html xmlns:o="urn:schemas-microsoft-com:office:office"
 		xmlns:w="urn:schemas-microsoft-com:office:word"
 		xmlns="http://www.w3.org/TR/REC-html40">
 		<head><meta charset="utf-8"></head>';
@@ -177,13 +178,14 @@ for( $j=0; $j < $t_row_count; $j++ ) {
 			if( $f_type_page == 'html' ) {
 				echo '<div class="clearfix" style="page-break-before: always">&nbsp;</div>';
 			} else {
-				echo '<br clear=all style="mso-special-character: line-break; page-break-before: always">&nbsp;';
+				echo /** @lang text */
+					'<br clear=all style="mso-special-character: line-break; page-break-before: always">&nbsp;';
 			}
 		}
 
 		$t_count_exported++;
 
-		$t_last_updated = date( $g_short_date_format, $t_bug->last_updated );
+		$t_last_updated = date( config_get( 'short_date_format' ), $t_bug->last_updated );
 
 		# grab the project name
 		$t_project_name = project_get_field( $t_bug->project_id, 'name' );
@@ -221,7 +223,7 @@ for( $j=0; $j < $t_row_count; $j++ ) {
 		<?php echo $t_id ?>
 	</td>
 	<td>
-		<?php echo '[' . string_display_line( $t_project_name ) . '] ' . string_display_line( $t_category_name ) ?>
+		<?php echo '[' . string_attribute( $t_project_name ) . '] ' . string_attribute( $t_category_name ) ?>
 	</td>
 	<td>
 		<?php echo get_enum_element( 'severity', $t_bug->severity, auth_get_current_user_id(), $t_bug->project_id ) ?>
@@ -248,7 +250,7 @@ for( $j=0; $j < $t_row_count; $j++ ) {
 		<?php echo sprintf( lang_get( 'label' ), $t_lang_platform ) ?>
 	</td>
 	<td>
-		<?php echo string_display_line( $t_bug->platform ) ?>
+		<?php echo string_attribute( $t_bug->platform ) ?>
 	</td>
 <?php if( access_has_bug_level( config_get( 'due_date_view_threshold' ), $t_id ) ) { ?>
 	<td class="bold">
@@ -286,7 +288,7 @@ for( $j=0; $j < $t_row_count; $j++ ) {
 		<?php echo sprintf( lang_get( 'label' ), $t_lang_os ) ?>
 	</td>
 	<td>
-		<?php echo string_display_line( $t_bug->os ) ?>
+		<?php echo string_attribute( $t_bug->os ) ?>
 	</td>
 	<td colspan="2">&#160;</td>
 </tr>
@@ -301,7 +303,7 @@ for( $j=0; $j < $t_row_count; $j++ ) {
 		<?php echo sprintf( lang_get( 'label' ), $t_lang_os_build ) ?>
 	</td>
 	<td>
-		<?php echo string_display_line( $t_bug->os_build ) ?>
+		<?php echo string_attribute( $t_bug->os_build ) ?>
 	</td>
 	<td colspan="2">&#160;</td>
 </tr>
@@ -316,7 +318,7 @@ for( $j=0; $j < $t_row_count; $j++ ) {
 		<?php echo sprintf( lang_get( 'label' ), $t_lang_product_version ) ?>
 	</td>
 	<td>
-		<?php echo string_display_line( $t_bug->version ) ?>
+		<?php echo string_attribute( $t_bug->version ) ?>
 	</td>
 	<td colspan="2">&#160;</td>
 </tr>
@@ -325,7 +327,7 @@ for( $j=0; $j < $t_row_count; $j++ ) {
 		<?php echo sprintf( lang_get( 'label' ), $t_lang_product_build ) ?>
 	</td>
 	<td>
-		<?php echo string_display_line( $t_bug->build ) ?>
+		<?php echo string_attribute( $t_bug->build ) ?>
 	</td>
 	<td class="bold">
 		<?php echo sprintf( lang_get( 'label' ), $t_lang_resolution ) ?>
@@ -361,7 +363,7 @@ for( $j=0; $j < $t_row_count; $j++ ) {
 		<?php echo sprintf( lang_get( 'label' ), $t_lang_fixed_in_version ) ?>
 	</td>
 	<td>
-		<?php echo string_display_line( $t_bug->fixed_in_version ) ?>
+		<?php echo string_attribute( $t_bug->fixed_in_version ) ?>
 	</td>
 	<td colspan="2">&#160;</td>
 
@@ -377,7 +379,7 @@ for( $j=0; $j < $t_row_count; $j++ ) {
 		<?php echo sprintf( lang_get( 'label' ), $t_lang_target_version ) ?>
 	</td>
 	<td>
-		<?php echo string_display_line( $t_bug->target_version ) ?>
+		<?php echo string_attribute( $t_bug->target_version ) ?>
 	</td>
 	<td colspan="2">&#160;</td>
 </tr>
@@ -528,11 +530,9 @@ $t_bugnotes = bugnote_get_all_visible_bugnotes( $t_id, $t_user_bugnote_order, $t
 </tr>
 	<?php
 		foreach ( $t_bugnotes as $t_bugnote ) {
-			# prefix all bugnote data with v3_
 			$t_date_submitted = date( $t_date_format, $t_bugnote->date_submitted );
 			$t_last_modified = date( $t_date_format, $t_bugnote->last_modified );
 
-			# grab the bugnote text and id and prefix with v3_
 			$t_note = string_display_links( $t_bugnote->note );
 	?>
 <tr>
@@ -548,19 +548,18 @@ $t_bugnotes = bugnote_get_all_visible_bugnotes( $t_id, $t_user_bugnote_order, $t
 			</td>
 	<td>
 <?php
-					switch ( $t_bugnote->note_type ) {
-						case REMINDER:
-							echo lang_get( 'reminder_sent_to' ) . ': ';
-							$t_note_attr = mb_substr( $t_bugnote->note_attr, 1, mb_strlen( $t_bugnote->note_attr ) - 2 );
-							$t_to = array();
-							foreach ( explode( '|', $t_note_attr ) as $t_recipient ) {
-								$t_to[] = prepare_user_name( $t_recipient );
-							}
-							echo implode( ', ', $t_to ) . '<br />';
-						default:
-							echo string_display_links( $t_bugnote->note );
-					}
-				?>
+			if( $t_bugnote->note_type == REMINDER ) {
+				echo lang_get( 'reminder_sent_to' ) . ': ';
+				$t_note_attr = mb_substr( $t_bugnote->note_attr, 1, mb_strlen( $t_bugnote->note_attr ) - 2 );
+				$t_to = array();
+				foreach ( explode( '|', $t_note_attr ) as $t_recipient ) {
+					$t_to[] = prepare_user_name( $t_recipient );
+				}
+				echo implode( ', ', $t_to ) . '<br />';
+			}
+
+			echo $t_note;
+?>
 			</td>
 		</tr>
 <?php

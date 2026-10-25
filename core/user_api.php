@@ -653,6 +653,20 @@ function user_create( $p_username, $p_password, $p_email = '',
 		$p_access_level = config_get( 'default_new_account_access_level' );
 	}
 
+	if( ON == config_get_global( 'use_ldap_realname' ) ) {
+		$t_realname = ldap_realname_from_username( $p_username );
+		if( !empty( $t_realname ) ) {
+			$p_realname = $t_realname;
+		}
+	}
+
+	if( ON == config_get_global( 'use_ldap_email' ) ) {
+		$t_email = ldap_email_from_username( $p_username );
+		if( !empty( $t_email ) ) {
+			$p_email = $t_email;
+		}
+	}
+
 	$t_password = auth_process_plain_password( $p_password );
 
 	$c_enabled = (bool)$p_enabled;
@@ -814,6 +828,9 @@ function user_delete( $p_user_id ) {
 
 	# Revoke all API tokens
 	api_token_revoke_all( $p_user_id );
+
+	# Remove user-owned filters
+	filter_db_delete_user_filters( $p_user_id );
 
 	# Remove account
 	db_param_push();
@@ -1129,7 +1146,7 @@ function user_get_field( $p_user_id, $p_field_name ) {
  */
 function user_get_email( $p_user_id ) {
 	$t_email = '';
-	if( LDAP == config_get_global( 'login_method' ) && ON == config_get_global( 'use_ldap_email' ) ) {
+	if( ON == config_get_global( 'use_ldap_email' ) ) {
 		$t_email = ldap_email( $p_user_id );
 	}
 	if( is_blank( $t_email ) ) {
@@ -1168,7 +1185,7 @@ function user_get_username( $p_user_id ) {
 function user_get_realname( $p_user_id ) {
 	$t_realname = '';
 
-	if( LDAP == config_get_global( 'login_method' ) && ON == config_get_global( 'use_ldap_realname' ) ) {
+	if( ON == config_get_global( 'use_ldap_realname' ) ) {
 		$t_realname = ldap_realname( $p_user_id );
 	}
 
@@ -2012,7 +2029,6 @@ function user_reset_password( $p_user_id, $p_send_email = true ) {
 	if( ( ON == config_get( 'send_reset_password' ) ) && ( ON == config_get( 'enable_email_notification' ) ) ) {
 		$t_email = user_get_field( $p_user_id, 'email' );
 		if( is_blank( $t_email ) ) {
-			trigger_error( ERROR_LOST_PASSWORD_NO_EMAIL_SPECIFIED, ERROR );
 			throw new ClientException(
 				sprintf( "User id '%d' does not have an e-mail address.", (int)$p_user_id ),
 				ERROR_LOST_PASSWORD_NO_EMAIL_SPECIFIED,

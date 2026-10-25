@@ -2,7 +2,7 @@
 /** MantisBT - a php based bugtracking system
  *
  * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2016  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * Copyright (C) 2002 - 2026  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  *
  * MantisBT is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -66,11 +66,6 @@ $s_plugin_MantisGraph_graph_imp_resolution_title = 'Gráfico de síntese por res
 $s_plugin_MantisGraph_graph_developer_title = 'Por desenvolvedores Gráficos';
 $s_plugin_MantisGraph_graph_reporter_title = 'Por Reporter Gráficos';
 $s_plugin_MantisGraph_graph_issues_trend_title = 'Questões abertas, resolvidas e restantes';
-$s_plugin_MantisGraph_by_status_pct = 'porcentagem por status';
-$s_plugin_MantisGraph_by_priority_pct = 'porcentagem por prioridade';
-$s_plugin_MantisGraph_by_severity_pct = 'porcentagem por gravidade';
-$s_plugin_MantisGraph_by_category_pct = 'porcentagem por categoria';
-$s_plugin_MantisGraph_by_resolution_pct = 'porcentagem por resolução';
 $s_plugin_MantisGraph_by_severity_mix = 'por gravidade e status';
 $s_plugin_MantisGraph_by_priority_mix = 'por prioridade e status';
 $s_plugin_MantisGraph_by_resolution_mix = 'por resolução e status';

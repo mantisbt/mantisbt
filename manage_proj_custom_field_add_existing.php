@@ -23,26 +23,16 @@
  * @link http://www.mantisbt.org
  *
  * @uses core.php
- * @uses access_api.php
  * @uses authentication_api.php
- * @uses config_api.php
- * @uses custom_field_api.php
  * @uses form_api.php
  * @uses gpc_api.php
- * @uses html_api.php
- * @uses lang_api.php
  * @uses print_api.php
  */
 
 require_once( 'core.php' );
-require_api( 'access_api.php' );
 require_api( 'authentication_api.php' );
-require_api( 'config_api.php' );
-require_api( 'custom_field_api.php' );
 require_api( 'form_api.php' );
 require_api( 'gpc_api.php' );
-require_api( 'html_api.php' );
-require_api( 'lang_api.php' );
 require_api( 'print_api.php' );
 
 form_security_validate( 'manage_proj_custom_field_add_existing' );
@@ -52,13 +42,13 @@ auth_reauthenticate();
 $f_field_id		= gpc_get_int( 'field_id' );
 $f_project_id	= gpc_get_int( 'project_id' );
 
-# We should check both since we are in the project section and an
-#  admin might raise the first threshold and not realize they need
-#  to raise the second
-access_ensure_project_level( config_get( 'manage_project_threshold' ), $f_project_id );
-access_ensure_project_level( config_get( 'custom_field_link_threshold' ), $f_project_id );
-
-custom_field_link( $f_field_id, $f_project_id );
+$t_command = new ProjectFieldLinkCommand( [
+	'query' => [
+		'field_id' => $f_field_id,
+		'project_id' => $f_project_id,
+	],
+] );
+$t_command->execute();
 
 form_security_purge( 'manage_proj_custom_field_add_existing' );
 

@@ -38,7 +38,12 @@
  * @uses print_api.php
  * @uses string_api.php
  * @uses version_api.php
+ *
+ * Unhandled exceptions will be caught by the default error handler
+ * @noinspection PhpUnhandledExceptionInspection
  */
+
+use Mantis\Exceptions\ClientException;
 
 require_once( 'core.php' );
 require_api( 'access_api.php' );
@@ -66,8 +71,10 @@ layout_page_begin( 'manage_filter_edit_page.php' );
 
 $f_filter_id = gpc_get_int( 'filter_id', null );
 if( null === $f_filter_id ) {
-	error_parameters( 'FILTER_ID' );
-	trigger_error( ERROR_EMPTY_FIELD, ERROR );
+	throw new ClientException( "Filter Id is required",
+		ERROR_EMPTY_FIELD,
+		[ 'filter_id' ]
+	);
 }
 
 $t_filter = filter_get( $f_filter_id, null );
@@ -124,7 +131,7 @@ $t_filter_project_id = filter_get_field( $f_filter_id, 'project_id' );
 						<div class="form-inline">
 							<label>
 								<?php echo lang_get( 'query_name' ) ?>&nbsp;
-								<input type="text" size="25" name="filter_name" maxlength="64" value="<?php echo string_display_line( filter_get_field( $f_filter_id, 'name' ) ) ?>">
+								<input type="text" size="25" name="filter_name" maxlength="64" value="<?php echo string_attribute( filter_get_field( $f_filter_id, 'name' ) ) ?>">
 							</label>
 						</div>
 					</div>
@@ -173,14 +180,14 @@ $t_filter_project_id = filter_get_field( $f_filter_id, 'project_id' );
 								<?php if( ALL_PROJECTS != $t_filter_project_id ) { ?>
 								<label>
 									<input type="radio" class="ace input-sm" name="filter_project_id" value="<?php echo $t_filter_project_id ?>" <?php check_checked( ALL_PROJECTS != $t_filter_project_id ) ?>>
-									<span class="lbl padding-6"><?php echo lang_get( 'stored_project' ) . ' (' . string_display_line( project_get_name( $t_filter_project_id ) ) . ')' ?></span>
+									<span class="lbl padding-6"><?php echo lang_get( 'stored_project' ) . ' (' . string_attribute( project_get_name( $t_filter_project_id ) ) . ')' ?></span>
 								</label>
 								<br>
 								<?php } ?>
 								<?php if( $t_filter_project_id != $t_current_project_id ) { ?>
 								<label>
 									<input type="radio" class="ace input-sm" name="filter_project_id" value="<?php echo $t_current_project_id ?>">
-									<span class="lbl padding-6"><?php echo lang_get( 'current_project' ) . ' (' . string_display_line( project_get_name( $t_current_project_id ) ) . ')' ?></span>
+									<span class="lbl padding-6"><?php echo lang_get( 'current_project' ) . ' (' . string_attribute( project_get_name( $t_current_project_id ) ) . ')' ?></span>
 								</label>
 								<?php } ?>
 							</td>

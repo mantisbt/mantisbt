@@ -2,7 +2,7 @@
 /** MantisBT - a php based bugtracking system
  *
  * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2016  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * Copyright (C) 2002 - 2026  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  *
  * MantisBT is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -47,6 +47,7 @@
  * @author SZ475
  * @author Saturnian
  * @author Stelistcristi
+ * @author Vellion Eagle
  */
 
 $s_actiongroup_menu_copy = 'Copiază';
@@ -173,8 +174,6 @@ $s_update_severity_title = 'Modifică gravitate';
 $s_update_severity_msg = 'Alege gravitatea problemei';
 $s_update_severity_button = 'Modifică gravitatea';
 $s_hide_button = 'Afișează doar cele selectate';
-$s_printing_preferences_title = 'Alegeți câmpurile pentru tipărire';
-$s_printing_options_link = 'Opțiuni de tipărire';
 $s_bugnote_title = 'Procesor pentru comentariu';
 $s_bugnote_date = 'Data comentariului';
 $s_bugnote_description = 'Descrierea comentariului';
@@ -186,7 +185,6 @@ $s_prefix_for_deleted_users = 'utilizator';
 $s_administrator = 'administrator';
 $s_myself = 'Eu însumi';
 $s_default_access_level = 'Nivel de acces implicit';
-$s_issue_status_percentage = 'Procent stare problemă';
 $s_access_levels_enum_string = '10:spectator,25:raportor,40:editor,55:dezvoltator,70:manager,90:administrator';
 $s_project_status_enum_string = '10:dezvoltare,30:release,50:stabilă,70:perimată';
 $s_project_view_state_enum_string = '10:public,50:privat';
@@ -477,13 +475,13 @@ $s_core_path = 'Calea de bază';
 $s_plugin_path = 'Calea Plugin-ului';
 $s_created_user_part1 = 'Utilizator creat';
 $s_created_user_part2 = 'cu nivel de acces ca și';
-$s_create_new_account_title = 'Crează un cont nou';
+$s_create_new_account_title = 'Creează un cont nou';
 $s_verify_password = 'Verifică parola';
 $s_enabled = 'Activat';
 $s_enabled_label = 'Activat';
 $s_protected = 'Protejat';
 $s_protected_label = 'Protejat';
-$s_create_user_button = 'Crează cont';
+$s_create_user_button = 'Creează cont';
 $s_hide_disabled = 'Ascunde cele dezactivate';
 $s_filter_button = 'Filtru';
 $s_default_filter = 'Filtru implicit';
@@ -502,7 +500,7 @@ $s_manage_email_config = 'Notificări e-mail';
 $s_manage_workflow_config = 'Tranziții flux de lucru';
 $s_manage_workflow_graph = 'Graficul fluxului de lucru';
 $s_manage_tags_link = 'Etichete';
-$s_create_new_account_link = 'Crează cont';
+$s_create_new_account_link = 'Creează cont';
 $s_projects_link = 'Proiecte';
 $s_documentation_link = 'Documentație';
 $s_new_accounts_title = 'Conturi noi';
@@ -745,7 +743,7 @@ $s_select_severity = 'Severitate';
 $s_or_fill_in = 'sau precizați';
 $s_assign_to = 'Atribuie lui';
 $s_additional_information = 'Informatie aditionala';
-$s_submit_report_button = 'Semnalează';
+$s_submit_report_button = 'Trimiteți problema';
 $s_check_report_more_bugs = 'bifați pentru a semnala probleme în continuare';
 $s_report_stay = 'Staționare';
 $s_selected_project = 'Proiect selectat';
@@ -802,10 +800,10 @@ $s_changed = 'Modificat (ore)';
 $s_viewing_bugs_title = 'Afișare probleme';
 $s_updated = 'Modificat';
 $s_sticky = 'Arată problemele sticky';
-$s_sort = 'Sortat după';
+$s_sort = 'Sortează după';
 $s_issue_id = 'Problema #';
 $s_recently_visited = 'Vizitate recent';
-$s_note_user_id = 'Comentat de';
+$s_note_user_id = 'Notă de';
 $s_filter_match_type = 'Tip de corespondență';
 $s_filter_match_all = 'Toate condițiile';
 $s_filter_match_any = 'Orice condiție';
@@ -970,7 +968,7 @@ $s_filters = 'Filtre';
 $s_save_filters = 'Salvează filtrele';
 $s_save_filters_as_shared = 'Salvează filtrele ca și partajate';
 $s_use_saved_filters = 'Utilizează filtrele salvate';
-$s_create_project = 'Crează proiect';
+$s_create_project = 'Creează proiect';
 $s_delete_project = 'Șterge proiect';
 $s_manage_project = 'Gestionează proiect';
 $s_manage_user_access_to_project = 'Gestionează accesul utilizatorilor la un proiect';

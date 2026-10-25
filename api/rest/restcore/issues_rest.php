@@ -25,6 +25,9 @@
  */
 
 use Mantis\Exceptions\ClientException;
+use Mantis\Exceptions\LegacyApiFaultException;
+use Slim\Http\Request;
+use Slim\Http\Response;
 
 /**
  * @var \Slim\App $g_app
@@ -44,6 +47,8 @@ $g_app->group('/issues', function() use ( $g_app ) {
 	$g_app->patch( '/', 'rest_issue_update' );
 	$g_app->patch( '/{id}', 'rest_issue_update' );
 	$g_app->patch( '/{id}/', 'rest_issue_update' );
+	$g_app->post( '/{id}/move', 'rest_issue_move' );
+	$g_app->post( '/{id}/move/', 'rest_issue_move' );
 
 	# Tags
 	$g_app->post( '/{id}/tags', 'rest_issue_tag_attach' );
@@ -74,23 +79,26 @@ $g_app->group('/issues', function() use ( $g_app ) {
 	$g_app->get( '/{id}/files', 'rest_issue_files_get' );
 	$g_app->get( '/{id}/files/{file_id}/', 'rest_issue_files_get' );
 	$g_app->get( '/{id}/files/{file_id}', 'rest_issue_files_get' );
+	$g_app->delete( '/{id}/files/{file_id}/', 'rest_issue_file_delete' );
+	$g_app->delete( '/{id}/files/{file_id}', 'rest_issue_file_delete' );
 });
 
 /**
  * A method that does the work to handle getting an issue via REST API.
  *
- * @param \Slim\Http\Request  $p_request  The request.
- * @param \Slim\Http\Response $p_response The response.
- * @param array               $p_args     Arguments
+ * @param Request  $p_request  The request.
+ * @param Response $p_response The response.
+ * @param array    $p_args     Arguments
  *
- * @return \Slim\Http\Response The augmented response.
+ * @return Response The augmented response.
  *
- * @throws \Mantis\Exceptions\LegacyApiFaultException
+ * @throws LegacyApiFaultException
+ * @throws ClientException
  */
-function rest_issue_get( \Slim\Http\Request $p_request, \Slim\Http\Response $p_response, array $p_args ) {
-	$t_issue_id = isset( $p_args['id'] ) ? $p_args['id'] : $p_request->getParam( 'id' );
+function rest_issue_get( Request $p_request, Response $p_response, array $p_args ) {
+	$t_issue_id = $p_args['id'] ?? $p_request->getParam( 'id' );
 
-	$t_select = $p_request->getParam( 'select', null );
+	$t_select = $p_request->getParam( 'select' );
 	if( $t_select !== null ) {
 		$t_select = explode( ',', $t_select );
 		$t_select = array_map( 'trim', $t_select );
@@ -146,9 +154,7 @@ function rest_issue_get( \Slim\Http\Request $p_request, \Slim\Http\Response $p_r
 		}
 	}
 
-	if( $t_result !== null ) {
-		$p_response = $p_response->withStatus( HTTP_STATUS_SUCCESS )->withJson( $t_result );
-	}
+	$p_response = $p_response->withStatus( HTTP_STATUS_SUCCESS )->withJson( $t_result );
 
 	return $p_response->withHeader( HEADER_ETAG, $t_etag );
 }
@@ -156,17 +162,17 @@ function rest_issue_get( \Slim\Http\Request $p_request, \Slim\Http\Response $p_r
 /**
  * Create an issue from a POST to the issues url.
  *
- * @param \Slim\Http\Request  $p_request  The request.
- * @param \Slim\Http\Response $p_response The response.
- * @param array               $p_args     Arguments
+ * @param Request  $p_request  The request.
+ * @param Response $p_response The response.
+ * @param array    $p_args     Arguments
  *
- * @return \Slim\Http\Response The augmented response.
+ * @return Response The augmented response.
  *
  * @throws ClientException
  *
  * @noinspection PhpUnusedParameterInspection
  */
-function rest_issue_add( \Slim\Http\Request $p_request, \Slim\Http\Response $p_response, array $p_args ) {
+function rest_issue_add( Request $p_request, Response $p_response, array $p_args ) {
 	$t_issue = $p_request->getParsedBody();
 	if( !$t_issue ) {
 		return $p_response->withStatus( HTTP_STATUS_BAD_REQUEST, "Invalid request body or format");
@@ -196,16 +202,17 @@ function rest_issue_add( \Slim\Http\Request $p_request, \Slim\Http\Response $p_r
 /**
  * Delete an issue given its id.
  *
- * @param \Slim\Http\Request  $p_request  The request.
- * @param \Slim\Http\Response $p_response The response.
- * @param array               $p_args     Arguments
+ * @param Request  $p_request  The request.
+ * @param Response $p_response The response.
+ * @param array    $p_args     Arguments
  *
- * @return \Slim\Http\Response The augmented response.
+ * @return Response The augmented response.
  *
- * @throws \Mantis\Exceptions\LegacyApiFaultException
+ * @throws LegacyApiFaultException
+ * @throws ClientException
  */
-function rest_issue_delete( \Slim\Http\Request $p_request, \Slim\Http\Response $p_response, array $p_args ) {
-	$t_issue_id = isset( $p_args['id'] ) ? $p_args['id'] : $p_request->getParam( 'id' );
+function rest_issue_delete( Request $p_request, Response $p_response, array $p_args ) {
+	$t_issue_id = $p_args['id'] ?? $p_request->getParam( 'id' );
 
 	$t_issue = mc_issue_get( /* username */ '', /* password */ '', $t_issue_id );
 	ApiObjectFactory::throwIfFault( $t_issue );
@@ -231,16 +238,16 @@ function rest_issue_delete( \Slim\Http\Request $p_request, \Slim\Http\Response $
 /**
  * Add issue file.
  *
- * @param \Slim\Http\Request  $p_request  The request.
- * @param \Slim\Http\Response $p_response The response.
- * @param array               $p_args     Arguments
+ * @param Request  $p_request  The request.
+ * @param Response $p_response The response.
+ * @param array    $p_args     Arguments
  *
- * @return \Slim\Http\Response The augmented response.
+ * @return Response The augmented response.
  *
  * @throws ClientException
  */
-function rest_issue_file_add( \Slim\Http\Request $p_request, \Slim\Http\Response $p_response, array $p_args ) {
-	$t_issue_id = isset( $p_args['id'] ) ? $p_args['id'] : $p_request->getParam( 'id' );
+function rest_issue_file_add( Request $p_request, Response $p_response, array $p_args ) {
+	$t_issue_id = $p_args['id'] ?? $p_request->getParam( 'id' );
 
 	$t_data = array(
 		'query' => array( 'issue_id' => $t_issue_id ),
@@ -260,16 +267,16 @@ function rest_issue_file_add( \Slim\Http\Request $p_request, \Slim\Http\Response
 /**
  * Add issue note.
  *
- * @param \Slim\Http\Request  $p_request  The request.
- * @param \Slim\Http\Response $p_response The response.
- * @param array               $p_args     Arguments
+ * @param Request  $p_request  The request.
+ * @param Response $p_response The response.
+ * @param array    $p_args     Arguments
  *
- * @return \Slim\Http\Response The augmented response.
+ * @return Response The augmented response.
  *
  * @throws ClientException
  */
-function rest_issue_note_add( \Slim\Http\Request $p_request, \Slim\Http\Response $p_response, array $p_args ) {
-	$t_issue_id = isset( $p_args['id'] ) ? $p_args['id'] : $p_request->getParam( 'id' );
+function rest_issue_note_add( Request $p_request, Response $p_response, array $p_args ) {
+	$t_issue_id = $p_args['id'] ?? $p_request->getParam( 'id' );
 
 	$t_data = array(
 		'query' => array( 'issue_id' => $t_issue_id ),
@@ -310,15 +317,16 @@ function rest_issue_note_add( \Slim\Http\Request $p_request, \Slim\Http\Response
 /**
  * Delete issue note.
  *
- * @param \Slim\Http\Request $p_request   The request.
- * @param \Slim\Http\Response $p_response The response.
- * @param array $p_args Arguments
+ * @param Request  $p_request  The request.
+ * @param Response $p_response The response.
+ * @param array    $p_args     Arguments
  *
- * @return \Slim\Http\Response The augmented response.
+ * @return Response The augmented response.
+ * @throws ClientException
  */
-function rest_issue_note_delete( \Slim\Http\Request $p_request, \Slim\Http\Response $p_response, array $p_args ) {
-	$t_issue_id = isset( $p_args['id'] ) ? $p_args['id'] : $p_request->getParam( 'id' );
-	$t_issue_note_id = isset( $p_args['note_id'] ) ? $p_args['note_id'] : $p_request->getParam( 'note_id' );
+function rest_issue_note_delete( Request $p_request, Response $p_response, array $p_args ) {
+	$t_issue_id = $p_args['id'] ?? $p_request->getParam( 'id' );
+	$t_issue_note_id = $p_args['note_id'] ?? $p_request->getParam( 'note_id' );
 
 	$t_data = array(
 		'query' => array(
@@ -337,13 +345,14 @@ function rest_issue_note_delete( \Slim\Http\Request $p_request, \Slim\Http\Respo
 /**
  * Add relationship to issue.
  *
- * @param \Slim\Http\Request $p_request   The request.
- * @param \Slim\Http\Response $p_response The response.
- * @param array $p_args Arguments
+ * @param Request  $p_request  The request.
+ * @param Response $p_response The response.
+ * @param array    $p_args     Arguments
  *
- * @return \Slim\Http\Response The augmented response.
+ * @return Response The augmented response.
+ * @throws ClientException
  */
-function rest_issue_relationship_add( \Slim\Http\Request $p_request, \Slim\Http\Response $p_response, array $p_args ) {
+function rest_issue_relationship_add( Request $p_request, Response $p_response, array $p_args ) {
 	$t_issue_id = $p_args['id'];
 
 	$t_data = array(
@@ -367,15 +376,16 @@ function rest_issue_relationship_add( \Slim\Http\Request $p_request, \Slim\Http\
 /**
  * Delete issue relationship.
  *
- * @param \Slim\Http\Request $p_request   The request.
- * @param \Slim\Http\Response $p_response The response.
- * @param array $p_args Arguments
+ * @param Request  $p_request  The request.
+ * @param Response $p_response The response.
+ * @param array    $p_args     Arguments
  *
- * @return \Slim\Http\Response The augmented response.
+ * @return Response The augmented response.
  *
  * @noinspection PhpUnusedParameterInspection
+ * @throws ClientException
  */
-function rest_issue_relationship_delete( \Slim\Http\Request $p_request, \Slim\Http\Response $p_response, array $p_args ) {
+function rest_issue_relationship_delete( Request $p_request, Response $p_response, array $p_args ) {
 	$t_issue_id = $p_args['id'];
 	$t_relationship_id = $p_args['relationship_id'];
 
@@ -396,16 +406,17 @@ function rest_issue_relationship_delete( \Slim\Http\Request $p_request, \Slim\Ht
 /**
  * Update an issue from a PATCH to the issues url.
  *
- * @param \Slim\Http\Request  $p_request  The request.
- * @param \Slim\Http\Response $p_response The response.
- * @param array               $p_args     Arguments
+ * @param Request  $p_request  The request.
+ * @param Response $p_response The response.
+ * @param array    $p_args     Arguments
  *
- * @return \Slim\Http\Response The augmented response.
+ * @return Response The augmented response.
  *
- * @throws \Mantis\Exceptions\LegacyApiFaultException
+ * @throws LegacyApiFaultException
+ * @throws ClientException
  */
-function rest_issue_update( \Slim\Http\Request $p_request, \Slim\Http\Response $p_response, array $p_args ) {
-	$t_issue_id = isset( $p_args['id'] ) ? $p_args['id'] : $p_request->getParam( 'id' );
+function rest_issue_update( Request $p_request, Response $p_response, array $p_args ) {
+	$t_issue_id = $p_args['id'] ?? $p_request->getParam( 'id' );
 	if( is_blank( $t_issue_id ) ) {
 		$t_message = "Mandatory field 'id' is missing.";
 		return $p_response->withStatus( HTTP_STATUS_BAD_REQUEST, $t_message );
@@ -448,16 +459,47 @@ function rest_issue_update( \Slim\Http\Request $p_request, \Slim\Http\Response $
 }
 
 /**
+ * Move an issue to another project.
+ *
+ * @param Request  $p_request  The request.
+ * @param Response $p_response The response.
+ * @param array    $p_args     Arguments
+ *
+ * @return Response The augmented response.
+ * @throws ClientException
+ */
+function rest_issue_move( Request $p_request, Response $p_response, array $p_args ) {
+	$t_payload = $p_request->getParsedBody();
+	if( !is_array( $t_payload ) ) {
+		return $p_response->withStatus( HTTP_STATUS_BAD_REQUEST, 'Invalid request body or format' );
+	}
+	if( isset( $t_payload['note']['files'] ) ) {
+		$t_payload['note']['files'] = files_base64_to_temp( $t_payload['note']['files'] );
+	}
+
+	$t_command = new IssueMoveCommand( array(
+		'query' => array( 'issue_id' => $p_args['id'] ),
+		'payload' => $t_payload,
+	) );
+
+	$t_result = $t_command->execute();
+	$t_issue = mc_issue_get( '', '', $t_result['issue_id'] );
+
+	return $p_response->withStatus( HTTP_STATUS_SUCCESS, 'Issue moved' )->withJson( array( 'issue' => $t_issue ) );
+}
+
+/**
  * Add users to monitor an issue.
  *
- * @param \Slim\Http\Request $p_request   The request.
- * @param \Slim\Http\Response $p_response The response.
- * @param array $p_args Arguments
+ * @param Request  $p_request  The request.
+ * @param Response $p_response The response.
+ * @param array    $p_args     Arguments
  *
- * @return \Slim\Http\Response The augmented response.
+ * @return Response The augmented response.
+ * @throws ClientException
  */
-function rest_issue_monitor_add( \Slim\Http\Request $p_request, \Slim\Http\Response $p_response, array $p_args ) {
-	$t_issue_id = isset( $p_args['id'] ) ? $p_args['id'] : $p_request->getParam( 'id' );
+function rest_issue_monitor_add( Request $p_request, Response $p_response, array $p_args ) {
+	$t_issue_id = $p_args['id'] ?? $p_request->getParam( 'id' );
 	$t_data = array(
 		'query' => array( 'issue_id' => $t_issue_id ),
 		'payload' => $p_request->getParsedBody(),
@@ -475,13 +517,14 @@ function rest_issue_monitor_add( \Slim\Http\Request $p_request, \Slim\Http\Respo
 /**
  * Attach a tag to an issue.
  *
- * @param \Slim\Http\Request $p_request   The request.
- * @param \Slim\Http\Response $p_response The response.
- * @param array $p_args Arguments
+ * @param Request  $p_request  The request.
+ * @param Response $p_response The response.
+ * @param array    $p_args     Arguments
  *
- * @return \Slim\Http\Response The augmented response.
+ * @return Response The augmented response.
+ * @throws ClientException
  */
-function rest_issue_tag_attach( \Slim\Http\Request $p_request, \Slim\Http\Response $p_response, array $p_args ) {
+function rest_issue_tag_attach( Request $p_request, Response $p_response, array $p_args ) {
 	$t_issue_id = $p_args['id'];
 	$t_data = array(
 		'query' => array( 'issue_id' => $t_issue_id ),
@@ -500,15 +543,16 @@ function rest_issue_tag_attach( \Slim\Http\Request $p_request, \Slim\Http\Respon
 /**
  * Detach a tag from the issue
  *
- * @param \Slim\Http\Request $p_request   The request.
- * @param \Slim\Http\Response $p_response The response.
- * @param array $p_args Arguments
+ * @param Request  $p_request  The request.
+ * @param Response $p_response The response.
+ * @param array    $p_args     Arguments
  *
- * @return \Slim\Http\Response The augmented response.
+ * @return Response The augmented response.
  *
  * @noinspection PhpUnusedParameterInspection
+ * @throws ClientException
  */
-function rest_issue_tag_detach( \Slim\Http\Request $p_request, \Slim\Http\Response $p_response, array $p_args ) {
+function rest_issue_tag_detach( Request $p_request, Response $p_response, array $p_args ) {
 	$t_issue_id = $p_args['id'];
 	$t_tag_id = $p_args['tag_id'];
 
@@ -528,17 +572,18 @@ function rest_issue_tag_detach( \Slim\Http\Request $p_request, \Slim\Http\Respon
 /**
  * Get files associated with an issue.
  *
- * @param \Slim\Http\Request $p_request   The request.
- * @param \Slim\Http\Response $p_response The response.
- * @param array $p_args Arguments
+ * @param Request  $p_request  The request.
+ * @param Response $p_response The response.
+ * @param array    $p_args     Arguments
  *
- * @return \Slim\Http\Response The augmented response.
+ * @return Response The augmented response.
  *
  * @noinspection PhpUnusedParameterInspection
+ * @throws ClientException
  */
-function rest_issue_files_get( \Slim\Http\Request $p_request, \Slim\Http\Response $p_response, array $p_args ) {
+function rest_issue_files_get( Request $p_request, Response $p_response, array $p_args ) {
 	$t_issue_id = $p_args['id'];
-	$t_file_id = isset( $p_args['file_id'] ) ? $p_args['file_id'] : null;
+	$t_file_id = $p_args['file_id'] ?? null;
 
 	$t_data = array(
 		'query' => array( 'issue_id' => $t_issue_id, 'file_id' => $t_file_id )
@@ -567,6 +612,33 @@ function rest_issue_files_get( \Slim\Http\Request $p_request, \Slim\Http\Respons
 
 	return $p_response->withStatus( HTTP_STATUS_SUCCESS )->
 		withJson( array( 'files' => $t_files ) );
+}
+
+/**
+ * Delete a file associated with an issue.
+ *
+ * @param Request  $p_request The request.
+ * @param Response $p_response The response.
+ * @param array    $p_args Route arguments.
+ *
+ * @return Response The augmented response.
+ * @throws ClientException
+ */
+function rest_issue_file_delete( Request $p_request, Response $p_response, array $p_args ) {
+	$t_issue_id = $p_args['id'];
+	$t_file_id = $p_args['file_id'];
+
+	$t_command = new IssueFileDeleteCommand( array(
+		'query' => array(
+			'issue_id' => $t_issue_id,
+			'file_id' => $t_file_id,
+		)
+	) );
+	$t_command->execute();
+
+	$t_issue = mc_issue_get( /* username */ '', /* password */ '', $t_issue_id );
+	return $p_response->withStatus( HTTP_STATUS_SUCCESS )
+		->withJson( array( 'issue' => $t_issue ) );
 }
 
 /**

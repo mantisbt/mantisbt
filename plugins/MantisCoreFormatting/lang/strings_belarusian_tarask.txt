@@ -2,7 +2,7 @@
 /** MantisBT - a php based bugtracking system
  *
  * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2016  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * Copyright (C) 2002 - 2026  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  *
  * MantisBT is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -51,8 +51,20 @@ $s_plugin_format_process_text = 'Апрацоўка тэксту';
 $s_plugin_format_process_text_warning_notice = 'Не выключайце, калі Вы сапраўды не ўпэўнены ў тым што Вы робіце. У выключаным стане ўзьнікае імавернасьць XSS-атакі на сайт.';
 $s_plugin_format_process_urls = 'Апрацоўка URL-адрасоў';
 $s_plugin_format_process_buglinks = 'Унутраныя спасылкі MantisBT (праблемы і камэнтары)';
-$s_plugin_format_process_buglinks_info = 'Вашая канфігурацыя вызначае метку <em>Issue</em> як «%s», а метку <em>Issue Note</em> як «%s»';
+$s_plugin_format_process_buglinks_info = 'Вашая канфіґурацыя вызначае тэґ <em>Issue</em> як «%1$s», а <em>Issue Note</em> як «%2$s»';
 $s_plugin_format_process_markdown = 'Апрацоўка Markdown';
 $s_plugin_format_process_markdown_info = 'Стылі з падтрымкай Markdown, сынтаксыс фарматаваньня тэксту створаны так, каб ён мог быць канвэртаваны ў HTML.';
 $s_plugin_format_enabled = 'Уключанае';
 $s_plugin_format_disabled = 'Выключанае';
+$s_plugin_format_syntax_highlighting_theme = 'Выгляд блёкаў коду';
+$s_plugin_format_syntax_highlighting_plugins = 'Опцыі блёкаў коду';
+$s_plugin_format_syntax_highlighting_plugin_copy_to_clipboard_name = 'Капіяваць у буфэр абмену';
+$s_plugin_format_syntax_highlighting_plugin_copy_to_clipboard_copy = 'Капіяваць';
+$s_plugin_format_syntax_highlighting_plugin_copy_to_clipboard_success = '✓ Скапіявана';
+$s_plugin_format_syntax_highlighting_plugin_copy_to_clipboard_error = 'Націсьніце Ctrl+C, каб скапіяваць';
+$s_plugin_format_syntax_highlighting_plugin_show_language_name = 'Паказаць мову';
+$s_plugin_format_syntax_highlighting_plugin_show_language_desc = 'Паказвае, якую мову зьмяшчае блёк коду.';
+$s_plugin_format_syntax_highlighting_plugin_line_numbers_name = 'Нумары радкоў';
+$s_plugin_format_syntax_highlighting_plugin_line_numbers_desc = 'Паказваць нумары радкоў.';
+$s_plugin_format_syntax_highlighting_plugin_show_invisibles_name = 'Паказаць прабелы';
+$s_plugin_format_syntax_highlighting_plugin_normalize_whitespace_name = 'Нармалізаваць прабелы';

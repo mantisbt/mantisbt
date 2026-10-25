@@ -2,7 +2,7 @@
 /** MantisBT - a php based bugtracking system
  *
  * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2016  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * Copyright (C) 2002 - 2026  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  *
  * MantisBT is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -61,17 +61,14 @@ $s_plugin_MantisGraph_graph_project_title = 'Графикони по проек�
 $s_plugin_MantisGraph_graph_developer_title = 'По разработувачки графикони';
 $s_plugin_MantisGraph_graph_reporter_title = 'По графикони за известувачи';
 $s_plugin_MantisGraph_graph_issues_trend_title = 'Отворени, решени и преостанати проблеми';
-$s_plugin_MantisGraph_by_status_pct = 'По статус (%)';
-$s_plugin_MantisGraph_by_priority_pct = 'По приоритет (%)';
-$s_plugin_MantisGraph_by_severity_pct = 'По сериозност (%)';
-$s_plugin_MantisGraph_by_category_pct = 'По категорија (%)';
-$s_plugin_MantisGraph_by_resolution_pct = 'По разделност (%)';
 $s_plugin_MantisGraph_by_severity_mix = 'По сериозност и статус';
 $s_plugin_MantisGraph_by_priority_mix = 'По приоритет и статус';
 $s_plugin_MantisGraph_by_resolution_mix = 'По разделност и состојба';
+$s_plugin_MantisGraph_data = 'Податоци';
 $s_plugin_MantisGraph_legend_still_open = 'Сè уште отворени';
 $s_plugin_MantisGraph_legend_resolved = 'Решени';
 $s_plugin_MantisGraph_legend_reported = 'Пријавени';
+$s_plugin_MantisGraph_period = 'Период';
 $s_plugin_MantisGraph_period_none = 'Нема';
 $s_plugin_MantisGraph_period_this_week = 'Оваа седмица';
 $s_plugin_MantisGraph_period_last_week = 'Минатата седмица';
@@ -89,3 +86,5 @@ $s_plugin_MantisGraph_graph_opendev = 'Разработувачи по отво�
 $s_plugin_MantisGraph_graph_topreporter_fixed = 'Најдобри пријавувачи по поправени проблеми';
 $s_plugin_MantisGraph_other_categories = 'други категории (%d)';
 $s_plugin_MantisGraph_other_projects = 'други проекти (%d)';
+$s_plugin_MantisGraph_bucket = 'Група';
+$s_plugin_MantisGraph_date = 'Датум';

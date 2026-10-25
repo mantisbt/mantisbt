@@ -26,4 +26,4 @@ do
 done
 
 # Trigger installation
-curl --data "${query_string:1}" http://$HOSTNAME:$PORT/admin/install.php
+curl --fail-with-body --data "${query_string:1}" http://$HOSTNAME:$PORT/admin/install.php

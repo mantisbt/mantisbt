@@ -38,6 +38,8 @@
 # don't auto-login when trying to verify new user
 $g_login_anonymous = false;
 
+use Mantis\Exceptions\ClientException;
+
 require_once( 'core.php' );
 require_api( 'authentication_api.php' );
 require_api( 'config_api.php' );
@@ -55,8 +57,9 @@ require_css( 'login.css' );
 # check if at least one way to get here is enabled
 if( !auth_signup_enabled() &&
 	OFF == config_get( 'lost_password_feature' ) &&
-	OFF == config_get( 'send_reset_password' ) ) {
-	trigger_error( ERROR_LOST_PASSWORD_NOT_ENABLED, ERROR );
+	OFF == config_get( 'send_reset_password' )
+) {
+	throw new ClientException( "Lost password feature is disabled", ERROR_LOST_PASSWORD_NOT_ENABLED );
 }
 
 $f_user_id = gpc_get_int( 'id' );
@@ -81,7 +84,7 @@ if( $t_token_confirm_hash == null
 	|| $f_confirm_hash !== $t_token_confirm_hash
 	|| $t_token_change_email !== null
 ) {
-	trigger_error( ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID, ERROR );
+	throw new ClientException( "Invalid confirmation hash", ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID );
 }
 
 user_reset_failed_login_count_to_zero( $f_user_id );
@@ -131,7 +134,7 @@ layout_login_page_begin( $t_form_title );
 		<div id="verify-div" class="form-container">
 			<form id="account-update-form" method="post" action="account_update.php">
 				<fieldset>
-					<legend><span><?php echo $t_form_title . ' - ' . string_display_line( $u_username ) ?></span></legend>
+					<legend><span><?php echo $t_form_title . ' - ' . string_attribute( $u_username ) ?></span></legend>
 					<div class="space-10"></div>
 					<input type="hidden" name="verify_user_id" value="<?php echo $u_id ?>">
 					<input type="hidden" name="confirm_hash" value="<?php echo string_html_specialchars( $f_confirm_hash ) ?>">

@@ -88,7 +88,7 @@ function summary_helper_print_row( $p_label, $p_open, $p_resolved, $p_closed, $p
  * @return string
  */
 function summary_helper_get_developer_label( $p_user_id, array $p_filter = [] ) {
-	$t_user = string_display_line( user_get_name( $p_user_id ) );
+	$t_user = string_attribute( user_get_name( $p_user_id ) );
 
 	$t_link_prefix = summary_get_link_prefix( $p_filter );
 
@@ -190,6 +190,7 @@ function summary_helper_get_bugratio( $p_bugs_open, $p_bugs_resolved, $p_bugs_cl
  * @param array  $p_filter Filter array to limit the visibility.
  *
  * @return void
+ * @throws Exception
  */
 function summary_print_by_enum( $p_enum, array $p_filter = [] ) {
 	$t_project_id = helper_get_current_project();
@@ -239,8 +240,8 @@ function summary_print_by_enum( $p_enum, array $p_filter = [] ) {
 			$t_filter_property = FILTER_PROPERTY_PRIORITY;
 			break;
 		default:
-			# Unknown Enum type
-			trigger_error( ERROR_GENERIC, ERROR );
+			$t_message = "Unknown Enum type '$p_enum'";
+			throw new Exception( $t_message, ERROR_GENERIC, [$t_message] );
 	}
 
 	foreach( $t_cache as $t_enum => $t_item) {
@@ -308,6 +309,7 @@ function summary_print_by_enum( $p_enum, array $p_filter = [] ) {
  * @param array $p_filter Filter array to limit the visibility.
  *
  * @return void
+ * @throws ClientException
  */
 function summary_print_by_activity( array $p_filter = [] ) {
 	$t_project_id = helper_get_current_project();
@@ -336,7 +338,9 @@ function summary_print_by_activity( array $p_filter = [] ) {
 	$t_summarybugs = array();
 	while( $t_row = $t_query->fetch() ) {
 		# Skip private bugs unless user has proper permissions
-		if( ( VS_PRIVATE == $t_row['view_state'] ) && ( false == access_has_bug_level( $t_private_bug_threshold, $t_row['id'] ) ) ) {
+		if( ( VS_PRIVATE == $t_row['view_state'] )
+			&& ( !access_has_bug_level( $t_private_bug_threshold, $t_row['id'] ) )
+		) {
 			continue;
 		}
 
@@ -400,7 +404,9 @@ function summary_print_by_age( array $p_filter = [] ) {
 		bug_cache_database_result( $t_row );
 
 		# Skip private bugs unless user has proper permissions
-		if( ( VS_PRIVATE == bug_get_field( $t_row['id'], 'view_state' ) ) && ( false == access_has_bug_level( $t_private_bug_threshold, $t_row['id'] ) ) ) {
+		if( ( VS_PRIVATE == bug_get_field( $t_row['id'], 'view_state' ) )
+			&& ( !access_has_bug_level( $t_private_bug_threshold, $t_row['id'] ) )
+		) {
 			continue;
 		}
 
@@ -463,9 +469,9 @@ function summary_print_by_developer( array $p_filter = [] ) {
 
 	foreach( $t_cache as $t_label => $t_item) {
 		# Build up the hyperlinks to bug views
-		$t_bugs_open = isset( $t_item['open'] ) ? $t_item['open'] : 0;
-		$t_bugs_resolved = isset( $t_item['resolved'] ) ? $t_item['resolved'] : 0;
-		$t_bugs_closed = isset( $t_item['closed'] ) ? $t_item['closed'] : 0;
+		$t_bugs_open = $t_item['open'] ?? 0;
+		$t_bugs_resolved = $t_item['resolved'] ?? 0;
+		$t_bugs_closed = $t_item['closed'] ?? 0;
 		$t_bugs_total = $t_bugs_open + $t_bugs_resolved + $t_bugs_closed;
 		$t_bugs_ratio = summary_helper_get_bugratio( $t_bugs_open, $t_bugs_resolved, $t_bugs_closed, $t_bugs_total_count);
 
@@ -580,7 +586,7 @@ function summary_print_by_reporter( array $p_filter = [] ) {
 			continue;
 		}
 		$t_reporter_id = $t_stats['reporter_id'];
-		$t_user = string_display_line( user_get_name( $t_reporter_id ) );
+		$t_user = string_attribute( user_get_name( $t_reporter_id ) );
 		$t_link_prefix = summary_get_link_prefix( $p_filter );
 
 		$t_bug_link = $t_link_prefix . '&amp;' . FILTER_PROPERTY_REPORTER_ID . '=' . $t_reporter_id;
@@ -613,7 +619,9 @@ function summary_print_by_reporter( array $p_filter = [] ) {
  * Print a bug count per category.
  *
  * @param array $p_filter Filter array to limit the visibility.
+ *
  * @return void
+ * @throws ClientException
  */
 function summary_print_by_category( array $p_filter = [] ) {
 	$t_summary_category_include_project = config_get( 'summary_category_include_project' );
@@ -656,9 +664,9 @@ function summary_print_by_category( array $p_filter = [] ) {
 
 	foreach( $t_cache as $t_label => $t_item) {
 		# Build up the hyperlinks to bug views
-		$t_bugs_open = isset( $t_item['open'] ) ? $t_item['open'] : 0;
-		$t_bugs_resolved = isset( $t_item['resolved'] ) ? $t_item['resolved'] :0;
-		$t_bugs_closed = isset( $t_item['closed'] ) ? $t_item['closed'] : 0;
+		$t_bugs_open = $t_item['open'] ?? 0;
+		$t_bugs_resolved = $t_item['resolved'] ?? 0;
+		$t_bugs_closed = $t_item['closed'] ?? 0;
 		$t_bugs_total = $t_bugs_open + $t_bugs_resolved + $t_bugs_closed;
 		$t_bugs_ratio = summary_helper_get_bugratio( $t_bugs_open, $t_bugs_resolved, $t_bugs_closed, $t_bugs_total_count);
 
@@ -666,7 +674,7 @@ function summary_print_by_category( array $p_filter = [] ) {
 
 		$t_bug_link = $t_link_prefix . '&amp;' . FILTER_PROPERTY_CATEGORY_ID . '=' . string_url( $t_label );
 		summary_helper_build_buglinks( $t_bug_link, $t_bugs_open, $t_bugs_resolved, $t_bugs_closed, $t_bugs_total );
-		summary_helper_print_row( string_display_line( $t_label ), $t_bugs_open, $t_bugs_resolved, $t_bugs_closed, $t_bugs_total, $t_bugs_ratio[0], $t_bugs_ratio[1] );
+		summary_helper_print_row( string_attribute( $t_label ), $t_bugs_open, $t_bugs_resolved, $t_bugs_closed, $t_bugs_total, $t_bugs_ratio[0], $t_bugs_ratio[1] );
 	}
 }
 
@@ -681,6 +689,7 @@ function summary_print_by_category( array $p_filter = [] ) {
  * @param array $p_filter   Filter array to limit the visibility.
  *
  * @return void
+ * @throws ClientException
  */
 function summary_print_by_project( array $p_projects = [], int $p_level = 0, array $p_cache = [], array $p_filter = [] ) {
 	$t_project_id = helper_get_current_project();
@@ -724,11 +733,11 @@ function summary_print_by_project( array $p_projects = [], int $p_level = 0, arr
 	foreach( $p_projects as $t_project ) {
 		$t_name = str_repeat( '&raquo; ', $p_level ) . project_get_name( $t_project );
 
-		$t_pdata = isset( $p_cache[$t_project] ) ? $p_cache[$t_project] : array( 'open' => 0, 'resolved' => 0, 'closed' => 0 );
+		$t_pdata = $p_cache[$t_project] ?? array( 'open' => 0, 'resolved' => 0, 'closed' => 0 );
 
-		$t_bugs_open = isset( $t_pdata['open'] ) ? $t_pdata['open'] : 0;
-		$t_bugs_resolved = isset( $t_pdata['resolved'] ) ? $t_pdata['resolved'] : 0;
-		$t_bugs_closed = isset( $t_pdata['closed'] ) ? $t_pdata['closed'] : 0;
+		$t_bugs_open = $t_pdata['open'] ?? 0;
+		$t_bugs_resolved = $t_pdata['resolved'] ?? 0;
+		$t_bugs_closed = $t_pdata['closed'] ?? 0;
 		$t_bugs_total = $t_bugs_open + $t_bugs_resolved + $t_bugs_closed;
 		
 		$t_bugs_ratio = summary_helper_get_bugratio( $t_bugs_open, $t_bugs_resolved, $t_bugs_closed, $t_bugs_total_count);
@@ -737,7 +746,7 @@ function summary_print_by_project( array $p_projects = [], int $p_level = 0, arr
 #		$t_bug_link = '<a class="subtle" href="' . config_get( 'bug_count_hyperlink_prefix' ) . '&amp;' . FILTER_PROPERTY_PROJECT_ID . '=' . string_url( $t_project );
 #		summary_helper_build_buglinks( $t_bug_link, $t_bugs_open, $t_bugs_resolved, $t_bugs_closed, $t_bugs_total );
 
-		summary_helper_print_row( string_display_line( $t_name ), $t_bugs_open, $t_bugs_resolved, $t_bugs_closed, $t_bugs_total, $t_bugs_ratio[0], $t_bugs_ratio[1]);
+		summary_helper_print_row( string_attribute( $t_name ), $t_bugs_open, $t_bugs_resolved, $t_bugs_closed, $t_bugs_total, $t_bugs_ratio[0], $t_bugs_ratio[1]);
 
 		if( count( project_hierarchy_get_subprojects( $t_project ) ) > 0 ) {
 			$t_subprojects = current_user_get_accessible_subprojects( $t_project );
@@ -965,7 +974,7 @@ function summary_print_reporter_resolution( $p_resolution_enum_string, array $p_
 			echo '<tr>';
 			$t_row_count++;
 			echo '<td>';
-			echo string_display_line( user_get_name( $t_reporter_id ) );
+			echo string_attribute( user_get_name( $t_reporter_id ) );
 			echo "</td>\n";
 
 			# We need to track the percentage of bugs that are considered fix, as well as
@@ -1111,7 +1120,7 @@ function summary_print_reporter_effectiveness( $p_severity_enum_string, $p_resol
 			echo '<tr>';
 			$t_row_count++;
 			echo '<td>';
-			echo string_display_line( user_get_name( $t_reporter_id ) );
+			echo string_attribute( user_get_name( $t_reporter_id ) );
 			echo '</td>';
 
 			$t_total_severity = 0;
@@ -1262,6 +1271,7 @@ function summary_helper_get_time_stats( $p_project_id, array $p_filter = [] ) {
  * accessible issues by the user.
  *
  * @return array Filter array
+ * @throws ClientException
  */
 function summary_get_filter() {
 	$t_filter = null;

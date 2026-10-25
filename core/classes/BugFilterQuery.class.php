@@ -107,6 +107,7 @@ class BugFilterQuery extends DbQuery {
 	public $project_id;
 	public $user_id;
 	public $use_sticky;
+	public bool $visible_only;
 
 	# internal storage for intermediate data
 	protected $query_type;
@@ -146,9 +147,12 @@ class BugFilterQuery extends DbQuery {
 	 *					By default current user is used.
 	 * - 'use_sticky':	(bool) Whether to allow returning the bug list sorted so that sticky
 	 *					bugs are placed first in the result order. This is false by default.
+	 * - 'visible_only':(bool) If true, only visible columns can be used as sort criteria,
+	 *                  others are ignored.
 	 *
 	 * @param array $p_filter			Filter array
 	 * @param array|integer $p_config	Options array, or single query type identifier
+	 *
 	 * @return void
 	 */
 	public function __construct( $p_filter, $p_config = self::QUERY_TYPE_LIST ) {
@@ -158,6 +162,7 @@ class BugFilterQuery extends DbQuery {
 		$this->use_sticky = false;
 		$this->project_id = helper_get_current_project();
 		$this->user_id = auth_get_current_user_id();
+		$this->visible_only = true;
 
 		# $p_config can be an array or an integer
 		if( is_array( $p_config ) ) {
@@ -177,6 +182,9 @@ class BugFilterQuery extends DbQuery {
 						break;
 					case 'use_sticky':
 						$this->use_sticky = (bool)$t_value;
+						break;
+					case 'visible_only':
+						$this->visible_only = (bool)$t_value;
 						break;
 				}
 			}
@@ -232,13 +240,14 @@ class BugFilterQuery extends DbQuery {
 	}
 
 	/**
-	 * Override DbQuery execute method to check first if the query is already buils and up to date
-	 * with current query parts.
+	 * Override DbQuery execute method to check first if the query is already
+	 * built and up to date with current query parts.
 	 *
 	 * @param array $p_bind_array	Array for binding values
-	 * @param integer $p_limit		Limit value
-	 * @param integer $p_offset		Offset value
-	 * @return IteratorAggregate|boolean ADOdb result set or false if the query failed.
+	 * @param int   $p_limit		Limit value
+	 * @param int   $p_offset		Offset value
+	 *
+	 * @return ADORecordSet|bool ADOdb result set or false if the query failed.
 	 */
 	public function execute( array $p_bind_array = [], $p_limit = null, $p_offset = null ) {
 		if( $this->needs_rebuild ) {
@@ -253,7 +262,7 @@ class BugFilterQuery extends DbQuery {
 	 * executes it and returns the count value.
 	 * This call does not modify current object.
 	 *
-	 * @return integer	Number of issues matched by the filter
+	 * @return int Number of issues matched by the filter
 	 */
 	public function get_bug_count() {
 		# create a copy from current query
@@ -451,6 +460,9 @@ class BugFilterQuery extends DbQuery {
 					break;
 				case FILTER_PROPERTY_SEVERITY:
 					$this->build_prop_severity();
+					break;
+				case FILTER_PROPERTY_REPRODUCIBILITY:
+					$this->build_prop_reproducibility();
 					break;
 				case FILTER_PROPERTY_RESOLUTION:
 					$this->build_prop_resolution();
@@ -900,6 +912,18 @@ class BugFilterQuery extends DbQuery {
 			return;
 		}
 		$t_query = $this->sql_in( '{bug}.severity', $this->filter[FILTER_PROPERTY_SEVERITY] );
+		$this->add_where( $t_query );
+	}
+
+  /**
+	 * Build the query parts for the filter property "reproducibility"
+	 * @return void
+	 */
+	protected function build_prop_reproducibility() {
+		if( filter_field_is_any( $this->filter[FILTER_PROPERTY_REPRODUCIBILITY] ) ) {
+			return;
+		}
+		$t_query = $this->sql_in( '{bug}.reproducibility', $this->filter[FILTER_PROPERTY_REPRODUCIBILITY] );
 		$this->add_where( $t_query );
 	}
 
@@ -1710,10 +1734,8 @@ class BugFilterQuery extends DbQuery {
 	 */
 	protected function build_order_by() {
 
-		# Get only the visible, and sortable, column properties
-		# @TODO cproensa: this defaults to COLUMNS_TARGET_VIEW_PAGE
-		# are we sure that filters are only used with the column set for view page?
-		$t_sort_properties = filter_get_visible_sort_properties_array( $this->filter );
+		# Get the sort column properties
+		$t_sort_properties = filter_get_sort_properties_array( $this->filter, $this->visible_only );
 		$t_sort_fields = $t_sort_properties[FILTER_PROPERTY_SORT_FIELD_NAME];
 		$t_dir_fields = $t_sort_properties[FILTER_PROPERTY_SORT_DIRECTION];
 

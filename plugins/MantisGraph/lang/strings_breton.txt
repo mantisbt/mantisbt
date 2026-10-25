@@ -2,7 +2,7 @@
 /** MantisBT - a php based bugtracking system
  *
  * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2016  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * Copyright (C) 2002 - 2026  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  *
  * MantisBT is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -61,11 +61,6 @@ $s_plugin_MantisGraph_graph_imp_resolution_title = 'Dre c\'hrafikoù diskoulm';
 $s_plugin_MantisGraph_graph_developer_title = 'Dre c\'hrafikoù diorroer';
 $s_plugin_MantisGraph_graph_reporter_title = 'Dre c\'hrafikoù titourer';
 $s_plugin_MantisGraph_graph_issues_trend_title = 'Kudennoù digoret, diskoulmet, hag ar re a chom';
-$s_plugin_MantisGraph_by_status_pct = 'dregantad dre statud';
-$s_plugin_MantisGraph_by_priority_pct = 'dregantad dre gentwir';
-$s_plugin_MantisGraph_by_severity_pct = 'dregantad dre live grevusted';
-$s_plugin_MantisGraph_by_category_pct = 'dregantad dre rummad';
-$s_plugin_MantisGraph_by_resolution_pct = 'dregantad dre ziskoulm';
 $s_plugin_MantisGraph_by_severity_mix = 'dre live grevusted ha dre statud';
 $s_plugin_MantisGraph_by_priority_mix = 'Dre gentwir ha dre statud';
 $s_plugin_MantisGraph_by_resolution_mix = 'dre ziskoulm ha statud';

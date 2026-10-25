@@ -101,7 +101,7 @@ $t_all_defs = multi_sort( $t_all_defs, 'name' );
 				# workaround to enforce line break displaying custom field values
 				# @todo replace by CSS after we don't support any longer browsers without CSS3 support
 				?>
-				<td><?php echo str_replace( '|', ' | ', string_display_line( $t_def['possible_values'] ) ) ?></td>
+				<td><?php echo str_replace( '|', ' | ', string_attribute( $t_def['possible_values'] ) ) ?></td>
 				<td><?php echo string_display( $t_def['default_value'] ) ?></td>
 			</tr>
 			<?php

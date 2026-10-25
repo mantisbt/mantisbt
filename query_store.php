@@ -80,7 +80,6 @@ foreach( $t_query_arr as $t_id => $t_name )	{
 		$t_query_redirect_url = helper_url_combine( $t_query_redirect_url,
 			[ 'error_msg' => lang_get( 'query_dupe_name' ) ] );
 		print_header_redirect( $t_query_redirect_url );
-		exit;
 	}
 }
 

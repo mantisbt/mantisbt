@@ -30,6 +30,8 @@
  * @uses html_api.php
  * @uses lang_api.php
  * @uses utility_api.php
+ *
+ * @noinspection PhpUnhandledExceptionInspection
  */
 
 require_once( 'core.php' );
@@ -76,19 +78,23 @@ print_doc_menu('proj_doc_add_page.php');
 <div class="table-responsive">
 <table class="table table-bordered table-condensed table-striped">
 <tr>
-	<th class="category" width="25%">
-		<span class="required">*</span> <?php echo lang_get( 'title' ) ?>
+	<th class="category">
+		<label for="title">
+			<span class="required">*</span> <?php echo lang_get( 'title' ) ?>
+		</label>
 	</th>
-	<td width="75%">
-		<input type="text" name="title" class="input-sm" size="70" maxlength="250" required />
+	<td>
+		<input type="text" id="title" name="title" class="input-sm" size="70" maxlength="250" required />
 	</td>
 </tr>
 <tr>
 	<th class="category">
-		<?php echo lang_get( 'description' ) ?>
+		<label for="description">
+			<?php echo lang_get( 'description' ) ?>
+		</label>
 	</th>
 	<td>
-		<textarea class="form-control" name="description" cols="60" rows="7"></textarea>
+		<textarea class="form-control" id="description" name="description" cols="60" rows="7"></textarea>
 	</td>
 </tr>
 <tr>

@@ -155,7 +155,7 @@ while( $t_row = db_fetch_array( $t_result ) ) {
 			/** @noinspection HtmlUnknownTarget */
 			printf( '<a href="%s">%s</a> (%s)',
 				$t_download_url,
-				string_display_line( $v_title ),
+                    string_attribute( $v_title ),
 				$t_filesize
 			);
 		?>

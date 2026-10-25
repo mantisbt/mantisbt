@@ -2,7 +2,7 @@
 /** MantisBT - a php based bugtracking system
  *
  * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2016  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * Copyright (C) 2002 - 2026  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  *
  * MantisBT is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -64,17 +64,14 @@ $s_plugin_MantisGraph_graph_project_title = 'לפי תרשימי מיזמים';
 $s_plugin_MantisGraph_graph_developer_title = 'לפי תרשימי מפתחים';
 $s_plugin_MantisGraph_graph_reporter_title = 'לפי תרשימי מדווח';
 $s_plugin_MantisGraph_graph_issues_trend_title = 'סוגיות שנפתחו, נפתרו ונותרו';
-$s_plugin_MantisGraph_by_status_pct = 'לפי אחוזי מצב';
-$s_plugin_MantisGraph_by_priority_pct = 'לפי אחוז עדיפות';
-$s_plugin_MantisGraph_by_severity_pct = 'לפי אחוז חומרה';
-$s_plugin_MantisGraph_by_category_pct = 'לפי אחוז קטגוריה';
-$s_plugin_MantisGraph_by_resolution_pct = 'לפי אחוז פתרון';
 $s_plugin_MantisGraph_by_severity_mix = 'לפי חומרה ומצב';
 $s_plugin_MantisGraph_by_priority_mix = 'לפי עדיפות ומצב';
 $s_plugin_MantisGraph_by_resolution_mix = 'לפי פתרון ומצב';
+$s_plugin_MantisGraph_data = 'נתונים';
 $s_plugin_MantisGraph_legend_still_open = 'עדיין פתוח';
 $s_plugin_MantisGraph_legend_resolved = 'פתור';
 $s_plugin_MantisGraph_legend_reported = 'מדוּוח';
+$s_plugin_MantisGraph_period = 'תקופה';
 $s_plugin_MantisGraph_period_none = 'כלום';
 $s_plugin_MantisGraph_period_this_week = 'השבוע';
 $s_plugin_MantisGraph_period_last_week = 'השבוע האחרון';
@@ -92,3 +89,5 @@ $s_plugin_MantisGraph_graph_opendev = 'מפתחים לפי סוגיות פתוח
 $s_plugin_MantisGraph_graph_topreporter_fixed = 'מדווחים מובילים לפי סוגיות שתוקנו';
 $s_plugin_MantisGraph_other_categories = 'קטגוריות אחרות (%d)';
 $s_plugin_MantisGraph_other_projects = 'מיזמים אחרים (%d)';
+$s_plugin_MantisGraph_bucket = 'הקבצה';
+$s_plugin_MantisGraph_date = 'תאריך';

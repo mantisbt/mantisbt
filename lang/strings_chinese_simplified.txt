@@ -2,7 +2,7 @@
 /** MantisBT - a php based bugtracking system
  *
  * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2016  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * Copyright (C) 2002 - 2026  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  *
  * MantisBT is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -45,6 +45,7 @@
  * @author Fengchao
  * @author Fwolf
  * @author Gaoxuewei
+ * @author Gsdn
  * @author GuoPC
  * @author Hydra
  * @author Hzy980512
@@ -211,8 +212,6 @@ $s_update_severity_title = '更新严重性';
 $s_update_severity_msg = '选择问题严重性';
 $s_update_severity_button = '更新严重性';
 $s_hide_button = '只显示选中内容';
-$s_printing_preferences_title = '选择要打印的字段';
-$s_printing_options_link = '打印选项';
 $s_bugnote_title = '问题注释管理人';
 $s_bugnote_date = '问题注释日期';
 $s_bugnote_description = '问题注释内容';
@@ -224,7 +223,6 @@ $s_prefix_for_deleted_users = '用户';
 $s_administrator = '管理员';
 $s_myself = '自身';
 $s_default_access_level = '默认级别';
-$s_issue_status_percentage = '问题状态百分比';
 $s_access_levels_enum_string = '10:观察者,25:报告者,40:升级者,55:开发人员,70:经理,90:管理员';
 $s_no_access = '无访问';
 $s_project_status_enum_string = '10:开发中,30:已发布,50:稳定,70:停止维护';
@@ -601,6 +599,7 @@ $s_date_created = '创建日期';
 $s_last_visit = '最近一次登录';
 $s_last_visit_label = '上次访问：';
 $s_failed_login_count = '登录失败';
+$s_locked = '账户已锁定';
 $s_edit_user_link = '编辑用户';
 $s_search_user_hint = '用户名、真实姓名或电子邮件';
 $s_separate_list_items_by = '（由“%1$s”指定的列表项）';
@@ -782,6 +781,7 @@ $s_prune_accounts_button = '删除';
 $s_confirm_account_pruning = '你确定要删除从来没有登录过的旧账号吗？';
 $s_edit_user_title = '编辑用户';
 $s_account_unlock_button = '解锁帐户';
+$s_clear_failed_logins = '清除失败的登录记录';
 $s_reset_password_button = '重设密码';
 $s_delete_user_button = '删除用户';
 $s_impersonate_user_button = '模仿用户';
@@ -791,6 +791,7 @@ $s_email_not_unique = '电子邮件地址至少与一个其他用户账号相关
 $s_account_reset_msg = '一封确认请求已发往选定用户的电子邮件地址。通过使用它，用户将可以更改他们的密码。';
 $s_account_reset_msg2 = '账号密码已经置为空...';
 $s_account_unlock_msg = '该帐户已解锁。';
+$s_clear_failed_logins_msg = '登录失败次数已重置。';
 $s_manage_user_updated_msg = '帐号成功更新...';
 $s_email_user_updated_subject = '帐户已更新';
 $s_email_user_updated_msg = '您的帐户已被管理员更新。下面提供了这些更改的列表。可以在任何时候更新您的帐户的详细信息和首选项，请访问下面的 URL：';
@@ -1412,10 +1413,12 @@ $MANTIS_ERROR[ERROR_PLUGIN_UPGRADE_FAILED] = '升级插件方案失败于块 #%1
 $MANTIS_ERROR[ERROR_PLUGIN_UPGRADE_NEEDED] = '在连接此页面之前“%1$s”插件需要更新。';
 $MANTIS_ERROR[ERROR_PLUGIN_INVALID_PAGE] = '指定的插件页面“%1$s”格式无效。它必须匹配“Plugin[/path/to]/page”。';
 $MANTIS_ERROR[ERROR_PLUGIN_INVALID_FILE] = '指定的插件文件“%1$s”格式无效。它必须匹配“Plugin[/path/to]/file[.ext]”。';
-$MANTIS_ERROR[ERROR_PLUGIN_GENERIC] = '在执行插件"%2$s"过程中出现未知错误"%1$s"';
-$MANTIS_ERROR[ERROR_COLUMNS_DUPLICATE] = '字段 "%1$s" 包含重复字段 "%2$s"。';
-$MANTIS_ERROR[ERROR_COLUMNS_INVALID] = '字段 "%1$s" 包含无效字段 "%2$s"。';
-$MANTIS_ERROR[ERROR_SESSION_VAR_NOT_FOUND] = '未找到会话变量"%1$s"';
+$MANTIS_ERROR[ERROR_PLUGIN_ENTITY_NOT_FOUND] = '未找到插件实体“%s”';
+$MANTIS_ERROR[ERROR_PLUGIN_RUNTIME] = '执行插件“%1$s”时发生以下错误。';
+$MANTIS_ERROR[ERROR_PLUGIN_GENERIC] = '执行插件“%2$s”时出现未知错误“%1$s”。';
+$MANTIS_ERROR[ERROR_COLUMNS_DUPLICATE] = '字段“%1$s”包含重复列“%2$s”。';
+$MANTIS_ERROR[ERROR_COLUMNS_INVALID] = '字段“%1$s”包含无效列“%2$s”。';
+$MANTIS_ERROR[ERROR_SESSION_VAR_NOT_FOUND] = '未找到会话变量“%1$s”。';
 $MANTIS_ERROR[ERROR_SESSION_NOT_VALID] = '您的会话已经失效';
 $MANTIS_ERROR[ERROR_FORM_TOKEN_INVALID] = '无效的安全权标。这可能是会话超时或者重复提交表单导致的。';
 $MANTIS_ERROR[ERROR_CRYPTO_MASTER_SALT_INVALID] = '基于安全原因，当config_inc.php中的$g_crypto_master_salt没有正确指定或长度少于16个字符时，MantisBT不会运作。';
@@ -1428,7 +1431,7 @@ $MANTIS_ERROR[ERROR_DEPRECATED_SUPERSEDED] = '弃用功能：“%1$s”，应使
 $MANTIS_ERROR[ERROR_DISPLAY_USER_ERROR_INLINE] = '警告：系统配置为内联显示MantisBT错误（E_USER_ERROR）。程序将继续执行；这将导致系统/数据完整性问题。';
 $MANTIS_ERROR[ERROR_TYPE_MISMATCH] = '数据类型不匹配。启用详细错误消息以获取更多信息。';
 $MANTIS_ERROR[ERROR_BUG_CONFLICTING_EDIT] = '此问题被另一用户更新，请返回问题并再次提交您的更改。';
-$MANTIS_ERROR[ERROR_SPAM_SUSPECTED] = '您已经达到了可允许的活动极限 - %d 次事件，%d 秒内；您的行为已经被阻止以防止垃圾信息，请稍候再试。';
+$MANTIS_ERROR[ERROR_SPAM_SUSPECTED] = '您已达到在 %2$d 秒内允许 %1$d 次事件的使用限制；您的行为已经被阻止以防止垃圾信息，请稍候再试。';
 $MANTIS_ERROR[ERROR_FIELD_TOO_LONG] = '字段“%1$s”的最大长度为%2$d个字符。';
 $MANTIS_ERROR[ERROR_API_TOKEN_NAME_NOT_UNIQUE] = 'API令牌名称“%s”已被使用。请返回并选择另一个。';
 $MANTIS_ERROR[ERROR_LOGFILE_NOT_WRITABLE] = '无法写入$g_log_destination的指定文件"%s"';
@@ -1473,3 +1476,4 @@ $s_filter_new = '新的';
 $s_filter_unused_tags = '未用';
 $s_filter_unused = '未用';
 $s_unknown = '未知';
+$s_optional = '可选';

@@ -52,6 +52,8 @@ class IssueFileGetCommand extends Command {
 
 	/**
 	 * Validate the data.
+	 *
+	 * @throws ClientException
 	 */
 	function validate() {
 		$this->issue_id = helper_parse_issue_id( $this->query( 'issue_id' ) );
@@ -68,6 +70,7 @@ class IssueFileGetCommand extends Command {
 	 * Process the command.
 	 *
 	 * @return array Command response
+	 * @throws ClientException
 	 */
 	protected function process() {
 		$t_issue = bug_get( $this->issue_id, true );
@@ -91,7 +94,7 @@ class IssueFileGetCommand extends Command {
 			$t_result = file_get_content( $t_attachment['id'] );
 			$t_attachment['content_type'] = $t_result['type'];
 			$t_attachment['content'] = $t_result['content'];
-	
+
 			$t_matching_attachments[] = $t_attachment;
 		}
 

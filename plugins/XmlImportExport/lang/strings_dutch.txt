@@ -2,7 +2,7 @@
 /** MantisBT - a php based bugtracking system
  *
  * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2016  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * Copyright (C) 2002 - 2026  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  *
  * MantisBT is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -63,4 +63,4 @@ $s_plugin_XmlImportExport_disable_desc = 'Verwijzging uitschakelen';
 $s_plugin_XmlImportExport_fallback = 'Terugvalstrategie (als "Hernummeren" niet werkt):';
 $s_plugin_XmlImportExport_fallback_category = 'Terugvalcategorie:';
 $s_plugin_XmlImportExport_keep_same_category = 'Proberen dezelfde categorie te houden';
-$s_plugin_XmlImportExport_error_no_xml = 'de extensies xmlreader en xmlwriter zijn niet aangetroffen';
+$s_plugin_XmlImportExport_error_no_xml = 'de uitbreidingen xmlreader en xmlwriter zijn niet aangetroffen';

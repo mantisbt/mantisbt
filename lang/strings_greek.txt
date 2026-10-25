@@ -2,7 +2,7 @@
 /** MantisBT - a php based bugtracking system
  *
  * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2016  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * Copyright (C) 2002 - 2026  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  *
  * MantisBT is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -186,8 +186,6 @@ $s_update_severity_title = 'Ενημέρωση Σοβαρότητας';
 $s_update_severity_msg = 'Επιλέξτε προτεραιότητα σφαλμάτων';
 $s_update_severity_button = 'Ενημέρωση προτεραιότητας';
 $s_hide_button = 'Προβολή επιλεγμένων μόνο';
-$s_printing_preferences_title = 'Επιλογή πεδίων προς εκτύπωση';
-$s_printing_options_link = 'Επιλογές Εκτύπωσης';
 $s_bugnote_date = 'Ημερομηνία σημείωσης';
 $s_bugnote_description = 'Περιγραφή σημείωσης';
 $s_error_no_proceed = 'Παρακαλώ πιέστε το "Πίσω" στον φυλλομετρήτη σας για να επιστρέψετε στην προηγούμενη σελίδα. Εκεί μπορείτε να διορθώσετε τα λάθη που σας υποδεικνύει το μήνυμα λάθους ή να επίλεξετε άλλη σελίδα. Επίσης, μπορείτε να επιλέξετε άλλη σελίδα απευθείας απο τη μενού-μπάρα.';
@@ -336,8 +334,14 @@ $s_timezone = 'Ζώνη ώρας';
 $s_prefs_reset_msg = 'Οι Επιλογές ακυρώθηκαν...';
 $s_prefs_updated_msg = 'Οι Επιλογές ανανεώθηκαν...';
 $s_select_profile = 'Επιλογή Προφίλ';
+$s_add_profile = 'Προσθήκη προφίλ';
 $s_edit_profile = 'Αλλαγή Προφίλ';
+$s_update_profile = 'Ενημέρωση προφίλ';
 $s_delete_profile = 'Διαγραφή Προφίλ';
+$s_delete_profile_confirm_msg = 'Σίγουρα θέλετε να διαγράψετε το προφίλ "%1$s";';
+$s_global_profile = 'Παγκόσμιο προφίλ';
+$s_default_profile = 'Προεπιλεγμένο προφίλ';
+$s_profile_description = 'Περιγραφή συστήματος';
 $s_my_sponsorship = 'Οι χορηγίες μου';
 $s_update_sponsorship_button = 'Αλλαγή κατάστασης πληρωμής';
 $s_sponsor = 'Χορηγός';

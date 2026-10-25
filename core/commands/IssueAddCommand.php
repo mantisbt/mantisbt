@@ -33,7 +33,8 @@ require_api( 'relationship_api.php' );
 require_api( 'string_api.php' );
 require_api( 'user_api.php' );
 
-$t_soap_dir = dirname( __DIR__, 2 ) . '/api/soap/';
+global $g_absolute_path;
+$t_soap_dir = $g_absolute_path . 'api/soap/';
 require_once( $t_soap_dir . 'mc_api.php' );
 require_once( $t_soap_dir . 'mc_enum_api.php' );
 require_once( $t_soap_dir . 'mc_issue_api.php' );
@@ -277,7 +278,8 @@ class IssueAddCommand extends Command {
 
 		$t_version_id = isset( $t_issue['version'] ) ? mci_get_version_id( $t_issue['version'], $t_project_id, 'version' ) : 0;
 		if( $t_version_id != 0 ) {
-			if( !access_has_project_level( config_get( 'report_issues_for_unreleased_versions_threshold' ) ) ) {
+			if( !version_is_released( $t_version_id )
+				&& !access_has_project_level( config_get( 'report_issues_for_unreleased_versions_threshold' ) ) ) {
 				throw new ClientException(
 					'User not allowed to assign unreleased versions',
 					ERROR_INVALID_FIELD_VALUE,
@@ -345,18 +347,11 @@ class IssueAddCommand extends Command {
 				}
 			}
 
-			foreach( $t_issue['files'] as $t_file ) {
-				$t_name = $t_file['name'];
-				if( strlen( $t_name ) > DB_FIELD_SIZE_FILENAME ) {
-					throw new ClientException(
-						"File name too long '$t_name'",
-						ERROR_FILE_NAME_TOO_LONG,
-						array( $t_name )
-					);
-				}
-			}
-
 			$this->files = $t_issue['files'];
+
+			foreach( $this->files as $t_file ) {
+				file_ensure_uploaded( $t_file );
+			}
 		}
 
 		# Trigger extensibility events to pre-process data before creating issue

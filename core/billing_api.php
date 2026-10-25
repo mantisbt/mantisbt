@@ -28,6 +28,8 @@
  * @uses bugnote_api.php
  */
 
+use Mantis\Exceptions\ClientException;
+
 require_api( 'access_api.php' );
 require_api( 'bug_api.php' );
 require_api( 'bugnote_api.php' );
@@ -40,7 +42,7 @@ require_api( 'bugnote_api.php' );
  */
 function billing_ensure_reporting_access( $p_project_id = null, $p_user_id = null ) {
 	if( config_get( 'time_tracking_enabled' ) == OFF ) {
-		trigger_error( ERROR_ACCESS_DENIED, ERROR );
+		throw new ClientException( "Time tracking disabled", ERROR_ACCESS_DENIED );
 	}
 
 	access_ensure_project_level( config_get( 'time_tracking_reporting_threshold' ), $p_project_id, $p_user_id );
@@ -63,8 +65,8 @@ function billing_get_for_project( $p_project_id, $p_from, $p_to, $p_cost_per_hou
 	$c_from = strtotime( $p_from );
 
 	if( $c_to === false || $c_from === false ) {
-		error_parameters( array( $p_from, $p_to ) );
-		trigger_error( ERROR_GENERIC, ERROR );
+		$t_invalid = "$p_from - $p_to";
+		throw new ClientException( "Invalid date", ERROR_GENERIC, [$t_invalid] );
 	}
 
 	db_param_push();

@@ -99,6 +99,31 @@ class AttachmentTest extends SoapBase {
 	}
 
 	/**
+	 * Test deleting an issue attachment through SOAP.
+	 *
+	 * @return void
+	 */
+	public function testIssueAttachmentDelete() {
+		$t_issue_id = $this->client->mc_issue_add( $this->userName, $this->password, $this->getIssueToAdd() );
+		$this->deleteAfterRun( $t_issue_id );
+
+		$t_attachment_id = $this->client->mc_issue_attachment_add(
+			$this->userName,
+			$this->password,
+			$t_issue_id,
+			'delete.txt',
+			'txt',
+			base64_encode( 'Attachment contents.' )
+		);
+
+		$this->assertTrue(
+			$this->client->mc_issue_attachment_delete( $this->userName, $this->password, $t_attachment_id )
+		);
+		$t_issue = $this->client->mc_issue_get( $this->userName, $this->password, $t_issue_id );
+		$this->assertCount( 0, $t_issue->attachments );
+	}
+
+	/**
 	 * A test case that tests the following:
 	 * 1. Create an issue.
 	 * 2. Adds at attachemnt

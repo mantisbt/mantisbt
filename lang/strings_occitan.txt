@@ -2,7 +2,7 @@
 /** MantisBT - a php based bugtracking system
  *
  * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2016  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * Copyright (C) 2002 - 2026  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  *
  * MantisBT is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -170,8 +170,6 @@ $s_update_severity_title = 'Metre a jorn la severitat';
 $s_update_severity_msg = 'Causissètz la severitat del bug';
 $s_update_severity_button = 'Metre a jorn la severitat';
 $s_hide_button = 'Afichar solament los bògues seleccionats';
-$s_printing_preferences_title = 'Causir los camps d\'imprimir';
-$s_printing_options_link = 'Opcions d\'impression';
 $s_bugnote_title = 'Autor de la nòta';
 $s_bugnote_date = 'Data de la nòta';
 $s_bugnote_description = 'Descripcion de la nòta';
@@ -183,7 +181,6 @@ $s_prefix_for_deleted_users = 'utilizaire';
 $s_administrator = 'administrator';
 $s_myself = 'Ieu';
 $s_default_access_level = 'Nivèl d\'accès per defaut';
-$s_issue_status_percentage = 'Percentatge d\'estatut de bug';
 $s_access_levels_enum_string = '10:convidat,25:raportaire,40:testaire,55:desvolopaire,70:gestionari,90:administrator';
 $s_project_status_enum_string = '10:desvolopament,30:liurat,50:estable,70:obsolèt';
 $s_project_view_state_enum_string = '10:public,50:privat';

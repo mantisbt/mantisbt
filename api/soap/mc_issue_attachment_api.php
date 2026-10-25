@@ -21,17 +21,27 @@
  * @copyright Copyright 2004  Victor Boctor - vboctor@users.sourceforge.net
  * @copyright Copyright 2005  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
+ *
+ * @noinspection PhpComposerExtensionStubsInspection Ignore missing ext-soap
+ * @noinspection PhpUnused Ignore unused mc_* functions
  */
+
+use Mantis\Exceptions\ClientException;
+use Mantis\Exceptions\ServiceException;
+use Mantis\Exceptions\StateException;
 
 require_once( __DIR__ . '/mc_core.php' );
 
 /**
  * Get the issue attachment with the specified id.
  *
- * @param string  $p_username            The name of the user trying to access the filters.
- * @param string  $p_password            The password of the user.
- * @param integer $p_issue_attachment_id The id of the attachment to be retrieved.
+ * @param string $p_username            The name of the user trying to access the filters.
+ * @param string $p_password            The password of the user.
+ * @param int    $p_issue_attachment_id The id of the attachment to be retrieved.
+ *
  * @return string Base64 encoded data that represents the attachment.
+ * @throws ClientException
+ * @throws StateException
  */
 function mc_issue_attachment_get( $p_username, $p_password, $p_issue_attachment_id ) {
 	$t_user_id = mci_check_login( $p_username, $p_password );
@@ -39,23 +49,23 @@ function mc_issue_attachment_get( $p_username, $p_password, $p_issue_attachment_
 		return mci_fault_login_failed();
 	}
 
-	$t_file = mci_file_get( $p_issue_attachment_id, 'bug', $t_user_id );
-	if( ApiObjectFactory::isFault( $t_file ) ) {
-		return $t_file;
-	}
-	return $t_file;
+	return mci_file_get( $p_issue_attachment_id, 'bug', $t_user_id );
 }
 
 /**
  * Add an attachment to an existing issue.
  *
- * @param string  $p_username  The name of the user trying to add an attachment to an issue.
- * @param string  $p_password  The password of the user.
- * @param integer $p_issue_id  The id of the issue to add the attachment to.
- * @param string  $p_name      The name of the file.
- * @param string  $p_file_type The mime type of the file.
- * @param string  $p_content   The attachment to add (base64 encoded string).
- * @return integer The id of the added attachment.
+ * @param string $p_username  The name of the user trying to add an attachment to an issue.
+ * @param string $p_password  The password of the user.
+ * @param int    $p_issue_id  The id of the issue to add the attachment to.
+ * @param string $p_name      The name of the file.
+ * @param string $p_file_type The mime type of the file.
+ * @param string $p_content   The attachment to add (base64 encoded string).
+ *
+ * @return int|RestFault|SoapFault The id of the added attachment.
+ *
+ * @throws ClientException
+ * @throws ServiceException
  */
 function mc_issue_attachment_add( $p_username, $p_password, $p_issue_id, $p_name, $p_file_type, $p_content ) {
 	$t_user_id = mci_check_login( $p_username, $p_password );
@@ -74,10 +84,13 @@ function mc_issue_attachment_add( $p_username, $p_password, $p_issue_id, $p_name
 /**
  * Delete an issue attachment given its id.
  *
- * @param string  $p_username            The name of the user trying to add an attachment to an issue.
- * @param string  $p_password            The password of the user.
- * @param integer $p_issue_attachment_id The id of the attachment to be deleted.
- * @return boolean true: success, false: failure
+ * @param string $p_username            The name of the user trying to add an
+ *                                      attachment to an issue.
+ * @param string $p_password            The password of the user.
+ * @param int    $p_issue_attachment_id The id of the attachment to be deleted.
+ *
+ * @return bool|RestFault|SoapFault true: success, false: failure
+ * @throws ClientException
  */
 function mc_issue_attachment_delete( $p_username, $p_password, $p_issue_attachment_id ) {
 	$t_user_id = mci_check_login( $p_username, $p_password );
@@ -86,18 +99,12 @@ function mc_issue_attachment_delete( $p_username, $p_password, $p_issue_attachme
 		return mci_fault_login_failed();
 	}
 
-	$t_bug_id = file_get_field( $p_issue_attachment_id, 'bug_id' );
+	$t_command = new IssueFileDeleteCommand( [
+		'query' => [
+			'file_id' => $p_issue_attachment_id,
+		]
+	] );
+	$t_command->execute();
 
-	# Perform access control checks
-	$t_attachment_owner = file_get_field( $p_issue_attachment_id, 'user_id' );
-	$t_current_user_is_attachment_owner = $t_attachment_owner == $t_user_id;
-	# Factor in allow_delete_own_attachments=ON|OFF
-	if( !$t_current_user_is_attachment_owner || ( $t_current_user_is_attachment_owner && !config_get( 'allow_delete_own_attachments' ) ) ) {
-		# Check access against delete_attachments_threshold
-		if( !access_has_bug_level( config_get( 'delete_attachments_threshold' ), $t_bug_id, $t_user_id ) ) {
-			return mci_fault_access_denied( $t_user_id );
-		}
-	}
-
-	return file_delete( $p_issue_attachment_id, 'bug' );
+	return true;
 }

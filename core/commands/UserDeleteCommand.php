@@ -14,6 +14,7 @@
 # You should have received a copy of the GNU General Public License
 # along with MantisBT.  If not, see <http://www.gnu.org/licenses/>.
 
+require_api( 'access_api.php' );
 require_api( 'authentication_api.php' );
 require_api( 'constant_inc.php' );
 require_api( 'config_api.php' );
@@ -39,15 +40,6 @@ class UserDeleteCommand extends Command {
 	private $user_id_to_delete;
 
 	/**
-	 * Constructor
-	 *
-	 * @param array $p_data The command data.
-	 */
-	function __construct( array $p_data ) {
-		parent::__construct( $p_data );
-	}
-
-	/**
 	 * Validate the data.
 	 */
 	function validate() {
@@ -57,22 +49,29 @@ class UserDeleteCommand extends Command {
 		}
 
 		user_ensure_exists( $this->user_id_to_delete );
+		user_ensure_unprotected( $this->user_id_to_delete );
 
-		if( $this->user_id_to_delete == auth_get_current_user_id() ) {
-			throw new ClientException( 'Deleting own account not allowed', ERROR_INVALID_FIELD_VALUE, array( 'id' ) );
-		}
+		$t_current_user_id = auth_get_current_user_id();
+		$t_is_self_delete = ( $this->user_id_to_delete == $t_current_user_id );
+		$t_manage_user_threshold = config_get( 'manage_user_threshold', null, NO_USER, ALL_PROJECTS );
 
-		# Ensure user has access level to delete users
-		if( !access_has_global_level( config_get_global( 'manage_user_threshold' ) ) ) {
-			throw new ClientException( 'Access denied to delete users', ERROR_ACCESS_DENIED );
-		}
+		if( $t_is_self_delete ) {
+			$t_allow_delete = config_get( 'allow_account_delete', null, NO_USER, ALL_PROJECTS );
+			if( OFF == $t_allow_delete &&
+				!access_has_global_level( $t_manage_user_threshold ) ) {
+				throw new ClientException( 'Access denied to delete own account', ERROR_ACCESS_DENIED );
+			}
+		} else {
+			if( !access_has_global_level( $t_manage_user_threshold ) ) {
+				throw new ClientException( 'Access denied to delete users', ERROR_ACCESS_DENIED );
+			}
 
-		$t_user = user_get_row( $this->user_id_to_delete );
+			$t_user = user_get_row( $this->user_id_to_delete );
 
-		# Ensure that the account to be deleted is of equal or lower access to the
-		# current user.
-		if( !access_has_global_level( $t_user['access_level'] ) ) {
-			throw new ClientException( 'Access denied to deleted users with higher access level', ERROR_ACCESS_DENIED );
+			# Ensure that the account to be deleted is of equal or lower access to the current user.
+			if( !access_has_global_level( $t_user['access_level'] ) ) {
+				throw new ClientException( 'Access denied to deleted users with higher access level', ERROR_ACCESS_DENIED );
+			}
 		}
 
 		# Check that we are not deleting the last administrator account

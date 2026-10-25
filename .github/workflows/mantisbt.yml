@@ -41,9 +41,14 @@ jobs:
           - 8.3
           - 8.2
           - 8.1
-          - 8.0
-          - 7.4
         experimental: [false]
+        include:
+          - php: 8.6
+            DB: mysqli
+            experimental: true
+          - php: 8.6
+            DB: pgsql
+            experimental: true
 
     env:
       HOSTNAME: localhost
@@ -67,7 +72,7 @@ jobs:
           sendmail_path=${{ github.workspace }}/tests/fakesendmail.sh
 
     - name: Checkout MantisBT Repository
-      uses: actions/checkout@v6
+      uses: actions/checkout@v7
 
     - run: composer install
 

@@ -2,7 +2,7 @@
 /** MantisBT - a php based bugtracking system
  *
  * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2016  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * Copyright (C) 2002 - 2026  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  *
  * MantisBT is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -192,8 +192,6 @@ $s_update_severity_title = 'Ажурирај озбиљност';
 $s_update_severity_msg = 'Изаберите озбиљност проблема';
 $s_update_severity_button = 'Ажурирај озбиљност';
 $s_hide_button = 'Прикажи само изабрано';
-$s_printing_preferences_title = 'Изаберите поља за штампање';
-$s_printing_options_link = 'Опције штампања';
 $s_bugnote_title = 'Руковалац белешкама';
 $s_bugnote_date = 'Датум белешке';
 $s_bugnote_description = 'Опис белешке';
@@ -205,7 +203,6 @@ $s_prefix_for_deleted_users = 'корисник';
 $s_administrator = 'администратор';
 $s_myself = 'Ја';
 $s_default_access_level = 'Подразумевани степен приступа';
-$s_issue_status_percentage = 'Стање проблема (%)';
 $s_access_levels_enum_string = '10:посматрач,25:известилац,40:дограђивач,55:програмер,70:руководилац,90:администратор';
 $s_no_access = 'нема приступ';
 $s_project_status_enum_string = '10:у развоју,30:издато,50:стабилно,70:застарело';
@@ -1384,7 +1381,7 @@ $MANTIS_ERROR[ERROR_DEPRECATED_SUPERSEDED] = 'Застарела функцио�
 $MANTIS_ERROR[ERROR_DISPLAY_USER_ERROR_INLINE] = 'Упозорење: Систем је конфигурисан да приказује грешке MantisBT (E_USER_ERROR) на линији. Извршење програма ће се наставити; ово може довести до проблема са интегритетом система/података.';
 $MANTIS_ERROR[ERROR_TYPE_MISMATCH] = 'Неподударање типа података. Омогућите детаљне поруке о грешци за додатне информације.';
 $MANTIS_ERROR[ERROR_BUG_CONFLICTING_EDIT] = 'Овај проблем је ажурирао други корисник, вратите се на проблем и поново поднесите ваше измене.';
-$MANTIS_ERROR[ERROR_SPAM_SUSPECTED] = 'Достигли сте ограничење дозвољене активности од %д догађаја у последњих %д секунди; ваша радња је блокирана да бисте избегли нежељену пошту, покушајте поново касније.';
+$MANTIS_ERROR[ERROR_SPAM_SUSPECTED] = 'Достигли сте ограничење дозвољене активности од %1$d догађаја у последњих %2$d секунди; ваша радња је блокирана да бисте избегли нежељену пошту, покушајте поново касније.';
 $MANTIS_ERROR[ERROR_FIELD_TOO_LONG] = 'Максимална дужина за Поље "%1$s" је %2$d.';
 $MANTIS_ERROR[ERROR_API_TOKEN_NAME_NOT_UNIQUE] = 'Назив API токена "%s" се већ користи. Вратите се и изаберите други назив.';
 $MANTIS_ERROR[ERROR_LOGFILE_NOT_WRITABLE] = 'У датотеку наведену у $g_log_destination „%s“ није могуће уписивати.';

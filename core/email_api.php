@@ -860,12 +860,18 @@ function email_relationship_added( $p_bug_id, $p_related_bug_id, $p_rel_type, $p
 	global $g_relationships;
 
 	if( !isset( $g_relationships[$p_rel_type] ) ) {
-		trigger_error( ERROR_RELATIONSHIP_NOT_FOUND, ERROR );
+		throw new ClientException(
+			"Unknown relationship type '$p_rel_type'",
+			ERROR_RELATIONSHIP_NOT_FOUND
+		);
 	}
 
 	$t_rev_rel_type = relationship_get_complementary_type( $p_rel_type );
 	if( !isset( $g_relationships[$t_rev_rel_type] ) ) {
-		trigger_error( ERROR_RELATIONSHIP_NOT_FOUND, ERROR );
+		throw new ClientException(
+		"Unknown relationship type '$t_rev_rel_type'",
+			ERROR_RELATIONSHIP_NOT_FOUND
+		);
 	}
 
 	log_event(
@@ -943,12 +949,18 @@ function email_relationship_send( int $p_bug_id, int $p_related_bug_id, $p_messa
 function email_relationship_deleted( $p_bug_id, $p_related_bug_id, $p_rel_type, $p_skip_email_for_issue_id = 0 ) {
 	global $g_relationships;
 	if( !isset( $g_relationships[$p_rel_type] ) ) {
-		trigger_error( ERROR_RELATIONSHIP_NOT_FOUND, ERROR );
+		throw new ClientException(
+			"Unknown relationship type '$p_rel_type'",
+			ERROR_RELATIONSHIP_NOT_FOUND
+		);
 	}
 
 	$t_rev_rel_type = relationship_get_complementary_type( $p_rel_type );
 	if( !isset( $g_relationships[$t_rev_rel_type] ) ) {
-		trigger_error( ERROR_RELATIONSHIP_NOT_FOUND, ERROR );
+		throw new ClientException(
+			"Unknown relationship type '$t_rev_rel_type'",
+			ERROR_RELATIONSHIP_NOT_FOUND
+		);
 	}
 
 	log_event(

@@ -80,7 +80,7 @@ function edit_account_prefs( $p_user_id = null, $p_error_if_protected = true, $p
 	# protected account check
 	if( user_is_protected( $p_user_id ) ) {
 		if( $p_error_if_protected ) {
-			trigger_error( ERROR_PROTECTED_ACCOUNT, ERROR );
+			throw new ClientException( "Protected account", ERROR_PROTECTED_ACCOUNT );
 		} else {
 			return;
 		}

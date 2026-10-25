@@ -88,7 +88,7 @@ if( $t_count > 0 ) {
 			continue;
 		}
 
-		$v_headline 	= string_display_line( $v_headline );
+		$v_headline 	= string_attribute( $v_headline );
 		$v_date_posted 	= date( config_get( 'complete_date_format' ), $v_date_posted ); ?>
 		<p>
 			<?php print_icon( 'fa-clock-o' ); ?>

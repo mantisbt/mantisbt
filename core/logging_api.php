@@ -322,7 +322,6 @@ function log_print_to_page() {
 function log_get_caller( $p_level = null ) {
 	$t_full_backtrace = debug_backtrace();
 	$t_backtrace = $t_full_backtrace;
-	$t_root_path = dirname( __DIR__ ) . DIRECTORY_SEPARATOR;
 
 	# Remove top trace, as it's this function
 	unset( $t_backtrace[0] );
@@ -334,7 +333,7 @@ function log_get_caller( $p_level = null ) {
 	$t_last_key = key( $t_backtrace );
 	if( isset( $t_last['function'] )
 		&& $t_last['function'] == 'include'
-		&& $t_last['file'] == $t_root_path . 'plugin.php'
+		&& basename( $t_last['file'] ) == 'plugin.php'
 		) {
 		unset( $t_backtrace[$t_last_key] );
 		unset( $t_full_backtrace[$t_last_key] );
@@ -347,35 +346,33 @@ function log_get_caller( $p_level = null ) {
 		switch( $p_level ) {
 			# For plugin logs, we want to hide the plugin api calls
 			case LOG_PLUGIN:
-				if( isset( $t_step['function'] ) ) {
-					# Remove trace step executed for plugin_log_event()
-					if( $t_step['function'] == 'plugin_log_event'
-						&& $t_full_backtrace[$t_index-1]['file'] == $t_root_path . 'core/plugin_api.php'
-						) {
-						unset( $t_backtrace[$t_index-1] );
-						continue 2; # next foreach
-					}
+				# Remove trace step executed for plugin_log_event()
+				if( isset( $t_step['function'] )
+					&& $t_step['function'] == 'plugin_log_event'
+					&& basename( $t_full_backtrace[$t_index-1]['file'] ) == 'plugin_api.php'
+					) {
+					unset( $t_backtrace[$t_index-1] );
+					continue 2; # next foreach
 				}
 				break;
 
 			# For database logs, we want to hide all the intermediate db api calls
 			case LOG_DATABASE:
 				# Remove trace steps that are executed inside DbQuery class, or inherited classes
-				if( isset( $t_step['class'] ) && (
-					$t_step['class'] == 'DbQuery'
-					|| is_subclass_of( $t_step['class'], 'DbQuery', true )
-					) ) {
+				if( isset( $t_step['class'] )
+					&& ( $t_step['class'] == 'DbQuery' || is_subclass_of( $t_step['class'], 'DbQuery', true ) )
+					) {
 					unset( $t_backtrace[$t_index-1] );
 					continue 2; # next foreach
 				}
-				if( isset( $t_step['function'] ) ) {
-					# Remove trace step executed for db_query() or db_query_bound()
-					if( ( $t_step['function'] == 'db_query' || $t_step['function'] == 'db_query_bound' )
-						&& $t_full_backtrace[$t_index-1]['file'] == $t_root_path . 'core/database_api.php'
-						) {
-						unset( $t_backtrace[$t_index-1] );
-						continue 2; # next foreach
-					}
+
+				# Remove trace step executed for db_query() or db_query_bound()
+				if( isset( $t_step['function'] )
+					&& ( $t_step['function'] == 'db_query' || $t_step['function'] == 'db_query_bound' )
+					&& basename( $t_full_backtrace[$t_index-1]['file'] ) == 'database_api.php'
+					) {
+					unset( $t_backtrace[$t_index-1] );
+					continue 2; # next foreach
 				}
 				break;
 		}

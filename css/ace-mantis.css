@@ -391,6 +391,11 @@ i.datetimepicker {
     color: #333333;
 }
 
+/* Allow datetimepicker to overflow table-responsive containers */
+.table-responsive:has(.datetimepicker) {
+    overflow: visible;
+}
+
 .dropdown-menu .divider {
     margin: 2px 0;
 }

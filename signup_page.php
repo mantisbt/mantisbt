@@ -101,7 +101,10 @@ $t_public_key = crypto_generate_uri_safe_nonce( 64 );
 	$t_allow_passwd_change = helper_call_custom_function( 'auth_can_change_password', array() );
 
 	# captcha image requires GD library and related option to ON
-	if( ON == config_get( 'signup_use_captcha' ) && get_gd_version() > 0 && $t_allow_passwd_change ) {
+	if( ON == config_get( 'signup_use_captcha' )
+		&& get_gd_version()
+		&& $t_allow_passwd_change
+	) {
 		$t_securimage_path = 'vendor/dapphp/securimage';
 		$t_securimage_show = $t_securimage_path . '/securimage_show.php';
 		# Unique id prevents caching issues with audio captcha

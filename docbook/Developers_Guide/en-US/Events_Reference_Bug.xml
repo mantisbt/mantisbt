@@ -302,6 +302,26 @@
 			</blockquote>
 		</blockquote>
 
+		<blockquote id="dev.eventref.bug.action.movebug">
+			<title>EVENT_MOVE_BUG (Execute)</title>
+
+			<blockquote>
+				<para>
+					This event allows plugins to perform post-processing after an issue has
+					been moved to another project. It is triggered after the issue and its
+					attachments have been moved and after the optional move note is added.
+				</para>
+
+				<itemizedlist>
+					<title>Parameters</title>
+					<listitem><para>&lt;Integer&gt;: Issue ID</para></listitem>
+					<listitem><para>&lt;Integer&gt;: Source project ID</para></listitem>
+					<listitem><para>&lt;Integer&gt;: Target project ID</para></listitem>
+					<listitem><para>&lt;Integer&gt;: Move note ID, or 0 when no note was added</para></listitem>
+				</itemizedlist>
+			</blockquote>
+		</blockquote>
+
 		<blockquote id="dev.eventref.bug.action.bugactiongroupform">
 			<title>EVENT_BUG_ACTIONGROUP_FORM (Execute)</title>
 

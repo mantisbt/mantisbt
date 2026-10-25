@@ -30,6 +30,7 @@
  * @uses config_api.php
  * @uses constant_inc.php
  * @uses custom_field_api.php
+ * @uses datetimepicker_api.php
  * @uses error_api.php
  * @uses event_api.php
  * @uses form_api.php
@@ -44,7 +45,12 @@
  * @uses string_api.php
  * @uses user_api.php
  * @uses version_api.php
+ *
+ * Unhandled exceptions will be caught by the default error handler
+ * @noinspection PhpUnhandledExceptionInspection
  */
+
+use Mantis\Exceptions\ClientException;
 
 require_once( 'core.php' );
 require_api( 'access_api.php' );
@@ -83,8 +89,10 @@ if( $t_bug->project_id != helper_get_current_project() ) {
 }
 
 if( bug_is_readonly( $f_bug_id ) ) {
-	error_parameters( $f_bug_id );
-	trigger_error( ERROR_BUG_READ_ONLY_ACTION_DENIED, ERROR );
+	throw new ClientException( "Issue is read-only",
+		ERROR_BUG_READ_ONLY_ACTION_DENIED,
+		[ $f_bug_id ]
+	);
 }
 
 access_ensure_bug_level( config_get( 'update_bug_threshold' ), $f_bug_id );
@@ -104,7 +112,7 @@ $t_show_id = in_array( 'id', $t_fields );
 $t_show_project = in_array( 'project', $t_fields );
 $t_show_category = in_array( 'category_id', $t_fields );
 $t_show_view_state = in_array( 'view_state', $t_fields );
-$t_view_state = $t_show_view_state ? string_display_line( get_enum_element( 'view_state', $t_bug->view_state ) ) : '';
+$t_view_state = $t_show_view_state ? string_attribute( get_enum_element( 'view_state', $t_bug->view_state ) ) : '';
 $t_show_date_submitted = in_array( 'date_submitted', $t_fields );
 $t_show_last_updated = in_array( 'last_updated', $t_fields );
 $t_show_reporter = in_array( 'reporter', $t_fields );
@@ -127,6 +135,10 @@ $t_product_build_attribute = $t_show_product_build ? string_attribute( $t_bug->b
 $t_show_target_version = $t_show_versions && in_array( 'target_version', $t_fields ) && access_has_bug_level( config_get( 'roadmap_update_threshold' ), $t_bug_id );
 $t_show_fixed_in_version = $t_show_versions && in_array( 'fixed_in_version', $t_fields );
 $t_show_due_date = in_array( 'due_date', $t_fields ) && access_has_bug_level( config_get( 'due_date_view_threshold' ), $t_bug_id );
+$t_can_update_due_date = $t_show_due_date && access_has_bug_level( config_get( 'due_date_update_threshold' ), $t_bug_id );
+if( $t_can_update_due_date ) {
+	require_api( 'datetimepicker_api.php' );
+}
 $t_show_summary = in_array( 'summary', $t_fields );
 $t_summary_attribute = $t_show_summary ? string_attribute( $t_bug->summary ) : '';
 $t_show_description = in_array( 'description', $t_fields );
@@ -138,7 +150,7 @@ $t_steps_to_reproduce_textarea = $t_show_steps_to_reproduce ? string_textarea( $
 if( NO_USER == $t_bug->handler_id ) {
 	$t_handler_name =  '';
 } else {
-	$t_handler_name = string_display_line( user_get_name( $t_bug->handler_id ) );
+	$t_handler_name = string_attribute( user_get_name( $t_bug->handler_id ) );
 }
 
 $t_can_change_view_state = $t_show_view_state && access_has_project_level( config_get( 'change_view_status_threshold' ) );
@@ -152,7 +164,7 @@ if( $t_show_product_version ) {
 }
 
 $t_formatted_bug_id = $t_show_id ? bug_format_id( $f_bug_id ) : '';
-$t_project_name = $t_show_project ? string_display_line( project_get_name( $t_bug->project_id ) ) : '';
+$t_project_name = $t_show_project ? string_attribute( project_get_name( $t_bug->project_id ) ) : '';
 
 layout_page_header( bug_format_summary( $f_bug_id, SUMMARY_CAPTION ) );
 
@@ -340,16 +352,13 @@ if( $t_show_reporter || $t_show_handler || $t_show_due_date ) {
 			echo '<td class="due-', $t_level, '">';
 		}
 
-		if( access_has_bug_level( config_get( 'due_date_update_threshold' ), $t_bug_id ) ) {
+		if( $t_can_update_due_date ) {
 			$t_date_to_display = '';
 
 			if( !date_is_null( $t_bug->due_date ) ) {
 				$t_date_to_display = date( config_get( 'normal_date_format' ), $t_bug->due_date );
 			}
-			echo '<input ' . helper_get_tab_index() . ' type="text" id="due_date" name="due_date" class="datetimepicker input-sm" size="16" ' .
-				'data-picker-locale="' . lang_get_current_datetime_locale() .  '" data-picker-format="' . config_get( 'datetime_picker_format' ) . '" ' .
-				'maxlength="16" value="' . $t_date_to_display . '" />';
-			print_icon( 'fa-calendar', 'fa-xlg datetimepicker' );
+			datetimepicker_print( $t_date_to_display, 'due_date' );
 		} else {
 			if( !date_is_null( $t_bug->due_date ) ) {
 				echo date( config_get( 'short_date_format' ), $t_bug->due_date );

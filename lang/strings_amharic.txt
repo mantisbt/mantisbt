@@ -2,7 +2,7 @@
 /** MantisBT - a php based bugtracking system
  *
  * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2016  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * Copyright (C) 2002 - 2026  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  *
  * MantisBT is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -129,8 +129,6 @@ $s_category_group_bugs_button = 'ፈርጁን  አዘምን';
 $s_view_status_group_bugs_button = ' የማየት ሁኔታውን  አዘምን';
 $s_set_sticky_group_bugs_button = 'የሚያጣብቅ  አዘጋጅ / አታዘጋጅ';
 $s_hide_button = 'የተመረጠውን ብቻ አሳይ';
-$s_printing_preferences_title = 'ለማተም መስኮችን ምረጥ';
-$s_printing_options_link = ' የህትመት  ምርጫዎች';
 $s_bugnote_title = 'ማስታወሻ ያዥ';
 $s_bugnote_date = 'የማስታወሻ ቀን';
 $s_bugnote_description = 'የማስታወሻ ገለፃ';

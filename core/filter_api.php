@@ -117,6 +117,12 @@ $g_cache_filter_db_rows = array();
 $g_cache_filter_subquery = array();
 
 /**
+ * Cache of current filter for given project and user.
+ * @global array $g_filter_project_current_cache
+ */
+$g_cache_filter_project_current = array();
+
+/**
  * Initialize the filter API with the current filter.
  * @param array $p_filter The filter to set as the current filter.
  */
@@ -215,6 +221,10 @@ function filter_get_url( array $p_custom_filter ) {
 
 	if( !filter_field_is_any( $p_custom_filter[FILTER_PROPERTY_SEVERITY] ) ) {
 		$t_query[] = filter_encode_field_and_value( FILTER_PROPERTY_SEVERITY, $p_custom_filter[FILTER_PROPERTY_SEVERITY] );
+	}
+
+	if( !filter_field_is_any( $p_custom_filter[FILTER_PROPERTY_REPRODUCIBILITY] ) ) {
+		$t_query[] = filter_encode_field_and_value( FILTER_PROPERTY_REPRODUCIBILITY, $p_custom_filter[FILTER_PROPERTY_REPRODUCIBILITY] );
 	}
 
 	if( !filter_field_is_any( $p_custom_filter[FILTER_PROPERTY_RESOLUTION] ) ) {
@@ -720,6 +730,7 @@ function filter_ensure_valid_filter( array $p_filter_arr ) {
 	$t_array_values_list = array(
 		FILTER_PROPERTY_CATEGORY_ID => 'string',
 		FILTER_PROPERTY_SEVERITY => 'int',
+		FILTER_PROPERTY_REPRODUCIBILITY => 'int',
 		FILTER_PROPERTY_STATUS => 'int',
 		FILTER_PROPERTY_REPORTER_ID => 'int',
 		FILTER_PROPERTY_HANDLER_ID => 'int',
@@ -889,6 +900,7 @@ function filter_get_default_array( $p_view_type = null ) {
 		'_view_type' => $t_view_type,
 		FILTER_PROPERTY_CATEGORY_ID => $t_meta_filter_any_array,
 		FILTER_PROPERTY_SEVERITY => $t_meta_filter_any_array,
+		FILTER_PROPERTY_REPRODUCIBILITY => $t_meta_filter_any_array,
 		FILTER_PROPERTY_STATUS => $t_meta_filter_any_array,
 		FILTER_PROPERTY_HIGHLIGHT_CHANGED => $t_default_show_changed,
 		FILTER_PROPERTY_REPORTER_ID => $t_meta_filter_any_array,
@@ -1049,7 +1061,7 @@ function filter_deserialize( $p_serialized_filter ) {
 		return false;
 	} elseif( in_array( $t_version_string, array( 'v5', 'v6', 'v7', 'v8' ) ) ) {
 		# filters from v5 onwards should cope with changing filter indices dynamically
-		$t_filter_array = unserialize( $t_setting_arr[1] );
+		$t_filter_array = unserialize( $t_setting_arr[1], ['allowed_classes' => false] );
 	} else {
 		# filters from v9 onwards are stored as json
 		$t_filter_array = json_decode( $t_setting_arr[1], /* assoc array */ true );
@@ -1117,24 +1129,27 @@ function filter_get_field( $p_filter_id, $p_field_name ) {
 }
 
 /**
- * Get set of bug rows from given filter
- * @todo Had to make all these parameters required because we can't use call-time pass by reference anymore.
- * I really preferred not having to pass all the params in if you didn't want to, but I wanted to get
- * rid of the errors for now.  If we can think of a better way later (maybe return an object) that would be great.
+ * Get set of bug rows from given filter.
  *
- * @param integer &$p_page_number  Page number of the page you want to see (set to the actual page on return).
- * @param integer &$p_per_page     The number of bugs to see per page (set to actual on return)
- *                                 -1   indicates you want to see all bugs
- *                                 null indicates you want to use the value specified in the filter.
- * @param integer &$p_page_count   You don't need to give a value here, the number of pages will be stored here on return.
- * @param integer &$p_bug_count    You don't need to give a value here, the number of bugs will be stored here on return.
- * @param mixed   $p_custom_filter Custom Filter to use.
- * @param integer $p_project_id    Project id to use in filtering.
- * @param integer $p_user_id       User id to use as current user when filtering.
- * @param boolean $p_show_sticky   True/false - get sticky issues only.
- * @return boolean|array
+ * @todo Had to make all these parameters required because we can't use call-time pass by reference anymore.
+ *   I really preferred not having to pass all the params in if you didn't want to, but I wanted to get
+ *   rid of the errors for now.  If we can think of a better way later (maybe return an object) that would be great.
+ *
+ * @param int      &$p_page_number  Page number of the page you want to see (set to the actual page on return).
+ * @param int      &$p_per_page     The number of bugs to see per page (set to actual on return).
+ *                                    -1   indicates you want to see all bugs
+ *                                    null indicates you want to use the value specified in the filter.
+ * @param int      &$p_page_count   You don't need to give a value here, the number of pages will be stored here on return.
+ * @param int      &$p_bug_count    You don't need to give a value here, the number of bugs will be stored here on return.
+ * @param mixed    $p_custom_filter Custom Filter to use.
+ * @param int|null $p_project_id    Project id to use in filtering.
+ * @param int|null $p_user_id       User id to use as current user when filtering.
+ * @param bool     $p_show_sticky   True/false - get sticky issues only.
+ * @param bool  $p_visible_only  If true (default), only allow sorting on visible columns.
+ *
+ * @return array
  */
-function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p_bug_count, $p_custom_filter = null, $p_project_id = null, $p_user_id = null, $p_show_sticky = null ) {
+function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p_bug_count, $p_custom_filter = null, $p_project_id = null, $p_user_id = null, $p_show_sticky = false, $p_visible_only = true ) {
 	# assigning to $p_* for this function writes the values back in case the caller wants to know
 
 	if( $p_custom_filter === null ) {
@@ -1150,7 +1165,8 @@ function filter_get_bug_rows( &$p_page_number, &$p_per_page, &$p_page_count, &$p
 				'query_type' => BugFilterQuery::QUERY_TYPE_LIST,
 				'project_id' => $p_project_id,
 				'user_id' => $p_user_id,
-				'use_sticky' => $p_show_sticky
+				'use_sticky' => $p_show_sticky,
+				'visible_only' => $p_visible_only,
 				)
 			);
 	$p_bug_count = $t_filter_query->get_bug_count();
@@ -1362,7 +1378,7 @@ function filter_draw_selection_area() {
 							foreach( $t_stored_queries_arr as $t_query_id => $t_query_name ) {
 								echo '<option value="' . $t_query_id . '" ';
 								check_selected( $t_query_id, $t_source_query_id );
-								echo '>' . string_display_line( $t_query_name ) . '</option>';
+								echo '>' . string_attribute( $t_query_name ) . '</option>';
 							}
 							?>
 						</select>
@@ -1439,7 +1455,7 @@ function filter_draw_selection_area() {
 									foreach( $t_stored_queries_arr as $t_query_id => $t_query_name ) {
 										echo '<option value="' . $t_query_id . '" ';
 										check_selected( $t_query_id, $t_source_query_id );
-										echo '>' . string_display_line( $t_query_name ) . '</option>';
+										echo '>' . string_attribute( $t_query_name ) . '</option>';
 									}
 									?>
 								</select>
@@ -1522,12 +1538,20 @@ function filter_cache_rows( array $p_filter_ids ) {
  * @return boolean
  */
 function filter_clear_cache( $p_filter_id = null ) {
-	global $g_cache_filter_db_rows;
+	global $g_cache_filter_db_rows, $g_cache_filter_project_current;
 
 	if( null === $p_filter_id ) {
 		$g_cache_filter_db_rows = array();
+		$g_cache_filter_project_current = array();
 	} else {
 		unset( $g_cache_filter_db_rows[(int)$p_filter_id] );
+		foreach( $g_cache_filter_project_current as $t_project_id => $t_user_filters ) {
+			foreach( $t_user_filters as $t_user_id => $t_current_filter_id ) {
+				if( $t_current_filter_id === (int)$p_filter_id ) {
+					unset( $g_cache_filter_project_current[$t_project_id][$t_user_id] );
+				}
+			}
+		}
 	}
 
 	return true;
@@ -1563,6 +1587,12 @@ function filter_db_update_filter( $p_filter_id, $p_filter_string, $p_project_id 
 	$t_query .= ' WHERE id=' . db_param();
 	$t_params[] = (int)$p_filter_id;
 	db_query( $t_query, $t_params );
+	if( null !== $p_project_id || null !== $p_name ) {
+		# The filter may have become (or ceased to be) a current filter.
+		filter_clear_cache();
+	} else {
+		filter_clear_cache( $p_filter_id );
+	}
 }
 
 /**
@@ -1586,6 +1616,7 @@ function filter_db_create_filter( $p_filter_string, $p_user_id, $p_project_id, $
 			. ' VALUES ( ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ' )';
 	$t_params = array( $c_user_id, $c_project_id, $c_is_public, $p_name, $p_filter_string );
 	db_query( $t_query, $t_params );
+	filter_clear_cache();
 
 	return db_insert_id( db_get_table( 'filters' ) );
 }
@@ -1660,6 +1691,8 @@ function filter_db_get_filter_string( $p_filter_id, $p_user_id = null ) {
  * @return integer|null
  */
 function filter_db_get_project_current( $p_project_id = null, $p_user_id = null ) {
+	global $g_cache_filter_project_current;
+
 	if( null === $p_project_id ) {
 		$c_project_id = helper_get_current_project();
 	} else {
@@ -1669,6 +1702,12 @@ function filter_db_get_project_current( $p_project_id = null, $p_user_id = null 
 		$c_user_id = auth_get_current_user_id();
 	} else {
 		$c_user_id = (int)$p_user_id;
+	}
+	
+	if( isset( $g_cache_filter_project_current[$c_project_id][$c_user_id] ) ) {
+		return ( $g_cache_filter_project_current[$c_project_id][$c_user_id] === false )
+			? null
+			: $g_cache_filter_project_current[$c_project_id][$c_user_id];
 	}
 
 	# we store current filters for each project with a special project index
@@ -1680,9 +1719,12 @@ function filter_db_get_project_current( $p_project_id = null, $p_user_id = null 
 	$t_result = db_query( $t_query, array( $c_user_id, $t_filter_project_id, '' ) );
 
 	if( $t_row = db_fetch_array( $t_result ) ) {
-		return $t_row['id'];
+		$t_filter_id = (int)$t_row['id'];
+		$g_cache_filter_project_current[$c_project_id][$c_user_id] = $t_filter_id;
+		return $t_filter_id;
 	}
 
+	$g_cache_filter_project_current[$c_project_id][$c_user_id] = false;
 	return null;
 }
 
@@ -1748,6 +1790,7 @@ function filter_db_delete_filter( $p_filter_id ) {
 	db_param_push();
 	$t_query = 'DELETE FROM {filters} WHERE id=' . db_param();
 	db_query( $t_query, array( $c_filter_id ) );
+	filter_clear_cache( $c_filter_id );
 
 	return true;
 }
@@ -1762,6 +1805,29 @@ function filter_db_delete_current_filters() {
 	db_param_push();
 	$t_query = 'DELETE FROM {filters} WHERE project_id<=' . db_param() . ' AND name=' . db_param();
 	db_query( $t_query, array( $t_all_id, '' ) );
+	filter_clear_cache();
+}
+
+/**
+ * Delete filters owned by the specified user.
+ *
+ * This function is called when a user is deleted to clean up orphaned filters.
+ * By default, shared (public) filters are preserved since they may be used by other users.
+ *
+ * @param int  $p_user_id       A valid user identifier.
+ * @param bool $p_delete_shared Whether to also delete shared (public) filters. Default false.
+ * @return void
+ */
+function filter_db_delete_user_filters( $p_user_id, $p_delete_shared = false ) {
+	db_param_push();
+	if( $p_delete_shared ) {
+		$t_query = 'DELETE FROM {filters} WHERE user_id=' . db_param();
+		db_query( $t_query, array( (int)$p_user_id ) );
+	} else {
+		$t_query = 'DELETE FROM {filters} WHERE user_id=' . db_param() . ' AND is_public=' . db_param();
+		db_query( $t_query, array( (int)$p_user_id, false ) );
+	}
+	filter_clear_cache();
 }
 
 /**
@@ -1825,39 +1891,48 @@ function filter_db_get_available_queries( $p_project_id = null, $p_user_id = nul
 	}
 
 	# If the user doesn't have access rights to stored queries, just return
-	if( !access_has_project_level( config_get( 'stored_query_use_threshold' ) ) ) {
-		return array();
+	if( ALL_PROJECTS == $t_project_id ) {
+		# For ALL_PROJECTS, check access in any accessible project
+		$t_accessible_project_ids = access_project_array_filter( 'stored_query_use_threshold', null, $t_user_id );
+		if( empty( $t_accessible_project_ids ) ) {
+			return array();
+		}
+		$t_accessible_project_ids = array_map( 'intval', $t_accessible_project_ids );
+	} else {
+		# For a specific project, check its threshold
+		$t_stored_query_use_threshold = config_get( 'stored_query_use_threshold', null, NO_USER, $t_project_id );
+		if( !access_has_project_level( $t_stored_query_use_threshold, $t_project_id ) ) {
+			return array();
+		}
+		# set the array of ids here to the specific project
+		$t_accessible_project_ids = [ (int)$t_project_id ];
 	}
 
 	# Get the list of available queries. By sorting such that public queries are
 	# first, we can override any query that has the same name as a private query
 	# with that private one
+	if( $p_filter_by_project ) {
+		# Use the canonical list from above and always include global (0)
+		$t_projects = array_merge( $t_accessible_project_ids, [ ALL_PROJECTS ] );
+	} else {
+		# Ignore the given project and use all user-accessible projects + global (0)
+		$t_projects = user_get_all_accessible_projects( $t_user_id );
+		$t_projects[] = ALL_PROJECTS;
+	}
+
+	# Normalize: ints, unique, reindex (and ensure there is at least ALL_PROJECTS)
+	$t_projects = array_values( array_unique( array_map( 'intval', $t_projects ) ) );
+
 	db_param_push();
 
-	if( $p_filter_by_project ) {
-		$t_query = 'SELECT * FROM {filters}
-			WHERE (project_id = ' . db_param() . '
-				OR project_id = 0)
-			AND name != \'\'
-			AND (is_public = ' . db_param() . '
-				OR user_id = ' . db_param() . ')
-			ORDER BY is_public DESC, name ASC';
+	$t_query = 'SELECT * FROM {filters}
+		WHERE project_id IN (' . implode( ',', $t_projects ) . ')
+		AND name != \'\'
+		AND (is_public = ' . db_param() . ' OR user_id = ' . db_param() . ')
+		ORDER BY is_public DESC, name ASC';
 
-		$t_result = db_query( $t_query, array( $t_project_id, true, $t_user_id ) );
-	} else {
-		$t_project_ids = user_get_all_accessible_projects( $t_user_id );
-		$t_project_ids[] = ALL_PROJECTS;
+	$t_result = db_query( $t_query, array( true, $t_user_id ) );
 
-		$t_query = 'SELECT * FROM {filters}
-			WHERE project_id in (' . implode( ',', $t_project_ids ) . ')
-			AND name != \'\'
-			AND (is_public = ' . db_param() . '
-				OR user_id = ' . db_param() . ')
-			ORDER BY is_public DESC, name ASC';
-
-		$t_result = db_query( $t_query, array( true, $t_user_id ) );
-	}
-	
 	$t_filters = array();
 
 	# first build the id=>name array
@@ -2036,6 +2111,7 @@ function filter_gpc_get( ?array $p_filter = null ): array {
 	$f_os = gpc_get( FILTER_PROPERTY_OS, $t_filter[FILTER_PROPERTY_OS] );
 	$f_os_build = gpc_get( FILTER_PROPERTY_OS_BUILD, $t_filter[FILTER_PROPERTY_OS_BUILD] );
 	$f_show_severity = gpc_get( FILTER_PROPERTY_SEVERITY, $t_filter[FILTER_PROPERTY_SEVERITY] );
+	$f_show_reproducibility = gpc_get( FILTER_PROPERTY_REPRODUCIBILITY, $t_filter[FILTER_PROPERTY_REPRODUCIBILITY] );
 	$f_show_status = gpc_get( FILTER_PROPERTY_STATUS, $t_filter[FILTER_PROPERTY_STATUS] );
 	$f_hide_status = gpc_get( FILTER_PROPERTY_HIDE_STATUS, $t_filter[FILTER_PROPERTY_HIDE_STATUS] );
 	$f_reporter_id = gpc_get( FILTER_PROPERTY_REPORTER_ID, $t_filter[FILTER_PROPERTY_REPORTER_ID] );
@@ -2274,6 +2350,7 @@ function filter_gpc_get( ?array $p_filter = null ): array {
 	$t_filter_input['_view_type'] 							= $f_view_type;
 	$t_filter_input[FILTER_PROPERTY_CATEGORY_ID] 			= $f_show_category;
 	$t_filter_input[FILTER_PROPERTY_SEVERITY] 				= $f_show_severity;
+	$t_filter_input[FILTER_PROPERTY_REPRODUCIBILITY] 				= $f_show_reproducibility;
 	$t_filter_input[FILTER_PROPERTY_STATUS] 					= $f_show_status;
 	$t_filter_input[FILTER_PROPERTY_ISSUES_PER_PAGE] 		= $f_per_page;
 	$t_filter_input[FILTER_PROPERTY_HIGHLIGHT_CHANGED] 		= $f_highlight_changed;
@@ -2333,41 +2410,58 @@ function filter_gpc_get( ?array $p_filter = null ): array {
 }
 
 /**
- * Returns the sort columns from a filter, with only those columns that are visible
- * according to $p_columns_target user's configuration, and valid for sorting.
- * Returns an array consisting of two respective properties of column names, and
- * sort direction, each one already exploded into an array.
- * Note: Filter array must be a valid filter
- * @param array $p_filter Original filter array.
- * @param integer $p_columns_target Target view for the columns.
- * @return array Array of filtered columns and order
+ * Returns the visible sort columns from a filter.
+ *
+ * Only those columns that are visible according to $p_columns_target user's
+ * configuration, and valid for sorting are returned.
+ *
+ * @param array $p_filter         Valid filter array.
+ * @param int   $p_columns_target Target view for the columns.
+ *
+ * @return array Visible sort columns and directions, each one exploded into an array.
  */
 function filter_get_visible_sort_properties_array( array $p_filter, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
-	# get visible columns
-	$t_visible_columns = helper_get_columns_to_view( $p_columns_target );
-	# filter out those that are not sortable
-	$t_visible_columns = array_filter( $t_visible_columns, 'column_is_sortable' );
+	return filter_get_sort_properties_array( $p_filter, true, $p_columns_target );
+}
 
-	# Special handling for overdue column, which is equivalent to sorting by due_date
-	if( in_array( 'overdue', $t_visible_columns ) & !in_array( 'due_date', $t_visible_columns ) ) {
-		$t_visible_columns[] = 'due_date';
-	}
-
+/**
+ * Returns the sort columns from a filter.
+ *
+ * @param array $p_filter         Valid filter array.
+ * @param bool  $p_visible_only   True to only return visible columns.
+ * @param int   $p_columns_target Target view for the columns.
+ *
+ * @return array Sort columns and directions, each one exploded into an array.
+ */
+function filter_get_sort_properties_array( array $p_filter, bool $p_visible_only = true, int $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ): array {
 	$t_sort_fields = explode( ',', $p_filter[FILTER_PROPERTY_SORT_FIELD_NAME] );
 	$t_dir_fields = explode( ',', $p_filter[FILTER_PROPERTY_SORT_DIRECTION] );
-	$t_sort_array = array();
-	$t_dir_array = array();
-	$t_count = count( $t_sort_fields );
-	for( $i = 0; $i < $t_count; $i++ ) {
-		$c_sort = $t_sort_fields[$i];
-		if( in_array( $c_sort, $t_visible_columns ) ) {
-			$t_sort_array[] = $t_sort_fields[$i];
-			$t_dir_array[] = $t_dir_fields[$i];
+
+	if( $p_visible_only ) {
+		# get visible columns
+		$t_visible_columns = helper_get_columns_to_view( $p_columns_target );
+
+		# filter out those that are not sortable
+		$t_visible_columns = array_filter( $t_visible_columns, 'column_is_sortable' );
+
+		# Special handling for overdue column, which is equivalent to sorting by due_date
+		if( in_array( 'overdue', $t_visible_columns ) & !in_array( 'due_date', $t_visible_columns ) ) {
+			$t_visible_columns[] = 'due_date';
 		}
+
+		# Only keep visible columns
+		foreach( $t_sort_fields as $t_key => $t_field ) {
+			if( !in_array( $t_field, $t_visible_columns ) ) {
+				unset( $t_sort_fields[$t_key], $t_dir_fields[$t_key] );
+			}
+		}
+		$t_sort_fields = array_values( $t_sort_fields );
+		$t_dir_fields = array_values( $t_dir_fields );
 	}
+
 	return array(
-		FILTER_PROPERTY_SORT_FIELD_NAME => $t_sort_array,
-		FILTER_PROPERTY_SORT_DIRECTION => $t_dir_array
+		FILTER_PROPERTY_SORT_FIELD_NAME => $t_sort_fields,
+		FILTER_PROPERTY_SORT_DIRECTION => $t_dir_fields,
 	);
 }
 
@@ -2682,16 +2776,19 @@ function filter_update_source_properties( array $p_filter ) {
 }
 
 /**
- * Returns a filter which is stored in session data, indexed by the provided key.
+ * Returns a filter which is stored in session data.
+ *
  * A default value can be provided to be used when the key doesn't exists
  *
- *  You may pass in any array as a default (including null) but if
- *  you pass in *no* default then an error will be triggered if the key
- *  cannot be found
+ * You may pass in any array as a default (including null) but if
+ * you pass in *no* default then an error will be triggered if the key
+ * cannot be found.
  *
- * @param string $p_filter_key  Key to look up for in session data
- * @param mixed $p_default		A default value to return if key not found
- * @return array	A filter array.
+ * @param string $p_filter_key Key to look up in session data.
+ * @param mixed  $p_default    A default value to return if key not found.
+ *
+ * @return array A filter array.
+ * @throws ClientException
  */
 function filter_temporary_get( $p_filter_key, $p_default = null ) {
 	# if no default was provided, we will trigger an error if not found
@@ -2706,8 +2803,10 @@ function filter_temporary_get( $p_filter_key, $p_default = null ) {
 		return filter_ensure_valid_filter( $t_filter );
 	} else {
 		if( $t_trigger_error ) {
-			error_parameters( $p_filter_key );
-			trigger_error( ERROR_FILTER_NOT_FOUND, ERROR );
+			throw new ClientException( "Filter '$p_filter_key' not found",
+				ERROR_FILTER_NOT_FOUND,
+				[ $p_filter_key ]
+			);
 		} else {
 			return $p_default;
 		}

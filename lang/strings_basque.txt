@@ -2,7 +2,7 @@
 /** MantisBT - a php based bugtracking system
  *
  * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2016  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * Copyright (C) 2002 - 2026  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  *
  * MantisBT is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -184,8 +184,6 @@ $s_update_severity_title = 'Eguneratu Larritasuna';
 $s_update_severity_msg = 'Aukeratu arazoaren larritasuna';
 $s_update_severity_button = 'Eguneratu Larritasuna';
 $s_hide_button = 'Erakutsi aukeratutakoak soilik';
-$s_printing_preferences_title = 'Aukeratu inprimatzeko eremuak';
-$s_printing_options_link = 'Inprimatzeko Hobespenak';
 $s_bugnote_title = 'Ohar kudeatzailea';
 $s_bugnote_date = 'Oharraren data';
 $s_bugnote_description = 'Oharraren deskribapena';
@@ -197,13 +195,12 @@ $s_prefix_for_deleted_users = 'lankide';
 $s_administrator = 'administratzaile';
 $s_myself = 'Ni neu';
 $s_default_access_level = 'Lehenetsitako sarbide maila';
-$s_issue_status_percentage = 'Arazo Egoera Portzentaila';
 $s_access_levels_enum_string = '10:ikuslea,25:informatzailea,40:eguneratzailea,55:garatzailea,70:kudeatzailea,90:administratzailea';
 $s_no_access = 'sarbide barik';
 $s_project_status_enum_string = '10:garapena,30:kaleratua,50:egonkorra,70:zaharkitua';
 $s_project_view_state_enum_string = '10:publikoa,50:pribatua';
 $s_view_state_enum_string = '10:publikoa,50:pribatua';
-$s_priority_enum_string = '10:ezer,20:baxua,30:normala,40:altua,50:larria,60:berehalakoa';
+$s_priority_enum_string = '10:bat ere ez,20:baxua,30:normala,40:altua,50:larria,60:berehalakoa';
 $s_severity_enum_string = '10:ezaugarria,20:arrunta,30:testua,40:doiketa,50:txikia,60:handia,70:apurtuta,80:blokeatzailea';
 $s_reproducibility_enum_string = '10:betik,30:batzutan,50:ausaz,70:saiatu gabe,90:ezin da erreproduzitu,100:E/A';
 $s_status_enum_string = '10:berria,20:datu gehiago behar dira,30:aitortua,40:baieztatua,50:esleitua,80:konponduta,90:itxia';
@@ -669,7 +666,7 @@ $s_private = 'pribatua';
 $s_update_project_button = 'Proiektua Eguneratu';
 $s_delete_project_button = 'Proiektua Ezabatu';
 $s_copy_from = 'Hemendik Kopiatu';
-$s_copy_to = 'Hona Kopiatu';
+$s_copy_to = 'Kopiatu hona:';
 $s_categories_and_version_title = 'Kategoria eta Bertsioak';
 $s_categories = 'Kategoriak';
 $s_add_category_button = 'Kategoria Gehitu';

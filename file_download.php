@@ -33,13 +33,20 @@
  * @uses gpc_api.php
  * @uses http_api.php
  * @uses utility_api.php
+ *
+ * Unhandled exceptions will be caught by the default error handler
+ * @noinspection PhpUnhandledExceptionInspection
+ * @noinspection PhpUnused
  */
 
 # Prevent output of HTML in the content if errors occur
-define( 'DISABLE_INLINE_ERROR_REPORTING', true );
+const DISABLE_INLINE_ERROR_REPORTING = true;
 
-$g_bypass_headers = true; # suppress headers as we will send our own later
-define( 'COMPRESSION_DISABLED', true );
+# Suppress headers as we will send our own later
+$g_bypass_headers = true;
+const COMPRESSION_DISABLED = true;
+
+use Mantis\Exceptions\ClientException;
 
 require_once( 'core.php' );
 require_api( 'access_api.php' );
@@ -55,11 +62,11 @@ require_api( 'utility_api.php' );
 
 auth_ensure_user_authenticated();
 
-$f_show_inline = gpc_get_bool( 'show_inline', false );
+$f_show_inline = gpc_get_bool( 'show_inline' );
 
 # To prevent cross-domain inline hotlinking to attachments we require a CSRF
 # token from the user to show any attachment inline within the browser.
-# Without this security in place a malicious user could upload a HTML file
+# Without this security in place a malicious user could upload an HTML file
 # attachment and direct a user to file_download.php?file_id=X&type=bug&show_inline=1
 # and the malicious HTML content would be rendered in the user's browser,
 # violating cross-domain security.
@@ -70,7 +77,7 @@ if( $f_show_inline ) {
 	# makes the assumption that they've been sent already).
 	if( !@form_security_validate( 'file_show_inline' ) ) {
 		http_all_headers();
-		trigger_error( ERROR_FORM_TOKEN_INVALID, ERROR );
+		throw new ClientException( "Invalid token", ERROR_FORM_TOKEN_INVALID );
 	}
 }
 
@@ -95,9 +102,10 @@ switch( $f_type ) {
 $t_result = db_query( $t_query, array( $c_file_id ) );
 $t_row = db_fetch_array( $t_result );
 if( false === $t_row ) {
-	# Attachment not found
-	error_parameters( $c_file_id );
-	trigger_error( ERROR_FILE_NOT_FOUND, ERROR );
+	throw new ClientException( "Attachment not found",
+		ERROR_FILE_NOT_FOUND,
+		[ $c_file_id ]
+	);
 }
 /**
  * @var int    $v_bug_id
@@ -113,15 +121,11 @@ if( false === $t_row ) {
  */
 extract( $t_row, EXTR_PREFIX_ALL, 'v' );
 
-if( $f_type == 'bug' ) {
-	$t_project_id = bug_get_field( $v_bug_id, 'project_id' );
-} else {
-	$t_project_id = $v_project_id;
-}
-
 # Check access rights
 switch( $f_type ) {
 	case 'bug':
+		$t_project_id = bug_get_field( $v_bug_id, 'project_id' );
+
 		if( !file_can_download_bug_attachments( $v_bug_id, $v_user_id )
 		|| !file_can_download_bugnote_attachments( $v_bugnote_id, $v_user_id, $v_bug_id )
 		) {
@@ -129,6 +133,8 @@ switch( $f_type ) {
 		}
 		break;
 	case 'doc':
+		$t_project_id = $v_project_id;
+
 		# Check if project documentation feature is enabled.
 		if( OFF == config_get( 'enable_project_documentation' ) ) {
 			access_denied();
@@ -139,6 +145,7 @@ switch( $f_type ) {
 }
 
 # throw away output buffer contents (and disable it) to protect download
+/** @noinspection PhpStatementHasEmptyBodyInspection */
 while( @ob_end_clean() ) {
 }
 
@@ -171,8 +178,7 @@ switch( $t_upload_method ) {
 		$t_file_info_type = file_get_mime_type_for_content( $v_content );
 		break;
 	default:
-		trigger_error( ERROR_GENERIC, ERROR );
-
+		throw new ClientException( "Unknown upload method", ERROR_GENERIC );
 }
 
 if( $t_file_info_type !== false ) {
@@ -193,6 +199,7 @@ $t_mime_force_inline = array(
 	'image/jpeg',
 	'image/png',
 	'image/tiff',
+	'image/webp',
 );
 $t_mime_force_attachment = array(
 	'application/x-shockwave-flash',

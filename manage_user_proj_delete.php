@@ -77,7 +77,15 @@ helper_ensure_confirmed(
 );
 
 foreach( $f_projects as $t_project_id ) {
-	project_remove_user( $t_project_id, $f_user_id );
+	$t_data = array(
+		'payload' => array(
+			'project' => array( 'id' => $t_project_id ),
+			'user' => array( 'id' => $f_user_id )
+		)
+	);
+
+	$t_command = new ProjectUsersDeleteCommand( $t_data );
+	$t_command->execute();
 }
 form_security_purge( 'manage_user_proj_delete' );
 

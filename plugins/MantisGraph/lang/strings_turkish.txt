@@ -2,7 +2,7 @@
 /** MantisBT - a php based bugtracking system
  *
  * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2016  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * Copyright (C) 2002 - 2026  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  *
  * MantisBT is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -40,6 +40,8 @@
  *
  * @author Andac
  * @author BaRaN6161 TURK
+ * @author Efygz
+ * @author HakanIST
  * @author Korayal
  */
 
@@ -58,20 +60,18 @@ $s_plugin_MantisGraph_graph_imp_priority_title = 'Öncelikli Grafiklere Göre';
 $s_plugin_MantisGraph_graph_imp_severity_title = 'Önem Grafiklere Göre';
 $s_plugin_MantisGraph_graph_imp_category_title = 'Kategori Grafiklerine Göre';
 $s_plugin_MantisGraph_graph_imp_resolution_title = 'Çözünürlük Grafiklere Göre';
+$s_plugin_MantisGraph_graph_project_title = 'Proje Grafiklerine Göre';
 $s_plugin_MantisGraph_graph_developer_title = 'Geliştirici Grafiklere Göre';
 $s_plugin_MantisGraph_graph_reporter_title = 'Raporcu Grafiklere Göre';
 $s_plugin_MantisGraph_graph_issues_trend_title = 'Açılan, Çözülen ve Kalan Sorunlar';
-$s_plugin_MantisGraph_by_status_pct = 'Durum yüzdesine göre';
-$s_plugin_MantisGraph_by_priority_pct = 'Öncelik yüzdesine göre';
-$s_plugin_MantisGraph_by_severity_pct = 'Önem derecesi yüzdesine göre';
-$s_plugin_MantisGraph_by_category_pct = 'Kategori yüzdesine göre';
-$s_plugin_MantisGraph_by_resolution_pct = 'Çözüm yüzdesine göre';
 $s_plugin_MantisGraph_by_severity_mix = 'Önem derecesi ve duruma göre';
 $s_plugin_MantisGraph_by_priority_mix = 'Önceliğe ve duruma göre';
 $s_plugin_MantisGraph_by_resolution_mix = 'Çözüme ve duruma göre';
+$s_plugin_MantisGraph_data = 'Veri';
 $s_plugin_MantisGraph_legend_still_open = 'Halâ Açık';
 $s_plugin_MantisGraph_legend_resolved = 'Çözüldü';
 $s_plugin_MantisGraph_legend_reported = 'Rapor edildi';
+$s_plugin_MantisGraph_period = 'Dönem';
 $s_plugin_MantisGraph_period_none = 'Hiçbiri';
 $s_plugin_MantisGraph_period_this_week = 'Bu Hafta';
 $s_plugin_MantisGraph_period_last_week = 'Geçen Hafta';
@@ -89,3 +89,4 @@ $s_plugin_MantisGraph_graph_opendev = 'Açık Konuya Göre Geliştiriciler';
 $s_plugin_MantisGraph_graph_topreporter_fixed = 'Giderilen Sorunlara Göre En İyi Bildirenler';
 $s_plugin_MantisGraph_other_categories = 'diğer kategoriler (%d)';
 $s_plugin_MantisGraph_other_projects = 'diğer projeler (%d)';
+$s_plugin_MantisGraph_date = 'Tarih';

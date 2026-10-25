@@ -31,10 +31,10 @@ long_options = ["help", "fresh", "ref=", "branches", "auto-suffix", "clean",
 
 
 def usage():
-    print('''Builds one or more releases (zip/tarball) for the specified
+    print(f'''Builds one or more releases (zip/tarball) for the specified
 references or for all branches.
 
-Usage: {0} [options] /path/for/tarballs [/path/to/repo]
+Usage: {path.basename(__file__)} [options] /path/for/tarballs [/path/to/repo]
 
 Options:
     -h | --help                  Show this usage message
@@ -46,12 +46,18 @@ Options:
     -a | --auto-suffix           Automatically append the HEAD commit's sha1
                                  to the version suffix
 
-The following options are passed on to '{1}':
+The following options are passed on to '{build_script_name}':
     -c | --clean                 Remove build directories when completed
     -d | --docbook               Build the docbook manuals
     -s | --suffix <suffix>       Include version suffix in config files
-'''.format(path.basename(__file__), build_script_name))
+''')
 # end usage()
+
+
+def get_head_commit_sha():
+    result = subprocess.run(['git', 'log', '--pretty=format:%h', '-n1'],
+                            check=True, text=True, capture_output=True)
+    return result.stdout
 
 
 def ignore(ref):
@@ -73,7 +79,7 @@ def main():
         usage()
         sys.exit(2)
 
-    pass_opts = ""
+    pass_opts = []
     refs = []
     all_branches = False
     version_suffix = ""
@@ -81,6 +87,7 @@ def main():
     fresh_clone = False
     delete_clone = False
 
+    # noinspection PyUnboundLocalVariable
     for opt, val in opts:
         if opt in ("-h", "--help"):
             usage()
@@ -96,10 +103,9 @@ def main():
             all_branches = True
 
         elif opt in ("-c", "--clean"):
-            pass_opts += " -c"
-
+            pass_opts.append("-c")
         elif opt in ("-d", "--docbook"):
-            pass_opts += " -d"
+            pass_opts.append("-d")
 
         elif opt in ("-a", "--auto-suffix"):
             auto_suffix = True
@@ -107,6 +113,7 @@ def main():
         elif opt in ("-s", "--suffix"):
             version_suffix = val
 
+    # noinspection PyUnboundLocalVariable
     if len(args) < 1:
         usage()
         sys.exit(1)
@@ -126,9 +133,9 @@ def main():
                 os.mkdir(release_path)
             repo_path = tempfile.mkdtemp(dir=release_path, prefix="mantisbt-", suffix=".git")
             delete_clone = True
-        ret = subprocess.call('git clone {} {}'.format(clone_url, repo_path),
-                              shell=True)
-        if ret != 0:
+        try:
+            subprocess.run(['git', 'clone', clone_url, repo_path], check=True)
+        except subprocess.CalledProcessError:
             print("ERROR: clone failed")
             sys.exit(1)
 
@@ -138,16 +145,18 @@ def main():
 
     # Update the repository
     if not fresh_clone:
-        os.system('git fetch')
+        print(f"Updating repository at '{repo_path}'")
+        subprocess.run(['git', 'fetch'], check=True)
 
     # Consolidate refs/branches
     if all_branches:
-        os.system('git remote prune origin')
-        cmd = 'git for-each-ref --format="%(refname:short)" refs/remotes'
-        refs.extend(os.popen(cmd).read().split())
+        subprocess.run(['git', 'remote', 'prune', 'origin'], check=True)
+        result = subprocess.run(['git', 'for-each-ref', '--format=%(refname:short)', 'refs/remotes'],
+                                check=True, text=True, capture_output=True)
+        refs.extend(result.stdout.split())
 
-    if len(refs) < 1:
-        refs.append(os.popen('git log --pretty="format:%h" -n1').read())
+    if not refs:
+        refs.append(get_head_commit_sha())
 
     refs = [ref for ref in refs if not ignore(ref)]
 
@@ -160,52 +169,59 @@ def main():
     refnameregex = re.compile('(?:[a-zA-Z0-9-.]+/)?(.*)')
 
     for ref in refs:
-        print("\nChecking out '{}'".format(ref))
-        os.system("git checkout -f -q {}".format(ref))
-        os.system("git log -n1 --pretty='HEAD is now at %h... %s'")
+        print(f"\nChecking out '{ref}'")
+        subprocess.run(['git', 'checkout', '-f', '-q', ref], check=True)
+        subprocess.run(['git', 'log', '-n1', '--pretty="HEAD is now at %h... %s"'],
+                       check=True)
         print()
 
         # Composer
         if path.isfile('composer.json'):
             print("Installing Composer packages")
-            if subprocess.call(
-                    'composer install --no-plugins --no-scripts --no-dev --no-progress',
-                    shell=True):
-                continue
+            composer = ['composer', 'install', '--no-plugins', '--no-scripts', '--no-dev', '--no-progress']
+            try:
+                subprocess.run(composer, check=True)
+            except subprocess.CalledProcessError as e:
+                print("ERROR:", e)
+                sys.exit(1)
             print()
 
         # Update and reset submodules
         print("Updating submodules")
-        subprocess.call('git submodule update --init', shell=True)
-        subprocess.call('git submodule foreach git checkout -- .', shell=True)
+        subprocess.run(['git', 'submodule', 'update', '--init'], check=True)
+        subprocess.run(['git', 'submodule', 'foreach', 'git', 'checkout', '--', '.'], check=True)
 
         # Handle suffix/auto-suffix generation
-        commit_hash = os.popen('git log --pretty="format:%h" -n1').read()
+        commit_hash = get_head_commit_sha()
         if commit_hash != ref:
             ref = refnameregex.search(ref).group(1)
-            commit_hash = "{}-{}".format(ref, commit_hash)
+            commit_hash = f"{ref}-{commit_hash}"
 
         if auto_suffix and version_suffix:
-            suffix = "--suffix {}-{}".format(version_suffix, commit_hash)
+            suffix = [f"--suffix={version_suffix}-{commit_hash}"]
         elif auto_suffix:
-            suffix = "--suffix " + commit_hash
+            suffix = ["--suffix=" + commit_hash]
         elif version_suffix:
-            suffix = "--suffix " + version_suffix
+            suffix = ["--suffix=" + version_suffix]
         else:
-            suffix = ""
+            suffix = []
 
         # Absolute path to buildrelease.py in the target repository, with a
         # fallback to the directory of the currently executing script
         buildscript = path.join(repo_path, 'build', build_script_name)
         if not path.exists(buildscript):
             buildscript = path.join(script_dir, build_script_name)
-            print("Build script ({file}) not found in {ref}"
-                  .format(file=build_script_name, ref=ref))
-            print("Using '{}' instead.".format(buildscript))
+            print(f"Build script ({build_script_name}) not found in {ref}")
+            print(f"Using '{buildscript}' instead.")
 
         # Start building
-        os.system("{} {} {} {} {}".format(buildscript, pass_opts, suffix,
-                                          release_path, repo_path))
+        try:
+            cmd = [buildscript] + pass_opts + suffix + [release_path, repo_path]
+            print("Running:", " ".join(cmd))
+            subprocess.run(cmd, check=True)
+        except subprocess.CalledProcessError as e:
+            print(e)
+            sys.exit(1)
 
     # Cleanup temporary repo if needed
     if delete_clone:

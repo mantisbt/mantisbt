@@ -1,7 +1,7 @@
 # -----------------------------------------------------------------------------
 # MantisBT GitHub Actions Worflow to build Documentation
 #
-# Will only run if DocBook files have been changed.
+# Runs when documentation or its OpenAPI source changes.
 # -----------------------------------------------------------------------------
 
 name: MantisBT Documentation
@@ -9,11 +9,27 @@ on:
   push:
     paths:
       - .github/workflows/documentation.yml
+      - api/rest/mantisbt_openapi.yaml
+      - tools/openapi/**
+      - tools/scalar/**
+      - redocly.yaml
+      - package.json
+      - package-lock.json
+      - api/soap/mantisconnect.wsdl
+      - api/soap/wsdl-viewer.xsl
       - "docbook/*/en-US/**"
       - "docbook/*/publican.cfg"
   pull_request:
     paths:
       - .github/workflows/documentation.yml
+      - api/rest/mantisbt_openapi.yaml
+      - tools/openapi/**
+      - tools/scalar/**
+      - redocly.yaml
+      - package.json
+      - package-lock.json
+      - api/soap/mantisconnect.wsdl
+      - api/soap/wsdl-viewer.xsl
       - "docbook/*/en-US/**"
       - "docbook/*/publican.cfg"
 
@@ -31,10 +47,42 @@ jobs:
 
     steps:
       - name: Checkout MantisBT Repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
 
       - name: Install Publican toolchain
-        run: sudo apt-get install publican
+        run: |
+          sudo apt-get update
+          sudo apt-get install --no-install-recommends publican xsltproc
+
+      - name: Install OpenAPI toolchain
+        run: npm ci
+
+      - name: Validate OpenAPI definition
+        run: npm run api:validate
+
+      - name: Generate REST API content
+        run: |
+          npm run api:generate -- --output "$RUNNER_TEMP/rest-api-generated"
+          test -s "$RUNNER_TEMP/rest-api-generated/mantisbt.postman_collection.json"
+          test -s "$RUNNER_TEMP/rest-api-generated/bruno/collection.bru"
+
+      - name: Generate SOAP API content
+        run: |
+          mkdir -p "$RUNNER_TEMP/soap-api"
+          xsltproc --nonet --output "$RUNNER_TEMP/soap-api/index.html" api/soap/wsdl-viewer.xsl api/soap/mantisconnect.wsdl
+          cp api/soap/mantisconnect.wsdl "$RUNNER_TEMP/soap-api/"
+          cp api/soap/wsdl-viewer.xsl "$RUNNER_TEMP/soap-api/"
+          test -s "$RUNNER_TEMP/soap-api/index.html"
+
+      - name: Upload generated REST API content
+        uses: actions/upload-artifact@v7
+        with:
+          name: rest-api-generated-content
+          path: |
+            ${{ runner.temp }}/rest-api-generated/mantisbt.postman_collection.json
+            ${{ runner.temp }}/rest-api-generated/bruno/
+            ${{ runner.temp }}/rest-api-generated/docs/
+            ${{ runner.temp }}/soap-api/
 
       - name: Build Docbooks
         run: |

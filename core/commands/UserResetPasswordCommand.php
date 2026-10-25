@@ -23,21 +23,29 @@ require_api( 'user_api.php' );
 use Mantis\Exceptions\ClientException;
 
 /**
- * A command that resets the password of the specified user account.
+ * A command that resets the password of or unlocks the specified user account.
  *
  * Sample:
  * {
  *   "query": {
- *	  "id": 1234
+ *     "id": 1234,
+ *     "action": "reset"
  *   }
  * }
  */
 class UserResetPasswordCommand extends Command {
 	/**
-	 * Constants for execute() method's return value.
+	 * Constants for Command action.
+	 * Also used for execute() method's return value.
 	 */
-	const RESULT_RESET = 'reset';
-	const RESULT_UNLOCK = 'unlock';
+	const RESET = 'reset';
+	const UNLOCK = 'unlock';
+	const CLEAR = 'clear';
+
+	/**
+	 * @var string The action to perform (reset or unlock)
+	 */
+	private $action;
 
 	/**
 	 * @var integer The id of the user to delete.
@@ -64,11 +72,17 @@ class UserResetPasswordCommand extends Command {
 		}
 
 		$this->user_id_reset = (int)$this->query( 'id', null );
+		$this->action = $this->query( 'action', self::RESET );
 
 		# Make sure the account exists
 		$t_user = user_get_row( $this->user_id_reset );
 		if( $t_user === false ) {
 			throw new ClientException( 'Invalid user id', ERROR_INVALID_FIELD_VALUE, array( 'id' ) );
+		}
+
+		# Remaining checks only apply when resetting password
+		if( $this->action != self::RESET ) {
+			return;
 		}
 
 		# Mantis can't reset protected accounts' passwords, but if the
@@ -107,15 +121,21 @@ class UserResetPasswordCommand extends Command {
 	 */
 	protected function process() {
 		# If the password can be changed, reset it
-		if( auth_can_set_password( $this->user_id_reset )
+		if( $this->action == self::RESET
+			&& auth_can_set_password( $this->user_id_reset )
 			&& user_reset_password( $this->user_id_reset )
 		) {
-			return array( 'action' => self::RESULT_RESET );
+			return array( 'action' => self::RESET );
 		}
 
 		# Password can't be changed, unlock the account
 		# the account (i.e. reset failed login count)
+		if( user_is_login_request_allowed( $this->user_id_reset ) ) {
+			$t_action = self::CLEAR;
+		} else {
+			$t_action = self::UNLOCK;
+		}
 		user_reset_failed_login_count_to_zero( $this->user_id_reset );
-		return array( 'action' =>  self::RESULT_UNLOCK );
+		return array( 'action' => $t_action );
 	}
 }

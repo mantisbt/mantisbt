@@ -23,20 +23,14 @@
  * @link http://www.mantisbt.org
  *
  * @uses core.php
- * @uses access_api.php
  * @uses authentication_api.php
- * @uses config_api.php
- * @uses custom_field_api.php
  * @uses form_api.php
  * @uses gpc_api.php
  * @uses print_api.php
  */
 
 require_once( 'core.php' );
-require_api( 'access_api.php' );
 require_api( 'authentication_api.php' );
-require_api( 'config_api.php' );
-require_api( 'custom_field_api.php' );
 require_api( 'form_api.php' );
 require_api( 'gpc_api.php' );
 require_api( 'print_api.php' );
@@ -49,16 +43,17 @@ $f_field_id = gpc_get_int( 'field_id' );
 $f_project_id = gpc_get_int_array( 'project_id', array() );
 $f_sequence	= gpc_get_int( 'sequence' );
 
-$t_manage_project_threshold = config_get( 'manage_project_threshold' );
-
 foreach ( $f_project_id as $t_proj_id ) {
-	if( access_has_project_level( $t_manage_project_threshold, $t_proj_id ) ) {
-		if( !custom_field_is_linked( $f_field_id, $t_proj_id ) ) {
-			custom_field_link( $f_field_id, $t_proj_id );
-		}
-
-		custom_field_set_sequence( $f_field_id, $t_proj_id, $f_sequence );
-	}
+	$t_command = new ProjectFieldLinkCommand( [
+		'query' => [
+			'field_id' => $f_field_id,
+			'project_id' => $t_proj_id,
+		],
+		'payload' => [
+			'sequence' => $f_sequence,
+		],
+	] );
+	$t_command->execute();
 }
 
 form_security_purge( 'manage_custom_field_proj_add' );

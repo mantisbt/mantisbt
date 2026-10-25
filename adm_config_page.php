@@ -34,7 +34,12 @@
  * @uses print_api
  * @uses string_api
  * @uses user_api
+ *
+ * Unhandled exceptions will be caught by the default error handler
+ * @noinspection PhpUnhandledExceptionInspection
  */
+
+use Mantis\Exceptions\ClientException;
 
 require_once( 'core.php' );
 require_api( 'access_api.php' );
@@ -78,8 +83,10 @@ $t_edit_action = in_array( $f_edit_action, $t_valid_actions )
 
 # if not creating a new option, the option name is required
 if( MANAGE_CONFIG_ACTION_CREATE != $t_edit_action && null == $f_edit_option ) {
-	error_parameters( 'config_option' );
-	trigger_error( ERROR_EMPTY_FIELD, ERROR );
+	throw new ClientException( "Option name is required",
+		ERROR_EMPTY_FIELD,
+		[ 'config_option' ]
+	);
 }
 
 # see if the user can modify configuration options
@@ -106,8 +113,10 @@ if( MANAGE_CONFIG_ACTION_CREATE != $t_edit_action ) {
 
 	if( !$t_config_row ) {
 		# this error will be triggered if the exact config combination does not exist in database
-		error_parameters( $f_edit_option );
-		trigger_error( ERROR_CONFIG_OPT_NOT_FOUND, ERROR );
+		throw new ClientException( "Config option not found",
+				ERROR_CONFIG_OPT_NOT_FOUND,
+				[ $f_edit_option ]
+		);
 	}
 	$t_option_user_id = (int)$t_config_row['user_id'];
 	$t_option_project_id = (int)$t_config_row['project_id'];
@@ -128,8 +137,10 @@ if( MANAGE_CONFIG_ACTION_CREATE != $t_edit_action ) {
 		# make sure that configuration option specified is a valid one.
 		$t_not_found_value = '***CONFIG OPTION NOT FOUND***';
 		if( config_get( $t_option_id, $t_not_found_value ) === $t_not_found_value ) {
-			error_parameters( $t_option_id );
-			trigger_error( ERROR_CONFIG_OPT_NOT_FOUND, ERROR );
+			throw new ClientException( "Config option not found",
+				ERROR_CONFIG_OPT_NOT_FOUND,
+				[ $t_option_id ]
+			);
 		}
 	}
 }
@@ -167,7 +178,7 @@ if( MANAGE_CONFIG_ACTION_CREATE != $t_edit_action ) {
 				<!-- Username -->
 				<tr>
 					<td class="category">
-						<?php echo lang_get( 'username' ) ?>
+						<label for="config-user-id"><?php echo lang_get( 'username' ) ?></label>
 					</td>
 					<td>
 						<?php
@@ -184,7 +195,7 @@ if( MANAGE_CONFIG_ACTION_CREATE != $t_edit_action ) {
 						<?php
 						} else {
 							$t_username = ALL_USERS == $t_option_user_id ? lang_get( 'all_users' ) : user_get_name( $t_option_user_id );
-							echo string_display_line( $t_username );
+							echo string_attribute( $t_username );
 						}
 						?>
 					</td>
@@ -193,7 +204,7 @@ if( MANAGE_CONFIG_ACTION_CREATE != $t_edit_action ) {
 				<!-- Project -->
 				<tr>
 					<td class="category">
-						<?php echo lang_get( 'project_name' ) ?>
+						<label for="config-project-id"><?php echo lang_get( 'project_name' ) ?></label>
 					</td>
 					<td>
 						<?php
@@ -209,7 +220,7 @@ if( MANAGE_CONFIG_ACTION_CREATE != $t_edit_action ) {
 						<input type="hidden" name="original_project_id" value="<?php echo $t_option_project_id; ?>" />
 						<?php
 						} else {
-							echo string_display_line( project_get_name( $t_option_project_id ) );
+							echo string_attribute( project_get_name( $t_option_project_id ) );
 						}
 						?>
 					</td>
@@ -218,14 +229,14 @@ if( MANAGE_CONFIG_ACTION_CREATE != $t_edit_action ) {
 				<!-- Config option name -->
 				<tr>
 					<td class="category">
-						<?php echo lang_get( 'configuration_option' ) ?>
+						<label for="config_option"><?php echo lang_get( 'configuration_option' ) ?></label>
 					</td>
 					<td>
 						<?php
-                        $c_option_id = string_display_line( $t_option_id );
+                        $c_option_id = string_attribute( $t_option_id );
 						if( $t_modify ) {
 						?>
-						<input type="text" name="config_option" class="input-sm"
+						<input type="text" id="config_option" name="config_option" class="input-sm"
 							   value="<?php echo $c_option_id ?>"
 							   size="64" maxlength="64" />
 						<input type="hidden" name="original_config_option" value="<?php echo $c_option_id; ?>" />
@@ -240,7 +251,7 @@ if( MANAGE_CONFIG_ACTION_CREATE != $t_edit_action ) {
 				<!-- Option type -->
 				<tr>
 					<td class="category">
-						<?php echo lang_get( 'configuration_option_type' ) ?>
+						<label for="config-type"><?php echo lang_get( 'configuration_option_type' ) ?></label>
 					</td>
 					<td>
 						<?php
@@ -251,7 +262,7 @@ if( MANAGE_CONFIG_ACTION_CREATE != $t_edit_action ) {
 						</select>
 						<?php
 						} else {
-							echo string_display_line( config_get_type_string( $t_option_type ) );
+							echo string_attribute( config_get_type_string( $t_option_type ) );
 						}
 						?>
 					</td>
@@ -260,18 +271,18 @@ if( MANAGE_CONFIG_ACTION_CREATE != $t_edit_action ) {
 				<!-- Option Value -->
 				<tr>
 					<td class="category">
-						<?php echo lang_get( 'configuration_option_value' ) ?>
+						<label for="value"><?php echo lang_get( 'configuration_option_value' ) ?></label>
 					</td>
 					<td>
 						<?php
 						if( $t_modify ) {
 						?>
-						<textarea class="form-control" name="value" cols="80" rows="10"><?php
+						<textarea class="form-control" id="value" name="value" cols="80" rows="10"><?php
 							echo config_get_value_as_string( $t_option_type, $t_option_value, false );
 							?></textarea>
 						<?php
 						} else {
-							echo config_get_value_as_string( $t_option_type, $t_option_value, true );
+							echo config_get_value_as_string( $t_option_type, $t_option_value );
 						}
 						?>
 					</td>

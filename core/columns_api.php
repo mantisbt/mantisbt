@@ -43,6 +43,8 @@
  * @uses string_api.php
  */
 
+use Mantis\Exceptions\ClientException;
+
 require_api( 'access_api.php' );
 require_api( 'bug_api.php' );
 require_api( 'category_api.php' );
@@ -459,10 +461,13 @@ function column_get_title( $p_column ) {
 /**
  * Checks an array of columns for duplicate or invalid fields.
  *
- * @param string $p_field_name          The logic name of the array being validated.  Used when triggering errors.
+ * @param string $p_field_name          The logical name of the array being validated.
+ *                                      Used when triggering errors.
  * @param array  $p_columns_to_validate The array of columns to validate.
  * @param array  $p_columns_all         The list of all valid columns.
- * @return boolean
+ *
+ * @return bool
+ * @throws ClientException
  * @access public
  */
 function columns_ensure_valid( $p_field_name, array $p_columns_to_validate, array $p_columns_all ) {
@@ -471,9 +476,11 @@ function columns_ensure_valid( $p_field_name, array $p_columns_to_validate, arra
 	# Check for invalid fields
 	foreach( $p_columns_to_validate as $t_column ) {
 		if( !in_array( mb_strtolower( $t_column ), $t_columns_all_lower ) ) {
-			error_parameters( $p_field_name, $t_column );
-			trigger_error( ERROR_COLUMNS_INVALID, ERROR );
-			return false;
+			$t_localized_field = lang_get( $p_field_name . '_columns_title' );
+			throw new ClientException( "Invalid column",
+				ERROR_COLUMNS_INVALID,
+				[ $t_localized_field, $t_column ]
+			);
 		}
 	}
 
@@ -482,8 +489,11 @@ function columns_ensure_valid( $p_field_name, array $p_columns_to_validate, arra
 	foreach( $p_columns_to_validate as $t_column ) {
 		$t_column_lower = mb_strtolower( $t_column );
 		if( in_array( $t_column, $t_columns_no_duplicates ) ) {
-			error_parameters( $p_field_name, $t_column );
-			trigger_error( ERROR_COLUMNS_DUPLICATE, ERROR );
+			$t_localized_field = lang_get( $p_field_name . '_columns_title' );
+			throw new ClientException( "Duplicate column",
+				ERROR_COLUMNS_DUPLICATE,
+				[ $t_localized_field, $t_column ]
+			);
 		} else {
 			$t_columns_no_duplicates[] = $t_column_lower;
 		}
@@ -1133,10 +1143,10 @@ function print_column_selection( BugData $p_bug, $p_columns_target = COLUMNS_TAR
 function print_column_title_plugin( $p_column, $p_column_object, $p_sort, $p_dir, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
 	echo '<th class="column-plugin">';
 	if( $p_column_object->sortable ) {
-		print_view_bug_sort_link( string_display_line( $p_column_object->title ), $p_column, $p_sort, $p_dir, $p_columns_target );
+		print_view_bug_sort_link( string_attribute( $p_column_object->title ), $p_column, $p_sort, $p_dir, $p_columns_target );
 		print_sort_icon( $p_dir, $p_sort, $p_column );
 	} else {
-		echo string_display_line( $p_column_object->title );
+		echo string_attribute( $p_column_object->title );
 	}
 	echo '</th>';
 }
@@ -1320,11 +1330,11 @@ function print_column_category_id( BugData $p_bug, $p_columns_target = COLUMNS_T
 	# type project name if viewing 'all projects' or if issue is in a subproject
 	if( ON == config_get( 'show_bug_project_links' ) && helper_get_current_project() != $p_bug->project_id ) {
 		echo '<span class="small project">[';
-		print_view_bug_sort_link( string_display_line( $t_project_name ), 'project_id', $t_sort, $t_dir, $p_columns_target );
+		print_view_bug_sort_link( string_attribute( $t_project_name ), 'project_id', $t_sort, $t_dir, $p_columns_target );
 		echo ']</span>&#160;&#160;';
 	}
 
-	echo string_display_line( category_full_name( $p_bug->category_id, false ) );
+	echo string_attribute( category_full_name( $p_bug->category_id, false ) );
 	echo '</div>';
 	echo '</td>';
 }
@@ -1352,7 +1362,7 @@ function print_column_severity( BugData $p_bug, $p_columns_target = COLUMNS_TARG
  * @access public
  */
 function print_column_eta( BugData $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
-	echo '<td class="column-eta">', get_enum_element( 'eta', $p_bug->eta, auth_get_current_user_id(), $p_bug->project_id ), '</td>';
+	echo '<td class="column-eta">', string_attribute( get_enum_element( 'eta', $p_bug->eta, auth_get_current_user_id(), $p_bug->project_id ) ), '</td>';
 }
 
 /**
@@ -1364,7 +1374,7 @@ function print_column_eta( BugData $p_bug, $p_columns_target = COLUMNS_TARGET_VI
  * @access public
  */
 function print_column_projection( BugData $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
-	echo '<td class="column-projection">', get_enum_element( 'projection', $p_bug->projection, auth_get_current_user_id(), $p_bug->project_id ), '</td>';
+	echo '<td class="column-projection">', string_attribute( get_enum_element( 'projection', $p_bug->projection, auth_get_current_user_id(), $p_bug->project_id ) ), '</td>';
 }
 
 /**
@@ -1376,7 +1386,7 @@ function print_column_projection( BugData $p_bug, $p_columns_target = COLUMNS_TA
  * @access public
  */
 function print_column_reproducibility( BugData $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
-	echo '<td class="column-reproducibility">', get_enum_element( 'reproducibility', $p_bug->reproducibility, auth_get_current_user_id(), $p_bug->project_id ), '</td>';
+	echo '<td class="column-reproducibility">', string_attribute( get_enum_element( 'reproducibility', $p_bug->reproducibility, auth_get_current_user_id(), $p_bug->project_id ) ), '</td>';
 }
 
 /**
@@ -1389,7 +1399,7 @@ function print_column_reproducibility( BugData $p_bug, $p_columns_target = COLUM
  */
 function print_column_resolution( BugData $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
 	echo '<td class="column-resolution">',
-		get_enum_element( 'resolution', $p_bug->resolution, auth_get_current_user_id(), $p_bug->project_id ),
+		string_attribute( get_enum_element( 'resolution', $p_bug->resolution, auth_get_current_user_id(), $p_bug->project_id ) ),
 		'</td>';
 }
 
@@ -1409,8 +1419,8 @@ function print_column_status( BugData $p_bug, $p_columns_target = COLUMNS_TARGET
 	echo '<div class="align-left">';
 	print_icon( 'fa-square', 'fa-status-box ' . $t_status_css );
 	printf( ' <span title="%s">%s</span>',
-		get_enum_element( 'resolution', $p_bug->resolution, $t_current_user, $p_bug->project_id ),
-		get_enum_element( 'status', $p_bug->status, $t_current_user, $p_bug->project_id )
+		string_attribute( get_enum_element( 'resolution', $p_bug->resolution, $t_current_user, $p_bug->project_id ) ),
+		string_attribute( get_enum_element( 'status', $p_bug->status, $t_current_user, $p_bug->project_id ) )
 	);
 
 	# print handler user next to status
@@ -1466,7 +1476,7 @@ function print_column_reporter_id( BugData $p_bug, $p_columns_target = COLUMNS_T
  */
 function print_column_project_id( BugData $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
 	echo '<td class="column-project-id">';
-	echo string_display_line( project_get_name( $p_bug->project_id ) );
+	echo string_attribute( project_get_name( $p_bug->project_id ) );
 	echo '</td>';
 }
 
@@ -1481,7 +1491,7 @@ function print_column_project_id( BugData $p_bug, $p_columns_target = COLUMNS_TA
 function print_column_last_updated( BugData $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
 	global $g_filter;
 
-	$t_last_updated = string_display_line( date( config_get( 'short_date_format' ), $p_bug->last_updated ) );
+	$t_last_updated = string_attribute( date( config_get( 'short_date_format' ), $p_bug->last_updated ) );
 
 	echo '<td class="column-last-modified">';
 	if( $p_bug->last_updated > strtotime( '-' . $g_filter[FILTER_PROPERTY_HIGHLIGHT_CHANGED] . ' hours' ) ) {
@@ -1501,7 +1511,7 @@ function print_column_last_updated( BugData $p_bug, $p_columns_target = COLUMNS_
  * @access public
  */
 function print_column_date_submitted( BugData $p_bug, $p_columns_target = COLUMNS_TARGET_VIEW_PAGE ) {
-	$t_date_submitted = string_display_line( date( config_get( 'short_date_format' ), $p_bug->date_submitted ) );
+	$t_date_submitted = string_attribute( date( config_get( 'short_date_format' ), $p_bug->date_submitted ) );
 
 	echo '<td class="column-date-submitted">', $t_date_submitted, '</td>';
 }
@@ -1518,7 +1528,7 @@ function print_column_summary( BugData $p_bug, $p_columns_target = COLUMNS_TARGE
 	if( $p_columns_target == COLUMNS_TARGET_CSV_PAGE ) {
 		$t_summary = string_attribute( $p_bug->summary );
 	} else {
-		$t_summary = string_display_line_links( $p_bug->summary );
+		$t_summary = string_display_line_without_links( $p_bug->summary );
 	}
 	
 	$t_bug_url = string_get_bug_view_url( $p_bug->id );
@@ -1595,7 +1605,7 @@ function print_column_target_version( BugData $p_bug, $p_columns_target = COLUMN
 	# In case of a specific project, if the current user has no access to the field, then it would have been excluded from the
 	# list of columns to view.  In case of ALL_PROJECTS, then we need to check the access per row.
 	if( helper_get_current_project() != ALL_PROJECTS || access_has_project_level( config_get( 'roadmap_view_threshold' ), $p_bug->project_id ) ) {
-		echo string_display_line( $p_bug->target_version );
+		echo string_attribute( $p_bug->target_version );
 	}
 
 	echo '</td>';
@@ -1635,7 +1645,7 @@ function print_column_tags( BugData $p_bug, $p_columns_target = COLUMNS_TARGET_V
 	echo '<td class="column-tags">';
 
 	if( access_has_bug_level( config_get( 'tag_view_threshold' ), $p_bug->id ) ) {
-		echo string_display_line( tag_bug_get_all( $p_bug->id ) );
+		echo string_attribute( tag_bug_get_all( $p_bug->id ) );
 	}
 
 	echo '</td>';
@@ -1657,7 +1667,7 @@ function print_column_due_date( BugData $p_bug, $p_columns_target = COLUMNS_TARG
 		$t_value = '&#160;';
 	} else {
 		$t_css = " due-" . bug_overdue_level( $p_bug->id );
-		$t_value = string_display_line( date( config_get( 'short_date_format' ), $p_bug->due_date ) );
+		$t_value = string_attribute( date( config_get( 'short_date_format' ), $p_bug->due_date ) );
 	}
 
 	printf( '<td class="column-due-date%s">%s</td>', $t_css, $t_value );
@@ -1698,7 +1708,7 @@ function print_column_overdue( BugData $p_bug, $p_columns_target = COLUMNS_TARGE
 				);
 			}
 		}
-		print_icon( $t_icon, '', string_display_line( $t_overdue_text_hover ) );
+		print_icon( $t_icon, '', string_attribute( $t_overdue_text_hover ) );
 	} else {
 		echo '&#160;';
 	}

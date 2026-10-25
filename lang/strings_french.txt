@@ -2,7 +2,7 @@
 /** MantisBT - a php based bugtracking system
  *
  * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2016  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * Copyright (C) 2002 - 2026  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  *
  * MantisBT is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -215,8 +215,6 @@ $s_update_severity_title = 'Mettre à jour la sévérité';
 $s_update_severity_msg = 'Choisir la sévérité de l’anomalie';
 $s_update_severity_button = 'Mettre à jour la sévérité';
 $s_hide_button = 'Afficher seulement les anomalies sélectionnées';
-$s_printing_preferences_title = 'Choisir les champs à imprimer';
-$s_printing_options_link = 'Options d’impression';
 $s_bugnote_title = 'Auteur de la note';
 $s_bugnote_date = 'Date de la note';
 $s_bugnote_description = 'Description de la note';
@@ -228,7 +226,6 @@ $s_prefix_for_deleted_users = 'utilisateur';
 $s_administrator = 'administrateur';
 $s_myself = 'Moi-même';
 $s_default_access_level = 'Niveau d’accès par défaut';
-$s_issue_status_percentage = 'Pourcentage des statuts d’anomalie';
 $s_access_levels_enum_string = '10:invité,25:rapporteur,40:testeur,55:développeur,70:gestionnaire,90:administrateur';
 $s_no_access = 'inaccessible';
 $s_project_status_enum_string = '10:développement,30:livré,50:stable,70:obsolète';
@@ -256,6 +253,9 @@ $s_reset_request_msg = 'Quelqu\'un (probablement vous) a demandé un changement 
 Si vous avez demandé cette vérification, visitez l’URL suivante pour changer votre mot de passe :';
 $s_reset_request_admin_msg = 'Votre mot de passe a été réinitialisé. Veuillez aller sur l’URL suivante pour en définir un nouveau :';
 $s_reset_request_in_progress_msg = 'Si vous avez fourni le nom d’utilisateur et l’adresse de courriel corrects pour votre compte, nous vous avons maintenant envoyé un message de confirmation à cette adresse de courriel. Une fois le message reçu, suivez les instructions fournies pour changer le mot de passe de votre compte.';
+$s_verify_email_msg = 'Quelqu\'un (probablement vous) a modifié l\'adresse e-mail associée au compte mentionné ci-dessous. L\'ancienne adresse restera active jusqu\'à ce que vous confirmiez ce changement. 
+
+Pour valider la nouvelle adresse, veuillez visiter l\'URL suivante:';
 $s_email_notification_title_for_status_bug_new = 'L’anomalie suivante est maintenant au statut NOUVELLE (encore)';
 $s_email_notification_title_for_status_bug_feedback = 'L’anomalie suivante nécessite un AVIS.';
 $s_email_notification_title_for_status_bug_acknowledged = 'L’anomalie suivante a été ACCEPTÉE.';
@@ -544,6 +544,10 @@ $s_lost_password_done_title = 'Message de mot de passe envoyé';
 $s_lost_password_subject = 'Réinitialisation du mot de passe';
 $s_lost_password_info = 'Pour réinitialiser votre mot de passe, merci d’indiquer le nom d’utilisateur et l’adresse de courriel du compte.<br /><br /> Si les données correspondent à un compte valide, une URL spéciale vous sera envoyé par courriel qui contient un code de validation pour votre compte. Veuillez alors suivre ce lien pour changer votre mot de passe.';
 $s_lost_password_confirm_hash_OK = 'Votre confirmation a été acceptée. Merci de mettre à jour votre mot de passe.';
+$s_verify_email_title = 'Vérifier l\'adresse e-mail';
+$s_verify_email_pending = 'La nouvelle adresse e-mail "%1$s" est en attente de vérification.';
+$s_verify_email_warning = 'Votre nouvelle adresse e-mail "%1$s" a été vérifiée.';
+$s_verify_email_confirm_msg = 'Pour valider le changement d\'adresse e-mail, un message de confirmation a été envoyé à "%1$s". L\'ancienne adresse restera active jusqu\'à ce que la nouvelle soit vérifiée.';
 $s_open_and_assigned_to_me_label = 'Anomalies ouvertes qui me sont assignées :';
 $s_open_and_reported_to_me_label = 'Anomalies ouvertes dont je suis le rapporteur :';
 $s_newer_news_link = 'Actualités récentes';
@@ -599,6 +603,7 @@ $s_date_created = 'Date de création';
 $s_last_visit = 'Dernière visite';
 $s_last_visit_label = 'Dernière visite :';
 $s_failed_login_count = 'Échec de connexion';
+$s_locked = 'Compte verrouillé';
 $s_edit_user_link = 'Modifier l’utilisateur';
 $s_search_user_hint = 'Nom d’utilisateur, nom véritable ou adresse courriel';
 $s_separate_list_items_by = '(séparez les éléments de la liste par « %1$s »)';
@@ -780,6 +785,7 @@ $s_prune_accounts_button = 'Supprimer';
 $s_confirm_account_pruning = 'Êtes-vous sûr de vouloir supprimer les comptes qui ne se sont jamais connectés ?';
 $s_edit_user_title = 'Modifier un utilisateur';
 $s_account_unlock_button = 'Déverrouiller le compte';
+$s_clear_failed_logins = 'Réinitialiser les erreurs de connexion';
 $s_reset_password_button = 'Effacer le mot de passe';
 $s_delete_user_button = 'Supprimer l’utilisateur';
 $s_impersonate_user_button = 'Se faire passer pour un utilisateur';
@@ -789,6 +795,7 @@ $s_email_not_unique = 'L’adresse de messagerie est associée avec au moins un 
 $s_account_reset_msg = 'Un message de confirmation a été envoyé à l’adresse courriel de l’utilisateur sélectionné. Grace à ceci, l’utilisateur sera en mesure de modifier son mot de passe.';
 $s_account_reset_msg2 = 'Mot de passe du compte a été mis à blanc...';
 $s_account_unlock_msg = 'Le compte a été déverrouillé.';
+$s_clear_failed_logins_msg = 'Le nombre de tentatives de connexion infructueuses a été réinitialisé.';
 $s_manage_user_updated_msg = 'Le compte a été mis à jour...';
 $s_email_user_updated_subject = 'Compte mis à jour';
 $s_email_user_updated_msg = 'Votre compte a été mis à jour par un administrateur. Une liste des modifications est affichée ci-dessous. Vous pouvez mettre à jour les détails et préférences de votre compte en visitant l’URL suivante :';
@@ -878,6 +885,7 @@ $s_assign_to = 'Affectée à';
 $s_additional_information = 'Informations complémentaires';
 $s_submit_report_button = 'Soumettre l’anomalie';
 $s_check_report_more_bugs = 'Cocher pour rapporter d’autres anomalies';
+$s_submitted_for_moderation = 'Votre action a été soumise à modération et apparaîtra une fois approuvée.';
 $s_report_stay = 'Rapport gardé en attente';
 $s_selected_project = 'Projet sélectionné';
 $s_valid_project_msg = 'Vous devez choisir un projet valide.';
@@ -1297,7 +1305,7 @@ $MANTIS_ERROR[ERROR_FILE_DISALLOWED] = 'Type de fichier interdit.';
 $MANTIS_ERROR[ERROR_NO_DIRECTORY] = 'Le répertoire n’existe pas. Veuillez vérifier les paramètres du projet.';
 $MANTIS_ERROR[ERROR_DUPLICATE_PROJECT] = 'Un projet ayant ce nom existe déjà.';
 $MANTIS_ERROR[ERROR_EMPTY_FIELD] = 'Le champ obligatoire « %1$s » n’est pas renseigné. Veuillez vérifier à nouveau votre saisie.';
-$MANTIS_ERROR[ERROR_INVALID_FIELD_VALUE] = 'Valeur non valide pour « %1$s »';
+$MANTIS_ERROR[ERROR_INVALID_FIELD_VALUE] = 'Valeur non valide pour "%1$s"';
 $MANTIS_ERROR[ERROR_PROTECTED_ACCOUNT] = 'Ce compte est protégé. Vous n’êtes pas autorisé à effectuer l’opération demandée tant que la protection du compte n’est pas levée.';
 $MANTIS_ERROR[ERROR_ACCESS_DENIED] = 'Accès interdit.';
 $MANTIS_ERROR[ERROR_UPLOAD_FAILURE] = 'Échec du dépôt de fichier. Le fichier n’est pas lisible par MantisBT. Vérifiez la configuration du projet.';
@@ -1307,7 +1315,7 @@ $MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND] = 'Un paramètre requis par cette page (%
 $MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = 'Ce nom d’utilisateur est déjà utilisé. Merci de recommencer et choisir un autre nom.';
 $MANTIS_ERROR[ERROR_USER_EMAIL_NOT_UNIQUE] = 'Cette adresse de courriel est déjà utilisée. Veuillez revenir en arrière et en sélectionner une autre.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND] = 'L’option de configuration « %1$s » n’a pas été trouvée.';
-$MANTIS_ERROR[ERROR_CONFIG_OPT_CANT_BE_SET_IN_DB] = 'L’option de configuration « %1$s » ne peut pas être définie dans la base de données. Elle doit être définie dans config_inc.php.';
+$MANTIS_ERROR[ERROR_CONFIG_OPT_CANT_BE_SET_IN_DB] = 'L’option de configuration "%1$s" ne peut pas être définie dans la base de données. Elle doit être définie dans le fichier config_inc.php.';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_BAD_SYNTAX] = 'Impossible de définir l’option de configuration « %1$s » : %2$s';
 $MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = 'Chaîne « %1$s » introuvable.';
 $MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND] = 'Note introuvable.';
@@ -1428,8 +1436,8 @@ $MANTIS_ERROR[ERROR_DEPRECATED_SUPERSEDED] = 'Fonctionnalité désuète : «�
 $MANTIS_ERROR[ERROR_DISPLAY_USER_ERROR_INLINE] = 'AVERTISSEMENT : le système est configuré pour afficher les erreurs MantisBT (E_USER_ERROR) en ligne. L’exécution du programme se poursuivra ; cela peut conduire à des problèmes d’intégrité du système ou des données.';
 $MANTIS_ERROR[ERROR_TYPE_MISMATCH] = 'Type de données incompatible. Activez les messages d’erreur détaillés pour plus d’informations.';
 $MANTIS_ERROR[ERROR_BUG_CONFLICTING_EDIT] = 'Cette anomalie a été mise à jour par un autre utilisateur, veuillez y retourner et soumettre à nouveau vos modifications.';
-$MANTIS_ERROR[ERROR_SPAM_SUSPECTED] = 'Vous avez atteint la limite d’activité autorisée de %d événements durant les %d dernières secondes ; votre action a été bloquée pour éviter le pourriel, veuillez essayer à nouveau ultérieurement.';
-$MANTIS_ERROR[ERROR_FIELD_TOO_LONG] = 'Le champ « %1$s » doit comporter moins de %2$d caractères.';
+$MANTIS_ERROR[ERROR_SPAM_SUSPECTED] = 'Vous avez atteint la limite d’activité autorisée de %1$d événements durant les %2$d dernières secondes ; votre action a été bloquée pour éviter le pourriel, veuillez essayer à nouveau ultérieurement.';
+$MANTIS_ERROR[ERROR_FIELD_TOO_LONG] = 'La longueur maximale du champ "%1$s" est de %2$d caractères.';
 $MANTIS_ERROR[ERROR_API_TOKEN_NAME_NOT_UNIQUE] = 'Le nom de jeton de l’API « %s » est déjà utilisé. Veuillez revenir en arrière et en sélectionner un autre.';
 $MANTIS_ERROR[ERROR_LOGFILE_NOT_WRITABLE] = 'Le fichier spécifié dans $g_log_destination « %s » ne peut pas être écrit.';
 $MANTIS_ERROR[ERROR_MONITOR_ACCESS_TOO_LOW] = 'L’utilisateur ajouté n’a pas les droits d’accès suffisants pour suivre ce problème.';

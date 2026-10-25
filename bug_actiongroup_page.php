@@ -30,6 +30,7 @@
  * @uses config_api.php
  * @uses constant_inc.php
  * @uses custom_field_api.php
+ * @uses datetimepicker_api.php
  * @uses event_api.php
  * @uses form_api.php
  * @uses gpc_api.php
@@ -39,7 +40,12 @@
  * @uses string_api.php
  * @uses utility_api.php
  * @uses version_api.php
+ *
+ * Unhandled exceptions will be caught by the default error handler
+ * @noinspection PhpUnhandledExceptionInspection
  */
+
+use Mantis\Exceptions\ClientException;
 
 require_once( 'core.php' );
 require_api( 'access_api.php' );
@@ -245,6 +251,7 @@ switch( $f_action ) {
 		$t_question_title		= lang_get( 'due_date_bugs_conf_msg' );
 		$t_button_title			= lang_get( 'due_date_group_bugs_button' );
 		$t_form					= 'due_date';
+		require_api( 'datetimepicker_api.php' );
 		break;
 	case 'CUSTOM' :
 		$t_custom_field_def = custom_field_get_definition( $t_custom_field_id );
@@ -256,7 +263,7 @@ switch( $f_action ) {
 		$t_event_params['custom_field_id'] = $t_custom_field_id;
 		break;
 	default:
-		trigger_error( ERROR_GENERIC, ERROR );
+		throw new ClientException( "Unknown Group action", ERROR_GENERIC );
 }
 $t_event_params['has_bugnote'] = $t_bugnote;
 
@@ -321,12 +328,7 @@ if( $t_multiple_projects ) {
 					$t_date_to_display = date( config_get( 'normal_date_format' ), $t_bug->due_date );
 				}
 			}
-
-			echo '<input type="text" id="due_date" name="due_date" class="datetimepicker input-sm" size="16" maxlength="16" ' .
-				'data-picker-locale="' . lang_get_current_datetime_locale() .
-				'" data-picker-format="' . config_get( 'datetime_picker_format' ) . '"' .
-				'" value="' . $t_date_to_display . '" />';
-			print_icon( 'fa-calendar', 'fa-xlg datetimepicker' );
+			datetimepicker_print( $t_date_to_display, 'due_date' );
 		} else {
 			echo '<select name="' . $t_form . '" class="input-sm" required>';
 
@@ -362,11 +364,11 @@ if( $t_multiple_projects ) {
 					print_enum_string_option_list( 'view_state', config_get( 'default_bug_view_status' ) );
 					break;
 				case 'UP_TARGET_VERSION':
-					print_version_option_list( '', $t_projects, VERSION_FUTURE, true );
+					print_version_option_list( '', $t_projects, VERSION_FUTURE );
 					break;
 				case 'UP_PRODUCT_VERSION':
 				case 'UP_FIXED_IN_VERSION':
-					print_version_option_list( '', $t_projects, VERSION_ALL, true );
+					print_version_option_list( '', $t_projects );
 					break;
 			}
 
@@ -386,10 +388,10 @@ if( $t_multiple_projects ) {
 ?>
 				<tr>
 					<th class="category">
-						<?php echo $t_question_title2 ?>
+						<label for="<?php echo $t_form2 ?>"><?php echo $t_question_title2 ?></label>
 					</th>
 					<td>
-						<select name="<?php echo $t_form2 ?>" class="input-sm">
+						<select id="<?php echo $t_form2 ?>" name="<?php echo $t_form2 ?>" class="input-sm">
 							<?php print_version_option_list( '', null, VERSION_ALL );?>
 						</select>
 					</td>
@@ -420,7 +422,7 @@ if( $t_multiple_projects ) {
 ?>
 				<tr>
 					<th class="category">
-						<?php echo lang_get( 'add_bugnote_title' ); ?>
+						<label for="bugnote_text"><?php echo lang_get( 'add_bugnote_title' ); ?></label>
 					</th>
 					<td>
 						<textarea name="bugnote_text" id="bugnote_text" class="<?php echo $t_bugnote_class ?>"
@@ -440,8 +442,9 @@ if( $t_multiple_projects ) {
 <?php
 			if( access_has_project_level( config_get( 'set_view_status_threshold' ), $t_project_id ) ) {
 ?>
-						<input type="checkbox" class="ace" name="private" <?php check_checked( $t_default_bugnote_view_status, VS_PRIVATE ); ?> />
-						<label class="lbl padding-6"><?php echo lang_get( 'private' ); ?></label>
+						<input type="checkbox" class="ace" id="view_status" name="private"
+								<?php check_checked( $t_default_bugnote_view_status, VS_PRIVATE ); ?> />
+						<label for="view_status" class="lbl padding-6"><?php echo lang_get( 'private' ); ?></label>
 <?php
 			} else {
 				echo get_enum_element( 'view_state', $t_default_bugnote_view_status );

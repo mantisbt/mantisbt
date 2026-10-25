@@ -2,7 +2,7 @@
 /** MantisBT - a php based bugtracking system
  *
  * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2016  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * Copyright (C) 2002 - 2026  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  *
  * MantisBT is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -60,20 +60,18 @@ $s_plugin_MantisGraph_graph_imp_priority_title = 'Podľa grafov priorít';
 $s_plugin_MantisGraph_graph_imp_severity_title = 'Podľa grafov závažnosti';
 $s_plugin_MantisGraph_graph_imp_category_title = 'Podľa grafov kategórií';
 $s_plugin_MantisGraph_graph_imp_resolution_title = 'Podľa grafov riešení';
+$s_plugin_MantisGraph_graph_project_title = 'Grafy podľa projektu';
 $s_plugin_MantisGraph_graph_developer_title = 'Podľa grafov vývojárov';
 $s_plugin_MantisGraph_graph_reporter_title = 'Podľa grafov reportéra';
 $s_plugin_MantisGraph_graph_issues_trend_title = 'Otvorené, vyriešený a zostávajúce problémy';
-$s_plugin_MantisGraph_by_status_pct = 'Podľa stavu';
-$s_plugin_MantisGraph_by_priority_pct = 'Podľa priority';
-$s_plugin_MantisGraph_by_severity_pct = 'Podľa dôležitosti';
-$s_plugin_MantisGraph_by_category_pct = 'Podľa kategórie';
-$s_plugin_MantisGraph_by_resolution_pct = 'Podľa riešenia';
 $s_plugin_MantisGraph_by_severity_mix = 'Podľa dôležitosti a stavu';
 $s_plugin_MantisGraph_by_priority_mix = 'Podľa priority a stavu';
 $s_plugin_MantisGraph_by_resolution_mix = 'podľa riešenia a stavu';
+$s_plugin_MantisGraph_data = 'Údaje';
 $s_plugin_MantisGraph_legend_still_open = 'Stále Otvorené';
 $s_plugin_MantisGraph_legend_resolved = 'Vyriešené';
 $s_plugin_MantisGraph_legend_reported = 'Reportované';
+$s_plugin_MantisGraph_period = 'Obdobie';
 $s_plugin_MantisGraph_period_none = 'Žiadne';
 $s_plugin_MantisGraph_period_this_week = 'Tento Týždeň';
 $s_plugin_MantisGraph_period_last_week = 'Posledný Týždeň';
@@ -90,3 +88,6 @@ $s_plugin_MantisGraph_graph_topdev = 'Vývojári podľa vyriešených problémov
 $s_plugin_MantisGraph_graph_opendev = 'Vývojári podľa otvorených problémov';
 $s_plugin_MantisGraph_graph_topreporter_fixed = 'Reportéri podľa vyriešených problémov';
 $s_plugin_MantisGraph_other_categories = 'ostatné kategórie (%d)';
+$s_plugin_MantisGraph_other_projects = 'ostatné projekty (%d)';
+$s_plugin_MantisGraph_bucket = 'Skupina';
+$s_plugin_MantisGraph_date = 'Dátum';

@@ -36,17 +36,30 @@ class AuthMiddleware {
 		if( !empty( $t_authorization_header ) ) {
 			# TODO: add an index on the token hash for the method below
 
-			# Manage multiple authorization header (ex: Basic + token)
-			$t_authorization_headers = explode(', ', $t_authorization_header);
+			# Split comma separated credentials (ex: Basic + Bearer);
+			# api_token_parse_credentials() trims each entry.
+			$t_authorization_headers = explode( ',', $t_authorization_header );
 
 			# Search for the token among the different authorization headers.
-			foreach( $t_authorization_headers as $t_api_token ) {
+			foreach( $t_authorization_headers as $t_credentials ) {
+				# The RFC 6750 'Bearer <token>' form is the expected one; the bare
+				# token is still accepted for backwards compatibility.  Credentials
+				# using any other scheme are left as-is and simply won't match a token.
+				$t_api_token = api_token_parse_credentials( $t_credentials );
 				$t_user_id = api_token_get_user( $t_api_token );
 				if( $t_user_id !== false ) {
 					# Valid token found
 					$t_username = user_get_username( $t_user_id );
 					$t_password = $t_api_token;
 					$t_login_method = LOGIN_METHOD_API_TOKEN;
+
+					# Send Deprecated header if token was passed without bearer scheme
+					if( $t_api_token === $t_credentials ) {
+						$t_doc_link = 'https://mantisbt.org/docs/master/en-US/Developers_Guide/html-desktop/#restapi.auth';
+						$response = $response
+							->withHeader( HEADER_DEPRECATION, '@1788480117')
+							->withAddedHeader( HEADER_LINK, '<' . $t_doc_link. '>; rel="deprecation"');
+					}
 					break;
 				}
 			}
@@ -64,7 +77,10 @@ class AuthMiddleware {
 				$t_password = '';
 				$t_login_method = LOGIN_METHOD_ANONYMOUS;
 				if( !auth_anonymous_enabled() || empty( $t_username ) ) {
-					return $response->withStatus( HTTP_STATUS_UNAUTHORIZED, 'Valid API token required' );
+					# RFC 7235 requires a 401 to advertise the auth scheme.
+					return $response
+						->withHeader( HEADER_WWW_AUTHENTICATE, 'Bearer' )
+						->withStatus( HTTP_STATUS_UNAUTHORIZED, 'Valid API token required' );
 				}
 			}
 		}

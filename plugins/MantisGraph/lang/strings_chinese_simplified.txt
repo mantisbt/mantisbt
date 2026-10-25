@@ -2,7 +2,7 @@
 /** MantisBT - a php based bugtracking system
  *
  * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2016  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * Copyright (C) 2002 - 2026  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  *
  * MantisBT is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -38,6 +38,7 @@
  * @ingroup Language
  * @file
  *
+ * @author GuoPC
  * @author Hydra
  * @author Hzy980512
  * @author Liuxinyu970226
@@ -65,17 +66,14 @@ $s_plugin_MantisGraph_graph_project_title = '按项目图表';
 $s_plugin_MantisGraph_graph_developer_title = '按开发者图表';
 $s_plugin_MantisGraph_graph_reporter_title = '按汇报者图表';
 $s_plugin_MantisGraph_graph_issues_trend_title = '开启的、解决的和剩余的问题';
-$s_plugin_MantisGraph_by_status_pct = '按问题状态百分比';
-$s_plugin_MantisGraph_by_priority_pct = '按问题优先级别百分比';
-$s_plugin_MantisGraph_by_severity_pct = '按问题严重性百分比';
-$s_plugin_MantisGraph_by_category_pct = '按项目分类百分比';
-$s_plugin_MantisGraph_by_resolution_pct = '按处理状况百分比';
 $s_plugin_MantisGraph_by_severity_mix = '按严重性和状态';
 $s_plugin_MantisGraph_by_priority_mix = '按优先权和状态';
 $s_plugin_MantisGraph_by_resolution_mix = '按处理状况和状态';
+$s_plugin_MantisGraph_data = '数据';
 $s_plugin_MantisGraph_legend_still_open = '仍然开启';
 $s_plugin_MantisGraph_legend_resolved = '已解决';
 $s_plugin_MantisGraph_legend_reported = '已报告';
+$s_plugin_MantisGraph_period = '期间';
 $s_plugin_MantisGraph_period_none = '无';
 $s_plugin_MantisGraph_period_this_week = '本周';
 $s_plugin_MantisGraph_period_last_week = '上周';
@@ -93,3 +91,5 @@ $s_plugin_MantisGraph_graph_opendev = '按开放问题排序开发者';
 $s_plugin_MantisGraph_graph_topreporter_fixed = '最活跃的报告者（按已修复问题排序）';
 $s_plugin_MantisGraph_other_categories = '其他分类 (%d)';
 $s_plugin_MantisGraph_other_projects = '其他项目（%d）';
+$s_plugin_MantisGraph_bucket = '存储桶';
+$s_plugin_MantisGraph_date = '日期';

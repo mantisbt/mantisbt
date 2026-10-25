@@ -2,7 +2,7 @@
 /** MantisBT - a php based bugtracking system
  *
  * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2016  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * Copyright (C) 2002 - 2026  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  *
  * MantisBT is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -155,7 +155,6 @@ $s_fixed_in_version_group_bugs_button = 'Timar kerdışanê Versiyoni Anewen ke'
 $s_target_version_group_bugs_button = 'Menzilê Versiyoni Anewen ke';
 $s_update_severity_title = 'Ver sewiyeyê cı anewen ke';
 $s_hide_button = 'Teyna weçinayı bıasne';
-$s_printing_options_link = 'Weçenegê çap kerdışi';
 $s_bugnote_title = 'Not karıtoğ';
 $s_bugnote_date = 'Dema noter';
 $s_prefix_for_deleted_users = 'karber';

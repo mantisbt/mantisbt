@@ -34,6 +34,11 @@ use Psr\Http\Message\ResponseInterface;
  * @group REST
  */
 class RestIssueTest extends RestBase {
+	/** @var mixed Saved status workflow configuration, or false if unset. */
+	private $savedStatusWorkflow = null;
+
+	/** @var bool Whether the status workflow configuration was saved. */
+	private bool $statusWorkflowSaved = false;
 
 	/**
 	 * @var array $versions
@@ -115,6 +120,39 @@ class RestIssueTest extends RestBase {
 		$this->deleteIssueAfterRun( $t_issue['id'] );
 	}
 
+	/**
+	 * Verify that REST issue updates enforce configured workflow transitions.
+	 *
+	 * @return void
+	 */
+	public function testUpdateIssueStatusEnforcesWorkflow() {
+		$this->savedStatusWorkflow = $this->setConfig( 'status_enum_workflow', array(
+			NEW_ => FEEDBACK . ':feedback',
+		) );
+		$this->statusWorkflowSaved = true;
+
+		$t_response = $this->builder()->post( '/issues', $this->getIssueToAdd() )->send();
+		$t_issue = $this->getJson( $t_response, HTTP_STATUS_CREATED )->issue;
+		$this->deleteIssueAfterRun( $t_issue->id );
+
+		$t_response = $this->builder()->patch( '/issues/' . $t_issue->id, array(
+			'status' => array( 'id' => ACKNOWLEDGED ),
+		) )->send();
+		$this->assertEquals( HTTP_STATUS_BAD_REQUEST, $t_response->getStatusCode() );
+		$t_error = json_decode( $t_response->getBody(), true );
+		$this->assertStringContainsString( 'Status transition', $t_error['message'] );
+
+		$t_response = $this->builder()->get( '/issues/' . $t_issue->id )->send();
+		$t_issue = $this->getJson( $t_response )->issues[0];
+		$this->assertEquals( NEW_, $t_issue->status->id );
+
+		$t_response = $this->builder()->patch( '/issues/' . $t_issue->id, array(
+			'status' => array( 'id' => FEEDBACK ),
+		) )->send();
+		$t_issue = $this->getJson( $t_response )->issues[0];
+		$this->assertEquals( FEEDBACK, $t_issue->status->id );
+	}
+
 	public function testCreateIssueWithLongText() {
 		$t_long_text = str_repeat( 'x', config_get_global( 'max_textarea_length' ) );
 
@@ -141,6 +179,71 @@ class RestIssueTest extends RestBase {
 		}
 
 		sleep(20);
+	}
+
+	/**
+	 * Tests that summary length validation counts characters, not bytes.
+	 * A 128-character multibyte string should succeed even though it
+	 * exceeds 128 bytes, while 129 characters should fail.
+	 *
+	 * @return void
+	 */
+	public function testCreateIssueWithTooLongSummary() {
+		# 128 CJK characters = 384 bytes in UTF-8, but only 128 characters
+		$t_issue_to_add = $this->getIssueToAdd( 'summary-multibyte' );
+		$t_issue_to_add['summary'] = str_repeat( "\xE4\xB8\x96", DB_FIELD_SIZE_BUG_SUMMARY );
+
+		$t_response = $this->builder()->post( '/issues', $t_issue_to_add )->send();
+		$this->assertEquals( HTTP_STATUS_CREATED, $t_response->getStatusCode(),
+			'Creating an issue with exactly ' . DB_FIELD_SIZE_BUG_SUMMARY . ' multibyte characters should succeed'
+		);
+
+		$t_body = json_decode( $t_response->getBody(), true );
+		$this->deleteIssueAfterRun( $t_body['issue']['id'] );
+
+		# 129 CJK characters should fail
+		$t_issue_to_add['summary'] = str_repeat( "\xE4\xB8\x96", DB_FIELD_SIZE_BUG_SUMMARY + 1 );
+
+		$t_response = $this->builder()->post( '/issues', $t_issue_to_add )->send();
+		$this->assertEquals( HTTP_STATUS_BAD_REQUEST, $t_response->getStatusCode(),
+			'Creating an issue with ' . ( DB_FIELD_SIZE_BUG_SUMMARY + 1 ) . ' multibyte characters should fail'
+		);
+	}
+
+	/**
+	 * Summary is a single-line field and must reject line breaks.
+	 *
+	 * @return void
+	 */
+	public function testSummaryCannotContainLineBreaks() {
+		$t_issue_to_add = $this->getIssueToAdd( 'summary-newline' );
+		$t_issue_to_add['summary'] .= "\nsecond line";
+
+		$t_response = $this->builder()->post( '/issues', $t_issue_to_add )->send();
+		$this->assertEquals( HTTP_STATUS_BAD_REQUEST, $t_response->getStatusCode(),
+			'Creating an issue with a multiline summary should fail'
+		);
+	}
+
+	/**
+	 * Summary is a single-line field and must reject line breaks on update.
+	 *
+	 * @return void
+	 */
+	public function testUpdateIssueWithSummaryContainingLineBreaks() {
+		$t_issue_to_add = $this->getIssueToAdd( 'summary-update-newline' );
+		$t_response = $this->builder()->post( '/issues', $t_issue_to_add )->send();
+		$this->assertEquals( HTTP_STATUS_CREATED, $t_response->getStatusCode() );
+		$t_issue_id = json_decode( $t_response->getBody(), true )['issue']['id'];
+		$this->deleteIssueAfterRun( $t_issue_id );
+
+		$t_response = $this->builder()->patch(
+			'/issues/' . $t_issue_id,
+			array( 'summary' => $t_issue_to_add['summary'] . "\rsecond line" )
+		)->send();
+		$this->assertEquals( HTTP_STATUS_BAD_REQUEST, $t_response->getStatusCode(),
+			'Updating an issue with a multiline summary should fail'
+		);
 	}
 
 	public function testCreateIssueWithEnumIds() {
@@ -615,6 +718,10 @@ class RestIssueTest extends RestBase {
 
 	public function tearDown(): void {
 		parent::tearDown();
+
+		if( $this->statusWorkflowSaved ) {
+			$this->restoreConfig( 'status_enum_workflow', $this->savedStatusWorkflow );
+		}
 
 		# Delete tag if it exists
 		# TODO: replace internal calls by GET /tag request when implemented (see #32863)

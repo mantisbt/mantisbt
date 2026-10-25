@@ -43,6 +43,8 @@
  * @uses utility_api.php
  */
 
+use Mantis\Exceptions\ClientException;
+
 require_api( 'access_api.php' );
 require_api( 'authentication_api.php' );
 require_api( 'bug_api.php' );
@@ -215,8 +217,9 @@ function history_count_user_recent_events( $p_duration_in_seconds, $p_user_id = 
  *
  * Any option can be omitted.
  *
- * @param array $p_query_options	Array of query options
- * @return IteratorAggregate|boolean database result to pass into history_get_event_from_row().
+ * @param array $p_query_options Array of query options
+ *
+ * @return ADORecordSet|false database result to pass into history_get_event_from_row().
  */
 function history_query_result( array $p_query_options ) {
 	# check query order by
@@ -285,13 +288,16 @@ function history_query_result( array $p_query_options ) {
 }
 
 /**
- * Creates and executes a query for the history rows related to bugs matched by the provided filter
- * @param  array $p_filter           Filter array
- * @param  integer $p_start_time     The start time to filter by, or null for all.
- * @param  integer $p_end_time       The end time to filter by, or null for all.
- * @param  string  $p_history_order  The sort order.
- * @return IteratorAggregate|boolean database result to pass into history_get_event_from_row().
- * @deprecated		Use history_query_result() instead
+ * Creates and executes a query for the history rows related to bugs matched by the provided filter.
+ *
+ * @param  array  $p_filter         Filter array
+ * @param  int    $p_start_time     The start time to filter by, or null for all.
+ * @param  int    $p_end_time       The end time to filter by, or null for all.
+ * @param  string $p_history_order  The sort order.
+ *
+ * @return ADORecordSet|bool database result to pass into history_get_event_from_row().
+ *
+ * @deprecated Use history_query_result() instead
  */
 function history_get_range_result_filter( $p_filter, $p_start_time = null, $p_end_time = null, $p_history_order = null ) {
 	error_parameters( __FUNCTION__ . '()', 'history_query_result()' );
@@ -315,12 +321,15 @@ function history_get_range_result_filter( $p_filter, $p_start_time = null, $p_en
 
 /**
  * Creates and executes a query for the history rows matching the specified criteria.
- * @param  integer $p_bug_id         The bug id or null for matching any bug.
- * @param  integer $p_start_time     The start time to filter by, or null for all.
- * @param  integer $p_end_time       The end time to filter by, or null for all.
- * @param  string  $p_history_order  The sort order.
- * @return IteratorAggregate|boolean database result to pass into history_get_event_from_row().
- * @deprecated		Use history_query_result() instead
+ *
+ * @param  int    $p_bug_id         The bug id or null for matching any bug.
+ * @param  int    $p_start_time     The start time to filter by, or null for all.
+ * @param  int    $p_end_time       The end time to filter by, or null for all.
+ * @param  string $p_history_order  The sort order.
+ *
+ * @return ADORecordSet|boolean database result to pass into history_get_event_from_row().
+ *
+ * @deprecated Use history_query_result() instead
  */
 function history_get_range_result( $p_bug_id = null, $p_start_time = null, $p_end_time = null, $p_history_order = null ) {
 	error_parameters( __FUNCTION__ . '()', 'history_query_result()' );
@@ -344,11 +353,14 @@ function history_get_range_result( $p_bug_id = null, $p_start_time = null, $p_en
 
 /**
  * Gets the next accessible history event for current user and specified db result.
- * @param  object  $p_result      The database result.
- * @param  integer $p_user_id     The user id or null for logged in user.
- * @param  boolean $p_check_access_to_issue true: check that user has access to bugs,
- *                                          false otherwise.
+ *
+ * @param  ADORecordSet $p_result                The database result.
+ * @param  int          $p_user_id               The user id or null for logged in user.
+ * @param  bool         $p_check_access_to_issue true: check that user has access to bugs,
+ *                                               false otherwise.
+ *
  * @return array|false containing the history event or false if no more matches.
+ * @throws ClientException
  */
 function history_get_event_from_row( $p_result, $p_user_id = null, $p_check_access_to_issue = true ) {
 	static $s_bug_visible = array();

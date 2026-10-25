@@ -37,6 +37,8 @@
  * @uses project_api.php
  * @uses string_api.php
  * @uses user_api.php
+ *
+ * @noinspection PhpUnitAnnotationToAttributeInspection
  */
 
 require_api( 'authentication_api.php' );
@@ -66,14 +68,23 @@ $g_cache_access_matrix_project_ids = array();
 $g_cache_access_matrix_user_ids = array();
 
 /**
- * Function to be called when a user is attempting to access a page that
- * he/she is not authorised to.  This outputs an access denied message then
- * re-directs to the mainpage.
+ * Display an access denied error message.
+ *
+ * After display, it will set the response code to 403 and redirect to the
+ * default home page. When running from CLI, just exit with code 1.
+ *
+ * Call this function when a user is attempting to access a page or perform an
+ * action they are not authorized to,
  *
  * @return void
  * @throws ClientException
  */
 function access_denied() {
+	if( php_sapi_name() == 'cli' ) {
+		echo error_string( ERROR_ACCESS_DENIED );
+		exit(1);
+	}
+
 	$t_return = '';
 	if( basename( $_SERVER['SCRIPT_NAME'] ) != auth_login_page() ) {
 		$t_return_page = $_SERVER['SCRIPT_NAME'];
@@ -84,10 +95,10 @@ function access_denied() {
 	}
 
 	if( !auth_is_user_authenticated() ) {
-		print_header_redirect( helper_mantis_url( auth_login_page( $t_return ) ), true, false, true );
+		print_header_redirect( helper_mantis_url( auth_login_page( $t_return ) ), false, true );
 	} else {
 		$t_buttons = [];
-		
+
 		# Login button
 		if( current_user_is_anonymous() ) {
 			$t_buttons[] = [
@@ -116,8 +127,10 @@ function access_denied() {
 
 /**
  * retrieves and returns access matrix for a project from cache or caching if required.
- * @param integer $p_project_id Integer representing project identifier.
- * @return array returns an array of users->accesslevel for the given user
+ *
+ * @param int $p_project_id Project identifier.
+ *
+ * @return array Array of users->access-level for the given user
  * @access private
  */
 function access_cache_matrix_project( $p_project_id ) {
@@ -151,8 +164,10 @@ function access_cache_matrix_project( $p_project_id ) {
 
 /**
  * retrieves and returns access matrix for a user from cache or caching if required.
- * @param integer $p_user_id Integer representing user identifier.
- * @return array returns an array of projects->accesslevel for the given user
+ *
+ * @param int $p_user_id User identifier.
+ *
+ * @return array Array of projects->access-level for the given user
  * @access private
  */
 function access_cache_matrix_user( $p_user_id ) {
@@ -177,14 +192,18 @@ function access_cache_matrix_user( $p_user_id ) {
 }
 
 /**
- * Check the a user's access against the given "threshold" and return true
+ * Check a user's access against the given "threshold" and return true
  * if the user can access, false otherwise.
+ *
  * $p_threshold may be a single value, or an array. If it is a single
  * value, treat it as a threshold so return true if user is >= threshold.
- * If it is an array, look for exact matches to one of the values
- * @param integer       $p_user_access_level User access level.
- * @param integer|array $p_threshold         Access threshold, defaults to NOBODY.
- * @return boolean true or false depending on whether given access level matches the threshold
+ * If it is an array, look for exact matches to one of the values.
+ *
+ * @param int       $p_user_access_level User access level.
+ * @param int|array $p_threshold         Access threshold, defaults to NOBODY.
+ *
+ * @return bool True if given access level matches the threshold, false if not.
+ *
  * @access public
  */
 function access_compare_level( $p_user_access_level, $p_threshold = NOBODY ) {
@@ -196,10 +215,15 @@ function access_compare_level( $p_user_access_level, $p_threshold = NOBODY ) {
 }
 
 /**
- * This function only checks the user's global access level, ignoring any
- * overrides they might have at a project level
- * @param integer|null $p_user_id Integer representing user identifier, defaults to null to use current user.
- * @return integer global access level
+ * Check the user's global access level only.
+ *
+ * Ignores any overrides they might have at project level.
+ *
+ * @param int|null $p_user_id User identifier, defaults to null to use current user.
+ *
+ * @return int global access level
+ * @throws ClientException
+ *
  * @access public
  */
 function access_get_global_level( $p_user_id = null ) {
@@ -220,9 +244,13 @@ function access_get_global_level( $p_user_id = null ) {
 /**
  * Check the current user's access against the given value and return true
  * if the user's access is equal to or higher, false otherwise.
- * @param integer      $p_access_level Integer representing access level.
- * @param integer|null $p_user_id      Integer representing user id, defaults to null to use current user.
- * @return boolean whether user has access level specified
+ *
+ * @param int      $p_access_level Access level.
+ * @param int|null $p_user_id      User id, defaults to null to use current user.
+ *
+ * @return bool whether user has access level specified
+ * @throws ClientException
+ *
  * @access public
  */
 function access_has_global_level( $p_access_level, $p_user_id = null ) {
@@ -240,10 +268,14 @@ function access_has_global_level( $p_access_level, $p_user_id = null ) {
  * Check if the user has the specified global access level
  * and deny access to the page if not
  * @see access_has_global_level
- * @param integer      $p_access_level Integer representing access level.
- * @param integer|null $p_user_id      Integer representing user id, defaults to null to use current user.
- * @access public
+ *
+ * @param int      $p_access_level Access level.
+ * @param int|null $p_user_id      User id, defaults to null to use current user.
+ *
  * @return void
+ * @throws ClientException
+ *
+ * @access public
  */
 function access_ensure_global_level( $p_access_level, $p_user_id = null ) {
 	if( !access_has_global_level( $p_access_level, $p_user_id ) ) {
@@ -252,12 +284,16 @@ function access_ensure_global_level( $p_access_level, $p_user_id = null ) {
 }
 
 /**
- * This function checks the project access level first (for the current project
- * if none is specified) and if the user is not listed, it falls back on the
+ * Checks the project access level first (for the current project if none
+ * is specified) and if the user is not listed, it falls back on the
  * user's global access level.
- * @param integer      $p_project_id Integer representing project id to check access against.
- * @param integer|null $p_user_id    Integer representing user id, defaults to null to use current user.
- * @return integer access level user has to given project
+ *
+ * @param int      $p_project_id Project id to check access against.
+ * @param int|null $p_user_id    User id, defaults to null to use current user.
+ *
+ * @return int access level user has to given project
+ * @throws ClientException
+ *
  * @access public
  */
 function access_get_project_level( $p_project_id = null, $p_user_id = null ) {
@@ -309,10 +345,14 @@ function access_get_project_level( $p_project_id = null, $p_user_id = null ) {
 /**
  * Check the current user's access against the given value and return true
  * if the user's access is equal to or higher, false otherwise.
- * @param integer|array $p_access_level Threshold representing an access level.
- * @param integer       $p_project_id   Integer representing project id to check access against.
- * @param integer|null  $p_user_id      Integer representing user id, defaults to null to use current user.
- * @return boolean whether user has access level specified
+ *
+ * @param int|array $p_access_level Threshold representing an access level.
+ * @param int       $p_project_id   Project id to check access against.
+ * @param int|null  $p_user_id      User id, defaults to null to use current user.
+ *
+ * @return bool whether user has access level specified
+ * @throws ClientException
+ *
  * @access public
  */
 function access_has_project_level( $p_access_level, $p_project_id = null, $p_user_id = null ) {
@@ -336,21 +376,23 @@ function access_has_project_level( $p_access_level, $p_project_id = null, $p_use
 /**
  * Filters an array of project ids based on an access level.
  *
- * Returns an array containing only those projects which meet said access level.
+ * Returns an array containing only those projects which meet said access
+ * level.
  * An optional limit for the number of results is provided as a shortcut for
  * access checks.
  *
- * @param integer|array|string  $p_access_level Parameter representing access level threshold, may be:
- *                                              - integer: for a simple threshold
- *                                              - array: for an array threshold
- *                                              - string: for a threshold option which will be evaluated
- *                                                for each project context
- * @param array|null            $p_project_ids  Array of project ids to check access against, default to null
- *                                               to use all user accessible projects
- * @param integer|null          $p_user_id      Integer representing user id, defaults to null to use current user.
- * @param integer               $p_limit        Maximum number of results, default is 0 for all results
+ * @param int|array|string $p_access_level Parameter representing access level threshold, may be:
+*                                           - integer: for a simple threshold
+*                                           - array: for an array threshold
+*                                           - string: for a threshold option which will be evaluated
+*                                             for each project context
+ * @param array|null       $p_project_ids  Array of project ids to check access against, default to null
+ *                                         to use all user accessible projects
+ * @param int|null         $p_user_id      User id, defaults to null to use current user.
+ * @param int              $p_limit        Maximum number of results, default is 0 for all results
  *
- * @return array                The filtered array of project ids
+ * @return array The filtered array of project ids
+ * @throws ClientException
  */
 function access_project_array_filter( $p_access_level, ?array $p_project_ids = null, ?int $p_user_id = null, int $p_limit = 0 ): array {
 	# Short circuit the check in this case
@@ -414,6 +456,8 @@ function access_project_array_filter( $p_access_level, ?array $p_project_ids = n
  * @param int|null         $p_user_id      User id, defaults to null to use current user.
  *
  * @return bool            True if user has the specified access level in any of the projects.
+ * @throws ClientException
+ *
  * @access public
  */
 function access_has_any_project_level( $p_access_level, ?array $p_project_ids = null, ?int $p_user_id = null ): bool {
@@ -430,6 +474,8 @@ function access_has_any_project_level( $p_access_level, ?array $p_project_ids = 
  * @param int|array|string $p_access_level Access level threshold.
  * @param array|null       $p_project_ids  Array of project ids to check access against.
  * @param int|null         $p_user_id      User id, defaults to null to use current user.
+ *
+ * @throws ClientException
  */
 function access_ensure_any_project_level( $p_access_level, ?array $p_project_ids = null, ?int $p_user_id = null ): void {
 	if( !access_has_any_project_level( $p_access_level, $p_project_ids, $p_user_id ) ) {
@@ -439,13 +485,18 @@ function access_ensure_any_project_level( $p_access_level, ?array $p_project_ids
 
 /**
  * Check if the user has the specified access level for the given project
- * and deny access to the page if not
- * @see access_has_project_level
- * @param integer      $p_access_level Integer representing access level.
- * @param integer|null $p_project_id   Integer representing project id to check access against, defaults to null to use current project.
- * @param integer|null $p_user_id      Integer representing user identifier, defaults to null to use current user.
- * @access public
+ * and deny access to the page if not.
+ *
+ * @param int      $p_access_level Access level.
+ * @param int|null $p_project_id   Project id to check access against,
+ *                                 defaults to null to use current project.
+ * @param int|null $p_user_id      User identifier, defaults to null to use current user.
+ *
  * @return void
+ * @throws ClientException
+ *
+ * @access public
+ * @see access_has_project_level
  */
 function access_ensure_project_level( $p_access_level, $p_project_id = null, $p_user_id = null ) {
 	if( !access_has_project_level( $p_access_level, $p_project_id, $p_user_id ) ) {
@@ -454,23 +505,27 @@ function access_ensure_project_level( $p_access_level, $p_project_id = null, $p_
 }
 
 /**
- * Check whether the user has the specified access level for any project project
+ * Check whether the user has the specified access level for any project
  *
- * Warning: this function may mislead into incorrect validations. Usually you want to
- * check that a user meets a threshold for any project, but that threshold may be configured
- * differently for each project, and the user may also have different access levels in each
- * project due to private projects assignment.
- * In that scenario, $p_access_level can't be a static threshold, but a "threshold identifier"
- * instead, that must be evaluated for each project.
- * Function "access_has_any_project_level()" provides that functionality, also covers the basic
- * usage of this function.
- * For such reasons, this function has been deprecated.
+ * Warning: this function may mislead into incorrect validations. Usually you
+ * want to check that a user meets a threshold for any project, but that
+ * threshold may be configured differently for each project, and the user may
+ * also have different access levels in each project due to private projects
+ * assignment. In that scenario, $p_access_level can't be a static threshold,
+ * but a "threshold identifier" instead, that must be evaluated for each
+ * project. Function "access_has_any_project_level()" provides that
+ * functionality, also covers the basic usage of this function. For such
+ * reasons, this function has been deprecated.
  *
- * @param integer      $p_access_level Integer representing access level.
- * @param integer|null $p_user_id      Integer representing user id, defaults to null to use current user.
- * @return boolean whether user has access level specified
- * @access public
- * @deprecated	access_has_any_project_level() should be used in preference to this function (since verrsion 2.6)
+ * @param int      $p_access_level Access level.
+ * @param int|null $p_user_id      User id, defaults to null to use current user.
+ *
+ * @return bool whether user has access level specified
+ * @throws ClientException
+ *
+ * @access        public
+ * @deprecated    access_has_any_project_level() should be used in preference
+ *                to this function (since version 2.6)
  */
 function access_has_any_project( $p_access_level, $p_user_id = null ) {
 	error_parameters( __FUNCTION__ . '()', 'access_has_any_project_level()' );
@@ -498,12 +553,17 @@ function access_has_any_project( $p_access_level, $p_user_id = null ) {
 /**
  * Check the current user's access against the given value and return true
  * if the user's access is equal to or higher, false otherwise.
+ *
  * This function looks up the bug's project and performs an access check
- * against that project
- * @param integer      $p_access_level Integer representing access level.
- * @param integer      $p_bug_id       Integer representing bug id to check access against.
- * @param integer|null $p_user_id      Integer representing user id, defaults to null to use current user.
- * @return boolean whether user has access level specified
+ * against that project.
+ *
+ * @param int      $p_access_level Access level.
+ * @param int      $p_bug_id       Bug id to check access against.
+ * @param int|null $p_user_id      User id, defaults to null to use current user.
+ *
+ * @return bool whether user has access level specified.
+ * @throws ClientException
+ *
  * @access public
  */
 function access_has_bug_level( $p_access_level, $p_bug_id, $p_user_id = null ) {
@@ -555,12 +615,15 @@ function access_has_bug_level( $p_access_level, $p_bug_id, $p_user_id = null ) {
 }
 
 /**
- * Filter the provided array of user ids to those who has the specified access level for the
- * specified bug.
- * @param  int $p_access_level   The access level.
- * @param  int $p_bug_id         The bug id.
- * @param  array $p_user_ids     The array of user ids.
+ * Filter the provided array of user ids to those who has the specified access
+ * level for the specified bug.
+ *
+ * @param int   $p_access_level The access level.
+ * @param int   $p_bug_id       The bug id.
+ * @param array $p_user_ids     The array of user ids.
+ *
  * @return array filtered array of user ids.
+ * @throws ClientException
  */
 function access_has_bug_level_filter( $p_access_level, $p_bug_id, $p_user_ids ) {
 	$t_users_ids_with_access = array();
@@ -575,13 +638,17 @@ function access_has_bug_level_filter( $p_access_level, $p_bug_id, $p_user_ids ) 
 
 /**
  * Check if the user has the specified access level for the given bug
- * and deny access to the page if not
- * @see access_has_bug_level
- * @param integer      $p_access_level Integer representing access level.
- * @param integer      $p_bug_id       Integer representing bug id to check access against.
- * @param integer|null $p_user_id      Integer representing user id, defaults to null to use current user.
+ * and deny access to the page if not.
+ *
+ * @param int      $p_access_level Access level.
+ * @param int      $p_bug_id       Bug id to check access against.
+ * @param int|null $p_user_id      User id, defaults to null to use current user.
+ *
  * @return void
- * @access public
+ * @throws ClientException
+ *
+ * @access   public
+ * @see      access_has_bug_level
  */
 function access_ensure_bug_level( $p_access_level, $p_bug_id, $p_user_id = null ) {
 	if( !access_has_bug_level( $p_access_level, $p_bug_id, $p_user_id ) ) {
@@ -592,12 +659,17 @@ function access_ensure_bug_level( $p_access_level, $p_bug_id, $p_user_id = null 
 /**
  * Check the current user's access against the given value and return true
  * if the user's access is equal to or higher, false otherwise.
+ *
  * This function looks up the bugnote's bug and performs an access check
- * against that bug
- * @param integer      $p_access_level Integer representing access level.
- * @param integer      $p_bugnote_id   Integer representing bugnote id to check access against.
- * @param integer|null $p_user_id      Integer representing user id, defaults to null to use current user.
- * @return boolean whether user has access level specified
+ * against that bug.
+ *
+ * @param int      $p_access_level Access level.
+ * @param int      $p_bugnote_id   Bugnote id to check access against.
+ * @param int|null $p_user_id      User id, defaults to null to use current user.
+ *
+ * @return bool whether user has access level specified
+ * @throws ClientException
+ *
  * @access public
  */
 function access_has_bugnote_level( $p_access_level, $p_bugnote_id, $p_user_id = null ) {
@@ -609,7 +681,7 @@ function access_has_bugnote_level( $p_access_level, $p_bugnote_id, $p_user_id = 
 	$t_project_id = bug_get_field( $t_bug_id, 'project_id' );
 
 	# If the bug is private and the user is not the reporter, then the
-	# the user must also have higher access than private_bug_threshold
+	# user must also have higher access than private_bug_threshold
 	if( bugnote_get_field( $p_bugnote_id, 'view_state' ) == VS_PRIVATE && !bugnote_is_user_reporter( $p_bugnote_id, $p_user_id ) ) {
 		$t_private_bugnote_threshold = config_get( 'private_bugnote_threshold', null, $p_user_id, $t_project_id );
 		$p_access_level = max( $p_access_level, $t_private_bugnote_threshold );
@@ -619,12 +691,15 @@ function access_has_bugnote_level( $p_access_level, $p_bugnote_id, $p_user_id = 
 }
 
 /**
- * Filter the provided array of user ids to those who has the specified access level for the
- * specified bugnote.
- * @param  int $p_access_level   The access level.
- * @param  int $p_bugnote_id     The bugnote id.
- * @param  array $p_user_ids     The array of user ids.
+ * Filter the provided array of user ids to those who has the specified access
+ * level for the specified bugnote.
+ *
+ * @param int   $p_access_level The access level.
+ * @param int   $p_bugnote_id   The bugnote id.
+ * @param array $p_user_ids     The array of user ids.
+ *
  * @return array filtered array of user ids.
+ * @throws ClientException
  */
 function access_has_bugnote_level_filter( $p_access_level, $p_bugnote_id, $p_user_ids ) {
 	$t_users_ids_with_access = array();
@@ -639,13 +714,17 @@ function access_has_bugnote_level_filter( $p_access_level, $p_bugnote_id, $p_use
 
 /**
  * Check if the user has the specified access level for the given bugnote
- * and deny access to the page if not
- * @see access_has_bugnote_level
- * @param integer      $p_access_level Integer representing access level.
- * @param integer      $p_bugnote_id   Integer representing bugnote id to check access against.
- * @param integer|null $p_user_id      Integer representing user id, defaults to null to use current user.
- * @access public
+ * and deny access to the page if not.
+ *
+ * @param int      $p_access_level Access level.
+ * @param int      $p_bugnote_id   Bugnote id to check access against.
+ * @param int|null $p_user_id      User id, defaults to null to use current user.
+ *
  * @return void
+ * @throws ClientException
+ *
+ * @access public
+ * @see    access_has_bugnote_level
  */
 function access_ensure_bugnote_level( $p_access_level, $p_bugnote_id, $p_user_id = null ) {
 	if( !access_has_bugnote_level( $p_access_level, $p_bugnote_id, $p_user_id ) ) {
@@ -654,10 +733,14 @@ function access_ensure_bugnote_level( $p_access_level, $p_bugnote_id, $p_user_id
 }
 
 /**
- * Check if the specified bug can be closed
- * @param BugData      $p_bug     Bug to check access against.
- * @param integer|null $p_user_id Integer representing user id, defaults to null to use current user.
- * @return boolean true if user can close the bug
+ * Check if the specified bug can be closed.
+ *
+ * @param BugData  $p_bug     Bug to check access against.
+ * @param int|null $p_user_id User id, defaults to null to use current user.
+ *
+ * @return bool true if user can close the bug.
+ * @throws ClientException
+ *
  * @access public
  */
 function access_can_close_bug( BugData $p_bug, $p_user_id = null ) {
@@ -685,12 +768,16 @@ function access_can_close_bug( BugData $p_bug, $p_user_id = null ) {
 }
 
 /**
- * Make sure that the user can close the specified bug
- * @see access_can_close_bug
- * @param BugData      $p_bug     Bug to check access against.
- * @param integer|null $p_user_id Integer representing user id, defaults to null to use current user.
- * @access public
+ * Make sure that the user can close the specified bug.
+ *
+ * @param BugData  $p_bug     Bug to check access against.
+ * @param int|null $p_user_id User id, defaults to null to use current user.
+ *
  * @return void
+ * @throws ClientException
+ *
+ * @see      access_can_close_bug
+ * @access   public
  */
 function access_ensure_can_close_bug( BugData $p_bug, $p_user_id = null ) {
 	if( !access_can_close_bug( $p_bug, $p_user_id ) ) {
@@ -699,10 +786,14 @@ function access_ensure_can_close_bug( BugData $p_bug, $p_user_id = null ) {
 }
 
 /**
- * Check if the specified bug can be reopened
- * @param BugData      $p_bug     Bug to check access against.
- * @param integer|null $p_user_id Integer representing user id, defaults to null to use current user.
- * @return boolean whether user has access to reopen bugs
+ * Check if the specified bug can be reopened.
+ *
+ * @param BugData  $p_bug     Bug to check access against.
+ * @param int|null $p_user_id User id, defaults to null to use current user.
+ *
+ * @return bool whether user has access to reopen bugs
+ * @throws ClientException
+ *
  * @access public
  */
 function access_can_reopen_bug( BugData $p_bug, $p_user_id = null ) {
@@ -731,7 +822,7 @@ function access_can_reopen_bug( BugData $p_bug, $p_user_id = null ) {
 		return true;
 	}
 
-	# Other users's access level must allow them to reopen bugs
+	# Other users' access level must allow them to reopen bugs
 	$t_reopen_bug_threshold = config_get( 'reopen_bug_threshold', null, null, $p_bug->project_id );
 	if( access_has_bug_level( $t_reopen_bug_threshold, $p_bug->id, $p_user_id ) ) {
 
@@ -745,12 +836,17 @@ function access_can_reopen_bug( BugData $p_bug, $p_user_id = null ) {
 
 /**
  * Make sure that the user can reopen the specified bug.
- * Calls access_denied if user has no access to terminate script
- * @see access_can_reopen_bug
- * @param BugData      $p_bug     Bug to check access against.
- * @param integer|null $p_user_id Integer representing user id, defaults to null to use current user.
- * @access public
+ *
+ * Calls {@see access_denied()} if user has no access to terminate script.
+ *
+ * @param BugData  $p_bug     Bug to check access against.
+ * @param int|null $p_user_id User id, defaults to null to use current user.
+ *
  * @return void
+ * @throws ClientException
+ *
+ * @see      access_can_reopen_bug
+ * @access   public
  */
 function access_ensure_can_reopen_bug( BugData $p_bug, $p_user_id = null ) {
 	if( !access_can_reopen_bug( $p_bug, $p_user_id ) ) {
@@ -759,11 +855,12 @@ function access_ensure_can_reopen_bug( BugData $p_bug, $p_user_id = null ) {
 }
 
 /**
- * get the user's access level specific to this project.
- * return false (0) if the user has no access override here
- * @param integer $p_user_id    Integer representing user id.
- * @param integer $p_project_id Integer representing project id.
- * @return boolean|integer returns false (if no access) or an integer representing level of access
+ * Get the user's access level specific to this project.
+ *
+ * @param int $p_user_id    User id.
+ * @param int $p_project_id Project id.
+ *
+ * @return int|false Access level or false if the user has no access override.
  * @access public
  */
 function access_get_local_level( $p_user_id, $p_project_id ) {
@@ -773,29 +870,25 @@ function access_get_local_level( $p_user_id, $p_project_id ) {
 	$p_user_id = (int)$p_user_id;
 
 	if( in_array( $p_project_id, $g_cache_access_matrix_project_ids ) ) {
-		if( isset( $g_cache_access_matrix[$p_user_id][$p_project_id] ) ) {
-			return $g_cache_access_matrix[$p_user_id][$p_project_id];
-		} else {
-			return false;
-		}
+		return $g_cache_access_matrix[$p_user_id][$p_project_id] ?? false;
 	}
 
 	$t_project_level = access_cache_matrix_user( $p_user_id );
 
-	if( isset( $t_project_level[$p_project_id] ) ) {
-		return $t_project_level[$p_project_id];
-	} else {
-		return false;
-	}
+	return $t_project_level[$p_project_id] ?? false;
 }
 
 /**
- * get the access level required to change the issue to the new status
+ * Get the access level required to change the issue to the new status.
+ *
  * If there is no specific differentiated access level, use the
  * generic update_bug_status_threshold.
- * @param integer $p_status     Status.
- * @param integer $p_project_id Default value ALL_PROJECTS.
- * @return integer integer representing user level e.g. DEVELOPER
+ *
+ * @param int $p_status     Status.
+ * @param int $p_project_id Default value ALL_PROJECTS.
+ *
+ * @return int User level e.g. DEVELOPER
+ *
  * @access public
  */
 function access_get_status_threshold( $p_status, $p_project_id = ALL_PROJECTS ) {
@@ -812,8 +905,10 @@ function access_get_status_threshold( $p_status, $p_project_id = ALL_PROJECTS ) 
 }
 
 /**
- * Given a access level, return the appropriate string for it
- * @param integer $p_access_level
+ * Given an access level, return the appropriate string for it.
+ *
+ * @param int $p_access_level
+ *
  * @return string
  */
 function access_level_get_string( $p_access_level ) {
@@ -826,12 +921,15 @@ function access_level_get_string( $p_access_level ) {
 }
 
 /**
- * Return the minimum access level, as integer, that matches the threshold.
+ * Return the minimum access level that matches the threshold.
+ *
  * $p_threshold may be a single value, or an array. If it is a single
  * value, returns that number. If it is an array, return the value of the
- * smallest element
- * @param integer|array $p_threshold         Access threshold
- * @return integer		Integer value for an access level.
+ * smallest element.
+ *
+ * @param int|array $p_threshold Access threshold
+ *
+ * @return int Access level.
  */
 function access_threshold_min_level( $p_threshold ) {
 	if( is_array( $p_threshold ) ) {
@@ -849,9 +947,12 @@ function access_threshold_min_level( $p_threshold ) {
 
 /**
  * Checks if the user can view the handler for the bug.
- * @param BugData      $p_bug     Bug to check access against.
- * @param integer|null $p_user_id Integer representing user id, defaults to null to use current user.
- * @return boolean whether user can view the handler user.
+ *
+ * @param BugData  $p_bug     Bug to check access against.
+ * @param int|null $p_user_id User id, defaults to null to use current user.
+ *
+ * @return bool whether user can view the handler user.
+ * @throws ClientException
  */
 function access_can_see_handler_for_bug( BugData $p_bug, $p_user_id = null ) {
 	if( null === $p_user_id ) {
@@ -861,20 +962,18 @@ function access_can_see_handler_for_bug( BugData $p_bug, $p_user_id = null ) {
 	}
 
 	# handler can be viewed if allowed by access level, OR the user himself is the handler
-	$t_can_view_handler =
-		( $p_bug->handler_id == $t_user_id )
+	return ( $p_bug->handler_id == $t_user_id )
 		|| access_has_bug_level(
 			config_get( 'view_handler_threshold', null, $t_user_id, $p_bug->project_id ),
 			$p_bug->id );
-
-	return $t_can_view_handler;
 }
 
 /**
- * Parse access level reference array parsed from json.
+ * Parse access level reference array parsed from JSON.
  *
  * @param array $p_access The access level
- * @return integer The access level
+ *
+ * @return int The access level
  * @throws ClientException Access level is invalid or not specified.
  */
 function access_parse_array( array $p_access ) {
@@ -907,12 +1006,14 @@ function access_parse_array( array $p_access ) {
 /**
  * Returns true if the user has limited view to issues in the specified project.
  *
- * @param integer $p_project_id   Project id, or null for current project
- * @param integer $p_user_id      User id, or null for current user
- * @return boolean	Whether limited view applies
+ * @param int $p_project_id Project id, or null for current project
+ * @param int $p_user_id    User id, or null for current user
  *
- * @see $g_limit_view_unless_threshold
+ * @return bool Whether limited view applies
+ * @throws ClientException
+ *
  * @see $g_limit_reporters
+ * @see $g_limit_view_unless_threshold
  */
 function access_has_limited_view( $p_project_id = null, $p_user_id = null ) {
 	$t_user_id = ( null === $p_user_id ) ? auth_get_current_user_id() : $p_user_id;
@@ -921,7 +1022,6 @@ function access_has_limited_view( $p_project_id = null, $p_user_id = null ) {
 	# Old 'limit_reporters' option was previously only supported for ALL_PROJECTS,
 	# Use this option if set, otherwise, check the new option for "unlimited view" threshold
 	$t_old_limit_reporters = config_get( 'limit_reporters', null, $t_user_id, ALL_PROJECTS );
-	$t_threshold_can_view = NOBODY;
 	if( ON != $t_old_limit_reporters ) {
 		$t_threshold_can_view = config_get( 'limit_view_unless_threshold', null, $t_user_id, $t_project_id );
 	} else {
@@ -955,6 +1055,7 @@ function access_has_limited_view( $p_project_id = null, $p_user_id = null ) {
  * @param int $p_user_id
  *
  * @return bool
+ * @throws ClientException
  */
 function access_can_view_bug_revisions( $p_bug_id, $p_user_id = null ) {
 	if( !bug_exists( $p_bug_id ) ) {
@@ -982,6 +1083,7 @@ function access_can_view_bug_revisions( $p_bug_id, $p_user_id = null ) {
  * @param int $p_user_id
  *
  * @return bool
+ * @throws ClientException
  */
 function access_can_view_bugnote_revisions( $p_bugnote_id, $p_user_id = null ) {
 	if( !bugnote_exists( $p_bugnote_id ) ) {

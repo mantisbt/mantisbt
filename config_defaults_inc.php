@@ -1088,6 +1088,7 @@ $g_language_choices_arr = array(
 	'saraiki',
 	'serbian',
 	'serbian_latin',
+	'serbo-croatian_latin',
 	'slovak',
 	'slovene',
 	'spanish',
@@ -1161,6 +1162,7 @@ $g_language_auto_map = array(
 	'ksh' => 'ripoarisch',
 	'ro-mo, ro' => 'romanian',
 	'ru-mo, ru-ru, ru-ua, ru' => 'russian',
+	'sh-latn, sh' => 'serbo-croatian_latin',
 	'skr' => 'saraiki', # skr does not actually exist as a browser language code
 	'sr' => 'serbian',
 	'sr-latn' => 'serbian_latin',
@@ -1273,6 +1275,9 @@ $g_window_title = 'MantisBT';
  * so that when inserted into the 'opensearch_XXX_short' language string, the
  * resulting text is 16 characters or less, to be compliant with the limit for
  * the ShortName element as defined in the OpenSearch specification.
+ *
+ * To disable the use of OpenSearch tags across the site, simply set the
+ * title prefix to empty string.
  *
  * @link https://github.com/dewitt/opensearch/blob/master/opensearch-1-1-draft-6.md
  * @see $g_window_title
@@ -5787,10 +5792,10 @@ $g_webservice_admin_access_level_threshold = MANAGER;
  * Minimum project access level required to be able to specify a reporter name when
  * adding an issue.
  *
- * Otherwise, the current user is used as the reporter.  Users who don't have
- * this access level can always do another step to modify the issue and specify
- * a different name, but in this case it will be logged in the history who
- * originally reported the issue.
+ * Otherwise, the reporter will be set to the current user. Users who do not
+ * have this access level can always update the issue in a second step to
+ * specify a different reporter, but in this case user who the originally
+ * reported the issue will be recorded in the history.
  *
  * @global int $g_webservice_specify_reporter_on_add_access_level_threshold
  */

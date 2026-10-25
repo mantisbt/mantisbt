@@ -123,4 +123,4 @@ if( !is_blank( $c_ref ) ) {
 	}
 }
 
-print_header_redirect( $t_redirect_url, true, true );
+print_header_redirect( $t_redirect_url, true );

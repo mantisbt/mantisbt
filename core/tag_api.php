@@ -66,6 +66,24 @@ $g_cache_tags = array();
 $g_cache_bug_tags = array();
 
 /**
+ * Clear the tag definition cache (or just the given id if specified).
+ *
+ * @global array $g_cache_tags
+ * @param int|null $p_tag_id Tag id, or null to clear all tag cache entries.
+ *
+ * @return void
+ */
+function tag_clear_cache( $p_tag_id = null ) {
+	global $g_cache_tags;
+
+	if( null === $p_tag_id ) {
+		$g_cache_tags = array();
+	} else {
+		unset( $g_cache_tags[(int)$p_tag_id] );
+	}
+}
+
+/**
  * Loads into cache a set of tag definitions from tag table.
  *
  * Non existent ids are cached as 'false'.
@@ -240,11 +258,15 @@ function tag_is_unique( $p_name ) {
  * @param string $p_name The tag name to check.
  *
  * @return void
+ * @throws ClientException
  */
 function tag_ensure_unique( $p_name ) {
 	if( !tag_is_unique( $p_name ) ) {
-		error_parameters( $p_name );
-		trigger_error( ERROR_TAG_DUPLICATE, ERROR );
+		throw new ClientException(
+			"Tag '$p_name' already exists",
+			ERROR_TAG_DUPLICATE,
+			[ $p_name ]
+		);
 	}
 }
 
@@ -276,12 +298,16 @@ function tag_name_is_valid( $p_name, array &$p_matches, $p_prefix = '' ) {
  * @param string $p_name The tag name to check.
  *
  * @return void
+ * @throws ClientException
  */
 function tag_ensure_name_is_valid( $p_name ) {
 	$t_matches = array();
 	if( !tag_name_is_valid( $p_name, $t_matches ) ) {
-		error_parameters( $p_name );
-		trigger_error( ERROR_TAG_NAME_INVALID, ERROR );
+		throw new ClientException(
+			"Tag name '$p_name' is invalid",
+			ERROR_TAG_NAME_INVALID,
+			[ $p_name ]
+		);
 	}
 }
 
@@ -665,8 +691,10 @@ function tag_create( $p_name, $p_user_id = null, $p_description = '' ) {
 				VALUES
 				( ' . db_param() . ',' . db_param() . ',' . db_param() . ',' . db_param() . ',' . db_param() . ')';
 	db_query( $t_query, array( $p_user_id, trim( $p_name ), trim( $p_description ), $c_date_created, $c_date_created ) );
+	$t_tag_id = db_insert_id( db_get_table( 'tag' ) );
+	tag_clear_cache( $t_tag_id );
 
-	return db_insert_id( db_get_table( 'tag' ) );
+	return $t_tag_id;
 }
 
 /**
@@ -705,7 +733,10 @@ function tag_update( $p_tag_id, $p_name, $p_user_id, $p_description ) {
 
 	# Do not allow assigning a tag to a user who is not allowed to create one
 	if( !access_has_global_level( config_get( 'tag_create_threshold' ), $p_user_id ) ) {
-		trigger_error( ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS, ERROR );
+		throw new ClientException(
+			"Access denied",
+			ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS
+		);
 	}
 
 	$t_rename = false;
@@ -733,6 +764,8 @@ function tag_update( $p_tag_id, $p_name, $p_user_id, $p_description ) {
 		}
 	}
 
+	tag_clear_cache( $p_tag_id );
+
 	return true;
 }
 
@@ -757,6 +790,7 @@ function tag_delete( $p_tag_id ) {
 	db_param_push();
 	$t_query = 'DELETE FROM {tag} WHERE id=' . db_param();
 	db_query( $t_query, array( $p_tag_id ) );
+	tag_clear_cache( $p_tag_id );
 
 	return true;
 }
@@ -833,6 +867,7 @@ function tag_bug_is_attached( $p_tag_id, $p_bug_id ) {
  * @param int $p_bug_id The bug ID to check.
  *
  * @return array Tag attachment row
+ * @throws ClientException
  */
 function tag_bug_get_row( $p_tag_id, $p_bug_id ) {
 	global $g_cache_bug_tags;
@@ -844,7 +879,10 @@ function tag_bug_get_row( $p_tag_id, $p_bug_id ) {
 
 	$t_bug_tags = $g_cache_bug_tags[$c_bug_id] ?? [];
 	if( !$t_bug_tags || !isset( $t_bug_tags[$p_tag_id] ) ) {
-		trigger_error( ERROR_TAG_NOT_ATTACHED, ERROR );
+		throw new ClientException(
+			"Tag $p_tag_id not attached to Issue $p_bug_id",
+			ERROR_TAG_NOT_ATTACHED
+		);
 	}
 	return $t_bug_tags[$p_tag_id];
 }
@@ -918,7 +956,10 @@ function tag_bug_attach( $p_tag_id, $p_bug_id, $p_user_id = null ) {
 	tag_ensure_exists( $p_tag_id );
 
 	if( tag_bug_is_attached( $p_tag_id, $p_bug_id ) ) {
-		trigger_error( ERROR_TAG_ALREADY_ATTACHED, ERROR );
+		throw new ClientException(
+			"Tag $p_tag_id already attached to Issue $p_bug_id",
+			ERROR_TAG_ALREADY_ATTACHED
+		);
 	}
 
 	if( null == $p_user_id ) {
@@ -964,7 +1005,10 @@ function tag_bug_detach( $p_tag_id, $p_bug_id, $p_add_history = true, $p_user_id
 	}
 
 	if( !tag_bug_is_attached( $p_tag_id, $p_bug_id ) ) {
-		trigger_error( ERROR_TAG_NOT_ATTACHED, ERROR );
+		throw new ClientException(
+			"Tag $p_tag_id not attached to Issue $p_bug_id",
+			ERROR_TAG_NOT_ATTACHED
+		);
 	}
 
 	$t_tag_row = tag_bug_get_row( $p_tag_id, $p_bug_id );
@@ -1027,8 +1071,8 @@ function tag_get_link( array $p_tag_row ) {
 	return sprintf(
 		'<a class="btn btn-xs btn-primary btn-white btn-round" href="tag_view_page.php?tag_id=%s" title="%s">%s</a>',
 		$p_tag_row['id'],
-		string_display_line( $p_tag_row['description'] ),
-		string_display_line( $p_tag_row['name'] )
+		string_attribute( $p_tag_row['description'] ),
+		string_attribute( $p_tag_row['name'] )
 	);
 }
 
@@ -1060,7 +1104,7 @@ function tag_display_link( array $p_tag_row, $p_bug_id = 0 ) {
 	}
 
 	if( $p_bug_id > 0 && access_has_bug_level( $t_detach, $p_bug_id ) ) {
-		$t_tooltip = string_html_specialchars( sprintf( lang_get( 'tag_detach' ), string_display_line( $p_tag_row['name'] ) ) );
+		$t_tooltip = string_html_specialchars( sprintf( lang_get( 'tag_detach' ), string_attribute( $p_tag_row['name'] ) ) );
 		$t_href = 'tag_detach.php?bug_id=' . $p_bug_id . '&amp;tag_id=' . $p_tag_row['id'] . $s_security_token;
 		echo ' <a class="btn btn-xs btn-primary btn-white btn-round" title="' . $t_tooltip . '" href="' . $t_href . '">';
 		print_icon( 'fa-times' );

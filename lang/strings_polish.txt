@@ -2,7 +2,7 @@
 /** MantisBT - a php based bugtracking system
  *
  * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2016  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * Copyright (C) 2002 - 2026  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  *
  * MantisBT is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -53,6 +53,7 @@
  * @author Mansoft
  * @author Mazab IZW
  * @author MojaEdukacja
+ * @author PanWor
  * @author Py64
  * @author Rail
  * @author Rambro
@@ -204,8 +205,6 @@ $s_update_severity_title = 'Aktualizacja ważności';
 $s_update_severity_msg = 'Wybierz ważność zgłoszenia';
 $s_update_severity_button = 'Aktualizacja ważności';
 $s_hide_button = 'Wyświetl tylko zaznaczone';
-$s_printing_preferences_title = 'Wybierz pola do wydruku';
-$s_printing_options_link = 'Opcje drukowania';
 $s_bugnote_title = 'Autor';
 $s_bugnote_date = 'Data komentarza';
 $s_bugnote_description = 'Treść komentarza';
@@ -217,7 +216,6 @@ $s_prefix_for_deleted_users = 'użytkownik';
 $s_administrator = 'administrator';
 $s_myself = 'Ja';
 $s_default_access_level = 'Domyślny poziom dostępu';
-$s_issue_status_percentage = 'Status procentowy zgłoszenia';
 $s_access_levels_enum_string = '10:obserwator,25:zgłaszający,40:aktualizujący,55:wykonawca,70:zarządca,90:administrator';
 $s_no_access = 'brak dostępu';
 $s_project_status_enum_string = '10:tworzony,30:ukończony,50:stabilny,70:zarzucony';
@@ -235,7 +233,7 @@ $s_new_account_subject = 'Rejestracja konta';
 $s_new_account_greeting = 'Dziękujemy za rejestrację. Twoje konto nazwa się „%1$s”. Aby zakończyć rejestrację, odwiedź podany adres URL (upewnij się, że jest wprowadzony w jednej linii) i ustaw swoje hasło dostępu:';
 $s_new_account_greeting_admincreated = 'Użytkownik %1$s stworzył dla Ciebie konto „%2$s”. W celu zakończenia rejestracji, odwiedź następujący adres URL (sprawdź, czy cały adres jest wpisany w jednej linii) i ustaw własne hasło dostępu:';
 $s_new_account_username = 'Nazwa użytkownika:';
-$s_new_account_message = 'Jeśli to nie twoje zgłoszenie, zignoruj tę wiadomość. Nic się nie stanie.';
+$s_new_account_message = 'Jeśli to nie Twoje zgłoszenie, zignoruj tę wiadomość. Nic się nie stanie.';
 $s_new_account_do_not_reply = 'Nie odpowiadaj na tą wiadomość';
 $s_new_account_email = 'Email:';
 $s_new_account_IP = 'Zdalny adres IP:';
@@ -244,7 +242,7 @@ $s_reset_request_msg = 'Ktoś (prawdopodobnie Ty) zażądał zmiany hasła przez
 
 Jeśli prosiłeś o to, odwiedź poniższy adres aby zmienić hasło:';
 $s_reset_request_admin_msg = 'Twoje hasło zostało zresetowane. Odwiedź następujący adres URL, aby ustawić nowy:';
-$s_reset_request_in_progress_msg = 'Jeśli nazwa użytkownika i adres email dla twojego konta są prawidłowe to prześlemy teraz wiadomość potwierdzającą na podany adres. Gdy otrzymasz wiadomość, postępuj zgodnie z podanymi w niej instrukcjami i zmień hasło.';
+$s_reset_request_in_progress_msg = 'Jeśli nazwa użytkownika i adres e-mail dla Twojego konta są prawidłowe, to prześlemy teraz wiadomość potwierdzającą na podany adres. Gdy otrzymasz wiadomość, postępuj zgodnie z podanymi w niej instrukcjami i zmień hasło.';
 $s_email_notification_title_for_status_bug_new = 'Następujące zgłoszenie ma ustawiony status NOWY (ponownie)';
 $s_email_notification_title_for_status_bug_feedback = 'Następujące zgłoszenie wymaga OBSŁUGI.';
 $s_email_notification_title_for_status_bug_acknowledged = 'Następujące zgłoszenie zostało ZATWIERDZONE.';
@@ -421,7 +419,7 @@ $s_resolve_add_bugnote_title = 'Dodawanie komentarza z wyjaśnieniem rozwiązani
 $s_bugnote_add_resolve_button = 'Dodaj komentarz';
 $s_from = 'Od';
 $s_to = 'Do';
-$s_sent_you_this_reminder_about = 'wysłał ci przypomnienie o';
+$s_sent_you_this_reminder_about = 'wysłał(a) Ci przypomnienie o';
 $s_bug_reminder = 'Wyślij przypomnienie';
 $s_reminder_sent_to = 'Przypomnienie wysłano do';
 $s_reminder_sent_none = 'Przypomnienia nie mogły zostać wysłane';
@@ -529,7 +527,7 @@ $s_select_project_button = 'Wybierz projekt';
 $s_lost_password_title = 'Resetowanie hasła';
 $s_lost_password_done_title = 'Wiadomość o haśle wysłana';
 $s_lost_password_subject = 'Resetowanie hasła';
-$s_lost_password_info = 'Aby zmienić zapomniane hasło, proszę podać nazwe użytkownika i adres email dla konta.<br /><br />Jeśli podane dane odpowiadają poprawnemu kontu, otrzymasz w wiadomości email specjalny adres URL zawierający kod weryfikujący dla twojego konta. Proszę otworzyć podany adres aby zmienić hasło.';
+$s_lost_password_info = 'Aby zmienić zapomniane hasło, podaj nazwę użytkownika i adres e-mail dla Twojego konta.<br /><br />Jeśli podane dane odpowiadają poprawnemu kontu, otrzymasz w wiadomości e-mail specjalny adres URL zawierający kod weryfikujący dla Twojego konta. Kliknij ten link, aby zmienić hasło.';
 $s_lost_password_confirm_hash_OK = 'Twoje potwierdzenie zostało zaakceptowane. Proszę zmienić hasło.';
 $s_open_and_assigned_to_me_label = 'Otwarte i przypisane do mnie:';
 $s_open_and_reported_to_me_label = 'Otwarte i zgłoszone przeze mnie:';
@@ -1058,11 +1056,11 @@ $s_sponsorship_more_info = 'Więcej informacji o sponsorowaniu';
 $s_sponsorship_total = 'Sponsorowanie – łączna liczba';
 $s_changelog = 'Lista zmian';
 $s_changelog_empty = 'Lista zmian niedostępna';
-$s_changelog_empty_manager = 'Brak dostępnych informacji o Liście Zmian. Problemy są uwzględniane, gdy projekty posiadają wersje, oraz są rozwiązywane przy pomocy "naprawiono w wersji".';
+$s_changelog_empty_manager = 'Brak dostępnych informacji o dzienniku zmian. Problemy są uwzględniane, gdy projekty mają wersje, oraz są rozwiązywane przy pomocy „naprawiono w wersji”.';
 $s_roadmap = 'Plan pracy';
 $s_resolved_progress = '%1$d z %2$d zgłoszeń zrealizowano.';
 $s_roadmap_empty = 'Brak informacji o planie działania';
-$s_roadmap_empty_manager = 'Brak dostępnych informacji o Planie Pracy. Problemy pojawią się, gdy projekty mają przypisane wersje a problemy posiadają ustawioną "Wersję docelową".';
+$s_roadmap_empty_manager = 'Brak dostępnych informacji o planie działania. Problemy pojawią się, gdy projekty mają przypisane wersje, a problemy mają ustawioną „Wersję docelową”.';
 $s_http_auth_realm = 'Logowanie do MantisBT';
 $s_bug = 'zgłoszenie';
 $s_bugs = 'zgłoszenia';
@@ -1357,7 +1355,7 @@ $MANTIS_ERROR[ERROR_VERSION_DUPLICATE] = 'Podana wersja już istnieje.';
 $MANTIS_ERROR[ERROR_VERSION_NOT_FOUND] = 'Nie znaleziono wersji „%1$s”.';
 $MANTIS_ERROR[ERROR_USER_NAME_INVALID] = 'Nieprawidłowa nazwa użytkownika. Nazwa użytkownika może zawierać tyko litery alfabetu łacińskiego, liczby, spacje, myślniki, kropki, znaki dodawania i podkreślenia.';
 $MANTIS_ERROR[ERROR_USER_REAL_NAME_INVALID] = '„Imię i nazwisko” użytkownika jest nieprawidłowe.';
-$MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = 'Użytkownik nie posiada wymaganego poziomu dostępu';
+$MANTIS_ERROR[ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS] = 'Użytkownik nie ma wymaganego poziomu dostępu';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_ENABLED] = 'Sponsorowanie nie zostało uruchmione.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_NOT_FOUND] = 'Sponsorowanie %1$d nie znalezione.';
 $MANTIS_ERROR[ERROR_SPONSORSHIP_AMOUNT_TOO_LOW] = 'Sponsorowanie (%1$s) jest poniżej minimalnej liczby (%2$s).';

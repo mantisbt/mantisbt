@@ -222,10 +222,6 @@ $s_update_severity_button = 'Update Severity';
 # print_all_bug_page.php : display selected issues
 $s_hide_button = 'Display selected only';
 
-# print_all_bug_options.php : printing preferences
-$s_printing_preferences_title = 'Choose fields to print';
-$s_printing_options_link = 'Printing Options';
-
 # word and excel export
 $s_bugnote_title = 'Note handler';
 $s_bugnote_date = 'Date of note';
@@ -244,7 +240,6 @@ $s_administrator = 'administrator';
 $s_myself = 'Myself';
 $s_default_access_level = 'Default access level';
 
-$s_issue_status_percentage = 'Issue Status Percentage';
 
 # Enum Strings
 $s_access_levels_enum_string = '10:viewer,25:reporter,40:updater,55:developer,70:manager,90:administrator';
@@ -732,6 +727,7 @@ $s_date_created = 'Date Created';
 $s_last_visit = 'Last Visit';
 $s_last_visit_label = 'Last Visit:';
 $s_failed_login_count = 'Failed Logins';
+$s_locked = 'Account Locked';
 $s_edit_user_link = 'Edit User';
 $s_search_user_hint = 'Username, Real Name or E-mail';
 
@@ -973,6 +969,7 @@ $s_confirm_account_pruning = 'Are you sure you want to delete old accounts that 
 # manage_user_page.php
 $s_edit_user_title = 'Edit User';
 $s_account_unlock_button = 'Unlock Account';
+$s_clear_failed_logins = 'Clear Failed logins';
 $s_reset_password_button = 'Reset Password';
 $s_delete_user_button = 'Delete User';
 $s_impersonate_user_button = 'Impersonate User';
@@ -984,6 +981,7 @@ $s_email_not_unique = 'Email address is associated with at least one other user 
 $s_account_reset_msg = 'A confirmation request has been sent to the selected user\'s e-mail address. Using this, the user will be able to change their password.';
 $s_account_reset_msg2 = 'Account password has been set to blank...';
 $s_account_unlock_msg = 'The account has been unlocked.';
+$s_clear_failed_logins_msg = 'Failed Logins count has been reset.';
 
 # manage_user_update.php
 $s_manage_user_updated_msg = 'Account successfully updated...';
@@ -1740,9 +1738,11 @@ $MANTIS_ERROR[ERROR_PLUGIN_UPGRADE_FAILED] = 'Upgrading the plugin schema failed
 $MANTIS_ERROR[ERROR_PLUGIN_UPGRADE_NEEDED] = 'The "%1$s" plugin needs to be upgraded before you can access this page.';
 $MANTIS_ERROR[ERROR_PLUGIN_INVALID_PAGE] = 'The format of the specified plugin page "%1$s" is invalid. It must match "Plugin[/path/to]/page".';
 $MANTIS_ERROR[ERROR_PLUGIN_INVALID_FILE] = 'The format of the specified plugin file "%1$s" is invalid. It must match "Plugin[/path/to]/file[.ext]".';
+$MANTIS_ERROR[ERROR_PLUGIN_ENTITY_NOT_FOUND] = 'Plugin entity "%s" not found';
+$MANTIS_ERROR[ERROR_PLUGIN_RUNTIME] = 'The following error occurred during execution of Plugin "%1$s".';
 $MANTIS_ERROR[ERROR_PLUGIN_GENERIC] = 'There was an unknown error "%1$s" during execution of the "%2$s" plugin.';
 $MANTIS_ERROR[ERROR_COLUMNS_DUPLICATE] = 'Field "%1$s" contains duplicate column "%2$s".';
-$MANTIS_ERROR[ERROR_COLUMNS_INVALID] = 'Field "%1$s" contains invalid field "%2$s".';
+$MANTIS_ERROR[ERROR_COLUMNS_INVALID] = 'Field "%1$s" contains invalid column "%2$s".';
 $MANTIS_ERROR[ERROR_SESSION_VAR_NOT_FOUND] = 'Session variable "%1$s" not found.';
 $MANTIS_ERROR[ERROR_SESSION_NOT_VALID] = 'Your session has become invalidated.';
 $MANTIS_ERROR[ERROR_FORM_TOKEN_INVALID] = 'Invalid form security token. This could be caused by a session timeout, or accidentally submitting the form twice.';
@@ -1756,7 +1756,7 @@ $MANTIS_ERROR[ERROR_DEPRECATED_SUPERSEDED] = 'Deprecated functionality: "%1$s", 
 $MANTIS_ERROR[ERROR_DISPLAY_USER_ERROR_INLINE] = 'Warning: The system is configured to display MantisBT errors (E_USER_ERROR) inline. Program execution will continue; this may lead to system/data integrity issues.';
 $MANTIS_ERROR[ERROR_TYPE_MISMATCH] = 'Data Type mismatch. Enable detailed error messages for further information.';
 $MANTIS_ERROR[ERROR_BUG_CONFLICTING_EDIT] = 'This issue has been updated by another user, please return to the issue and submit your changes again.';
-$MANTIS_ERROR[ERROR_SPAM_SUSPECTED] = 'You have reached the allowed activity limit of %d events within the last %d seconds; your action has been blocked to avoid spam, please try again later.';
+$MANTIS_ERROR[ERROR_SPAM_SUSPECTED] = 'You have reached the allowed activity limit of %1$d events within the last %2$d seconds; your action has been blocked to avoid spam, please try again later.';
 $MANTIS_ERROR[ERROR_FIELD_TOO_LONG] = 'Maximum length for Field "%1$s" is %2$d characters.';
 $MANTIS_ERROR[ERROR_API_TOKEN_NAME_NOT_UNIQUE] = 'API token name "%s" is already being used. Please go back and select another one.';
 $MANTIS_ERROR[ERROR_LOGFILE_NOT_WRITABLE] = 'The file specified in $g_log_destination "%s" is not writable.';
@@ -1807,3 +1807,4 @@ $s_filter_new = 'New';
 $s_filter_unused_tags = 'Unused';
 $s_filter_unused = 'Unused';
 $s_unknown = 'unknown';
+$s_optional = 'Optional';

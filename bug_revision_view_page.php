@@ -37,7 +37,12 @@
  * @uses print_api.php
  * @uses string_api.php
  * @uses user_api.php
+ *
+ * Unhandled exceptions will be caught by the default error handler
+ * @noinspection PhpUnhandledExceptionInspection
  */
+
+use Mantis\Exceptions\ClientException;
 
 require_once( 'core.php' );
 require_api( 'access_api.php' );
@@ -62,14 +67,14 @@ $f_rev_id = gpc_get_int( 'rev_id', 0 );
 $t_title = '';
 
 if( $f_bug_id ) {
-	$t_bug_id = (int)$f_bug_id;
+	$t_bug_id = $f_bug_id;
 	$t_bugnote_id = false;
 	$t_bug_revisions = bug_revision_list( $t_bug_id );
 
 	$t_title = lang_get( 'issue_id' ) . $t_bug_id;
 
 } elseif( $f_bugnote_id ) {
-	$t_bugnote_id = (int)$f_bugnote_id;
+	$t_bugnote_id = $f_bugnote_id;
 	$t_bug_id = bugnote_get_field( $t_bugnote_id, 'bug_id' );
 
 	$t_bug_revisions = bug_revision_list( $t_bug_id, REV_ANY, $f_bugnote_id );
@@ -80,7 +85,7 @@ if( $f_bug_id ) {
 	$t_bug_revisions = bug_revision_like( $f_rev_id );
 
 	if( count( $t_bug_revisions ) < 1 ) {
-		trigger_error( ERROR_GENERIC, ERROR );
+		throw new ClientException( "No bug revisions", ERROR_GENERIC );
 	}
 
 	$t_rev = $t_bug_revisions[$f_rev_id];
@@ -90,8 +95,7 @@ if( $f_bug_id ) {
 	$t_title = lang_get( 'issue_id' ) . $t_bug_id;
 
 } else {
-	trigger_error( ERROR_GENERIC, ERROR );
-	exit;
+	throw new ClientException( "No identifier provided", ERROR_GENERIC );
 }
 
 # Make sure user is allowed to view revisions
@@ -108,9 +112,11 @@ if( $t_bugnote_id ) {
 
 
 /**
- * Show Bug revision
+ * Show Bug revision.
  *
  * @param array $p_revision Bug Revision Data.
+ *
+ * @throws ClientException
  */
 function show_revision( array $p_revision ) {
 	static $s_view_bug_threshold = null;
@@ -159,7 +165,7 @@ function show_revision( array $p_revision ) {
 	}
 
 	$t_by_string = sprintf( lang_get( 'revision_by' ),
-		string_display_line( date( $s_date_format, $v_timestamp ) ),
+		string_attribute( date( $s_date_format, $v_timestamp ) ),
 		prepare_user_name( $v_user_id )
 	);
 

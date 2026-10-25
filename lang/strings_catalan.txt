@@ -2,7 +2,7 @@
 /** MantisBT - a php based bugtracking system
  *
  * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2016  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * Copyright (C) 2002 - 2026  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  *
  * MantisBT is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -195,8 +195,6 @@ $s_update_severity_title = 'Actualitza la Severitat';
 $s_update_severity_msg = 'Escull la severitat de la incidència';
 $s_update_severity_button = 'Actualitza la severitat';
 $s_hide_button = 'Mostra només els seleccionats';
-$s_printing_preferences_title = 'Seleccioni camps per imprimir';
-$s_printing_options_link = 'Opcions d\'Impressió';
 $s_bugnote_title = 'Editor de notes';
 $s_bugnote_date = 'Data de la nota';
 $s_bugnote_description = 'Descripció de la nota';
@@ -208,7 +206,6 @@ $s_prefix_for_deleted_users = 'usuari';
 $s_administrator = 'administrador';
 $s_myself = 'jo mateix';
 $s_default_access_level = 'Nivell d\'accés per defecte';
-$s_issue_status_percentage = 'Percentatge de incidències per estat';
 $s_access_levels_enum_string = '10:espectador,25:informador,40:actualitzador,55:desenvolupador,70:gestor,90:administrador';
 $s_no_access = 'Cap accés';
 $s_project_status_enum_string = '10:en desenvolupament,30:lliurament,50:estable,70:obsolet';

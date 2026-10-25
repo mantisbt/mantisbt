@@ -2,7 +2,7 @@
 /** MantisBT - a php based bugtracking system
  *
  * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2016  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * Copyright (C) 2002 - 2026  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  *
  * MantisBT is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -155,7 +155,6 @@ $s_product_version_group_bugs_button = 'Ĝisdatigi Produktan Version';
 $s_update_severity_title = 'Ĝisdatigi Severecon';
 $s_update_severity_msg = 'Elekti severecon de problemo';
 $s_update_severity_button = 'Ĝisdatigi Severecon';
-$s_printing_options_link = 'Opcioj pri Presado';
 $s_bugnote_date = 'Dato de noto';
 $s_bugnote_description = 'Priskribo de noto';
 $s_logged_in_as = 'Elsalutinta kiel';
@@ -163,7 +162,6 @@ $s_prefix_for_deleted_users = 'uzanto';
 $s_administrator = 'administranto';
 $s_myself = 'Mi mem';
 $s_default_access_level = 'Implicita atingonivelo';
-$s_issue_status_percentage = 'Procento de Problemaj Statoj';
 $s_access_levels_enum_string = '10:vidanto,25:raportanto,40:ĝisdatiganto,55:evoluiganto,70:mastrumanto,90:administranto';
 $s_no_access = 'neniu aliro';
 $s_project_status_enum_string = '10:evoluigata,30:eldonita,50:stabila,70:malnoviĝinta';

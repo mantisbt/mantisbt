@@ -43,7 +43,12 @@
  * @uses user_api.php
  * @uses utility_api.php
  * @uses version_api.php
+ *
+ * Unhandled exceptions will be caught by the default error handler
+ * @noinspection PhpUnhandledExceptionInspection
  */
+
+use Mantis\Exceptions\ClientException;
 
 require_once( 'core.php' );
 require_api( 'access_api.php' );
@@ -79,15 +84,15 @@ function print_version_header( $p_version_id ) {
 	$t_version_name = version_get_field( $p_version_id, 'version' );
 	$t_project_name = project_get_field( $t_project_id, 'name' );
 
-	$t_release_title = '<a class="white" href="changelog_page.php?project_id=' . $t_project_id . '">' . string_display_line( $t_project_name ) . '</a>';
-	$t_release_title .= ' - <a class="white" href="changelog_page.php?version_id=' . $p_version_id . '">' . string_display_line( $t_version_name ) . '</a>';
+	$t_release_title = '<a class="white" href="changelog_page.php?project_id=' . $t_project_id . '">' . string_attribute( $t_project_name ) . '</a>';
+	$t_release_title .= ' - <a class="white" href="changelog_page.php?version_id=' . $p_version_id . '">' . string_attribute( $t_version_name ) . '</a>';
 
 	if( config_get( 'show_changelog_dates' ) ) {
 		$t_version_released = version_get_field( $p_version_id, 'released' );
 		$t_release_timestamp = version_get_field( $p_version_id, 'date_order' );
 
 		if( (bool)$t_version_released ) {
-			$t_release_date = lang_get( 'released' ) . ' ' . string_display_line( date( config_get( 'short_date_format' ), $t_release_timestamp ) );
+			$t_release_date = lang_get( 'released' ) . ' ' . string_attribute( date( config_get( 'short_date_format' ), $t_release_timestamp ) );
 		} else {
 			$t_release_date = lang_get( 'not_released' );
 		}
@@ -130,11 +135,11 @@ function print_version_header( $p_version_id ) {
 	);
 	print_extra_small_button(
 		'changelog_page.php?version_id=' . $p_version_id,
-		string_display_line( $t_version_name )
+		string_attribute( $t_version_name )
 	);
 	print_extra_small_button(
 		'changelog_page.php?project_id=' . $t_project_id,
-		string_display_line( $t_project_name )
+		string_attribute( $t_project_name )
 	);
 	echo '</div>';
 	echo PHP_EOL;
@@ -178,7 +183,7 @@ function print_version_footer( $p_version_id, $p_issues_resolved ) {
  */
 function print_project_header_changelog( $p_project_name ) {
 	echo '<div class="page-header">';
-	echo '<h1><strong>' . string_display_line( $p_project_name ), '</strong> - ', lang_get( 'changelog' ) . '</h1>';
+	echo '<h1><strong>' . string_attribute( $p_project_name ), '</strong> - ', lang_get( 'changelog' ) . '</h1>';
 	echo '</div>';
 	echo PHP_EOL;
 }
@@ -193,8 +198,10 @@ if( is_blank( $f_project ) ) {
 	$f_project_id = project_get_id_by_name( $f_project );
 
 	if( $f_project_id === 0 ) {
-		error_parameters( $f_project );
-		trigger_error( ERROR_PROJECT_NOT_FOUND, ERROR );
+		throw new ClientException( "Project not found",
+			ERROR_PROJECT_NOT_FOUND,
+			[ $f_project ]
+		);
 	}
 }
 
@@ -223,8 +230,10 @@ if( is_blank( $f_version ) ) {
 	$f_version_id = version_get_id( $f_version, $t_project_id );
 
 	if( $f_version_id === false ) {
-		error_parameters( $f_version );
-		trigger_error( ERROR_VERSION_NOT_FOUND, ERROR );
+		throw new ClientException( "Version not found",
+			ERROR_VERSION_NOT_FOUND,
+			[ $f_version ]
+		);
 	}
 }
 

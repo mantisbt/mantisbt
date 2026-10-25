@@ -2,7 +2,7 @@
 /** MantisBT - a php based bugtracking system
  *
  * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2016  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * Copyright (C) 2002 - 2026  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  *
  * MantisBT is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -159,8 +159,6 @@ $s_product_version_group_bugs_button = 'პროდუქტის ვერს
 $s_due_date_group_bugs_button = 'დედლაინის განახლება';
 $s_update_severity_button = 'სიმძიმის განახლება';
 $s_hide_button = 'აჩვენე მხოლოდ მონიშნულები';
-$s_printing_preferences_title = 'აირჩიეთ ველები ბეჭდვისთვის';
-$s_printing_options_link = 'ბეჭდვის ოპციები';
 $s_bugnote_date = 'შენიშვნის თარიღი';
 $s_bugnote_description = 'შენიშვნის აღწერა';
 $s_login_error = 'მომხმარებელი შესაძლოა დაბლოკილია ან გათიშული ან მომხმარებლის სახელი/პაროლი არასწორია.';
@@ -169,7 +167,6 @@ $s_prefix_for_deleted_users = 'მომხმარებელი';
 $s_administrator = 'ადმინისტრატორი';
 $s_myself = 'მე თვითონ';
 $s_default_access_level = 'სტანდარტული დაშვების დონე';
-$s_issue_status_percentage = 'მოთხოვნის სტატუსის პროცენტი';
 $s_access_levels_enum_string = '10:მნახველი,25:რეპორტერი,40:გამნახლებელი,55:დეველოპერი,70:მენეჯერი,90:ადმინისტრატორი';
 $s_no_access = 'დაშვება არ არის';
 $s_project_status_enum_string = '10:დეველოპმეტი,30:რელიზი,50:სტაბილური,70:მოძველებული';

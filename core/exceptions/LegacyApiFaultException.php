@@ -16,6 +16,7 @@
 
 namespace Mantis\Exceptions;
 
+use Exception;
 use Throwable;
 
 /**
@@ -26,15 +27,14 @@ use Throwable;
  * Don't inherit from MantisException since we don't follow the conventions of having
  * code correspond to Mantis error code, but code here is the http error code.
  */
-class LegacyApiFaultException extends \Exception {
-    /**
-     * Constructor
-     *
-     * @param string $p_message The internal non-localized error message.
-     * @param integer $p_code The Mantis error code.
-     * @param \Throwable $p_previous The inner exception.
-     * @return void
-     */
+class LegacyApiFaultException extends Exception {
+	/**
+	 * Constructor
+	 *
+	 * @param string         $p_message  The internal non-localized error message.
+	 * @param int            $p_code     The Mantis error code.
+	 * @param Throwable|null $p_previous The inner exception.
+	 */
 	function __construct( $p_message, $p_code, ?Throwable $p_previous = null ) {
 		parent::__construct( $p_message, $p_code, $p_previous );
 	}

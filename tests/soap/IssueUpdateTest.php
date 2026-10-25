@@ -27,6 +27,7 @@
 
 namespace Mantis\tests\soap;
 
+use SoapFault;
 use stdClass;
 
 /**
@@ -36,6 +37,29 @@ use stdClass;
  * @group SOAP
  */
 class IssueUpdateTest extends SoapBase {
+	/**
+	 * @var mixed Saved status workflow configuration, or false if unset.
+	 */
+	private $savedStatusWorkflow = null;
+
+	/**
+	 * @var bool Whether the status workflow configuration was saved.
+	 */
+	private bool $statusWorkflowSaved = false;
+
+	/**
+	 * Restore the status workflow configuration after each test.
+	 *
+	 * @return void
+	 */
+	protected function tearDown(): void {
+		if( $this->statusWorkflowSaved ) {
+			$this->restoreConfig( 'status_enum_workflow', $this->savedStatusWorkflow );
+		}
+
+		parent::tearDown();
+	}
+
 	/**
 	 * A test case that tests the following:
 	 * 1. Ability to create an issue with only the mandatory parameters.
@@ -166,6 +190,38 @@ class IssueUpdateTest extends SoapBase {
 
 		$this->assertEquals( 10, $t_issue->resolution->id );
 		$this->assertEquals( 'open', $t_issue->resolution->name );
+	}
+
+	/**
+	 * Tests that summary length validation on update counts characters,
+	 * not bytes. A 128-character multibyte string should succeed even
+	 * though it exceeds 128 bytes, while 129 characters should fail.
+	 *
+	 * @return void
+	 */
+	public function testUpdateIssueWithTooLongSummary() {
+		$t_issue_to_add = $this->getIssueToAdd();
+		$t_issue_id = $this->client->mc_issue_add( $this->userName, $this->password, $t_issue_to_add );
+
+		$this->assertGreaterThan( 0, $t_issue_id );
+		$this->deleteAfterRun( $t_issue_id );
+
+		# 128 multi-byte characters = 384 bytes in UTF-8, but only 128 characters
+		$t_issue_to_update = $this->getIssueToAdd();
+		$t_issue_to_update['summary'] = str_repeat( "\xE4\xB8\x96", DB_FIELD_SIZE_BUG_SUMMARY );
+		$this->client->mc_issue_update( $this->userName, $this->password, $t_issue_id, $t_issue_to_update );
+
+		$t_issue = $this->client->mc_issue_get( $this->userName, $this->password, $t_issue_id );
+		$this->assertEquals( $t_issue_to_update['summary'], $t_issue->summary );
+
+		# 129 multi-byte characters should fail
+		$t_issue_to_update['summary'] = str_repeat( "\xE4\xB8\x96", DB_FIELD_SIZE_BUG_SUMMARY + 1 );
+
+		$this->expectException( SoapFault::class );
+		$this->expectExceptionMessageMatches(
+			'/Field "summary" exceeds maximum length ' . DB_FIELD_SIZE_BUG_SUMMARY . '\./'
+		);
+		$this->client->mc_issue_update( $this->userName, $this->password, $t_issue_id, $t_issue_to_update );
 	}
 
 	/**
@@ -518,5 +574,45 @@ class IssueUpdateTest extends SoapBase {
 		$this->client->mc_issue_update( $this->userName, $this->password, $t_issue_id, $t_issue );
 		$t_issue = $this->client->mc_issue_get( $this->userName, $this->password, $t_issue_id );
 		$this->assertCount( 0, $t_issue->monitors );
+	}
+
+	/**
+	 * Verify that SOAP issue updates enforce configured workflow transitions.
+	 *
+	 * @return void
+	 */
+	public function testUpdateStatusEnforcesWorkflow() {
+		$this->savedStatusWorkflow = $this->setConfig( 'status_enum_workflow', array(
+			NEW_ => FEEDBACK . ':feedback',
+		) );
+		$this->statusWorkflowSaved = true;
+
+		$t_issue_id = $this->client->mc_issue_add(
+			$this->userName,
+			$this->password,
+			$this->getIssueToAdd()
+		);
+		$this->deleteAfterRun( $t_issue_id );
+
+		$t_issue = $this->client->mc_issue_get( $this->userName, $this->password, $t_issue_id );
+		$t_issue->status = array( 'id' => ACKNOWLEDGED );
+
+		try {
+			$this->client->mc_issue_update( $this->userName, $this->password, $t_issue_id, $t_issue );
+			$this->fail( 'Disallowed status transition should fail.' );
+		} catch( SoapFault $e ) {
+			$this->assertStringContainsString(
+				"Status transition from 'new' (10) to 'acknowledged' (30) is not allowed.",
+				$e->getMessage()
+			);
+		}
+
+		$t_issue = $this->client->mc_issue_get( $this->userName, $this->password, $t_issue_id );
+		$this->assertEquals( NEW_, $t_issue->status->id );
+
+		$t_issue->status = array( 'id' => FEEDBACK );
+		$this->client->mc_issue_update( $this->userName, $this->password, $t_issue_id, $t_issue );
+		$t_issue = $this->client->mc_issue_get( $this->userName, $this->password, $t_issue_id );
+		$this->assertEquals( FEEDBACK, $t_issue->status->id );
 	}
 }

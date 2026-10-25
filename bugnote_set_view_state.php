@@ -36,7 +36,12 @@
  * @uses helper_api.php
  * @uses print_api.php
  * @uses string_api.php
+ *
+ * Unhandled exceptions will be caught by the default error handler
+ * @noinspection PhpUnhandledExceptionInspection
  */
+
+use Mantis\Exceptions\ClientException;
 
 require_once( 'core.php' );
 require_api( 'access_api.php' );
@@ -69,8 +74,10 @@ if( $t_bug->project_id != helper_get_current_project() ) {
 
 # Check if the bug is readonly
 if( bug_is_readonly( $t_bug_id ) ) {
-	error_parameters( $t_bug_id );
-	trigger_error( ERROR_BUG_READ_ONLY_ACTION_DENIED, ERROR );
+	throw new ClientException( "Issue is read-only",
+		ERROR_BUG_READ_ONLY_ACTION_DENIED,
+		[ $t_bug_id ]
+	);
 }
 
 # Check if the current user is allowed to change the view state of this bugnote

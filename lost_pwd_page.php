@@ -33,6 +33,8 @@
  * @uses print_api.php
  */
 
+use Mantis\Exceptions\ClientException;
+
 require_once( 'core.php' );
 require_api( 'config_api.php' );
 require_api( 'constant_inc.php' );
@@ -48,7 +50,7 @@ if( LDAP == config_get_global( 'login_method' ) ||
 	OFF == config_get( 'lost_password_feature' ) ||
 	OFF == config_get( 'send_reset_password' )  ||
 	OFF == config_get( 'enable_email_notification' ) ) {
-	trigger_error( ERROR_LOST_PASSWORD_NOT_ENABLED, ERROR );
+	throw new ClientException( "Lost password disabled", ERROR_LOST_PASSWORD_NOT_ENABLED );
 }
 
 $f_username = gpc_get_string( 'username', '' );

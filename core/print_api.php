@@ -53,6 +53,9 @@
  * @uses version_api.php
  */
 
+use Mantis\Exceptions\ClientException;
+use Mantis\Exceptions\StateException;
+
 require_api( 'access_api.php' );
 require_api( 'authentication_api.php' );
 require_api( 'bug_group_action_api.php' );
@@ -83,13 +86,10 @@ require_api( 'utility_api.php' );
 require_api( 'version_api.php' );
 
 /**
- * Print the headers to cause the page to redirect to $p_url.
- *
- * If we have handled any errors on this page return false and don't redirect.
+ * Print the headers to cause the page to redirect to $p_url and
+ * terminate script execution immediately after the redirect.
  *
  * @param string $p_url      The page to redirect to: has to be a relative path.
- * @param bool $p_die        If true (default), terminate script execution
- *                           immediately after redirecting.
  * @param bool   $p_sanitize Apply string_sanitize_url to passed URL.
  *                           Should be true when the URL is extracted from an
  *                           untrusted source (e.g. GET/POST),
@@ -97,18 +97,20 @@ require_api( 'version_api.php' );
  *                           (e.g. read from config_inc.php).
  * @param bool   $p_absolute Indicate if URL is absolute.
  *
- * @return bool
+ * @return never
+ * @throws ClientException
  */
-function print_header_redirect( $p_url, $p_die = true, $p_sanitize = false, $p_absolute = false ) {
+
+function print_header_redirect( $p_url, $p_sanitize = false, $p_absolute = false ): never {
 	if( error_handled() ) {
 		# Display a basic "proceed" page to show any pending errors, regardless
 		# of $g_stop_on_errors setting which is actually handled in
 		# html_meta_redirect(), called by layout_page_header().
-		layout_page_header( null, $p_url );
+		layout_page_header( '', $p_url );
 		layout_page_begin();
 		html_operation_successful( $p_url );
 		layout_page_end();
-		return false;
+		die;
 	}
 
 	# validate the url as part of this site before continuing
@@ -133,17 +135,10 @@ function print_header_redirect( $p_url, $p_die = true, $p_sanitize = false, $p_a
 		header( 'Content-Type: text/html; charset=utf-8' );
 		header( 'Location: ' . $t_url );
 	} else {
-		trigger_error( ERROR_PAGE_REDIRECTION, ERROR );
-		return false;
+		throw new ClientException( "Page redirection error", ERROR_PAGE_REDIRECTION );
 	}
 
-	if( $p_die ) {
-		die;
-
-		# additional output can cause problems so let's just stop output here
-	}
-
-	return true;
+	die;
 }
 
 /**
@@ -845,14 +840,12 @@ function print_category_option_list( $p_category_id = 0, $p_project_id = null, $
 
 	foreach( $t_cat_arr as $t_category_row ) {
 		$t_category_id = (int)$t_category_row['id'];
-		$t_disabled = $t_category_row['status'] == CATEGORY_STATUS_DISABLED;
+		$t_disabled = !category_is_enabled( $t_category_id );
 		$t_category_name = category_full_name(
 			$t_category_id,
 			$t_category_row['project_id'] != $t_project_id
 		);
-		if( $t_disabled ) {
-//			$t_category_name .= ' [' . lang_get( 'disabled' ) . ']';
-		}
+
 		echo '<option value="' . $t_category_id . '"';
 		check_selected( $p_category_id, $t_category_id );
 		check_disabled( $t_disabled );
@@ -1280,7 +1273,7 @@ function print_custom_field_projects_list( $p_field_id ) {
 
 	foreach( $t_project_ids as $t_project_id ) {
 		$t_project_name = project_get_field( $t_project_id, 'name' );
-		echo '<strong>', string_display_line( $t_project_name ), '</strong>: ';
+		echo '<strong>', string_attribute( $t_project_name ), '</strong>: ';
 		print_extra_small_button( 'manage_proj_custom_field_remove.php?field_id=' . $c_field_id . '&project_id=' . $t_project_id . '&return=custom_field' . $t_security_token, lang_get( 'remove_link' ) );
 		echo '<br />- ';
 
@@ -1298,7 +1291,7 @@ function print_custom_field_projects_list( $p_field_id ) {
 				echo '<em>';
 			}
 
-			echo string_display_line( custom_field_get_field( $t_current_field_id, 'name' ) );
+			echo string_attribute( custom_field_get_field( $t_current_field_id, 'name' ) );
 			echo ' (', custom_field_get_sequence( $t_current_field_id, $t_project_id ), ')';
 
 			if( $t_current_field_id == $p_field_id ) {
@@ -1351,9 +1344,9 @@ function print_formatted_priority_string( BugData $p_bug ) {
 	if( $t_priority_threshold >= 0 &&
 		$p_bug->priority >= $t_priority_threshold &&
 		$p_bug->status < config_get( 'bug_closed_status_threshold' ) ) {
-		echo '<span class="bold">' . $t_pri_str . '</span>';
+		echo '<span class="bold">' . string_attribute( $t_pri_str ) . '</span>';
 	} else {
-		echo $t_pri_str;
+		echo string_attribute( $t_pri_str );
 	}
 }
 
@@ -1370,9 +1363,9 @@ function print_formatted_severity_string( BugData $p_bug ) {
 	if( $t_severity_threshold >= 0 &&
 		$p_bug->severity >= $t_severity_threshold &&
 		$p_bug->status < config_get( 'bug_closed_status_threshold' ) ) {
-		echo '<span class="bold">' . $t_sev_str . '</span>';
+		echo '<span class="bold">' . string_attribute( $t_sev_str ) . '</span>';
 	} else {
-		echo $t_sev_str;
+		echo string_attribute( $t_sev_str);
 	}
 }
 
@@ -1940,34 +1933,46 @@ function print_recently_visited() {
 
 /**
  * print a drop down box from input array
+ *
  * @param array        $p_control_array Array of elements in drop down list (name, description).
  * @param string       $p_control_name  Name attribute of <select> box.
  * @param string|array $p_match	        Either a string or an array of selected values.
  * @param boolean      $p_add_any       Whether to display an '[any]' option in the drop down.
  * @param boolean      $p_multiple      Whether drop down list allows multiple values to be selected.
+ * @param boolean      $p_required      Whether user must select a value from the list
+ *                                      (the first item's key in $p_control_array must be empty string)
+ *
  * @return string
  */
-function get_dropdown( array $p_control_array, $p_control_name, $p_match = '', $p_add_any = false, $p_multiple = false ) {
+function get_dropdown( array $p_control_array, $p_control_name, $p_match = '', $p_add_any = false, $p_multiple = false, $p_required = false ) {
 	if( $p_multiple ) {
 		$t_size = ' size="5"';
-		$t_multiple = ' multiple="multiple"';
+		$t_multiple = ' multiple';
 	} else {
 		$t_size = '';
 		$t_multiple = '';
 	}
-	$t_info = sprintf( '<select class="input-sm" %s name="%s" id="%s"%s>', $t_multiple, $p_control_name, $p_control_name, $t_size );
+	$t_required = $p_required ? ' required' : '';
+	/** @noinspection HtmlUnknownAttribute */
+	$t_info = sprintf( '<select class="input-sm" name="%1$s" id="%1$s"%2$s%3$s%4$s data-arbitrary-dates="%5$s">',
+		$p_control_name,
+		$t_required,
+		$t_multiple,
+		$t_size,
+		Period::PERIOD_ARBITRARY_DATES
+	);
 	if( $p_add_any ) {
-		array_unshift( $p_control_array, [ META_FILTER_ANY => '[any]' ] );
+		array_unshift( $p_control_array, [ META_FILTER_ANY => '[' . lang_get( 'any' ) . ']' ] );
 	}
 	foreach ( $p_control_array as $t_name => $t_desc ) {
 		$t_sel = '';
 		if( is_array( $p_match ) ) {
 			if( in_array( $t_name, array_values( $p_match ) ) || in_array( $t_desc, array_values( $p_match ) ) ) {
-				$t_sel = ' selected="selected"';
+				$t_sel = ' selected';
 			}
 		} else {
 			if( ( $t_name === $p_match ) || ( $t_desc === $p_match ) ) {
-				$t_sel = ' selected="selected"';
+				$t_sel = ' selected';
 			}
 		}
 		$t_info .= sprintf( '<option%s value="%s">%s</option>', $t_sel, $t_name, $t_desc );
@@ -2080,7 +2085,7 @@ function print_bug_attachment_header( array $p_attachment, $p_security_token ) {
 		if( $p_attachment['can_download'] ) {
 			echo '<a href="' . string_attribute( $p_attachment['download_url'] ) . '"' . print_attachment_link_target() . '>';
 		}
-		echo string_display_line( $p_attachment['display_name'] );
+		echo string_attribute( $p_attachment['display_name'] );
 		if( $p_attachment['can_download'] ) {
 			echo '</a>';
 		}
@@ -2089,7 +2094,7 @@ function print_bug_attachment_header( array $p_attachment, $p_security_token ) {
 		event_signal( 'EVENT_VIEW_BUG_ATTACHMENT', array( $p_attachment ) );
 	} else {
 		print_file_icon( $p_attachment['display_name'] );
-		echo lang_get( 'word_separator' ) . '<s>' . string_display_line( $p_attachment['display_name'] ) . '</s>' . lang_get( 'word_separator' ) . '(' . lang_get( 'attachment_missing' ) . ')';
+		echo lang_get( 'word_separator' ) . '<s>' . string_attribute( $p_attachment['display_name'] ) . '</s>' . lang_get( 'word_separator' ) . '(' . lang_get( 'attachment_missing' ) . ')';
 	}
 
 	if( $p_attachment['can_delete'] ) {
@@ -2103,9 +2108,12 @@ function print_bug_attachment_header( array $p_attachment, $p_security_token ) {
 
 /**
  * Prints the preview of a text file attachment.
- * @param array $p_attachment An attachment array from within the array returned by
- *              the file_get_visible_attachments() function.
+ *
+ * @param array $p_attachment An attachment array from within the array returned
+ *                            by the file_get_visible_attachments() function.
+ *
  * @return void
+ * @throws StateException
  */
 function print_bug_attachment_preview_text( array $p_attachment ) {
 	if( !$p_attachment['exists'] ) {
@@ -2126,7 +2134,7 @@ function print_bug_attachment_preview_text( array $p_attachment ) {
 			$t_content = $t_row['content'];
 			break;
 		default:
-			trigger_error( ERROR_GENERIC, ERROR );
+			throw new StateException( "Unknown file upload method", ERROR_GENERIC );
 	}
 	echo htmlspecialchars( $t_content, ENT_SUBSTITUTE, 'UTF-8' );
 	echo '</pre>';
@@ -2190,20 +2198,17 @@ function print_bug_attachment_preview_audio_video( array $p_attachment, $p_file_
 function print_timezone_option_list( $p_timezone ) {
 	$t_identifiers = timezone_identifiers_list( DateTimeZone::ALL );
 
+	$t_locations_list = [];
 	foreach( $t_identifiers as $t_identifier ) {
 		$t_zone = explode( '/', $t_identifier, 2 );
-		if( isset( $t_zone[1] ) ) {
-			$t_id = $t_zone[1];
-		} else {
-			$t_id = $t_identifier;
-		}
-		$t_locations[$t_zone[0]][$t_identifier] = array(
+		$t_id = $t_zone[1] ?? $t_identifier;
+		$t_locations_list[$t_zone[0]][$t_identifier] = array(
 			str_replace( '_', ' ', $t_id ),
 			$t_identifier
 		);
 	}
 
-	foreach( $t_locations as $t_continent => $t_locations ) {
+	foreach( $t_locations_list as $t_continent => $t_locations ) {
 		echo "\t" . '<optgroup label="' . $t_continent . '">' . "\n";
 		foreach ( $t_locations as $t_location ) {
 			echo "\t\t" . '<option value="' . $t_location[1] . '"';
@@ -2252,58 +2257,24 @@ function print_max_filesize( $p_size, $p_divider = 1024, $p_unit = 'kib' ) {
 /**
  * Populate form element with dropzone data attributes
  * @return void
+ * @deprecated 2.29.0 dropzone_print_form_data() should be used in preference to this function
  */
 function print_dropzone_form_data() {
-	//$t_max_file_size = ceil( file_get_max_file_size() / ( 1024*1024 ) );
-	echo 'data-force-fallback="' . ( config_get( 'dropzone_enabled' ) ? 'false' : 'true' ) . '"' . "\n";
-	echo "\t" . 'data-max-filesize-bytes="'. file_get_max_file_size() . '"' . "\n";
-	echo "\t" . 'data-max-filename-length="'. DB_FIELD_SIZE_FILENAME . '"' . "\n";
-	$t_allowed_files = config_get( 'allowed_files' );
-	if ( !empty ( $t_allowed_files ) ) {
-		$t_allowed_files = '.' . implode ( ',.', explode ( ',', $t_allowed_files ) );
-	}
-	echo "\t" . 'data-accepted-files="' . $t_allowed_files . '"' . "\n";
-	echo "\t" . 'data-default-message="' . htmlspecialchars( lang_get( 'dropzone_default_message' ) ) . '"' . "\n";
-	echo "\t" . 'data-fallback-message="' . htmlspecialchars( lang_get( 'dropzone_fallback_message' ) ) . '"' . "\n";
-	echo "\t" . 'data-fallback-text="' . htmlspecialchars( lang_get( 'dropzone_fallback_text' ) ) . '"' . "\n";
-	echo "\t" . 'data-file-too-big="' . htmlspecialchars( lang_get( 'dropzone_file_too_big' ) ) . '"' . "\n";
-	echo "\t" . 'data-invalid-file-type="' . htmlspecialchars( lang_get( 'dropzone_invalid_file_type' ) ) . '"' . "\n";
-	echo "\t" . 'data-response-error="' . htmlspecialchars( lang_get( 'dropzone_response_error' ) ) . '"' . "\n";
-	echo "\t" . 'data-cancel-upload="' . htmlspecialchars( lang_get( 'dropzone_cancel_upload' ) ) . '"' . "\n";
-	echo "\t" . 'data-cancel-upload-confirmation="' . htmlspecialchars( lang_get( 'dropzone_cancel_upload_confirmation' ) ) . '"' . "\n";
-	echo "\t" . 'data-remove-file=""' . "\n";
-	echo "\t" . 'data-remove-file-confirmation="' . htmlspecialchars( lang_get( 'dropzone_remove_file_confirmation' ) ) . '"' . "\n";
-	echo "\t" . 'data-max-files-exceeded="' . htmlspecialchars( lang_get( 'dropzone_max_files_exceeded' ) ) . '"' . "\n";
-	echo "\t" . 'data-dropzone-not-supported="' . htmlspecialchars( lang_get( 'dropzone_not_supported' ) ) . '"';
-	echo "\t" . 'data-dropzone_multiple_files_too_big="' . htmlspecialchars( lang_get( 'dropzone_multiple_files_too_big' ) ) . '"';
-	echo "\t" . 'data-dropzone_multiple_filenames_too_long="' . htmlspecialchars( lang_get( 'dropzone_multiple_filenames_too_long' ) ) . '"';
+	error_parameters( __FUNCTION__, 'dropzone_print_form_data' );
+	trigger_error( ERROR_DEPRECATED_SUPERSEDED, DEPRECATED );
+	dropzone_print_form_data();
 }
 
 /**
  * Populate a hidden div where its inner html will be used as preview template
  * for dropzone attached files
  * @return void
+ * @deprecated 2.29.0 dropzone_print_template() should be used in preference to this function
  */
 function print_dropzone_template(){
-	?>
-	<div id="dropzone-preview-template" class="hidden">
-		<div class="dz-preview dz-file-preview">
-			<div class="dz-filename"><span data-dz-name></span></div>
-			<img src="data:image/png;base64," alt="" data-dz-thumbnail>
-			<div class="dz-error-message">
-				<div class="dz-error-mark"><span><?php print_icon('fa-times-circle'); ?></span></div>
-				<span data-dz-errormessage></span>
-			</div>
-			<div class="dz-size" data-dz-size></div>
-			<div class="progress progress-small progress-striped active">
-				<div class="progress-bar progress-bar-success" data-dz-uploadprogress></div>
-			</div>
-			<a class="btn btn-primary btn-white btn-round btn-xs" data-dz-remove>
-				<?php echo lang_get( 'dropzone_remove_file' ); ?>
-			</a>
-		</div>
-	</div>
-	<?php
+	error_parameters( __FUNCTION__, 'dropzone_print_template' );
+	trigger_error( ERROR_DEPRECATED_SUPERSEDED, DEPRECATED );
+	dropzone_print_template();
 }
 
 /**

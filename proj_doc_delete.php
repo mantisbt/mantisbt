@@ -69,7 +69,7 @@ $t_title = db_result( $t_result );
 # Confirm with the user
 helper_ensure_confirmed(
 	sprintf( lang_get( 'confirm_file_delete_msg' ),
-		string_display_line( $t_title )
+		string_attribute( $t_title )
 	),
 	lang_get( 'file_delete_button' )
 );

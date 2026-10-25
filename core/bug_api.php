@@ -351,7 +351,7 @@ class BugData {
 				if( !$this->loading && $this->$p_name != $p_value ) {
 					# Only set target_version if user has access to do so
 					if( !access_has_project_level( config_get( 'roadmap_update_threshold' ) ) ) {
-						trigger_error( ERROR_ACCESS_DENIED, ERROR );
+						throw new ClientException( "Access denied", ERROR_ACCESS_DENIED );
 					}
 				}
 				break;
@@ -486,15 +486,35 @@ class BugData {
 	public function validate( $p_update_extended = true ) {
 		# Summary cannot be blank
 		if( is_blank( $this->summary ) ) {
-			error_parameters( lang_get( 'summary' ) );
-			trigger_error( ERROR_EMPTY_FIELD, ERROR );
+			throw new ClientException( "Summary cannot be empty",
+				ERROR_EMPTY_FIELD,
+				[ lang_get( 'summary' ) ]
+			);
+		}
+
+		if( preg_match( '/[\r\n]/', $this->summary ) ) {
+			throw new ClientException(
+				'Field "summary" cannot contain line breaks.',
+				ERROR_INVALID_FIELD_VALUE,
+				array( lang_get( 'summary' ) )
+			);
+		}
+
+		if( mb_strlen( $this->summary ) > DB_FIELD_SIZE_BUG_SUMMARY ) {
+			throw new ClientException(
+				'Field "summary" exceeds maximum length ' . DB_FIELD_SIZE_BUG_SUMMARY . '.',
+				ERROR_FIELD_TOO_LONG,
+				array( lang_get( 'summary' ), DB_FIELD_SIZE_BUG_SUMMARY )
+			);
 		}
 
 		if( $p_update_extended ) {
 			# Description field cannot be empty
 			if( is_blank( $this->description ) ) {
-				error_parameters( lang_get( 'description' ) );
-				trigger_error( ERROR_EMPTY_FIELD, ERROR );
+				throw new ClientException( "Description cannot be empty",
+					ERROR_EMPTY_FIELD,
+					[ lang_get( 'description' ) ]
+				);
 			}
 
 			helper_ensure_longtext_length_valid( $this->description, 'description' );
@@ -504,8 +524,10 @@ class BugData {
 
 		# Make sure a category is set
 		if( 0 == $this->category_id && !config_get( 'allow_no_category' ) ) {
-			error_parameters( lang_get( 'category' ) );
-			trigger_error( ERROR_EMPTY_FIELD, ERROR );
+			throw new ClientException( "Category cannot be empty",
+				ERROR_EMPTY_FIELD,
+				[ lang_get( 'category' ) ]
+			);
 		}
 
 		# Ensure that category id is a valid category
@@ -514,7 +536,7 @@ class BugData {
 		}
 
 		if( !is_blank( $this->duplicate_id ) && ( $this->duplicate_id != 0 ) && ( $this->id == $this->duplicate_id ) ) {
-			trigger_error( ERROR_BUG_DUPLICATE_SELF, ERROR );
+			throw new ClientException( "Issue can't duplicate itself", ERROR_BUG_DUPLICATE_SELF );
 			# never returns
 		}
 	}
@@ -568,7 +590,12 @@ class BugData {
 			$t_result = db_query( $t_query, array( $this->category_id ) );
 			$t_handler = db_result( $t_result );
 
-			if( $t_handler !== false && user_exists( $t_handler ) ) {
+			$t_handle_bug_threshold = config_get( 'handle_bug_threshold', null, null, $this->project_id );
+			if( $t_handler !== false
+				&& user_exists( $t_handler )
+				&& user_is_enabled( $t_handler )
+				&& access_has_project_level( $t_handle_bug_threshold, $this->project_id, $t_handler )
+			) {
 				$this->handler_id = $t_handler;
 			}
 		}
@@ -1224,7 +1251,7 @@ function bug_is_closed( $p_bug_id ) {
  * @param $p_bug_id
  *
  * @return int|false Warning level (0 = overdue), false if N/A.
- * @throws ClientException if the bug does not exist.
+ * @throws ClientException if the bug does not exist or config is not valid.
  */
 function bug_overdue_level( $p_bug_id ) {
 	if( bug_is_resolved( $p_bug_id ) ) {
@@ -1240,7 +1267,7 @@ function bug_overdue_level( $p_bug_id ) {
 
 	$t_warning_levels = config_get( 'due_date_warning_levels', null, null, $t_bug->project_id );
 	if( !empty( $t_warning_levels ) && !is_array( $t_warning_levels ) ) {
-		trigger_error( ERROR_GENERIC );
+		throw new ClientException( "Invalid 'due_date_warning_levels' config", ERROR_GENERIC );
 	}
 
 	$t_now = db_now();
@@ -1781,14 +1808,24 @@ function bug_get_newest_bugnote_timestamp( $p_bug_id ) {
  * @access public
  */
 function bug_get_bugnote_stats_array( array $p_bugs_id, $p_user_id = null ) {
-	if( empty( $p_bugs_id ) ) {
-		return array();
-	}
+	global $g_cache_bug;
+
+	$t_stats = array();
 
 	$t_id_array = array();
 	foreach( $p_bugs_id as $t_id ) {
-		$t_id_array[$t_id] = (int)$t_id;
+		$c_id = (int)$t_id;
+		if( isset( $g_cache_bug[$c_id]['_stats'] ) ) {
+			$t_stats[$c_id] = $g_cache_bug[$c_id]['_stats'];
+		} else {
+			$t_id_array[$c_id] = $c_id;
+		}
 	}
+
+	if ( empty( $t_id_array ) ) {
+		return $t_stats;
+	}
+
 	if( db_is_mssql() ) {
 		# MSSQL is limited to 2100 parameters per query, see #24393
 		$t_chunks = array_chunk( $t_id_array, 2100, true );
@@ -1808,7 +1845,6 @@ function bug_get_bugnote_stats_array( array $p_bugs_id, $p_user_id = null ) {
 	$t_query->sql( sprintf( $t_sql, $t_query->sql_in( 'n.bug_id', 'bug_ids' ) ) );
 
 	$t_counter = 0;
-	$t_stats = array();
 	foreach( $t_chunks as $t_chunk_ids ) {
 		$t_current_project_id = null;
 		$t_current_bug_id = null;
@@ -1851,9 +1887,8 @@ function bug_get_bugnote_stats_array( array $p_bugs_id, $p_user_id = null ) {
 					$t_last_submit_date = $t_query_row['date_submitted'];
 					$t_stats[$c_bug_id]['last_submitted_bugnote'] = $t_query_row['id'];
 				}
-				if( isset( $t_id_array[$c_bug_id] ) ) {
-					unset( $t_id_array[$c_bug_id] );
-				}
+				$g_cache_bug[$c_bug_id]['_stats'] = $t_stats[$c_bug_id];
+				unset( $t_id_array[$c_bug_id] );
 			}
 			$t_counter++;
 		}
@@ -1862,6 +1897,7 @@ function bug_get_bugnote_stats_array( array $p_bugs_id, $p_user_id = null ) {
 	# The remaining bug ids, are those without visible notes. Save false as cached value
 	foreach( $t_id_array as $t_id ) {
 		$t_stats[$t_id] = false;
+		$g_cache_bug[$t_id]['_stats'] = false;
 	}
 	return $t_stats;
 }
@@ -1987,7 +2023,7 @@ function bug_set_field( $p_bug_id, $p_field_name, $p_value ) {
 		case 'date_submitted':
 		case 'due_date':
 			if( !is_numeric( $p_value ) ) {
-				trigger_error( ERROR_GENERIC, ERROR );
+				throw new ClientException( "Invalid date", ERROR_GPC_NOT_NUMBER, [$p_field_name] );
 			}
 			$c_value = $p_value;
 			break;
@@ -2053,10 +2089,10 @@ function bug_assign( $p_bug_id, $p_user_id, $p_bugnote_text = '', $p_bugnote_pri
 		# The new handler is checked at project level
 		$t_project_id = bug_get_field( $p_bug_id, 'project_id' );
 		if( !access_has_project_level( config_get( 'handle_bug_threshold' ), $t_project_id, $p_user_id ) ) {
-			trigger_error( ERROR_HANDLER_ACCESS_TOO_LOW, ERROR );
+			throw new ClientException( "Access denied", ERROR_HANDLER_ACCESS_TOO_LOW );
 		}
 		if( $t_bug_sponsored && !access_has_project_level( config_get( 'handle_sponsored_bugs_threshold' ), $t_project_id, $p_user_id ) ) {
-			trigger_error( ERROR_SPONSORSHIP_HANDLER_ACCESS_LEVEL_TOO_LOW, ERROR );
+			throw new ClientException( "Access denied", ERROR_SPONSORSHIP_HANDLER_ACCESS_LEVEL_TOO_LOW );
 		}
 	}
 
@@ -2161,7 +2197,7 @@ function bug_resolve( $p_bug_id, $p_resolution, $p_fixed_in_version = '', $p_bug
 	$t_duplicate = !is_blank( $p_duplicate_id ) && ( $p_duplicate_id != 0 );
 	if( $t_duplicate ) {
 		if( $p_bug_id == $p_duplicate_id ) {
-			trigger_error( ERROR_BUG_DUPLICATE_SELF, ERROR );
+			throw new ClientException( "Issue can't duplicate itself", ERROR_BUG_DUPLICATE_SELF );
 
 			# never returns
 		}
@@ -2288,9 +2324,6 @@ function bug_monitor( $p_bug_id, $p_user_id ) {
 	# log new monitoring action
 	history_log_event_special( $c_bug_id, BUG_MONITOR, $c_user_id );
 
-	# updated the last_updated date
-	bug_update_date( $p_bug_id );
-
 	email_monitor_added( $p_bug_id, $p_user_id );
 
 	return true;
@@ -2379,9 +2412,6 @@ function bug_unmonitor( $p_bug_id, $p_user_id ) {
 
 	# log new un-monitor action
 	history_log_event_special( $p_bug_id, BUG_UNMONITOR, (int)$p_user_id );
-
-	# updated the last_updated date
-	bug_update_date( $p_bug_id );
 
 	return true;
 }

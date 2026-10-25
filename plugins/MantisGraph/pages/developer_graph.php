@@ -55,7 +55,7 @@ $t_mantisgraph->print_submenu();
 			</div>
 
 <?php
-			$t_metrics = create_developer_resolved_summary( $t_filter );
+			$t_metrics = create_developer_summary( 'resolved', $t_filter );
 			graph_bar( $t_metrics );
 ?>
 		</div>
@@ -69,7 +69,7 @@ $t_mantisgraph->print_submenu();
 			</div>
 
 <?php
-			$t_metrics = create_developer_open_summary( $t_filter );
+			$t_metrics = create_developer_summary( 'open', $t_filter );
 			graph_bar( $t_metrics );
 ?>
 		</div>

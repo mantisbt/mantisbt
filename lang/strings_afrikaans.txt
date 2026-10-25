@@ -2,7 +2,7 @@
 /** MantisBT - a php based bugtracking system
  *
  * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2016  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * Copyright (C) 2002 - 2026  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  *
  * MantisBT is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -112,7 +112,6 @@ $s_category_group_bugs_button = 'Wysig kategorie';
 $s_view_status_group_bugs_button = 'Wysig sigbaarheid';
 $s_update_severity_title = 'Opdateer impak';
 $s_update_severity_button = 'Opdateer Impak';
-$s_printing_options_link = 'Drukopsies';
 $s_bugnote_date = 'Datum van opmerking';
 $s_bugnote_description = 'Beskrywing';
 $s_logged_in_as = 'Aangeteken as';

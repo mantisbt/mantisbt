@@ -154,7 +154,7 @@ function mention_format_text( $p_text, $p_html = true ) {
 		$t_mention_formatted = $t_mention;
 
 		if( $p_html ) {
-			$t_mention_formatted = string_display_line( $t_mention_formatted );
+			$t_mention_formatted = string_attribute( $t_mention_formatted );
 
 			$t_mention_formatted = '<a href="' . string_sanitize_url( 'view_user_page.php?id=' . $t_user_id, true ) . '">' . $t_mention_formatted . '</a>';
 

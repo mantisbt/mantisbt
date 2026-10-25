@@ -2,7 +2,7 @@
 /** MantisBT - a php based bugtracking system
  *
  * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2016  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * Copyright (C) 2002 - 2026  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  *
  * MantisBT is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -187,8 +187,6 @@ $s_update_severity_title = 'Opdatere alvorlighed';
 $s_update_severity_msg = 'Vælg problemets alvorlighed';
 $s_update_severity_button = 'Opdatere alvorlighed';
 $s_hide_button = 'Vis kun valgte';
-$s_printing_preferences_title = 'Vælg felter der skal udskrives';
-$s_printing_options_link = 'Udskriftsmuligheder';
 $s_bugnote_title = 'Behandler af bemærkninger';
 $s_bugnote_date = 'Dato for bemærkning';
 $s_bugnote_description = 'Beskrivelse af bemærkning';
@@ -200,7 +198,6 @@ $s_prefix_for_deleted_users = 'bruger';
 $s_administrator = 'administrator';
 $s_myself = 'Mig selv';
 $s_default_access_level = 'Standardadgangsniveau';
-$s_issue_status_percentage = 'Rapport status i procent';
 $s_access_levels_enum_string = '10:observatør,25:rapportør,40:opdatering,55:udvikler,70:leder,90:administrator';
 $s_no_access = 'ingen adgang';
 $s_project_status_enum_string = '10:udvikling,30:udgivelse,50:stabil,70:forældet';

@@ -50,6 +50,10 @@ span.dependency_met			{ color: green; }
 span.dependency_unmet		{ color: red; }
 span.dependency_upgrade		{ color: orange; }
 
+.label.multiline {
+	margin-top: .3em;
+}
+	
 tr.bugnote, div.widget-box, a#attachments, .test-langs tr {
 	scroll-margin-top: 50px;
 }

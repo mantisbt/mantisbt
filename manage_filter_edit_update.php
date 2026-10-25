@@ -23,7 +23,12 @@
  *
  * @uses core.php
  * @uses filter_api.php
+ *
+ * Unhandled exceptions will be caught by the default error handler
+ * @noinspection PhpUnhandledExceptionInspection
  */
+
+use Mantis\Exceptions\ClientException;
 
 require_once( 'core.php' );
 require_api( 'filter_api.php' );
@@ -36,8 +41,10 @@ $t_errors = array();
 
 $f_filter_id = gpc_get_int( 'filter_id', null );
 if( null === $f_filter_id ) {
-	error_parameters( 'FILTER_ID' );
-	trigger_error( ERROR_EMPTY_FIELD, ERROR );
+	throw new ClientException( "Filter Id is required",
+		ERROR_EMPTY_FIELD,
+		[ 'filter_id' ]
+	);
 }
 
 $t_filter = filter_get( $f_filter_id, null );

@@ -35,7 +35,12 @@
  * @uses string_api.php
  * @uses user_api.php
  * @uses utility_api.php
+ *
+ * Unhandled exceptions will be caught by the default error handler
+ * @noinspection PhpUnhandledExceptionInspection
  */
+
+use Mantis\Exceptions\ClientException;
 
 require_once( 'core.php' );
 require_api( 'access_api.php' );
@@ -60,8 +65,10 @@ auth_ensure_user_authenticated();
 $f_user_id = gpc_get_int( 'id', auth_get_current_user_id() );
 $t_row = user_get_row( $f_user_id );
 if( !$t_row ) {
-	error_parameters( $f_user_id );
-	trigger_error( ERROR_USER_BY_ID_NOT_FOUND, ERROR );
+	throw new ClientException( "User '$f_user_id' not found",
+		ERROR_USER_BY_ID_NOT_FOUND,
+		[ $f_user_id ]
+	);
 }
 
 extract( $t_row, EXTR_PREFIX_ALL, 'u' );
@@ -105,7 +112,7 @@ $t_timeline_view_class = ( $t_timeline_view_threshold_access ) ? "col-md-7" : "c
 			<?php echo lang_get( 'username' ) ?>
 		</th>
 		<td>
-			<?php echo string_display_line( $u_username ) ?>
+			<?php echo string_attribute( $u_username ) ?>
 		</td>
 	</tr>
 	<?php
@@ -115,7 +122,7 @@ $t_timeline_view_class = ( $t_timeline_view_threshold_access ) ? "col-md-7" : "c
 					<?php echo lang_get( 'realname' ) ?>
 				</th>
 				<td>
-					<?php echo string_display_line( $u_realname ); ?>
+					<?php echo string_attribute( $u_realname ); ?>
 				</td>
 			</tr>
 	<?php } ?>
@@ -141,7 +148,7 @@ $t_timeline_view_class = ( $t_timeline_view_threshold_access ) ? "col-md-7" : "c
 					<?php echo lang_get( 'access_level' ) ?>
 				</th>
 				<td>
-					<?php echo string_display_line( get_enum_element( 'access_levels', $u_access_level ) ); ?>
+					<?php echo string_attribute( get_enum_element( 'access_levels', $u_access_level ) ); ?>
 				</td>
 			</tr>
 			<tr>
@@ -177,13 +184,19 @@ $t_timeline_view_class = ( $t_timeline_view_threshold_access ) ? "col-md-7" : "c
 				</td>
 			</tr>
 			<?php
-				if( OFF != config_get( 'max_failed_login_count' ) ) { ?>
+				$t_failed_login_count = config_get( 'max_failed_login_count' );
+				if( OFF != $t_failed_login_count ) { ?>
 				<tr>
 					<th class="category">
 						<?php echo lang_get( 'failed_login_count' ) ?>
 					</th>
 					<td>
-						<?php echo $u_failed_login_count ?>
+						<?php
+						echo $u_failed_login_count;
+							if( $u_failed_login_count >= $t_failed_login_count ) {
+								echo '&nbsp;&nbsp;' . icon_get( 'lock', 'fa-lg', lang_get( 'locked' ) );
+							}
+						?>
 					</td>
 				</tr>
 			<?php } ?>

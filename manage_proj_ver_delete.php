@@ -50,7 +50,7 @@ $t_version_info = version_get( $f_version_id );
 # Confirm with the user
 helper_ensure_confirmed(
 	sprintf( lang_get( 'version_delete_sure' ),
-		string_display_line( $t_version_info->version )
+		string_attribute( $t_version_info->version )
 	),
 	lang_get( 'delete_version_button' )
 );

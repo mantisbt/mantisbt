@@ -55,11 +55,15 @@ $g_collapse_cache_token = null;
 
 /**
  * Marks the beginning of a collapse block's open phase.
+ *
  * This will be visible if the block is expanded or javascript is disabled.
+ *
  * @param string $p_name      Collapse block name.
  * @param string $p_section   Collapse block section.
  * @param string $p_css_class CSS class to apply to the div (defaults to none).
+ *
  * @return void
+ * @throws ClientException
  */
 function collapse_open( $p_name, $p_section = '', $p_css_class = '' ) {
 	global $g_current_collapse_section, $g_open_collapse_section;
@@ -69,7 +73,7 @@ function collapse_open( $p_name, $p_section = '', $p_css_class = '' ) {
 
 	# make sure no other collapse section is started
 	if( $g_current_collapse_section !== null ) {
-		trigger_error( ERROR_GENERIC, ERROR );
+		throw new ClientException( "Another collapse section has already been started", ERROR_GENERIC );
 	}
 
 	if( $t_display ) {
@@ -88,11 +92,15 @@ function collapse_open( $p_name, $p_section = '', $p_css_class = '' ) {
 /**
  * Marks the end of a collapse block's open phase and the beginning
  * of the closed phase.
+ *
  * This will be visible if the block is collapsed and javascript is enabled.
- * @param string $p_name    Collapse block name.
- * @param string $p_section Collapse block section.
+ *
+ * @param string $p_name      Collapse block name.
+ * @param string $p_section   Collapse block section.
  * @param string $p_css_class CSS class to apply to the div (defaults to none).
+ *
  * @return void
+ * @throws ClientException
  */
 function collapse_closed( $p_name, $p_section = '', $p_css_class = '' ) {
 	global $g_current_collapse_section, $g_open_collapse_section;
@@ -102,7 +110,7 @@ function collapse_closed( $p_name, $p_section = '', $p_css_class = '' ) {
 
 	# Make sure a section is opened, and it is the same section.
 	if( $t_block !== $g_current_collapse_section ) {
-		trigger_error( ERROR_GENERIC, ERROR );
+		throw new ClientException( "Collapse section mismatch", ERROR_GENERIC );
 	}
 
 	echo '</div>';
@@ -142,9 +150,12 @@ function collapse_icon( $p_name ) {
 
 /**
  * Marks the end of a collapse block's closed phase.
+ *
  * @param string $p_name    Collapse block name.
  * @param string $p_section Collapse block section.
+ *
  * @return void
+ * @throws ClientException
  */
 function collapse_end( $p_name, $p_section = '' ) {
 	global $g_current_collapse_section, $g_open_collapse_section;
@@ -154,7 +165,7 @@ function collapse_end( $p_name, $p_section = '' ) {
 
 	# Make sure a section is opened, and it is the same section.
 	if( $t_block !== $g_current_collapse_section ) {
-		trigger_error( ERROR_GENERIC, ERROR );
+		throw new ClientException( "Collapse section mismatch", ERROR_GENERIC );
 	}
 
 	echo '</div>';

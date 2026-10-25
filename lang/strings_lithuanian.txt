@@ -2,7 +2,7 @@
 /** MantisBT - a php based bugtracking system
  *
  * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2016  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * Copyright (C) 2002 - 2026  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  *
  * MantisBT is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -184,8 +184,6 @@ $s_update_severity_title = 'Atnaujinti svarbą';
 $s_update_severity_msg = 'Pasirinkite klaidos svarbą';
 $s_update_severity_button = 'Atnaujinti svarbą';
 $s_hide_button = 'Rodyti tik pasirinktas';
-$s_printing_preferences_title = 'Pasirinkti laukus spausdinimui';
-$s_printing_options_link = 'Spausdinimo nustatymai';
 $s_bugnote_title = 'Komentaro antraštė';
 $s_bugnote_date = 'Komentaro data';
 $s_bugnote_description = 'Komentaro aprašymas';
@@ -197,7 +195,6 @@ $s_prefix_for_deleted_users = 'naudotojas';
 $s_administrator = 'administratorius';
 $s_myself = 'Aš pats';
 $s_default_access_level = 'Numatytasis prieigos lygis';
-$s_issue_status_percentage = 'Klaidos pagal būseną procentais';
 $s_access_levels_enum_string = '10:stebėtojas,25:pranešėjas,40:atnaujintojas,55:sprendėjas,70:vadovas,90:administratorius';
 $s_no_access = 'Neturite prieigos';
 $s_project_status_enum_string = '10:kuriamas,30:išleistas,50:stabilus,70:pasenęs';

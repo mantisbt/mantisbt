@@ -24,6 +24,8 @@
  * @link http://www.mantisbt.org
  */
 
+use Mantis\Exceptions\ClientException;
+
 /**
  * Converts an html color (e.g. #fcbdbd) to rgba.
  *
@@ -209,6 +211,7 @@ function graph_cumulative_bydate( array $p_metrics, $p_wfactor = 1 ) {
  * @param array  $p_filter        Filter array.
  *
  * @return array
+ * @throws ClientException
  */
 function create_bug_enum_summary( $p_enum_string, $p_enum, array $p_exclude_codes = array(), array $p_filter = [] ) {
 	$t_project_id = helper_get_current_project();
@@ -219,7 +222,7 @@ function create_bug_enum_summary( $p_enum_string, $p_enum, array $p_exclude_code
 	$t_assoc_array = MantisEnum::getAssocArrayIndexedByValues( $p_enum_string );
 
 	if( !db_field_exists( $p_enum, db_get_table( 'bug' ) ) ) {
-		trigger_error( ERROR_DB_FIELD_NOT_FOUND, ERROR );
+		throw new ClientException( "Database field '$p_enum' not found", ERROR_DB_FIELD_NOT_FOUND );
 	}
 
 	$t_query = new DBQuery();
@@ -249,7 +252,9 @@ function create_bug_enum_summary( $p_enum_string, $p_enum, array $p_exclude_code
  *
  * @param array $p_filter Filter array.
  *
- * @return array An array with keys being status names and values being number of issues with such status.
+ * @return array An array with keys being status names and values being number
+ *               of issues with such status.
+ * @throws ClientException
  */
 function create_bug_status_summary( array $p_filter = [] ) {
 	# When the provided filter is temporary, it's a filter that was explicitly applied to summary pages.
@@ -276,84 +281,52 @@ function create_bug_status_summary( array $p_filter = [] ) {
 }
 
 /**
- * Create summary for issues resolved by a developer.
+ * Create summary for issues handled by a developer.
  *
- * @param array $p_filter Filter array.
+ * @param string $p_type   Summary type ('resolved' or 'open')
+ * @param array  $p_filter Optional filter array.
  *
  * @return array with key being username and value being # of issues fixed.
+ * @throws ClientException
  */
-function create_developer_resolved_summary( array $p_filter = [] ) {
+function create_developer_summary( $p_type, array $p_filter = [] ) {
 	$t_project_id = helper_get_current_project();
 	$t_user_id = auth_get_current_user_id();
 	$t_specific_where = helper_project_specific_where( $t_project_id, $t_user_id );
-	$t_resolved_status_threshold = config_get( 'bug_resolved_status_threshold' );
+	$t_resolved_status_threshold = (int)config_get( 'bug_resolved_status_threshold' );
 
-	$t_query = new DBQuery();
-	$t_sql = 'SELECT handler_id, count(*) as count FROM {bug} WHERE ' . $t_specific_where
-		. ' AND handler_id <> :nouser AND status >= :status_resolved AND resolution = :resolution_fixed';
-	if( !empty( $p_filter ) ) {
-		$t_subquery = filter_cache_subquery( $p_filter );
-		$t_sql .= ' AND {bug}.id IN :filter';
-		$t_query->bind( 'filter', $t_subquery );
+	$t_query = new DBQuery(<<<SQL
+		SELECT handler_id, count(*) as count FROM {bug} 
+		WHERE $t_specific_where
+		AND handler_id <> :nouser 
+		SQL
+	);
+
+	switch( $p_type ) {
+		case 'open':
+			$t_query->append_sql( "AND status < :status_resolved" );
+			break;
+		case 'resolved':
+			$t_query->append_sql(<<<SQL
+				AND status >= :status_resolved 
+				AND resolution = :resolution_fixed
+				SQL
+			);
+			$t_query->bind( 'resolution_fixed', FIXED );
+			break;
 	}
-	$t_sql .= ' GROUP BY handler_id ORDER BY count DESC';
-	$t_query->sql( $t_sql );
-	$t_query->bind( array(
+	$t_query->bind( [
 		'nouser' => NO_USER,
-		'status_resolved' => (int)$t_resolved_status_threshold,
-		'resolution_fixed' => FIXED,
-	) );
+		'status_resolved' => $t_resolved_status_threshold,
+	] );
+
+	if( !empty( $p_filter ) ) {
+		$t_query->append_sql( ' AND {bug}.id IN :filter' );
+		$t_query->bind( 'filter', filter_cache_subquery( $p_filter ) );
+	}
+
+	$t_query->append_sql( ' GROUP BY handler_id ORDER BY count DESC' );
 	$t_query->set_limit( 20 );
-
-	$t_handler_array = array();
-	$t_handler_ids = array();
-	while( $t_row = $t_query->fetch() ) {
-		$t_handler_array[$t_row['handler_id']] = (int)$t_row['count'];
-		$t_handler_ids[] = $t_row['handler_id'];
-	}
-
-	if( count( $t_handler_array ) == 0 ) {
-		return array();
-	}
-
-	user_cache_array_rows( $t_handler_ids );
-
-	foreach( $t_handler_array as $t_handler_id => $t_count ) {
-		$t_metrics[user_get_name( $t_handler_id )] = $t_count;
-	}
-
-	arsort( $t_metrics );
-
-	return $t_metrics;
-}
-
-/**
- * Create summary for issues opened by a developer.
- *
- * @param array $p_filter Filter array.
- *
- * @return array with key being username and value being # of issues fixed.
- */
-function create_developer_open_summary( array $p_filter = [] ) {
-	$t_project_id = helper_get_current_project();
-	$t_user_id = auth_get_current_user_id();
-	$t_specific_where = helper_project_specific_where( $t_project_id, $t_user_id );
-	$t_resolved_status_threshold = config_get( 'bug_resolved_status_threshold' );
-
-	$t_query = new DBQuery();
-	$t_sql = 'SELECT handler_id, count(*) as count FROM {bug} WHERE ' . $t_specific_where
-		. ' AND handler_id <> :nouser AND status < :status_resolved';
-	if( !empty( $p_filter ) ) {
-		$t_subquery = filter_cache_subquery( $p_filter );
-		$t_sql .= ' AND {bug}.id IN :filter';
-		$t_query->bind( 'filter', $t_subquery );
-	}
-	$t_sql .= ' GROUP BY handler_id ORDER BY count DESC';
-	$t_query->sql( $t_sql );
-	$t_query->bind( array(
-		'nouser' => NO_USER,
-		'status_resolved' => (int)$t_resolved_status_threshold,
-	) );
 
 	$t_handler_array = array();
 	$t_handler_ids = array();
@@ -383,6 +356,7 @@ function create_developer_open_summary( array $p_filter = [] ) {
  * @param array $p_filter Filter array.
  *
  * @return array
+ * @throws ClientException
  */
 function create_reporter_summary( array $p_filter = [] ) {
 	$t_project_id = helper_get_current_project();
@@ -430,6 +404,7 @@ function create_reporter_summary( array $p_filter = [] ) {
  * @param array $p_filter Filter array.
  *
  * @return array
+ * @throws ClientException
  */
 function create_category_summary( array $p_filter = [] ) {
 	$t_project_id = helper_get_current_project();
@@ -476,6 +451,7 @@ function create_category_summary( array $p_filter = [] ) {
  * @param array $p_filter Filter array.
  *
  * @return array
+ * @throws ClientException
  */
 function create_cumulative_bydate( array $p_filter = [] ) {
 	$t_res_val = config_get( 'bug_resolved_status_threshold' );
@@ -577,22 +553,12 @@ function create_cumulative_bydate( array $p_filter = [] ) {
 }
 
 /**
- * Get formatted date string
- *
- * @param integer $p_date Date.
- *
- * @return string
- */
-function graph_date_format( $p_date ) {
-	return date( config_get( 'short_date_format' ), $p_date );
-}
-
-/**
  * Create summary table of projects.
  *
  * @param array $p_filter Filter array.
  *
  * @return array
+ * @throws ClientException
  */
 function create_project_summary( array $p_filter = [] ) {
 	$t_project_id = helper_get_current_project();

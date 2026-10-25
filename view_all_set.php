@@ -36,7 +36,12 @@
  * @uses logging_api.php
  * @uses print_api.php
  * @uses utility_api.php
+ *
+ * Unhandled exceptions will be caught by the default error handler
+ * @noinspection PhpUnhandledExceptionInspection
  */
+
+use Mantis\Exceptions\ClientException;
 
 require_once( 'core.php' );
 require_api( 'authentication_api.php' );
@@ -144,8 +149,10 @@ switch( $f_type ) {
 		if( null === $t_setting_arr ) {
 			# couldn't get the filter, if we were trying to use the filter, clear it and reload
 			error_proceed_url( 'view_all_set.php?type=' . FILTER_ACTION_RESET );
-			trigger_error( ERROR_FILTER_NOT_FOUND, ERROR );
-			exit;
+			throw new ClientException( "Filter '$f_source_query_id' not found",
+				ERROR_FILTER_NOT_FOUND,
+				[ $f_source_query_id ]
+			);
 		} else {
 			$t_setting_arr['_source_query_id'] = $f_source_query_id;
 		}

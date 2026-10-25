@@ -2,7 +2,7 @@
 /** MantisBT - a php based bugtracking system
  *
  * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2016  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * Copyright (C) 2002 - 2026  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  *
  * MantisBT is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -180,8 +180,6 @@ $s_update_severity_title = 'Actualisar severitate';
 $s_update_severity_msg = 'Selige severitate del problemas';
 $s_update_severity_button = 'Actualisar severitate';
 $s_hide_button = 'Monstrar solmente le selection';
-$s_printing_preferences_title = 'Selige le campos a imprimer';
-$s_printing_options_link = 'Optiones de impression';
 $s_bugnote_title = 'Gestor de nota';
 $s_bugnote_date = 'Data del nota';
 $s_bugnote_description = 'Description del nota';
@@ -193,7 +191,6 @@ $s_prefix_for_deleted_users = 'usator';
 $s_administrator = 'administrator';
 $s_myself = 'Me';
 $s_default_access_level = 'Nivello de accesso predefinite';
-$s_issue_status_percentage = 'Percentage de stato de problema';
 $s_access_levels_enum_string = '10:spectator,25:reportator,40:actualisator,55:disveloppator,70:gerente,90:administrator';
 $s_no_access = 'sin accesso';
 $s_project_status_enum_string = '10:disveloppamento,30:publication,50:stabile,70:obsolete';
@@ -570,6 +567,7 @@ $s_date_created = 'Data de creation';
 $s_last_visit = 'Ultime visita';
 $s_last_visit_label = 'Ultime visita:';
 $s_failed_login_count = 'Aperturas de session fallite';
+$s_locked = 'Conto serrate';
 $s_edit_user_link = 'Modificar usator';
 $s_search_user_hint = 'Nomine de usator, nomine real o e-mail';
 $s_separate_list_items_by = '(separa elementos de lista per "%1$s")';
@@ -751,6 +749,7 @@ $s_prune_accounts_button = 'Purgar';
 $s_confirm_account_pruning = 'Es tu secur de voler deler vetule contos que nunquam ha aperite session?';
 $s_edit_user_title = 'Modificar usator';
 $s_account_unlock_button = 'Disblocar conto';
+$s_clear_failed_logins = 'Rader aperturas de session fallite';
 $s_reset_password_button = 'Reinitialisar contrasigno';
 $s_delete_user_button = 'Deler usator';
 $s_impersonate_user_button = 'Representar usator';
@@ -760,6 +759,7 @@ $s_email_not_unique = 'Le adresse de e-mail es associate con al minus un altere 
 $s_account_reset_msg = 'Un requesta de confirmation ha essite inviate al adresse de e-mail del usator seligite. Usante iste, le usator potera cambiar su contrasigno.';
 $s_account_reset_msg2 = 'Le contrasigno del conto ha essite mittite in blanco...';
 $s_account_unlock_msg = 'Le conto ha essite disblocate.';
+$s_clear_failed_logins_msg = 'Le numero de aperturas de session fallite ha essite reinitialisate.';
 $s_manage_user_updated_msg = 'Conto actualisate con successo...';
 $s_email_user_updated_subject = 'Conto actualisate';
 $s_email_user_updated_msg = 'Tu conto ha essite actualisate per un administrator. Un lista de iste cambios se trova hic infra. Tu pote actualisar le detalios e preferentias de tu conto a qualcunque momento via le sequente URL:';
@@ -849,6 +849,7 @@ $s_assign_to = 'Assignar a';
 $s_additional_information = 'Information additional';
 $s_submit_report_button = 'Submitter problema';
 $s_check_report_more_bugs = 'marca pro reportar plus problemas';
+$s_submitted_for_moderation = 'Tu action ha essite submittite al moderation e apparera quando illo habera essite approbate.';
 $s_report_stay = 'Continuar a reportar';
 $s_selected_project = 'Projecto seligite';
 $s_valid_project_msg = 'Tu debe seliger un projecto valide.';
@@ -1382,7 +1383,7 @@ $MANTIS_ERROR[ERROR_PLUGIN_INVALID_PAGE] = 'Le formato del pagina de plug-in spe
 $MANTIS_ERROR[ERROR_PLUGIN_INVALID_FILE] = 'Le formato del file de plug-in specificate, “%1$s”, non es valide. Illo debe corresponder a “Modulo[/percurso/verso]/file[.ext]”.';
 $MANTIS_ERROR[ERROR_PLUGIN_GENERIC] = 'Il habeva un error incognite "%1$s" durante le execution del plug-in "%2$s".';
 $MANTIS_ERROR[ERROR_COLUMNS_DUPLICATE] = 'Le campo "%1$s" contine un columna duplicate "%2$s".';
-$MANTIS_ERROR[ERROR_COLUMNS_INVALID] = 'Le campo "%1$s" contine un campo invalide "%2$s".';
+$MANTIS_ERROR[ERROR_COLUMNS_INVALID] = 'Le campo “%1$s” contine un columna invalide “%2$s”.';
 $MANTIS_ERROR[ERROR_SESSION_VAR_NOT_FOUND] = 'Variabile de session "%1$s" non trovate.';
 $MANTIS_ERROR[ERROR_SESSION_NOT_VALID] = 'Tu session ha devenite invalide.';
 $MANTIS_ERROR[ERROR_FORM_TOKEN_INVALID] = 'Le token de securitate del formulario es invalide. Isto pote esser causate per un expiration del session, o per submitter le formulario duo vices per accidente.';
@@ -1396,7 +1397,7 @@ $MANTIS_ERROR[ERROR_DEPRECATED_SUPERSEDED] = 'Functionalitate obsolescente: "%1$
 $MANTIS_ERROR[ERROR_DISPLAY_USER_ERROR_INLINE] = 'Attention: Le systema es configurate pro monstrar errores de MantisBT (E_USER_ERROR) "inline", i.e. inter le datos producite. Le execution del programma continuara; isto pote causar problemas de systema o compromitter le integritate del datos.';
 $MANTIS_ERROR[ERROR_TYPE_MISMATCH] = 'Typo de datos non correspondente. Activa le messages de error detaliate pro plus information.';
 $MANTIS_ERROR[ERROR_BUG_CONFLICTING_EDIT] = 'Iste problema ha essite actualisate per un altere usator. Per favor, retorna al problema e resubmitte tu cambiamentos.';
-$MANTIS_ERROR[ERROR_SPAM_SUSPECTED] = 'Tu ha attingite le limite de %d actiones permittite intra le ultime %d secundas. Le action ha essite blocate pro evitar le spam. Essaya lo de novo plus tarde.';
+$MANTIS_ERROR[ERROR_SPAM_SUSPECTED] = 'Tu ha attingite le limite de %1$d actiones permittite intra le ultime %2$d secundas. Le action ha essite blocate pro evitar le spam. Essaya lo de novo plus tarde.';
 $MANTIS_ERROR[ERROR_FIELD_TOO_LONG] = 'Le longitude maxime del campo “%1$s” es%2$d characteres.';
 $MANTIS_ERROR[ERROR_API_TOKEN_NAME_NOT_UNIQUE] = 'Le nomine de token API "%s" es ja in uso. Per favor retorna e selige un altere.';
 $MANTIS_ERROR[ERROR_LOGFILE_NOT_WRITABLE] = 'Le file specificate in $g_log_destination "%s" non es scribibile.';

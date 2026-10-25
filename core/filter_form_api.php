@@ -182,7 +182,7 @@ function print_filter_values_reporter_id( array $p_filter ) {
 			} else {
 				$t_first_flag = false;
 			}
-			$t_output .= string_display_line( $t_this_name );
+			$t_output .= string_attribute( $t_this_name );
 		}
 		if( $t_any_found ) {
 			echo lang_get( 'any' );
@@ -266,7 +266,7 @@ function print_filter_values_user_monitor( array $p_filter ) {
 			} else {
 				$t_first_flag = false;
 			}
-			$t_output .= string_display_line( $t_this_name );
+			$t_output .= string_attribute( $t_this_name );
 		}
 		if( $t_any_found ) {
 			echo lang_get( 'any' );
@@ -348,7 +348,7 @@ function print_filter_values_handler_id( array $p_filter ) {
 			} else {
 				$t_first_flag = false;
 			}
-			$t_output .= string_display_line( $t_this_name );
+			$t_output .= string_attribute( $t_this_name );
 		}
 		if( $t_any_found ) {
 			echo lang_get( 'any' );
@@ -421,7 +421,7 @@ function print_filter_values_show_category( array $p_filter ) {
 			} else {
 				$t_first_flag = false;
 			}
-			$t_output .= string_display_line( $t_this_string );
+			$t_output .= string_attribute( $t_this_string );
 		}
 		if( $t_any_found ) {
 			echo lang_get( 'any' );
@@ -586,7 +586,7 @@ function print_filter_values_show_severity( array $p_filter ) {
 			} else {
 				$t_first_flag = false;
 			}
-			$t_output .= string_display_line( $t_this_string );
+			$t_output .= string_attribute( $t_this_string );
 		}
 		if( $t_any_found ) {
 			echo lang_get( 'any' );
@@ -618,6 +618,61 @@ function print_filter_show_severity( ?array $p_filter = null ) {
 }
 
 /**
+ * Print the current value of this filter field, as visible string, and as a hidden form input.
+ * @param array $p_filter	Filter array
+ * @return void
+ */
+function print_filter_values_show_reproducibility( array $p_filter ) {
+	$t_filter = $p_filter;
+	$t_output = '';
+	$t_any_found = false;
+	if( count( $t_filter[FILTER_PROPERTY_REPRODUCIBILITY] ) == 0 ) {
+		echo lang_get( 'any' );
+	} else {
+		$t_first_flag = true;
+		foreach( $t_filter[FILTER_PROPERTY_REPRODUCIBILITY] as $t_current ) {
+			echo '<input type="hidden" name="', FILTER_PROPERTY_REPRODUCIBILITY, '[]" value="', string_attribute( $t_current ), '" />';
+			$t_this_string = '';
+			if( filter_field_is_any( $t_current ) ) {
+				$t_any_found = true;
+			} else {
+				$t_this_string = get_enum_element( 'reproducibility', $t_current );
+			}
+			if( $t_first_flag != true ) {
+				$t_output = $t_output . '<br />';
+			} else {
+				$t_first_flag = false;
+			}
+			$t_output = $t_output . string_display_line( $t_this_string );
+		}
+		if( true == $t_any_found ) {
+			echo lang_get( 'any' );
+		} else {
+			echo $t_output;
+		}
+	}
+}
+
+/**
+ * print the reproducibility field
+ * @global array $g_filter
+ * @param array|null $p_filter Filter array
+ * @return void
+ */
+function print_filter_show_reproducibility( ?array $p_filter = null ) {
+	global $g_filter;
+	if( null === $p_filter ) {
+		$p_filter = $g_filter;
+	}
+	?><!-- Reproducibility -->
+	<select class="input-xs" <?php echo filter_select_modifier( $p_filter ) ?> name="<?php echo FILTER_PROPERTY_REPRODUCIBILITY;?>[]">
+		<option value="<?php echo META_FILTER_ANY?>"<?php check_selected( $p_filter[FILTER_PROPERTY_REPRODUCIBILITY], META_FILTER_ANY );?>>[<?php echo lang_get( 'any' )?>]</option>
+		<?php print_enum_string_option_list( 'reproducibility', $p_filter[FILTER_PROPERTY_REPRODUCIBILITY] )?>
+	</select>
+	<?php
+}
+
+/**
  * Print the filter field's current value as a visible string and a hidden form input.
  *
  * @param array $p_filter Filter array
@@ -645,7 +700,7 @@ function print_filter_values_show_resolution( array $p_filter ) {
 			} else {
 				$t_first_flag = false;
 			}
-			$t_output .= string_display_line( $t_this_string );
+			$t_output .= string_attribute( $t_this_string );
 		}
 		if( $t_any_found ) {
 			echo lang_get( 'any' );
@@ -704,7 +759,7 @@ function print_filter_values_show_status( array $p_filter ) {
 			} else {
 				$t_first_flag = false;
 			}
-			$t_output .= string_display_line( $t_this_string );
+			$t_output .= string_attribute( $t_this_string );
 		}
 		if( $t_any_found ) {
 			echo lang_get( 'any' );
@@ -763,7 +818,7 @@ function print_filter_values_hide_status( array $p_filter ) {
 			} else {
 				$t_first_flag = false;
 			}
-			$t_output .= string_display_line( $t_this_string );
+			$t_output .= string_attribute( $t_this_string );
 		}
 		$t_hide_status_post = '';
 		if( count( $t_filter[FILTER_PROPERTY_HIDE_STATUS] ) == 1 ) {
@@ -772,7 +827,7 @@ function print_filter_values_hide_status( array $p_filter ) {
 		if( $t_none_found ) {
 			echo lang_get( 'none' );
 		} else {
-			echo $t_output . string_display_line( $t_hide_status_post );
+			echo $t_output . string_attribute( $t_hide_status_post );
 		}
 	}
 }
@@ -829,7 +884,7 @@ function print_filter_values_show_build( array $p_filter ) {
 			} else {
 				$t_first_flag = false;
 			}
-			$t_output .= string_display_line( $t_this_string );
+			$t_output .= string_attribute( $t_this_string );
 		}
 		if( $t_any_found ) {
 			echo lang_get( 'any' );
@@ -892,7 +947,7 @@ function print_filter_values_show_version( array $p_filter ) {
 			} else {
 				$t_first_flag = false;
 			}
-			$t_output .= string_display_line( $t_this_string );
+			$t_output .= string_attribute( $t_this_string );
 		}
 		if( $t_any_found ) {
 			echo lang_get( 'any' );
@@ -956,7 +1011,7 @@ function print_filter_values_show_fixed_in_version( array $p_filter ) {
 			} else {
 				$t_first_flag = false;
 			}
-			$t_output .= string_display_line( $t_this_string );
+			$t_output .= string_attribute( $t_this_string );
 		}
 		if( $t_any_found ) {
 			echo lang_get( 'any' );
@@ -1020,7 +1075,7 @@ function print_filter_values_show_target_version( array $p_filter ) {
 			} else {
 				$t_first_flag = false;
 			}
-			$t_output .= string_display_line( $t_this_string );
+			$t_output .= string_attribute( $t_this_string );
 		}
 		if( $t_any_found ) {
 			echo lang_get( 'any' );
@@ -1081,7 +1136,7 @@ function print_filter_values_show_priority( array $p_filter ) {
 			} else {
 				$t_first_flag = false;
 			}
-			$t_output .= string_display_line( $t_this_string );
+			$t_output .= string_attribute( $t_this_string );
 		}
 		if( $t_any_found ) {
 			echo lang_get( 'any' );
@@ -1142,7 +1197,7 @@ function print_filter_values_show_profile( array $p_filter ) {
 			} else {
 				$t_first_flag = false;
 			}
-			$t_output .= string_display_line( $t_this_string );
+			$t_output .= string_attribute( $t_this_string );
 		}
 		if( $t_any_found ) {
 			echo lang_get( 'any' );
@@ -1182,7 +1237,7 @@ function print_filter_show_profile( ?array $p_filter = null ) {
  */
 function print_filter_values_per_page( array $p_filter ) {
 	$t_filter = $p_filter;
-	echo ( $t_filter[FILTER_PROPERTY_ISSUES_PER_PAGE] == 0 ) ? lang_get( 'all' ) : string_display_line( $t_filter[FILTER_PROPERTY_ISSUES_PER_PAGE] );
+	echo ( $t_filter[FILTER_PROPERTY_ISSUES_PER_PAGE] == 0 ) ? lang_get( 'all' ) : string_attribute( $t_filter[FILTER_PROPERTY_ISSUES_PER_PAGE] );
 	echo '<input type="hidden" name="', FILTER_PROPERTY_ISSUES_PER_PAGE, '" value="', string_attribute( $t_filter[FILTER_PROPERTY_ISSUES_PER_PAGE] ), '" />';
 }
 
@@ -1794,7 +1849,7 @@ function print_filter_values_note_user_id( array $p_filter ) {
 			} else {
 				$t_first_flag = false;
 			}
-			$t_output .= string_display_line( $t_this_name );
+			$t_output .= string_attribute( $t_this_name );
 		}
 		if( $t_any_found ) {
 			echo lang_get( 'any' );
@@ -1857,13 +1912,13 @@ function print_filter_values_plugin_field( array $p_filter, $p_field_name, $p_fi
 				if( filter_field_is_any( $t_value ) ) {
 					echo lang_get( 'any' );
 				} else {
-					echo string_display_line( $t_value );
+					echo string_attribute( $t_value );
 				}
 				echo '<input type="hidden" name="' . string_attribute( $p_field_name ) . '" value="' . string_attribute( $t_value ) . '">';
 				break;
 
 			case FILTER_TYPE_BOOLEAN:
-				echo string_display_line( $p_filter_object->display( (bool)$t_value ) );
+				echo string_attribute( $p_filter_object->display( (bool)$t_value ) );
 				echo '<input type="hidden" name="' . string_attribute( $p_field_name ) . '" value="' . (bool)$t_value . '">';
 				break;
 
@@ -1877,7 +1932,7 @@ function print_filter_values_plugin_field( array $p_filter, $p_field_name, $p_fi
 					if( filter_field_is_any( $t_current ) ) {
 						$t_strings[] = lang_get( 'any' );
 					} else {
-						$t_strings[] = string_display_line( $p_filter_object->display( $t_current ) );
+						$t_strings[] = string_attribute( $p_filter_object->display( $t_current ) );
 					}
 					echo '<input type="hidden" name="' . string_attribute( $p_field_name ) . '[]" value="' . string_attribute( $t_current ) . '">';
 				}
@@ -1938,7 +1993,7 @@ function print_filter_plugin_field( $p_field_name, $p_filter_object, ?array $p_f
 			foreach( $p_filter_object->options() as $t_option_value => $t_option_name ) {
 				echo '<option value="', string_attribute( $t_option_value ), '" ';
 				check_selected( $p_filter[$p_field_name], $t_option_value, false );
-				echo '>', string_display_line( $t_option_name ), '</option>';
+				echo '>', string_attribute( $t_option_name ), '</option>';
 			}
 
 			echo '</select>';
@@ -1953,7 +2008,7 @@ function print_filter_plugin_field( $p_field_name, $p_filter_object, ?array $p_f
 			foreach( $p_filter_object->options() as $t_option_value => $t_option_name ) {
 				echo '<option value="', (int)$t_option_value, '" ';
 				check_selected( $p_filter[$p_field_name], (int)$t_option_value );
-				echo '>', string_display_line( $t_option_name ), '</option>';
+				echo '>', string_attribute( $t_option_name ), '</option>';
 			}
 
 			echo '</select>';
@@ -2371,7 +2426,7 @@ function print_filter_values_project_id( array $p_filter ) {
 			} else {
 				$t_first_flag = false;
 			}
-			$t_output .= string_display_line( $t_this_name );
+			$t_output .= string_attribute( $t_this_name );
 		}
 		echo $t_output;
 	}
@@ -2430,7 +2485,7 @@ function print_filter_values_projection( array $p_filter ) {
 			} else {
 				$t_first_flag = false;
 			}
-			$t_output .= string_display_line( $t_this_string );
+			$t_output .= string_attribute( $t_this_string );
 		}
 		if( $t_any_found ) {
 			echo lang_get( 'any' );
@@ -2533,7 +2588,7 @@ function print_multivalue_field( $p_field_name, $p_field_value ) {
 			if( ( ( $t_current == META_FILTER_ANY ) && ( is_numeric( $t_current ) ) ) || ( is_blank( $t_current ) ) ) {
 				$t_any_found = true;
 			} else {
-				$t_this_string = string_display( $t_current );
+				$t_this_string = string_attribute( $t_current );
 			}
 
 			if( !$t_first_flag ) {
@@ -2697,7 +2752,14 @@ function filter_form_draw_inputs( $p_filter, $p_for_screen = true, $p_static = f
 			null /* class */,
 			'show_severity_filter_target' /* content id */
 			));
-	$t_row1->add_item( new TableFieldsItem(
+    $t_row1->add_item( new TableFieldsItem(
+        $get_field_header( 'show_reproducibility_filter', lang_get( 'reproducibility' ) ),
+        filter_form_get_input( $t_filter, 'show_reproducibility', $t_show_inputs ),
+        1 /* colspan */,
+        null /* class */,
+        'show_reproducibility_filter_target' /* content id */
+    ));
+    $t_row1->add_item( new TableFieldsItem(
 			$get_field_header( 'view_state_filter', lang_get( 'view_status' ) ),
 			filter_form_get_input( $t_filter, 'view_state', $t_show_inputs ),
 			1 /* colspan */,
@@ -2865,7 +2927,7 @@ function filter_form_draw_inputs( $p_filter, $p_for_screen = true, $p_static = f
 	$t_plugin_filters = filter_get_plugin_filters();
 	foreach( $t_plugin_filters as $t_field_name => $t_filter_object ) {
 		$t_colspan = (int)$t_filter_object->colspan;
-		$t_header = $get_field_header( string_attribute( $t_field_name ) . '_filter', string_display_line( $t_filter_object->title ) );
+		$t_header = $get_field_header( string_attribute( $t_field_name ) . '_filter', string_attribute( $t_filter_object->title ) );
 		ob_start();
 		if( $p_static ) {
 			print_filter_plugin_field( $t_field_name, $t_filter_object, $t_filter );

@@ -147,6 +147,10 @@ if( isset( $t_projects[ALL_PROJECTS] ) ) {
 			$t_disk_count = $t_disk_stats[$t_id];
 		}
 
+		if( $t_db_count == 0 && $t_disk_count == 0 ) {
+			continue;
+		}
+
 		$t_upload_method = config_get( 'file_upload_method', null, ALL_USERS, $t_id );
 		if( $t_upload_method == DISK ) {
 			$t_method = 'Disk';

@@ -2,7 +2,7 @@
 /** MantisBT - a php based bugtracking system
  *
  * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2016  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * Copyright (C) 2002 - 2026  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  *
  * MantisBT is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -40,6 +40,7 @@
  *
  * @author Adam Zivner
  * @author Chmee2
+ * @author Comfyquiettree
  * @author Cvanca
  * @author Dvorapa
  * @author FikusModry
@@ -200,8 +201,6 @@ $s_update_severity_title = 'Upravit závažnost';
 $s_update_severity_msg = 'Zvolit závažnost záznamu';
 $s_update_severity_button = 'Upravit závažnost';
 $s_hide_button = 'Zobrazit pouze vybrané';
-$s_printing_preferences_title = 'Vyberte pole k tisku';
-$s_printing_options_link = 'Možnosti tisku';
 $s_bugnote_title = 'Operátor poznámky';
 $s_bugnote_date = 'Datum poznámky';
 $s_bugnote_description = 'Popis poznámky';
@@ -213,7 +212,6 @@ $s_prefix_for_deleted_users = 'uživatel';
 $s_administrator = 'správce';
 $s_myself = 'Já sám';
 $s_default_access_level = 'Výchozí přístupová práva';
-$s_issue_status_percentage = 'Stav záznamu v procentech';
 $s_access_levels_enum_string = '10:pozorovatel,25:reportér,40:úpravář,55:vývojář,70:vedoucí,90:správce';
 $s_no_access = 'žádný přístup';
 $s_project_status_enum_string = '10:vývoj,30:verze,50:stabilní,70:zastaralý';

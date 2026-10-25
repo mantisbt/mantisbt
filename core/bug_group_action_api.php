@@ -32,6 +32,8 @@
  * @uses string_api.php
  */
 
+use Mantis\Exceptions\ClientException;
+
 require_api( 'bug_api.php' );
 require_api( 'config_api.php' );
 require_api( 'constant_inc.php' );
@@ -41,9 +43,12 @@ require_api( 'lang_api.php' );
 require_api( 'string_api.php' );
 
 /**
- * Initialise bug action group api
+ * Initialise bug action group api.
+ *
  * @param string $p_action Custom action to run.
+ *
  * @return void
+ * @throws ClientException
  */
 function bug_group_action_init( $p_action ) {
 	$t_valid_actions = bug_group_action_get_commands( current_user_get_accessible_projects() );
@@ -52,12 +57,12 @@ function bug_group_action_init( $p_action ) {
 	if( !isset( $t_valid_actions[$t_action] ) &&
 		!isset( $t_valid_actions['EXT_' . $t_action] )
 		) {
-		trigger_error( ERROR_GENERIC, ERROR );
+		throw new ClientException( "Invalid Group action", ERROR_GENERIC );
 	}
 
 	$t_include_file = config_get_global( 'absolute_path' ) . 'bug_actiongroup_' . $p_action . '_inc.php';
 	if( !file_exists( $t_include_file ) ) {
-		trigger_error( ERROR_GENERIC, ERROR );
+		throw new ClientException( "Missing Group action script", ERROR_GENERIC, [$t_include_file] );
 	} else {
 		require_once( $t_include_file );
 	}
@@ -173,13 +178,15 @@ function bug_group_action_print_title( $p_action ) {
 }
 
 /**
- * Validates the combination of an action and a bug.  This ends up calling
- * action_<action>_validate() from bug_actiongroup_<action>_inc.php
+ * Validates the combination of an action and a bug.
  *
- * @param string  $p_action The custom action name without the "EXT_" prefix.
- * @param integer $p_bug_id The id of the bug to validate the action on.
+ * This calls action_<action>_validate() from bug_actiongroup_<action>_inc.php
  *
- * @return boolean|array true if action can be applied or array of ( bug_id => reason for failure to validate )
+ * @param string $p_action The custom action name without the "EXT_" prefix.
+ * @param int    $p_bug_id The id of the bug to validate the action on.
+ *
+ * @return null|string null if the action can be applied or a string with the
+ *                     reason for the validation failure.
  */
 function bug_group_action_validate( $p_action, $p_bug_id ) {
 	$t_function_name = 'action_' . $p_action . '_validate';
@@ -318,7 +325,7 @@ function bug_group_action_get_commands( array $p_project_ids = [] ) {
 					$t_custom_field_def = custom_field_get_definition( $t_custom_field_id );
 					$t_command_id = 'custom_field_' . $t_custom_field_id;
 					$t_command_caption = sprintf( lang_get( 'actiongroup_menu_update_field' ), lang_get_defaulted( $t_custom_field_def['name'] ) );
-					$t_commands[$t_command_id] = string_display_line( $t_command_caption );
+					$t_commands[$t_command_id] = string_attribute( $t_command_caption );
 				}
 			}
 		}

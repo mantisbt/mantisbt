@@ -180,21 +180,32 @@ function get_enum_element( $p_enum_name, $p_val, $p_user = null, $p_project = nu
 }
 
 /**
- * Compares the 2 specified variables, returns true if equal, false if not.
- * With strict type checking, will trigger an error if the types of the compared
- * variables don't match.
- * This helper function is used by {@link check_checked()} and {@link check_selected()}
- * @param mixed   $p_var1   The variable to compare.
- * @param mixed   $p_var2   The second variable to compare.
- * @param boolean $p_strict Set to true for strict type checking, false for loose.
- * @return boolean
+ * Compares the 2 specified variables.
+ *
+ * With strict type checking, will throw an Exception if the types of the
+ * compared variables do not match.
+ *
+ * This helper function is used by {@link check_checked()} and
+ * {@link check_selected()}.
+ *
+ * @param mixed $p_var1   The variable to compare.
+ * @param mixed $p_var2   The second variable to compare.
+ * @param bool  $p_strict Set to true for strict type checking, false for loose.
+ *
+ * @return bool True if variables are equal, false if not.
+ * @throws ClientException
  */
 function helper_check_variables_equal( $p_var1, $p_var2, $p_strict ) {
 	if( $p_strict ) {
-		if( gettype( $p_var1 ) !== gettype( $p_var2 ) ) {
+		$t_type1 = gettype( $p_var1 );
+		$t_type2 = gettype( $p_var2 );
+		if( $t_type1 !== $t_type2 ) {
 			# Reaching this point is a a sign that you need to check the types
 			# of the parameters passed to this function. They should match.
-			trigger_error( ERROR_TYPE_MISMATCH, ERROR );
+			throw new ClientException(
+				"Type mismatch: var1 ($t_type1) vs var2 ($t_type2)",
+				ERROR_TYPE_MISMATCH
+			);
 		}
 
 		# We need to be careful when comparing an array of
@@ -301,8 +312,7 @@ function check_disabled( $p_val = true ) {
 function helper_begin_long_process( $p_ignore_abort = false ) {
 	$t_timeout = config_get_global( 'long_process_timeout' );
 
-	# silent errors or warnings reported when safe_mode is ON.
-	@set_time_limit( $t_timeout );
+	set_time_limit( $t_timeout );
 
 	ignore_user_abort( $p_ignore_abort );
 	return $t_timeout;
@@ -760,17 +770,22 @@ function helper_url_combine( string $p_page, $p_query_string ): string {
 }
 
 /**
- * Generate a hash to be used with dynamically generated content that is expected
- * to be cached by the browser. This hash can be used to differentiate the generated
- * content when it may be different based on some runtime attributes like: current user,
- * project or language.
- * An optional custom string can be provided to be added to the hash, for additional
- * differentiating criteria, but this string must be already prepared by the caller.
+ * Generate a hash to be used with dynamically generated content that is
+ * expected to be cached by the browser.
  *
- * @param array $p_runtime_attrs    Array of attributes to be calculated from current session.
- *                                  possible values: 'user', 'project', 'lang'
- * @param string $p_custom_string   Additional string provided by the caller
- * @return string                   A hashed md5 string
+ * This hash can be used to differentiate the generated content when it may be
+ * different based on some runtime attributes like: current user, project or
+ * language. An optional custom string can be provided to be added to the hash,
+ * for additional differentiating criteria, but this string must be already
+ * prepared by the caller.
+ *
+ * @param array  $p_runtime_attrs   Array of attributes to be calculated from
+ *                                  current session.
+ *                                  Possible values: 'user', 'project', 'lang'.
+ * @param string $p_custom_string   Additional string provided by the caller.
+ *
+ * @return string                   A hashed md5 string.
+ * @throws Exception
  */
 function helper_generate_cache_key( array $p_runtime_attrs = [], $p_custom_string = '' ) {
 	# always add core version, to force reload of resources after an upgrade.
@@ -788,7 +803,7 @@ function helper_generate_cache_key( array $p_runtime_attrs = [], $p_custom_strin
 				$t_key .= '+L' . lang_get_current();
 				break;
 			default:
-				trigger_error( ERROR_GENERIC, ERROR );
+				throw new Exception( "Invalid cache key type '$t_attr'" );
 		}
 	}
 	return md5( $t_key );
@@ -849,35 +864,46 @@ function helper_parse_view_state( $p_view_state ) {
 /**
  * Parse numeric positive id.
  *
- * @param string $p_id The id to parse.
+ * @param mixed  $p_id         The id to parse.
  * @param string $p_field_name The field name.
- * @return integer The parsed id.
+ *
+ * @return int The parsed id.
  * @throws ClientException Id is not specified or invalid.
  */
 function helper_parse_id( $p_id, $p_field_name ) {
-	$t_id = trim( $p_id );
-	if( !is_numeric( $t_id ) ) {
-		if( empty( $t_id ) ) {
-			throw new ClientException( "'$p_field_name' missing", ERROR_GPC_VAR_NOT_FOUND, array( $p_field_name ) );
+	if( !is_numeric( $p_id ) ) {
+		$p_id = trim( (string)$p_id );
+		if( empty( $p_id ) ) {
+			throw new ClientException( "'$p_field_name' missing",
+				ERROR_GPC_VAR_NOT_FOUND,
+				[ $p_field_name ]
+			);
 		}
 
-		throw new ClientException( "'$p_field_name' must be numeric", ERROR_INVALID_FIELD_VALUE, array( $p_field_name ) );
+		throw new ClientException( "'$p_field_name' must be numeric",
+			ERROR_INVALID_FIELD_VALUE,
+			[ $p_field_name ]
+		);
 	}
 
-	$t_id = (int)$t_id;
-	if( $t_id < 1 ) {
-		throw new ClientException( "'$p_field_name' must be >= 1", ERROR_INVALID_FIELD_VALUE, array( $p_field_name ) );
+	$p_id = (int)$p_id;
+	if( $p_id < 1 ) {
+		throw new ClientException( "'$p_field_name' must be >= 1",
+			ERROR_INVALID_FIELD_VALUE,
+			[ $p_field_name ]
+		);
 	}
 
-	return $t_id;
+	return $p_id;
 }
 
 /**
  * Parse issue id.
  *
- * @param string $p_issue_id The id to parse.
+ * @param mixed  $p_issue_id   The id to parse.
  * @param string $p_field_name The field name.
- * @return integer The issue id.
+ *
+ * @return int The issue id.
  * @throws ClientException Issue is not specified or invalid.
  */
 function helper_parse_issue_id( $p_issue_id, $p_field_name = 'issue_id' ) {

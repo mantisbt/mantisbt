@@ -36,7 +36,12 @@
  * @uses print_api.php
  * @uses string_api.php
  * @uses utility_api.php
+ *
+ * Unhandled exceptions will be caught by the default error handler
+ * @noinspection PhpUnhandledExceptionInspection
  */
+
+use Mantis\Exceptions\ClientException;
 
 require_once( 'core.php' );
 require_api( 'constant_inc.php' );
@@ -80,8 +85,10 @@ if( $f_master_bug_id > 0 ) {
 	access_ensure_bug_level( config_get( 'view_bug_threshold' ), $f_master_bug_id );
 
 	if( bug_is_readonly( $f_master_bug_id ) ) {
-		error_parameters( $f_master_bug_id );
-		trigger_error( ERROR_BUG_READ_ONLY_ACTION_DENIED, ERROR );
+		throw new ClientException( "Bug is read-only",
+			ERROR_BUG_READ_ONLY_ACTION_DENIED,
+			[ $f_master_bug_id ]
+		);
 	}
 	$t_master_bug = bug_get( $f_master_bug_id, true );
 	$t_project_id = $t_master_bug->project_id;

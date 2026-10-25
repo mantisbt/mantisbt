@@ -731,21 +731,19 @@ function mci_issue_set_monitors( $p_issue_id, $p_requesting_user_id, array $p_mo
 
 	# 3. for each of the new monitor ids, add it if it does not already exist
 	foreach( $t_new_monitor_ids as $t_user_id ) {
-		if( $p_requesting_user_id == $t_user_id ) {
-			if( ! access_has_bug_level( config_get( 'monitor_bug_threshold' ), $p_issue_id ) ) {
-				continue;
-			}
-		} else {
-			if( !access_has_bug_level( config_get( 'monitor_add_others_bug_threshold' ), $p_issue_id ) ) {
-				continue;
-			}
-		}
-
 		if( in_array( $t_user_id, $t_existing_monitor_ids ) ) {
 			continue;
 		}
 
-		bug_monitor( $p_issue_id, $t_user_id );
+		$t_data = array(
+			'query' => array( 'issue_id' => $p_issue_id ),
+			'payload' => array(
+				'users' => array( array( 'id' => $t_user_id ) )
+			)
+		);
+
+		$t_command = new MonitorAddCommand( $t_data );
+		$t_command->execute();
 	}
 
 	# 4. for each of the existing monitor ids, remove it if it is not found in the new monitor ids
@@ -1103,8 +1101,17 @@ function mc_issue_update( $p_username, $p_password, $p_issue_id, stdClass $p_iss
 			) {
 				return ApiObjectFactory::faultBadRequest( 'Unresolved child issues.' );
 			}
-			$t_bug_data->status = $t_new_status;
 
+			if( !bug_check_workflow( $t_old_status, $t_new_status ) ) {
+				$t_old_status_name = get_enum_element( 'status', $t_old_status );
+				$t_new_status_name = get_enum_element( 'status', $t_new_status );
+				return ApiObjectFactory::faultBadRequest(
+					"Status transition from '$t_old_status_name' ($t_old_status) to " .
+					"'$t_new_status_name' ($t_new_status) is not allowed."
+				);
+			}
+
+			$t_bug_data->status = $t_new_status;
 		}
 	}
 	if( isset( $p_issue['reproducibility'] ) ) {
@@ -1221,7 +1228,6 @@ function mc_issue_update( $p_username, $p_password, $p_issue_id, stdClass $p_iss
 					}
 
 					$t_bugnote_changed = false;
-					$t_bugnote = $t_bugnotes_by_id[$t_bugnote_id];
 
 					if( isset( $t_note['text']) && $t_bugnote->note !== $t_note['text'] ) {
 						bugnote_set_text( $t_bugnote_id, $t_note['text'] );

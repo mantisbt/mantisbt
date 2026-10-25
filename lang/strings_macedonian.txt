@@ -2,7 +2,7 @@
 /** MantisBT - a php based bugtracking system
  *
  * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2016  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * Copyright (C) 2002 - 2026  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  *
  * MantisBT is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -181,8 +181,6 @@ $s_update_severity_title = 'Поднови сериозност';
 $s_update_severity_msg = 'Одберете сериозност на проблемот';
 $s_update_severity_button = 'Поднови сериозност';
 $s_hide_button = 'Прикажи ги само избраните';
-$s_printing_preferences_title = 'Изберете полиња за печатење';
-$s_printing_options_link = 'Нагодувања за печатење';
 $s_bugnote_title = 'Забележил';
 $s_bugnote_date = 'Датум на белешката';
 $s_bugnote_description = 'Опис на белешката';
@@ -194,7 +192,6 @@ $s_prefix_for_deleted_users = 'корисник';
 $s_administrator = 'администратор';
 $s_myself = 'Јас';
 $s_default_access_level = 'Основно ниво на пристап';
-$s_issue_status_percentage = 'Статус на проблем (%)';
 $s_access_levels_enum_string = '10:посматрач,25:пријавувач,40:подновувач,55:разработувач,70:раководител,90:администратор';
 $s_no_access = 'нема пристап';
 $s_project_status_enum_string = '10:во развој,30:пуштен,50:постојан,70:застарен';
@@ -572,6 +569,7 @@ $s_date_created = 'Создадена на';
 $s_last_visit = 'Последна посета';
 $s_last_visit_label = 'Последна посета:';
 $s_failed_login_count = 'Неуспешни најави';
+$s_locked = 'Сметката е заклучена';
 $s_edit_user_link = 'Уреди корисник';
 $s_search_user_hint = 'Корисничко име, вистинско име и е-пошта';
 $s_separate_list_items_by = '(одделувајте ги ставките во списокот со „%1$s“)';
@@ -753,6 +751,7 @@ $s_prune_accounts_button = 'Исчисти';
 $s_confirm_account_pruning = 'Дали сте сигурни дека сакате да ги избришете старите сметки коишто никогаш се немаат најавено?';
 $s_edit_user_title = 'Уреди корисник';
 $s_account_unlock_button = 'Отклучи сметка';
+$s_clear_failed_logins = 'Исчисти неуспешни најави';
 $s_reset_password_button = 'Смени лозинка';
 $s_delete_user_button = 'Избриши корисник';
 $s_impersonate_user_button = 'Имитирај корисник';
@@ -762,6 +761,7 @@ $s_email_not_unique = 'Е-поштенската адреса е поврзан�
 $s_account_reset_msg = 'На е-поштенската адреса на одбраниот корисник е испратено е барање за потврда. Со помош на ова барање корисникот ќе може да си ја смени лозинката.';
 $s_account_reset_msg2 = 'Лоинката е поставена како празна...';
 $s_account_unlock_msg = 'Сметката е отклучена.';
+$s_clear_failed_logins_msg = 'Бројот на неуспешни најави е избришан.';
 $s_manage_user_updated_msg = 'Сметката е успешно подновена...';
 $s_email_user_updated_subject = 'Сметката е подновена';
 $s_email_user_updated_msg = 'Вашата сметка е подновена од администратор. Подолу е наведен список на тие промени. Можете да ги подновите поединостите во сметката и нагодувањата во секое време, со посета на следнава URL-адреса:';
@@ -1384,9 +1384,11 @@ $MANTIS_ERROR[ERROR_PLUGIN_UPGRADE_FAILED] = 'Надградувањето на 
 $MANTIS_ERROR[ERROR_PLUGIN_UPGRADE_NEEDED] = 'За да пристапите на страницата, ќе треба прво да го надградите приклучокот „%1$s“.';
 $MANTIS_ERROR[ERROR_PLUGIN_INVALID_PAGE] = 'Форматот на укажаната приклучочна страница „%1$s“ е неважечка. Мора да се совпаѓа со „Plugin[/path/to]/page“.';
 $MANTIS_ERROR[ERROR_PLUGIN_INVALID_FILE] = 'Форматот на укажаната приклучочна податотека „%1$s“ е неважечка. Мора да се совпаѓа со „Plugin[/path/to]/file[.ext]“.';
+$MANTIS_ERROR[ERROR_PLUGIN_ENTITY_NOT_FOUND] = 'Не е пронајдена приклучочката единица „%s“';
+$MANTIS_ERROR[ERROR_PLUGIN_RUNTIME] = 'Се јави следнава грешка при извршувањето на приклучокот „%1$s“.';
 $MANTIS_ERROR[ERROR_PLUGIN_GENERIC] = 'За време на извршувањето на приклучокот „%2$s“ се појави непозната грешка „%1$s“.';
 $MANTIS_ERROR[ERROR_COLUMNS_DUPLICATE] = 'Полето „%1$s“ го содржи дуплираниот столб „%2$s“.';
-$MANTIS_ERROR[ERROR_COLUMNS_INVALID] = 'Полето „%1$s“ содржи неважечко поле „%2$s“.';
+$MANTIS_ERROR[ERROR_COLUMNS_INVALID] = 'Полето „%1$s“ содржи неважечки столб „%2$s“.';
 $MANTIS_ERROR[ERROR_SESSION_VAR_NOT_FOUND] = 'Седничката променлива „%1$s“ не е пронајдена.';
 $MANTIS_ERROR[ERROR_SESSION_NOT_VALID] = 'Вашата седница стана неважечка.';
 $MANTIS_ERROR[ERROR_FORM_TOKEN_INVALID] = 'Неважечки сигурносна шифра. Можеби е истечена седницата, или пак случајно сте го поднеле образецот двапати?';
@@ -1400,7 +1402,7 @@ $MANTIS_ERROR[ERROR_DEPRECATED_SUPERSEDED] = 'Застарена функциј�
 $MANTIS_ERROR[ERROR_DISPLAY_USER_ERROR_INLINE] = 'Предупредување: Системот е наместен да ги прикажува грешките во MantisBT (E_USER_ERROR) во самите редови. Извршувањето на програмот ќе продолжи. Ова може да доведе до проблеми со целовидноста на системот/податоците.';
 $MANTIS_ERROR[ERROR_TYPE_MISMATCH] = 'Несовпаѓање во податочните типови. Овозможете подробни пораки за грешки за да добиете повеќе информации.';
 $MANTIS_ERROR[ERROR_BUG_CONFLICTING_EDIT] = 'Проблемот е изменет од друг корисник. Навратете се  на него и повторно поднесете ги вашите промени.';
-$MANTIS_ERROR[ERROR_SPAM_SUSPECTED] = 'Го достигнавте ограничувањето за допуштени %d дејства во последните %d секунди. Дејствата се блокирани како мерка против спам. Обидете се подоцна.';
+$MANTIS_ERROR[ERROR_SPAM_SUSPECTED] = 'Го достигнавте ограничувањето за допуштени %1$d дејства во последните %2$d секунди. Дејствата се блокирани како мерка против спам. Обидете се подоцна.';
 $MANTIS_ERROR[ERROR_FIELD_TOO_LONG] = 'Максималната должина на полето „%1$s“ изнесува %2$d знаци.';
 $MANTIS_ERROR[ERROR_API_TOKEN_NAME_NOT_UNIQUE] = 'Називот на извршничката шифра „%s“ веќе се користи. Вратете се и одберете друга.';
 $MANTIS_ERROR[ERROR_LOGFILE_NOT_WRITABLE] = 'Укажаната податотека во $g_log_destination „%s“ е незапислива.';
@@ -1445,3 +1447,4 @@ $s_filter_new = 'Нови';
 $s_filter_unused_tags = 'Неискористени';
 $s_filter_unused = 'Неискористени';
 $s_unknown = 'непознато';
+$s_optional = 'Незадолжително';

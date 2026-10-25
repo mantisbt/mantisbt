@@ -26,6 +26,8 @@
  * @uses database_api.php
  */
 
+use Mantis\Exceptions\ClientException;
+
 require_api( 'constant_inc.php' );
 require_api( 'database_api.php' );
 
@@ -92,8 +94,11 @@ function bug_revision_exists( $p_revision_id ) {
 
 /**
  * Get a row of data for a given revision ID.
- * @param integer $p_revision_id A bug revision identifier.
+ *
+ * @param int $p_revision_id A bug revision identifier.
+ *
  * @return array Revision data row
+ * @throws ClientException
  */
 function bug_revision_get( $p_revision_id ) {
 	db_param_push();
@@ -102,7 +107,7 @@ function bug_revision_get( $p_revision_id ) {
 
 	$t_row = db_fetch_array( $t_result );
 	if( !$t_row ) {
-		trigger_error( ERROR_BUG_REVISION_NOT_FOUND, ERROR );
+		throw new ClientException( "Revision not found", ERROR_BUG_REVISION_NOT_FOUND );
 	}
 
 	return $t_row;
@@ -289,10 +294,12 @@ function bug_revision_list( $p_bug_id, $p_type = REV_ANY, $p_bugnote_id = 0 ) {
 }
 
 /**
- * Retrieve a list of changes to a bug of the same type as the
- * given revision ID.
- * @param integer $p_rev_id A bug revision identifier.
+ * Retrieve a list of changes to a bug of the same type as the given revision ID.
+ *
+ * @param int $p_rev_id A bug revision identifier.
+ *
  * @return array|null Array of Revision rows
+ * @throws ClientException
  */
 function bug_revision_like( $p_rev_id ) {
 	db_param_push();
@@ -302,7 +309,7 @@ function bug_revision_like( $p_rev_id ) {
 	$t_row = db_fetch_array( $t_result );
 
 	if( !$t_row ) {
-		trigger_error( ERROR_BUG_REVISION_NOT_FOUND, ERROR );
+		throw new ClientException( "Revision not found", ERROR_BUG_REVISION_NOT_FOUND );
 	}
 
 	$t_bug_id = $t_row['bug_id'];

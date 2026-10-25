@@ -134,6 +134,18 @@ class BugRelationshipData {
 	public $type;
 }
 
+/**
+ * Cache of all relationships with the given bug as source indexed by bug id.
+ * @global array $g_cache_relationships_src
+ */
+$g_cache_relationships_src = [];
+
+/**
+ * Cache of all relationships with the given bug as destination indexed by bug id.
+ * @global array $g_cache_relationships_dest 
+ */
+$g_cache_relationships_dest = [];
+
 $g_relationships = array();
 $g_relationships[BUG_DEPENDANT] = array(
 	'#forward' => true,
@@ -218,11 +230,13 @@ function relationship_type_ensure_valid( $p_relationship_type ) {
  * @param int $p_relationship_type A Relationship type.
  *
  * @return int Complementary type
+ * @throws ClientException
  */
 function relationship_get_complementary_type( $p_relationship_type ) {
 	global $g_relationships;
 	if( !isset( $g_relationships[$p_relationship_type] ) ) {
-		trigger_error( ERROR_GENERIC, ERROR );
+		$t_message = "Unknown relationship type '$p_relationship_type'";
+		throw new ClientException( $t_message, ERROR_GENERIC, [$t_message] );
 	}
 	return $g_relationships[$p_relationship_type]['#complementary'];
 }
@@ -240,6 +254,7 @@ function relationship_get_complementary_type( $p_relationship_type ) {
  * @param int $p_relationship_type
  *
  * @return array Prepared data for database insert/update query
+ * @throws ClientException
  * @internal
  */
 function relationship_prepare_for_assignment( $p_src_bug_id, $p_dest_bug_id, $p_relationship_type ) {
@@ -271,6 +286,7 @@ function relationship_prepare_for_assignment( $p_src_bug_id, $p_dest_bug_id, $p_
  * @param bool $p_email_for_source  Should an email be triggered for source issue?
  *
  * @return int The new bug relationship id.
+ * @throws ClientException
  */
 function relationship_add( $p_src_bug_id, $p_dest_bug_id, $p_relationship_type, $p_email_for_source = true ) {
 	db_param_push();
@@ -304,6 +320,7 @@ function relationship_add( $p_src_bug_id, $p_dest_bug_id, $p_relationship_type, 
  * @param bool $p_email_for_source  Should an email be triggered for source issue?
  *
  * @return void
+ * @throws ClientException
  */
 function relationship_update( $p_relationship_id, $p_src_bug_id, $p_dest_bug_id, $p_relationship_type, $p_email_for_source = true ) {
 	db_param_push();
@@ -334,6 +351,7 @@ function relationship_update( $p_relationship_id, $p_src_bug_id, $p_dest_bug_id,
  * @param bool $p_email_for_source  Should an email be triggered for source issue?
  *
  * @return int The new bug relationship id.
+ * @throws ClientException
  */
 function relationship_upsert( $p_src_bug_id, $p_dest_bug_id, $p_relationship_type, $p_email_for_source = true ) {
 	# Check if there is other relationship between the bugs.
@@ -475,6 +493,13 @@ function relationship_get( $p_relationship_id ) {
  * @throws ClientException if the bug does not exist.
  */
 function relationship_get_all_src( $p_src_bug_id ) {
+	global $g_cache_relationships_src;
+	
+	$c_src_bug_id = (int)$p_src_bug_id;
+	if( isset( $g_cache_relationships_src[$c_src_bug_id] ) ) {
+		return $g_cache_relationships_src[$c_src_bug_id];
+	}
+
 	db_param_push();
 	$t_query = 'SELECT {bug_relationship}.id, {bug_relationship}.relationship_type,
 				{bug_relationship}.source_bug_id, {bug_relationship}.destination_bug_id,
@@ -483,9 +508,9 @@ function relationship_get_all_src( $p_src_bug_id ) {
 				INNER JOIN {bug} ON {bug_relationship}.destination_bug_id = {bug}.id
 				WHERE source_bug_id=' . db_param() . '
 				ORDER BY relationship_type, {bug_relationship}.id';
-	$t_result = db_query( $t_query, array( $p_src_bug_id ) );
+	$t_result = db_query( $t_query, array( $c_src_bug_id ) );
 
-	$t_src_project_id = bug_get_field( $p_src_bug_id, 'project_id' );
+	$t_src_project_id = bug_get_field( $c_src_bug_id, 'project_id' );
 
 	$t_bug_relationship_data = array();
 	$t_bug_array = array();
@@ -506,6 +531,8 @@ function relationship_get_all_src( $p_src_bug_id ) {
 	if( !empty( $t_bug_array ) ) {
 		bug_cache_array_rows( $t_bug_array );
 	}
+	
+	$g_cache_relationships_src[$c_src_bug_id] = $t_bug_relationship_data;
 
 	return $t_bug_relationship_data;
 }
@@ -519,6 +546,13 @@ function relationship_get_all_src( $p_src_bug_id ) {
  * @throws ClientException if the bug does not exist.
  */
 function relationship_get_all_dest( $p_dest_bug_id ) {
+	global $g_cache_relationships_dest;
+	
+	$c_dest_bug_id = (int)$p_dest_bug_id;
+	if( isset( $g_cache_relationships_dest[$c_dest_bug_id] ) ) {
+		return $g_cache_relationships_dest[$c_dest_bug_id];
+	}
+
 	db_param_push();
 	$t_query = 'SELECT {bug_relationship}.id, {bug_relationship}.relationship_type,
 				{bug_relationship}.source_bug_id, {bug_relationship}.destination_bug_id,
@@ -527,9 +561,9 @@ function relationship_get_all_dest( $p_dest_bug_id ) {
 				INNER JOIN {bug} ON {bug_relationship}.source_bug_id = {bug}.id
 				WHERE destination_bug_id=' . db_param() . '
 				ORDER BY relationship_type, {bug_relationship}.id';
-	$t_result = db_query( $t_query, array( (int)$p_dest_bug_id ) );
+	$t_result = db_query( $t_query, array( $c_dest_bug_id ) );
 
-	$t_dest_project_id = bug_get_field( $p_dest_bug_id, 'project_id' );
+	$t_dest_project_id = bug_get_field( $c_dest_bug_id, 'project_id' );
 
 	$t_bug_relationship_data = array();
 	$t_bug_array = array();
@@ -550,6 +584,8 @@ function relationship_get_all_dest( $p_dest_bug_id ) {
 	if( !empty( $t_bug_array ) ) {
 		bug_cache_array_rows( $t_bug_array );
 	}
+
+	$g_cache_relationships_dest[$c_dest_bug_id] = $t_bug_relationship_data;
 	return $t_bug_relationship_data;
 }
 
@@ -613,11 +649,11 @@ function relationship_exists( $p_src_bug_id, $p_dest_bug_id ) {
  * @param int $p_rel_type    Relationship Type.
  *
  * @return int 0 if the relationship is not found,
- *             -1 if the relationship is found and it's of the same type $p_rel_type, or
- *             Id if the relationship is found and it's of a different type
+ *             -1 if the relationship is found and it's of the same type
+ *             $p_rel_type, or Id if the relationship is found and it's of a
+ *             different type
  *             (this means it can be replaced with the new type $p_rel_type)
- *
- * @noinspection PhpDocMissingThrowsInspection
+ * @throws ClientException
  */
 function relationship_same_type_exists( $p_src_bug_id, $p_dest_bug_id, $p_rel_type ) {
 	# Check if there is already a relationship set between them

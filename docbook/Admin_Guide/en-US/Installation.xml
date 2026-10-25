@@ -227,6 +227,12 @@
 									(see <xref linkend="admin.auth.ldap" />).
 								</para></listitem>
 
+								<listitem><para><emphasis>openssl</emphasis> -
+									required for SMTP servers using SSL/TLS alongside
+									with PHPMailer's SMTP method.
+									(see <xref linkend="admin.config.email" />).
+								</para></listitem>								
+
 								<listitem><para><emphasis>SOAP</emphasis> -
 									required to use the SOAP API
 									(see <xref linkend="admin.config.api" />).
@@ -344,8 +350,8 @@
 							<row>
 								<entry>PHP</entry>
 								<entry>PHP</entry>
-								<entry>7.4</entry>
-								<entry>8.0 or later</entry>
+								<entry>8.1</entry>
+								<entry>8.4 or later</entry>
 								<entry>See above for PHP extensions</entry>
 							</row>
 

@@ -21,7 +21,13 @@
  * @copyright Copyright 2004  Victor Boctor - vboctor@users.sourceforge.net
  * @copyright Copyright 2005  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  * @link http://www.mantisbt.org
+ *
+ * @noinspection PhpComposerExtensionStubsInspection Ignore missing ext-soap
  */
+
+use Mantis\Exceptions\ClientException;
+use Mantis\Exceptions\ServiceException;
+use Mantis\Exceptions\StateException;
 
 /**
  * Read a local file and return its content.
@@ -48,16 +54,21 @@ function mci_file_write_local( $p_diskfile, $p_content ) {
 }
 
 /**
- * Add a file
- * @param integer $p_id        File id.
- * @param string  $p_name      File name.
- * @param string  $p_content   File content to write.
- * @param string  $p_file_type File type.
- * @param string  $p_table     Database table name.
- * @param string  $p_title     Title.
- * @param string  $p_desc      Description.
- * @param string  $p_user_id   User id.
- * @return mixed
+ * Add a file.
+ *
+ * @param int      $p_id        File id.
+ * @param string   $p_name      File name.
+ * @param string   $p_content   File content to write.
+ * @param string   $p_file_type File type.
+ * @param string   $p_table     Database table name.
+ * @param string   $p_title     Title.
+ * @param string   $p_desc      Description.
+ * @param int|null $p_user_id   User id.
+ *
+ * @return int|RestFault|SoapFault Attachment id or fault
+ * @throws ClientException
+ * @throws ServiceException
+ * @throws Exception
  */
 function mci_file_add( $p_id, $p_name, $p_content, $p_file_type, $p_table, $p_title = '', $p_desc = '', $p_user_id = null ) {
 	if( !file_type_check( $p_name ) ) {
@@ -104,10 +115,6 @@ function mci_file_add( $p_id, $p_name, $p_content, $p_file_type, $p_table, $p_ti
 
 	switch( $t_method ) {
 		case DISK:
-			if( !file_exists( $t_file_path ) || !is_dir( $t_file_path ) || !is_writable( $t_file_path ) || !is_readable( $t_file_path ) ) {
-				return ApiObjectFactory::faultServerError( "Upload folder doesn't exist." );
-			}
-
 			file_ensure_valid_upload_path( $t_file_path );
 
 			if( !file_exists( $t_disk_file_name ) ) {
@@ -171,12 +178,16 @@ function mci_file_add( $p_id, $p_name, $p_content, $p_file_type, $p_table, $p_ti
 }
 
 /**
- * Returns the attachment contents
+ * Returns the attachment contents.
  *
- * @param integer $p_file_id File identifier.
- * @param string  $p_type    The file type, bug or doc.
- * @param integer $p_user_id A valid user identifier.
- * @return string|soap_fault the string contents, or a soap_fault
+ * @param int    $p_file_id File identifier.
+ * @param string $p_type    The file type, bug or doc.
+ * @param int    $p_user_id A valid user identifier.
+ *
+ * @return string|SoapFault the string contents, or a soap fault
+ *
+ * @throws ClientException
+ * @throws StateException
  */
 function mci_file_get( $p_file_id, $p_type, $p_user_id ) {
 	# we handle the case where the file is attached to a bug
@@ -246,6 +257,6 @@ function mci_file_get( $p_file_id, $p_type, $p_user_id ) {
 		case DATABASE:
 			return $t_content;
 		default:
-			trigger_error( ERROR_GENERIC, ERROR );
+			throw new StateException( "Unknown file upload method", ERROR_GENERIC );
 	}
 }

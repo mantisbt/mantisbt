@@ -40,6 +40,7 @@
  */
 
 use Mantis\classes\MissingHooksPlugin;
+use Mantis\Exceptions\ClientException;
 
 require_api( 'access_api.php' );
 require_api( 'config_api.php' );
@@ -144,6 +145,7 @@ function plugin_get_force_installed() {
  * @param string|null $p_basename Plugin base name (defaults to current plugin).
  *
  * @return MantisPlugin Plugin Object
+ * @throws ClientException
  */
 function plugin_get( $p_basename = null ) {
 	global $g_plugin_cache;
@@ -155,8 +157,11 @@ function plugin_get( $p_basename = null ) {
 	}
 
 	if( !plugin_is_registered( $t_current ) ) {
-		error_parameters( $t_current );
-		trigger_error( ERROR_PLUGIN_NOT_REGISTERED, ERROR );
+		throw new ClientException(
+			"Plugin '$t_current' not registered",
+			ERROR_PLUGIN_NOT_REGISTERED,
+			[ $t_current ]
+		);
 	}
 
 	return $g_plugin_cache[$t_current];
@@ -253,6 +258,7 @@ function plugin_file( $p_file, $p_redirect = false, $p_base_name = null ) {
  * @param string $p_basename Plugin basename.
  *
  * @return void
+ * @throws ClientException
  */
 function plugin_file_include( $p_filename, $p_basename = null ) {
 	global $g_plugin_mime_types;
@@ -265,8 +271,11 @@ function plugin_file_include( $p_filename, $p_basename = null ) {
 
 	$t_file_path = plugin_file_path( $p_filename, $t_current );
 	if( false === $t_file_path ) {
-		error_parameters( $t_current, $p_filename );
-		trigger_error( ERROR_PLUGIN_FILE_NOT_FOUND, ERROR );
+		throw new ClientException(
+			"Plugin file '$p_filename' not found",
+			ERROR_PLUGIN_FILE_NOT_FOUND,
+			[$t_current, $p_filename]
+		);
 	}
 
 	$t_content_type = '';
@@ -308,6 +317,7 @@ function plugin_file_include( $p_filename, $p_basename = null ) {
  * @param string $p_basename Plugin basename (defaults to current plugin).
  *
  * @return string Full table name
+ * @throws ClientException
  */
 function plugin_table( $p_name, $p_basename = null ) {
 	if( is_null( $p_basename ) ) {
@@ -318,7 +328,7 @@ function plugin_table( $p_name, $p_basename = null ) {
 
 	# Determine plugin table prefix including trailing '_'
 	$t_prefix = trim( config_get_global( 'db_table_plugin_prefix' ) );
-	if( !empty( $t_prefix ) && '_' != substr( $t_prefix, -1 ) ) {
+	if( !empty( $t_prefix ) && !str_ends_with( $t_prefix, '_' ) ) {
 		$t_prefix .= '_';
 	}
 
@@ -448,7 +458,7 @@ function plugin_lang_get_defaulted( $p_name, $p_default = null, $p_basename = nu
 	}
 	$t_basename = plugin_get_current();
 	$t_name = 'plugin_' . $t_basename . '_' . $p_name;
-	$t_string = lang_get_defaulted( $t_name, $p_default );
+	$t_string = lang_get_defaulted( $t_name, $p_default ?? $p_name );
 
 	if( !is_null( $p_basename ) ) {
 		plugin_pop_current();
@@ -483,13 +493,21 @@ function plugin_history_log( $p_bug_id, $p_field_name, $p_old_value, $p_new_valu
 /**
  * Trigger a plugin-specific error with the given name and type.
  *
- * @param string $p_error_name Error name.
- * @param int    $p_error_type Error type.
- * @param string $p_basename   The plugin basename (or current plugin if null).
+ *
+ *
+ * @param string     $p_error_name Error name.
+ * @param int        $p_error_type Error type.
+ * @param string     $p_basename   The plugin basename (or current plugin if null).
+ * @param array|null $p_param      Localized error parameters.
+ *                                 For BC, if null, will retrieve them from
+ *                                 {@see $g_error_parameters} {@see error_parameters()}.
  *
  * @return void
+ * @throws ClientException
+ *
+ * @since 2.29.0 E_USER_ERROR type will throw an exception, added $p_param.
  */
-function plugin_error( $p_error_name, $p_error_type = ERROR, $p_basename = null ) {
+function plugin_error( $p_error_name, $p_error_type = E_USER_ERROR, $p_basename = null, ?array $p_param = null ) {
 	if( is_null( $p_basename ) ) {
 		$t_basename = plugin_get_current();
 	} else {
@@ -497,8 +515,16 @@ function plugin_error( $p_error_name, $p_error_type = ERROR, $p_basename = null 
 	}
 
 	$t_error_code = "plugin_{$t_basename}_$p_error_name";
-
-	trigger_error( $t_error_code, $p_error_type );
+	if( $p_error_type == E_USER_ERROR ) {
+		global $g_error_parameters;
+		if( $p_param === null) {
+			$p_param = $g_error_parameters;
+		}
+		array_unshift( $p_param, $t_error_code );
+		throw new ClientException( $t_error_code, ERROR_PLUGIN_RUNTIME, $p_param );
+	} else {
+		trigger_error( $t_error_code, $p_error_type );
+	}
 }
 
 /**
@@ -548,6 +574,7 @@ function plugin_event_hook_many( array $p_hooks ) {
  * @param string $p_child Child plugin basename.
  *
  * @return MantisPlugin
+ * @throws ClientException
  */
 function plugin_child( $p_child ) {
 	$t_base_name = plugin_get_current();
@@ -627,7 +654,7 @@ function plugin_dependency( $p_base_name, $p_required, $p_initialized = false ) 
 		# designed for a new major Mantis release to force authors to review
 		# their code, adapt it if necessary, and release a new version of the
 		# plugin with updated dependencies.
-		if( $p_base_name == 'MantisCore' && strpos( $p_required, '<' ) === false ) {
+		if( $p_base_name == 'MantisCore' && !str_contains( $p_required, '<' ) ) {
 			$t_version_core = mb_substr( $t_plugin_version, 0, strpos( $t_plugin_version, '.' ) );
 			$t_is_current_core_supported = false;
 			foreach( $t_required_array as $t_version_required ) {
@@ -720,6 +747,7 @@ function plugin_is_installed( $p_basename ) {
  * @param MantisPlugin $p_plugin Plugin basename.
  *
  * @return void
+ * @throws ClientException
  */
 function plugin_install( MantisPlugin $p_plugin ) {
 	if( plugin_is_installed( $p_plugin->basename ) ) {
@@ -778,6 +806,7 @@ function plugin_needs_upgrade( MantisPlugin $p_plugin ) {
  * @param MantisPlugin $p_plugin Plugin basename.
  *
  * @return bool|null True if upgrade completed, null if problem
+ * @throws ClientException
  */
 function plugin_upgrade( MantisPlugin $p_plugin ) {
 	if( !plugin_is_installed( $p_plugin->basename ) ) {
@@ -800,57 +829,62 @@ function plugin_upgrade( MantisPlugin $p_plugin ) {
 			plugin_pop_current();
 			return false;
 		}
-		$t_status = false;
 
-		switch( $t_schema[$i][0] ) {
-			case 'InsertData':
-				$t_sqlarray = array(
-					'INSERT INTO ' . $t_schema[$i][1][0] . $t_schema[$i][1][1],
-				);
-				break;
+		# No-op upgrade step
+		if( $t_schema[$i] === null ) {
+			$t_status = 2;
+			$t_sqlarray = [];
+		} else {
+			$t_status = false;
+			$t_operation = $t_schema[$i][0];
+			$t_target = $t_schema[$i][1][0];
 
-			case 'UpdateSQL':
-				$t_sqlarray = array(
-					'UPDATE ' . $t_schema[$i][1][0] . $t_schema[$i][1][1],
-				);
-				break;
+			switch( $t_operation ) {
+				case 'InsertData':
+					$t_sqlarray = array(
+						'INSERT INTO ' . $t_target . $t_schema[$i][1][1],
+					);
+					break;
 
-			case 'UpdateFunction':
-				$t_sqlarray = false;
-				if( isset( $t_schema[$i][2] ) ) {
-					$t_status = call_user_func( 'install_' . $t_schema[$i][1], $t_schema[$i][2] );
-				} else {
-					$t_status = call_user_func( 'install_' . $t_schema[$i][1] );
-				}
-				break;
+				case 'UpdateSQL':
+					$t_sqlarray = array(
+						'UPDATE ' . $t_target . $t_schema[$i][1][1],
+					);
+					break;
 
-			case null:
-				# No-op upgrade step
-				$t_sqlarray = false;
-				$t_status = 2;
-				break;
+				case 'UpdateFunction':
+					$t_sqlarray = false;
+					if( isset( $t_schema[$i][2] ) ) {
+						$t_status = call_user_func( 'install_' . $t_schema[$i][1], $t_schema[$i][2] );
+					} else {
+						$t_status = call_user_func( 'install_' . $t_schema[$i][1] );
+					}
+					break;
 
-			default:
-				$t_sqlarray = call_user_func_array(
-					array( $t_dict, $t_schema[$i][0] ),
-					$t_schema[$i][1]
-				);
-		}
+				default:
+					$t_sqlarray = call_user_func_array(
+						array( $t_dict, $t_operation ),
+						$t_schema[$i][1]
+					);
+			}
 
-		if( $t_sqlarray ) {
-			$t_status = $t_dict->ExecuteSQLArray( $t_sqlarray );
+			if( $t_sqlarray ) {
+				$t_status = $t_dict->ExecuteSQLArray( $t_sqlarray );
+			}
 		}
 
 		if( 2 == $t_status ) {
 			plugin_config_set( 'schema', $i );
 		} else {
-			error_parameters( 
-				$i, 
-				$g_db->ErrorMsg(), 
-				implode( '<br>', $t_sqlarray ) 
+			throw new ClientException(
+				"Plugin upgrade failed at step $i",
+				ERROR_PLUGIN_UPGRADE_FAILED,
+				[
+					$i,
+					$g_db->ErrorMsg(),
+					implode( '<br>', $t_sqlarray ),
+				]
 			);
-			trigger_error( ERROR_PLUGIN_UPGRADE_FAILED, ERROR );
-			return null;
 		}
 
 		$i++;
@@ -871,6 +905,7 @@ function plugin_upgrade( MantisPlugin $p_plugin ) {
  * @param MantisPlugin $p_plugin Plugin basename.
  *
  * @return void
+ * @throws ClientException
  */
 function plugin_uninstall( MantisPlugin $p_plugin ) {
 	access_ensure_global_level( config_get_global( 'manage_plugin_threshold' ) );
@@ -902,6 +937,7 @@ function plugin_uninstall( MantisPlugin $p_plugin ) {
  * (or one of its child classes) allowing special handling by the caller.
  *
  * @return MantisPlugin[] List of found plugins, with basename as key.
+ * @throws ClientException
  */
 function plugin_find_all() {
 	static $s_plugins;
@@ -1025,6 +1061,7 @@ function plugin_is_registered( $p_basename ) {
  * @param string $p_child    Child filename.
  *
  * @return MantisPlugin
+ * @throws ClientException
  */
 function plugin_register( $p_basename, $p_return = false, $p_child = null ) {
 	global $g_plugin_cache;
@@ -1065,15 +1102,16 @@ function plugin_register( $p_basename, $p_return = false, $p_child = null ) {
 				"Plugin '$t_basename' is invalid ('$t_classname' class is not defined)"
 			);
 		} else {
-			error_parameters( $t_basename, $t_classname );
-			trigger_error( ERROR_PLUGIN_CLASS_NOT_FOUND, ERROR );
+			throw new ClientException(
+				"Plugin Class '$t_classname' not defined in '$t_basename'",
+				ERROR_PLUGIN_CLASS_NOT_FOUND,
+				[ $t_basename, $t_classname ]
+			);
 		}
 
 		if( $p_return ) {
-			/** @noinspection PhpUndefinedVariableInspection */
 			return $t_plugin;
 		} else {
-			/** @noinspection PhpUndefinedVariableInspection */
 			$g_plugin_cache[$t_basename] = $t_plugin;
 		}
 	}
@@ -1087,6 +1125,7 @@ function plugin_register( $p_basename, $p_return = false, $p_child = null ) {
  * This includes the MantisCore pseudo-plugin.
  *
  * @return void
+ * @throws ClientException
  */
 function plugin_register_installed() {
 	global $g_plugin_cache_priority, $g_plugin_cache_protected;
@@ -1123,6 +1162,7 @@ function plugin_register_installed() {
  * Post-signals EVENT_PLUGIN_INIT.
  *
  * @return void
+ * @throws ClientException
  */
 function plugin_init_installed() {
 	if( OFF == config_get_global( 'plugins_enabled' ) || !db_table_exists( db_get_table( 'plugin' ) ) ) {
@@ -1235,6 +1275,8 @@ function plugin_init( $p_basename ) {
  * @param string|array $p_msg       Log message - either a string, or an array
  *                                  structured as (string,execution time).
  * @param string        $p_basename Plugin's basename (defaults to current plugin)
+ *
+ * @noinspection PhpUnused
  */
 function plugin_log_event( $p_msg, $p_basename = null ) {
 	$t_current_plugin = plugin_get_current();

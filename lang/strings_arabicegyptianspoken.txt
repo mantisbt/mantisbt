@@ -2,7 +2,7 @@
 /** MantisBT - a php based bugtracking system
  *
  * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2016  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * Copyright (C) 2002 - 2026  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  *
  * MantisBT is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -163,8 +163,6 @@ $s_update_severity_title = 'تحديث الشدة';
 $s_update_severity_msg = 'اختار أولويه المشاكل';
 $s_update_severity_button = 'حدّث التشديد';
 $s_hide_button = 'عرض المختار فقط';
-$s_printing_preferences_title = 'اختر الحقول للطبع';
-$s_printing_options_link = 'خيارات الطبع';
 $s_bugnote_title = 'معالج الملاحظات';
 $s_bugnote_date = 'تاريخ الملاحظة';
 $s_bugnote_description = 'وصف الملاحظة';
@@ -176,7 +174,6 @@ $s_prefix_for_deleted_users = 'مستخدم';
 $s_administrator = 'إداري';
 $s_myself = 'أنا';
 $s_default_access_level = 'مستوى الدخول الافتراضي';
-$s_issue_status_percentage = 'النسبه المئويه لحاله القضية';
 $s_access_levels_enum_string = '10:مشاهد,25:مبلغ,40:محدث,55:مطور,70:مدير,90:إداري';
 $s_project_status_enum_string = '10:تطوير,30:إصدار,50:مستقر,70:قديم';
 $s_project_view_state_enum_string = '10:علني,50:خاص';

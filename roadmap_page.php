@@ -45,6 +45,8 @@
  * @uses version_api.php
  */
 
+use Mantis\Exceptions\ClientException;
+
 require_once( 'core.php' );
 require_api( 'access_api.php' );
 require_api( 'authentication_api.php' );
@@ -167,12 +169,12 @@ function print_version_header( array $p_version_row, $p_progress ) {
 	$t_version_name = $p_version_row['version'];
 	$t_project_name = project_get_field( $t_project_id, 'name' );
 
-	$t_release_title = '<a class="white" href="roadmap_page.php?project_id=' . $t_project_id . '">' . string_display_line( $t_project_name ) . '</a>';
-	$t_release_title .= ' - <a class="white" href="roadmap_page.php?version_id=' . $t_version_id . '">' . string_display_line( $t_version_name ) . '</a>';
+	$t_release_title = '<a class="white" href="roadmap_page.php?project_id=' . $t_project_id . '">' . string_attribute( $t_project_name ) . '</a>';
+	$t_release_title .= ' - <a class="white" href="roadmap_page.php?version_id=' . $t_version_id . '">' . string_attribute( $t_version_name ) . '</a>';
 
 	$t_version_timestamp = $p_version_row['date_order'];
 	if( config_get( 'show_roadmap_dates' ) && !date_is_null( $t_version_timestamp ) ) {
-		$t_scheduled_release_date = lang_get( 'scheduled_release' ) . ' ' . string_display_line( date( config_get( 'short_date_format' ), $t_version_timestamp ) );
+		$t_scheduled_release_date = lang_get( 'scheduled_release' ) . ' ' . string_attribute( date( config_get( 'short_date_format' ), $t_version_timestamp ) );
 	} else {
 		$t_scheduled_release_date = null;
 	}
@@ -218,11 +220,11 @@ function print_version_header( array $p_version_row, $p_progress ) {
 	);
 	print_extra_small_button(
 		'roadmap_page.php?version_id=' . $t_version_id,
-		string_display_line( $t_version_name )
+		string_attribute( $t_version_name )
 	);
 	print_extra_small_button(
 		'roadmap_page.php?project_id=' . $t_project_id,
-		string_display_line( $t_project_name )
+		string_attribute( $t_project_name )
 	);
 	echo '</div>';
 	echo PHP_EOL;
@@ -274,7 +276,7 @@ function print_version_footer( $p_version_row, $p_progress ) {
  */
 function print_project_header_roadmap( $p_project_name ) {
 	echo '<div class="page-header">';
-	echo '<h1><strong>' . string_display_line( $p_project_name ), '</strong> - ', lang_get( 'roadmap' ) . '</h1>';
+	echo '<h1><strong>' . string_attribute( $p_project_name ), '</strong> - ', lang_get( 'roadmap' ) . '</h1>';
 	echo '</div>';
 	echo PHP_EOL;
 }
@@ -290,8 +292,10 @@ if( is_blank( $f_project ) ) {
 	$f_project_id = project_get_id_by_name( $f_project );
 
 	if( $f_project_id === 0 ) {
-		error_parameters( $f_project );
-		trigger_error( ERROR_PROJECT_NOT_FOUND, ERROR );
+		throw new ClientException( "Project '$f_project' not found",
+			ERROR_PROJECT_NOT_FOUND,
+			[ $f_project ]
+		);
 	}
 }
 
@@ -321,8 +325,10 @@ if( is_blank( $f_version ) ) {
 	$f_version_id = version_get_id( $f_version, $t_project_id );
 
 	if( $f_version_id === false ) {
-		error_parameters( $f_version );
-		trigger_error( ERROR_VERSION_NOT_FOUND, ERROR );
+		throw new ClientException( "Version '$f_version' not found",
+			ERROR_VERSION_NOT_FOUND,
+			[ $f_version ]
+		);
 	}
 }
 
@@ -484,7 +490,6 @@ foreach( $t_project_ids as $t_project_id ) {
 			if( $t_cycle || !in_array( $t_issue_parent, $t_issue_ids ) ) {
 				$l = array_search( $t_issue_parent, $t_issue_set_ids );
 				if( $l !== false ) {
-					/** @noinspection PhpStatementHasEmptyBodyInspection */
 					for( $m = $l+1; $m < count( $t_issue_set_ids ) && $t_issue_set_levels[$m] > $t_issue_set_levels[$l]; $m++ ) {
 						#do nothing
 					}

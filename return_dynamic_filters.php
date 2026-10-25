@@ -60,7 +60,7 @@ require_api( 'gpc_api.php' );
 require_api( 'helper_api.php' );
 
 if( !auth_is_user_authenticated() ) {
-	trigger_error( ERROR_ACCESS_DENIED, ERROR );
+	throw new ClientException( "User is not authenticated", ERROR_ACCESS_DENIED );
 }
 
 compress_enable();
@@ -69,7 +69,7 @@ $f_filter_id = gpc_get( 'filter_id', null );
 if( null !== $f_filter_id ) {
 	$t_filter = filter_get( $f_filter_id, null );
 	if( null === $t_filter ) {
-		trigger_error( ERROR_ACCESS_DENIED, ERROR );
+		throw new ClientException( "Filter invalid or unaccessible", ERROR_ACCESS_DENIED );
 	}
 } else {
 	$t_filter = current_user_get_bug_filter();
@@ -115,7 +115,7 @@ if( false !== $t_content ) {
 		return_dynamic_filters_prepend_headers();
 		print_filter_custom_field( $t_custom_id, $t_filter );
 	} else {
-		trigger_error( ERROR_ACCESS_DENIED, ERROR );
+		throw new ClientException( "Access Denied", ERROR_ACCESS_DENIED );
 	}
 } else {
 	$t_plugin_filters = filter_get_plugin_filters();
@@ -132,5 +132,7 @@ if( false !== $t_content ) {
 if( !$t_found ) {
 	# error - no function to populate the target (e.g., print_filter_foo)
 	error_parameters( $f_filter_target );
-	trigger_error( ERROR_FILTER_NOT_FOUND, ERROR );
+	throw new ClientException( "No function to populate the target custom field",
+		ERROR_CUSTOM_FIELD_NOT_FOUND
+	);
 }

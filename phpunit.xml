@@ -2,8 +2,13 @@
     MantisBT PHPUnit configuration
 -->
 <phpunit
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/10.5/phpunit.xsd"
+
     bootstrap="tests/bootstrap.php"
     colors="true"
+    displayDetailsOnAllIssues="true"
+    failOnAllIssues="true"
     >
 
     <testsuites>

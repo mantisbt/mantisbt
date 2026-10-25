@@ -25,7 +25,10 @@
  * @uses constant_inc.php
  * @uses database_api.php
  * @uses logging_api.php
+ * @noinspection PhpUnitAnnotationToAttributeInspection
  */
+
+use Mantis\Exceptions\ClientException;
 
 require_api( 'config_api.php' );
 require_api( 'constant_inc.php' );
@@ -114,7 +117,7 @@ class DbQuery {
 
 	/**
 	 * Stores the adodb result set for the query after it has been executed, or false if the query failed.
-	 * @var  IteratorAggregate|boolean
+	 * @var ADORecordSet|false|null
 	 */
 	protected $db_result = null;
 
@@ -235,7 +238,7 @@ class DbQuery {
 	 * @param int   $p_limit      Limit value
 	 * @param int   $p_offset     Offset value
 	 *
-	 * @return IteratorAggregate|boolean ADOdb result set or false if the query failed.
+	 * @return ADORecordSet|bool ADOdb result set or false if the query failed.
 	 */
 	public function execute( array $p_bind_array = [], $p_limit = null, $p_offset = null ) {
 		# For backwards compatibility with legacy code still relying on DB API,
@@ -261,10 +264,14 @@ class DbQuery {
 
 	/**
 	 * Call ADOdb execution of sql string.
+	 *
 	 * At this point all preprocessing and value binding has been performed.
-	 * @param integer $p_limit	Limit value
-	 * @param integer $p_offset	Offset value
-	 * @return IteratorAggregate|boolean ADOdb result set or false if the query failed.
+	 *
+	 * @param int $p_limit  Limit value
+	 * @param int $p_offset Offset value
+	 *
+	 * @return ADORecordSet|bool ADOdb result set or false if the query failed.
+	 * @throws ClientException
 	 */
 	protected function db_execute( $p_limit = null, $p_offset = null ) {
 		global $g_db;
@@ -294,9 +301,11 @@ class DbQuery {
 		$this->log_query();
 
 		if( !$this->db_result ) {
-			db_error( $this->db_query_string );
-			trigger_error( ERROR_DB_QUERY_FAILED, ERROR );
 			$this->db_result = false;
+			throw new ClientException( "DB Query failed",
+				ERROR_DB_QUERY_FAILED,
+				db_error_as_array( $this->db_query_string )
+			);
 		}
 		$this->current_row = null;
 		return $this->db_result;
@@ -774,7 +783,7 @@ class DbQuery {
 	 * @param int    $p_offset    Query offset
 	 * @param bool   $p_pop_param Set to false to leave the parameters on the stack
 	 *
-	 * @return IteratorAggregate|false ADOdb result set or false if the query failed
+	 * @return ADORecordSet|false ADOdb result set or false if the query failed
 	 */
 	public static function compat_db_query( string $p_query, array $p_params = [], int $p_limit = -1, int $p_offset = -1, bool $p_pop_param = true ) {
 		global $g_db_param;

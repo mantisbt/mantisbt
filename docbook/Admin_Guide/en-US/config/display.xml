@@ -60,6 +60,7 @@
 						OpenSearch specification
 					</ulink>.
 				</para>
+				<para>To disable the use of OpenSearch tags across the site, simply set the title prefix to empty string.</para>
 				<para>Defaults to the value of $g_window_title.</para>
 			</listitem>
 		</varlistentry>

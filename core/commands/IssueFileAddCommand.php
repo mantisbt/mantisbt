@@ -22,38 +22,40 @@ require_api( 'helper_api.php' );
 require_api( 'user_api.php' );
 
 use Mantis\Exceptions\ClientException;
-
-/**
- * Command data
- * - In files, `error` and `size` are used only by web UI.
- * - Reporter is optional, it is defaulted to logged in user.
- *
- * Sample:
- * {
- *   "query": {
- *     "issue_id": 12345
- *   },
- *   "payload": {
- *     "reporter": {
- *       "name": "vboctor"
- *     },
- *     "files": [
- *       {
- *         "name": "filename.ext",
- *         "type": "application/...",
- *         "tmp_name": "/tmp/php/phpRELws8",
- *         "error": 0,
- *         "size": 114
- *       }
- *     ]
- *   } 
- * }
- */
+use Mantis\Exceptions\ServiceException;
 
 /**
  * A command that adds an issue attachment.
+ *
+ *  Command data
+ *  - In files, `error` and `size` are used only by web UI.
+ *  - Reporter is optional, it is defaulted to logged in user.
+ *
+ *  Sample:
+ *  ```
+ *  {
+ *    "query": {
+ *      "issue_id": 12345
+ *    },
+ *    "payload": {
+ *      "reporter": {
+ *        "name": "vboctor"
+ *      },
+ *      "files": [
+ *        {
+ *          "name": "filename.ext",
+ *          "type": "application/...",
+ *          "tmp_name": "/tmp/php/phpRELws8",
+ *          "error": 0,
+ *          "size": 114
+ *        }
+ *      ]
+ *    }
+ *  }
+ * ```
  */
-class IssueFileAddCommand extends Command {
+class IssueFileAddCommand extends Command
+{
 	/**
 	 * The issue to add the note to.
 	 *
@@ -87,6 +89,8 @@ class IssueFileAddCommand extends Command {
 
 	/**
 	 * Validate the data.
+	 *
+	 * @throws ClientException
 	 */
 	function validate() {
 		$t_issue_id = helper_parse_issue_id( $this->query( 'issue_id' ) );
@@ -96,7 +100,8 @@ class IssueFileAddCommand extends Command {
 			throw new ClientException(
 				sprintf( "Issue '%d' is read-only.", $t_issue_id ),
 				ERROR_BUG_READ_ONLY_ACTION_DENIED,
-				array( $t_issue_id ) );
+				array( $t_issue_id )
+			);
 		}
 
 		$this->parseFiles();
@@ -107,7 +112,8 @@ class IssueFileAddCommand extends Command {
 			throw new ClientException(
 				'Files not provided',
 				ERROR_INVALID_FIELD_VALUE,
-				array( 'files' ) );
+				array( 'files' )
+			);
 		}
 
 		$this->user_id = auth_get_current_user_id();
@@ -116,7 +122,8 @@ class IssueFileAddCommand extends Command {
 		$t_reporter = $this->payload( 'reporter' );
 		if( $t_reporter !== null ) {
 			$this->reporterId = user_get_id_by_user_info(
-				$t_reporter, /* throw_if_id_doesnt_exist */ true );
+				$t_reporter, /* throw_if_id_doesnt_exist */ true
+			);
 		} else {
 			$this->reporterId = $this->user_id;
 		}
@@ -134,12 +141,18 @@ class IssueFileAddCommand extends Command {
 		if( !file_allow_bug_upload( $this->issue->id, $this->reporterId ) ) {
 			throw new ClientException( 'access denied for uploading files', ERROR_ACCESS_DENIED );
 		}
+
+		foreach( $this->files as $t_file ) {
+			file_ensure_uploaded( $t_file );
+		}
 	}
 
 	/**
 	 * Process the command.
 	 *
 	 * @return array Command response
+	 * @throws ClientException
+	 * @throws ServiceException
 	 */
 	protected function process() {
 		if( $this->issue->project_id != helper_get_current_project() ) {
@@ -158,7 +171,9 @@ class IssueFileAddCommand extends Command {
 
 	/**
 	 * Parse files from payload.
+	 *
 	 * @return void
+	 * @throws ClientException
 	 */
 	private function parseFiles() {
 		$this->files = $this->payload( 'files', array() );
@@ -173,7 +188,8 @@ class IssueFileAddCommand extends Command {
 					throw new ClientException(
 						sprintf( "File field '%s' is missing.", $t_field ),
 						ERROR_EMPTY_FIELD,
-						array( $t_field ) );
+						array( $t_field )
+					);
 				}
 			}
 		}

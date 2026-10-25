@@ -34,6 +34,8 @@
  * @uses utility_api.php
  */
 
+use Mantis\Exceptions\ClientException;
+
 if( !defined( 'BUG_ACTIONGROUP_INC_ALLOW' ) ) {
 	return;
 }
@@ -72,7 +74,7 @@ function action_add_note_print_fields() {
 ?>
 	<tr>
 		<th class="category">
-			<?php echo lang_get( 'add_bugnote_title' ); ?>
+			<label for="bugnote_text"><?php echo lang_get( 'add_bugnote_title' ); ?></label>
 		</th>
 		<td>
 			<textarea class="form-control" name="bugnote_text" id="bugnote_text"
@@ -85,13 +87,13 @@ function action_add_note_print_fields() {
 	<!-- View Status -->
 	<tr>
 		<th class="category">
-			<?php echo lang_get( 'view_status' ) ?>
+			<label for="view_state"><?php echo lang_get( 'view_status' ) ?></label>
 		</th>
 		<td>
 <?php
 	$t_default_state = config_get( 'default_bugnote_view_status' );
 	if( access_has_project_level( config_get( 'set_view_status_threshold' ) ) ) { ?>
-				<select name="view_state" class="input-sm">
+				<select id="view_state" name="view_state" class="input-sm">
 					<?php print_enum_string_option_list( 'view_state', $t_default_state ) ?>
 				</select>
 <?php
@@ -110,15 +112,20 @@ function action_add_note_print_fields() {
 /**
  * Validates the action on the specified bug id.
  *
- * @param integer $p_bug_id A bug identifier.
- * @return string|null On failure: the reason why the action could not be validated. On success: null.
+ * @param int $p_bug_id A bug identifier.
+ *
+ * @return string|null On failure: the reason why the action could not be
+ *                     validated. On success: null.
+ * @throws ClientException
  */
 function action_add_note_validate( $p_bug_id ) {
 	$f_bugnote_text = gpc_get_string( 'bugnote_text' );
 
 	if( is_blank( $f_bugnote_text ) ) {
-		error_parameters( lang_get( 'bugnote' ) );
-		trigger_error( ERROR_EMPTY_FIELD, ERROR );
+		throw new ClientException( "Bugnote text cannot be empty" ,
+			ERROR_EMPTY_FIELD, 
+			[lang_get( 'bugnote' )]
+		);
 	}
 
 	$t_add_bugnote_threshold = config_get( 'add_bugnote_threshold' );
@@ -138,8 +145,11 @@ function action_add_note_validate( $p_bug_id ) {
 /**
  * Executes the custom action on the specified bug id.
  *
- * @param integer $p_bug_id The bug id to execute the custom action on.
- * @return null Previous validation ensures that this function doesn't fail. Therefore we can always return null to indicate no errors occurred.
+ * @param int $p_bug_id The bug id to execute the custom action on.
+ *
+ * @return null Previous validation ensures that this function doesn't fail.
+ *              Therefore we can always return null to indicate no errors occurred.
+ * @throws ClientException
  */
 function action_add_note_process( $p_bug_id ) {
 	$f_bugnote_text = gpc_get_string( 'bugnote_text' );

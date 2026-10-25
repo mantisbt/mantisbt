@@ -16,7 +16,8 @@
 
 require_api( 'project_api.php' );
 
-$t_soap_dir = dirname( __DIR__, 2 ) . '/api/soap/';
+global $g_absolute_path;
+$t_soap_dir = $g_absolute_path . 'api/soap/';
 require_once( $t_soap_dir . 'mc_api.php' );
 require_once( $t_soap_dir . 'mc_enum_api.php' );
 

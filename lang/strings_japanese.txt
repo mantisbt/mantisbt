@@ -2,7 +2,7 @@
 /** MantisBT - a php based bugtracking system
  *
  * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2016  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * Copyright (C) 2002 - 2026  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  *
  * MantisBT is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -61,6 +61,7 @@
  * @author SkyDaisy9
  * @author Sujiniku
  * @author Takeru0430
+ * @author Tensama0415
  * @author ネイ
  * @author 赤城。
  */
@@ -201,8 +202,6 @@ $s_update_severity_title = '深刻度を更新';
 $s_update_severity_msg = '課題の深刻度を選んでください';
 $s_update_severity_button = '深刻度を更新';
 $s_hide_button = '選択項目のみを表示';
-$s_printing_preferences_title = '印刷する項目を選択してください';
-$s_printing_options_link = '印刷オプション';
 $s_bugnote_title = 'コメント登録者';
 $s_bugnote_date = 'コメント登録日';
 $s_bugnote_description = 'コメント内容';
@@ -214,7 +213,6 @@ $s_prefix_for_deleted_users = 'ユーザー';
 $s_administrator = '管理者';
 $s_myself = '自身';
 $s_default_access_level = '既定のアクセスレベル';
-$s_issue_status_percentage = '課題ごとのステータスの割合';
 $s_access_levels_enum_string = '10:参照,25:報告者,40:編集者,55:開発者,70:マネージャー,90:管理者';
 $s_no_access = 'アクセスなし';
 $s_project_status_enum_string = '10:開発,30:リリース,50:安定,70:廃止';
@@ -662,7 +660,7 @@ $s_plugin = 'プラグイン';
 $s_plugins_installed = 'インストール済みプラグイン';
 $s_plugins_available = '利用できるプラグイン';
 $s_plugins_missing = 'プラグインが不明か無効です';
-$s_plugins_missing_description = '以下の一覧にあるプラグインは登録済みですが、それぞれのソースコードは「%s」で探しても見当たらず、読み込むこともできません。<br>再インストールもしくはいったん削除することを検討してください。';
+$s_plugins_missing_description = '以下の一覧にあるプラグインは<ul><li>登録済みですが、それぞれのソースコードは「%s」で探しても見当たらず、読み込むこともできない、または</li><li>インストール済みですが、初期化することができませんません。</li></ul>再インストールもしくはいったん削除することを検討してください。';
 $s_plugin_description = '説明';
 $s_plugin_problem_description = '問題の説明';
 $s_plugin_author = '作者: %1$s';
@@ -688,7 +686,7 @@ $s_plugin_invalid_status_message = '以下にあげた必須のプロパティ�
 $s_plugin_missing_description = '見当たらないプラグイン';
 $s_plugin_missing_status_message = 'プラグインのインストール先は Mantis データベースですが、読み込むことができません。';
 $s_plugin_missing_class_description = '見当たらないプラグインの基本クラス';
-$s_plugin_missing_class_status_message = 'このプラグインに対するディレクトリを検出しましたが、その中に対応するはずのプラグインコードは存在しません。プラグインの名称がプラグインの基本名称と一致するかどうか確認してください (大文字小文字を識別。)';
+$s_plugin_missing_class_status_message = 'このプラグインに対するディレクトリを検出しましたが、その中に対応するはずのプラグインコードは存在しません。プラグインの名称がプラグインの基本名称「 %1$s 」(大文字小文字を識別。)と一致し、同じ名前のPHPファイルがディレクトリ内に存在し、そのファイルがMantisPluginを継承する「 %2$s 」という名前のクラスを定義しているかどうか確認してください。';
 $s_project_added_msg = 'プロジェクトを追加しました...';
 $s_category_added_msg = 'カテゴリを追加しました...';
 $s_category_deleted_msg = 'カテゴリを削除しました...';
@@ -1280,7 +1278,7 @@ $MANTIS_ERROR[ERROR_GPC_VAR_NOT_FOUND] = 'このページで必須のパラメ�
 $MANTIS_ERROR[ERROR_USER_NAME_NOT_UNIQUE] = 'そのユーザー名は既に使用されています。戻って別のユーザー名を選択してください。';
 $MANTIS_ERROR[ERROR_USER_EMAIL_NOT_UNIQUE] = 'そのメールアドレスは既に使用されています。戻って別のメールアドレスを選択してください。';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_NOT_FOUND] = '設定オプション「%1$s」が見つかりません。';
-$MANTIS_ERROR[ERROR_CONFIG_OPT_CANT_BE_SET_IN_DB] = '設定オプション「%1$s」はデータベース内には設定できません。config_inc.php 内で設定してください。';
+$MANTIS_ERROR[ERROR_CONFIG_OPT_CANT_BE_SET_IN_DB] = '設定オプション「%1$s」はデータベース内には設定できません。config_inc.php 内で定義してください。';
 $MANTIS_ERROR[ERROR_CONFIG_OPT_BAD_SYNTAX] = '設定オプションを保存できません 「%1$s」: %2$s';
 $MANTIS_ERROR[ERROR_LANG_STRING_NOT_FOUND] = '文字列「%1$s」が見つかりません。';
 $MANTIS_ERROR[ERROR_BUGNOTE_NOT_FOUND] = 'コメントが見つかりません。';
@@ -1363,7 +1361,7 @@ $MANTIS_ERROR[ERROR_SIGNUP_NOT_MATCHING_CAPTCHA] = 'コードが一致しませ�
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_ENABLED] = '「パスワード紛失」機能を利用できません。';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_NO_EMAIL_SPECIFIED] = 'パスワードをリセットするために，メールアドレスを入力しなければなりません。';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_NOT_MATCHING_DATA] = '入力された情報と一致する登録済みアカウントはありません!';
-$MANTIS_ERROR[ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID] = '確認 URL は無効か既に使用されました。もう一度登録してください。';
+$MANTIS_ERROR[ERROR_LOST_PASSWORD_CONFIRM_HASH_INVALID] = '確認 URL は無効か既に使用されました。';
 $MANTIS_ERROR[ERROR_LOST_PASSWORD_MAX_IN_PROGRESS_ATTEMPTS_REACHED] = 'リクエストの最大回数に達しました。システム管理者に連絡してください。';
 $MANTIS_ERROR[ERROR_USER_CHANGE_LAST_ADMIN] = '最後の一人の管理者アカウントの削除または管理者権限除去はできません。要求した操作を行うためには、まず他の管理者アカウントを作成する必要があります。';
 $MANTIS_ERROR[ERROR_PAGE_REDIRECTION] = '画面遷移に失敗しました。config_inc.php や custom_*.php ファイルの PHP ブロック (&lt;?php ?&gt;) の外側にスペースがないことを確認してください。';
@@ -1401,8 +1399,8 @@ $MANTIS_ERROR[ERROR_DEPRECATED_SUPERSEDED] = '推奨されない機能: 「%1$s�
 $MANTIS_ERROR[ERROR_DISPLAY_USER_ERROR_INLINE] = '警告：システムは、MantisBTエラー（E_USER_ERROR）をインラインで表示するように設定されています。 プログラムの実行は続行されます。 システム/データの整合性の問題が発生する可能性があります。';
 $MANTIS_ERROR[ERROR_TYPE_MISMATCH] = 'データの種類が一致しません。詳細についてはエラーメッセージの状況を有効にしてください。';
 $MANTIS_ERROR[ERROR_BUG_CONFLICTING_EDIT] = 'この課題は別のユーザーにより更新されています。課題に戻って変更を再度送信してください。';
-$MANTIS_ERROR[ERROR_SPAM_SUSPECTED] = '過去 %d 秒の間にイベントの上限 %d に達しました。スパムを防止するため操作がブロックされました。あとでやり直してください。';
-$MANTIS_ERROR[ERROR_FIELD_TOO_LONG] = '項目「%1$s」は%2$d文字以下である必要があります。';
+$MANTIS_ERROR[ERROR_SPAM_SUSPECTED] = '過去 %2$d 秒の間にイベントの上限 %1$d に達しました。スパムを防止するため操作がブロックされました。あとでやり直してください。';
+$MANTIS_ERROR[ERROR_FIELD_TOO_LONG] = '項目「%1$s」の最大長は%2$d文字です。';
 $MANTIS_ERROR[ERROR_API_TOKEN_NAME_NOT_UNIQUE] = 'その API トークン「%s」は既に使用されています。戻って別の API トークンを選択してください。';
 $MANTIS_ERROR[ERROR_LOGFILE_NOT_WRITABLE] = '$g_log_destination "%s" に指定したファイルは読み取り専用です。';
 $MANTIS_ERROR[ERROR_MONITOR_ACCESS_TOO_LOW] = '追加した利用者はこの課題を監視するのに十分なアクセス権限がありません。';

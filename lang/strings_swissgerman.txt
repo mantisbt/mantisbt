@@ -2,7 +2,7 @@
 /** MantisBT - a php based bugtracking system
  *
  * Copyright (C) 2000 - 2002  Kenzaburo Ito - kenito@300baud.org
- * Copyright (C) 2002 - 2016  MantisBT Team - mantisbt-dev@lists.sourceforge.net
+ * Copyright (C) 2002 - 2026  MantisBT Team - mantisbt-dev@lists.sourceforge.net
  *
  * MantisBT is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -168,8 +168,6 @@ $s_update_severity_title = 'Schwärigrad ändere';
 $s_update_severity_msg = 'Schwärigrad vum Thema uuswehle';
 $s_update_severity_button = 'Schwärigrad ändere';
 $s_hide_button = 'nume uusgwehlti aazeige';
-$s_printing_preferences_title = 'Fälder zum Drucken uuswehle';
-$s_printing_options_link = 'Druckoptione';
 $s_bugnote_title = 'Problämnotiz-Bearbeiter';
 $s_bugnote_date = 'Datum vu dr Problämnotiz';
 $s_bugnote_description = 'Problemnotiz-Bschryybig';
@@ -181,7 +179,6 @@ $s_prefix_for_deleted_users = 'Benutzer';
 $s_administrator = 'Adminischtrator';
 $s_myself = 'Ich';
 $s_default_access_level = 'Standardzuegangsrächt';
-$s_issue_status_percentage = 'Problämstatus in Prozänt';
 $s_access_levels_enum_string = '10:Betrachter,25:Reporter,40:Teschter,55:Entwickler,70:Manager,90:Adminischtrator';
 $s_project_status_enum_string = '10:Entwicklig,30:Frejgab,50:stabil,70:veraltet';
 $s_project_view_state_enum_string = '10:effentlig,50:privat';
