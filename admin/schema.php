@@ -912,6 +912,11 @@ $g_upgrade[214] = array( 'UpdateFunction', 'delete_orphaned_private_filters' );
 # Delete table print preferences table (unused since 2009)
 $g_upgrade[215] = array( 'DropTableSQL', array( db_get_table( 'user_print_pref' ) ) );
 
+# Speed up filter queries on project and status (e.g. hide closed issues),
+# and on last updated date
+$g_upgrade[216] = array( 'CreateIndexSQL', array( 'idx_bug_project_status', db_get_table( 'bug' ), 'project_id, status' ) );
+$g_upgrade[217] = array( 'CreateIndexSQL', array( 'idx_bug_last_updated', db_get_table( 'bug' ), 'last_updated' ) );
+
 # ----------------------------------------------------------------------------
 # End of schema definition, clear local variables
 #
