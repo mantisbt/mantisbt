@@ -912,6 +912,44 @@ $g_upgrade[214] = array( 'UpdateFunction', 'delete_orphaned_private_filters' );
 # Delete table print preferences table (unused since 2009)
 $g_upgrade[215] = array( 'DropTableSQL', array( db_get_table( 'user_print_pref' ) ) );
 
+$g_upgrade[216] = array( 'AlterColumnSQL', array( db_get_table( 'bugnote_text' ), "
+	note					XL		NOTNULL" ) );
+
+$g_upgrade[217] = array( 'AlterColumnSQL', array( db_get_table( 'bug_text' ), "
+	description				XL		NOTNULL,
+	steps_to_reproduce		XL		$t_notnull,
+	additional_information	XL		$t_notnull"
+	) );
+
+$g_upgrade[218] = array( 'AlterColumnSQL', array( db_get_table( 'config' ), "
+	value					XL		NOTNULL" ) );
+
+$g_upgrade[219] = array( 'AlterColumnSQL', array( db_get_table( 'custom_field' ), "
+	display_report			L		NOTNULL DEFAULT \" '0' \"" ) );
+
+$g_upgrade[220] = array( 'AlterColumnSQL', array( db_get_table( 'email' ), "
+	metadata				XL		NOTNULL,
+	body					XL		NOTNULL"
+	) );
+
+$g_upgrade[221] = array( 'AlterColumnSQL', array( db_get_table( 'filters' ), "
+	filter_string			XL		NOTNULL" ) );
+
+$g_upgrade[222] = array( 'AlterColumnSQL', array( db_get_table( 'news' ), "
+	body					XL		NOTNULL" ) );
+
+$g_upgrade[223] = array( 'AlterColumnSQL', array( db_get_table( 'project' ), "
+	description				XL		$t_notnull" ) );
+
+$g_upgrade[224] = array( 'AlterColumnSQL', array( db_get_table( 'project_version' ), "
+	description				XL		$t_notnull" ) );
+
+$g_upgrade[225] = array( 'AlterColumnSQL', array( db_get_table( 'tokens' ), "
+	value					XL		NOTNULL" ) );
+
+$g_upgrade[226] = array( 'AlterColumnSQL', array( db_get_table( 'user_profile' ), "
+	description				XL		$t_notnull" ) );
+
 # ----------------------------------------------------------------------------
 # End of schema definition, clear local variables
 #
