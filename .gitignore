@@ -49,7 +49,7 @@ library/phpmailer
 library/securimage
 api/rest/swagger/
 api/rest/generated/
-/node_modules/
+/**/node_modules/
 
 # Composer
 /vendor/
