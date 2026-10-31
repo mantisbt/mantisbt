@@ -414,6 +414,50 @@ class IssueUpdateTest extends SoapBase {
 		$this->assertEquals( 30, $t_issue_with_note->notes[0]->time_tracking );
 	}
 
+	/**
+	 * Updating an existing note without specifying its view state must not
+	 * change the view state, while an explicit view state is still applied.
+	 *
+	 * @return void
+	 */
+	public function testUpdateNoteKeepsViewStateIfNotSpecified() {
+		$t_issue_to_add = $this->getIssueToAdd();
+		$t_issue_id = $this->client->mc_issue_add( $this->userName, $this->password, $t_issue_to_add );
+		$this->deleteAfterRun( $t_issue_id );
+
+		$t_note_id = $this->client->mc_issue_note_add( $this->userName, $this->password, $t_issue_id, array(
+			'text' => 'private note',
+			'view_state' => array( 'id' => VS_PRIVATE ),
+		) );
+
+		# Update the note text only, without a view state
+		$t_issue = $this->client->mc_issue_get( $this->userName, $this->password, $t_issue_id );
+		$t_issue->notes = array(
+			array(
+				'id' => $t_note_id,
+				'text' => 'private note, edited',
+			)
+		);
+		$this->client->mc_issue_update( $this->userName, $this->password, $t_issue_id, $t_issue );
+
+		$t_issue = $this->client->mc_issue_get( $this->userName, $this->password, $t_issue_id );
+		$this->assertCount( 1, $t_issue->notes );
+		$this->assertEquals( 'private note, edited', $t_issue->notes[0]->text );
+		$this->assertEquals( VS_PRIVATE, $t_issue->notes[0]->view_state->id, 'View state is unchanged' );
+
+		# Explicitly changing the view state still works
+		$t_issue->notes = array(
+			array(
+				'id' => $t_note_id,
+				'view_state' => array( 'id' => VS_PUBLIC ),
+			)
+		);
+		$this->client->mc_issue_update( $this->userName, $this->password, $t_issue_id, $t_issue );
+
+		$t_issue = $this->client->mc_issue_get( $this->userName, $this->password, $t_issue_id );
+		$this->assertEquals( VS_PUBLIC, $t_issue->notes[0]->view_state->id, 'View state has been changed' );
+	}
+
 
 	/**
 	 * Adding REMINDER notes is not supported.

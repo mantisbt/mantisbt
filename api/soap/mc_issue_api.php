@@ -1210,12 +1210,9 @@ function mc_issue_update( $p_username, $p_password, $p_issue_id, stdClass $p_iss
 
 		foreach( $p_issue['notes'] as $t_note ) {
 			$t_note = ApiObjectFactory::objectToArray( $t_note );
-			$t_view_state = $t_note['view_state'] ?? config_get( 'default_bugnote_view_status' );
 
 			if( isset( $t_note['id'] ) && ( (int)$t_note['id'] > 0 ) ) {
 				$t_bugnote_id = (int)$t_note['id'];
-
-				$t_view_state_id = mci_get_enum_id_from_objectref( 'view_state', $t_view_state );
 
 				if( array_key_exists( $t_bugnote_id, $t_bugnotes_by_id ) ) {
 					$t_bugnote = $t_bugnotes_by_id[$t_bugnote_id];
@@ -1234,9 +1231,13 @@ function mc_issue_update( $p_username, $p_password, $p_issue_id, stdClass $p_iss
 						$t_bugnote_changed = true;
 					}
 
-					if( $t_bugnote->view_state != $t_view_state_id ) {
-						bugnote_set_view_state( $t_bugnote_id, $t_view_state_id == VS_PRIVATE );
-						$t_bugnote_changed = true;
+					# Only change the view state if specified, otherwise keep it
+					if( isset( $t_note['view_state'] ) ) {
+						$t_view_state_id = mci_get_enum_id_from_objectref( 'view_state', $t_note['view_state'] );
+						if( $t_bugnote->view_state != $t_view_state_id ) {
+							bugnote_set_view_state( $t_bugnote_id, $t_view_state_id == VS_PRIVATE );
+							$t_bugnote_changed = true;
+						}
 					}
 
 					if( isset( $t_note['time_tracking']) && $t_note['time_tracking'] != $t_bugnote->time_tracking ) {
