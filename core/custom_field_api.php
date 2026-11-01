@@ -1286,11 +1286,18 @@ function custom_field_validate( $p_field_id, $p_value ) {
 				$t_valid &= preg_match( '/' . $t_valid_regexp . '/', $p_value );
 			}
 			# Check the length of the string
+			$t_max_field_length = $t_type == CUSTOM_FIELD_TYPE_TEXTAREA
+				? config_get_global( 'max_textarea_length' )
+				: DB_FIELD_SIZE_CF_DEFAULT_VALUE;
+			if( $t_length > $t_max_field_length ) {
+				throw new ClientException(
+					"Custom Field '{$t_row['name']}' too long.",
+					ERROR_FIELD_TOO_LONG,
+					array(  $t_row['name'], $t_max_field_length )
+				);
+			}
 			$t_valid &= ( 0 == $t_length_min ) || ( $t_length >= $t_length_min );
 			$t_valid &= ( 0 == $t_length_max ) || ( $t_length <= $t_length_max );
-			if( $t_type == CUSTOM_FIELD_TYPE_TEXTAREA ) {
-				$t_valid &= $t_length <= config_get_global( 'max_textarea_length' );
-			}
 			break;
 		case CUSTOM_FIELD_TYPE_NUMERIC:
 			# Empty fields are valid
