@@ -917,14 +917,9 @@ function custom_field_get_id_from_name( $p_field_name ) {
 
 	$p_field_name = mb_strtolower($p_field_name);
 	if( !isset( $g_cache_name_to_id_map[$p_field_name] ) ) {
-		# Build cache of lowercase custom fields names to id
-		if( !$g_cache_name_to_id_map ) {
-			$t_query = new DbQuery( "SELECT id, name FROM {custom_field}" );
-			foreach( $t_query->fetch_all() as $t_row ) {
-				$t_name = mb_strtolower($t_row['name']);
-				$g_cache_name_to_id_map[$t_name] = $t_row['id'];
-			}
-		}
+		# The names map may only be partially populated if specific custom
+		# fields were cached before, so make sure all of them are loaded
+		custom_field_cache_array_rows();
 	}
 
 	return $g_cache_name_to_id_map[$p_field_name] ?? false;
