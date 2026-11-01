@@ -623,6 +623,7 @@ define( 'EMAIL_SHUTDOWN_FORCE', 2 );
 # divided by 4 (bytes per unicode char), see #20431:52209 for details.
 define( 'DB_FIELD_SIZE_USERNAME', 191 );
 define( 'DB_FIELD_SIZE_REALNAME', 255 );
+define( 'DB_FIELD_SIZE_EMAIL', 191 );
 define( 'DB_FIELD_SIZE_PASSWORD', 64 );
 define( 'DB_FIELD_SIZE_BUG_SUMMARY', 128 );
 define( 'DB_FIELD_SIZE_API_TOKEN_NAME', 128 );
