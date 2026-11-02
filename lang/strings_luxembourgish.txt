@@ -236,6 +236,7 @@ $s_verify_password = 'Passwuert iwwerpréifen';
 $s_create_user_button = 'Benotzer uleeën';
 $s_default_filter = 'Standardfilter';
 $s_manage_users_link = 'Benotzer';
+$s_manage_projects_link = 'Projeten';
 $s_manage_config_link = 'Konfiguratioun';
 $s_manage_email_config = 'E-Mail-Notifikatiounen';
 $s_create_new_account_link = 'Neie Kont uleeën';
