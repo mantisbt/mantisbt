@@ -58,6 +58,9 @@ composer.phar
 # PHPUnit
 .phpunit.result.cache
 
+# Docker dev stack
+.env
+
 
 # Settings below are for convenience when switching branches on Dev machines
 
