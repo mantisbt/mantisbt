@@ -93,4 +93,58 @@ class TagApiTest extends MantisCoreBase {
 		$this->assertFalse( tag_get( $t_tag_id ) );
 		$this->assertGreaterThan( $t_after_delete_queries, db_count_queries(), 'Tag delete should invalidate the cached tag row.' );
 	}
+
+	/**
+	 * Verify that an existing tag name is looked up in the database once.
+	 *
+	 * @return void
+	 */
+	public function testTagGetByNameIsCached(): void {
+		$t_tag_name = 'TagApiTest-' . uniqid( '', true );
+		$t_tag_id = tag_create( $t_tag_name, auth_get_current_user_id(), 'Created by TagApiTest' );
+		$this->tagIdsToDelete[] = $t_tag_id;
+
+		$t_queries = db_count_queries();
+		for( $i = 0; $i < 5; $i++ ) {
+			$this->assertEquals( $t_tag_id, tag_get_by_name( $t_tag_name )['id'] );
+		}
+		$this->assertSame( 1, db_count_queries() - $t_queries, 'Repeated lookups of a tag name should run one query.' );
+	}
+
+	/**
+	 * Verify that a missing tag name is not cached, so a tag created later
+	 * (even by another process) is found.
+	 *
+	 * @return void
+	 */
+	public function testTagGetByNameDoesNotCacheMissingName(): void {
+		$t_tag_name = 'TagApiTest-' . uniqid( '', true );
+
+		$t_queries = db_count_queries();
+		$this->assertFalse( tag_get_by_name( $t_tag_name ) );
+		$this->assertFalse( tag_get_by_name( $t_tag_name ) );
+		$this->assertSame( 2, db_count_queries() - $t_queries, 'A missing tag name should be looked up again.' );
+	}
+
+	/**
+	 * Verify that creating, renaming and deleting a tag is seen by the next lookup by name.
+	 *
+	 * @return void
+	 */
+	public function testTagWriteClearsCacheByName(): void {
+		$t_tag_name = 'TagApiTest-' . uniqid( '', true );
+		$t_new_name = $t_tag_name . '-renamed';
+		$this->assertFalse( tag_get_by_name( $t_tag_name ) );
+
+		$t_tag_id = tag_create( $t_tag_name, auth_get_current_user_id(), 'Created by TagApiTest' );
+		$this->tagIdsToDelete[] = $t_tag_id;
+		$this->assertEquals( $t_tag_id, tag_get_by_name( $t_tag_name )['id'] );
+
+		tag_update( $t_tag_id, $t_new_name, auth_get_current_user_id(), 'Updated by TagApiTest' );
+		$this->assertFalse( tag_get_by_name( $t_tag_name ) );
+		$this->assertEquals( $t_tag_id, tag_get_by_name( $t_new_name )['id'] );
+
+		tag_delete( $t_tag_id );
+		$this->assertFalse( tag_get_by_name( $t_new_name ) );
+	}
 }

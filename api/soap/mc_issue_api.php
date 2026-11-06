@@ -468,6 +468,12 @@ function mci_issue_get_custom_fields( $p_issue_id ) {
 
 	$t_custom_fields = array();
 	$t_related_custom_field_ids = custom_field_get_linked_ids( $t_project_id );
+
+	# An empty list would make custom_field_cache_array_rows() load all custom fields.
+	if( empty( $t_related_custom_field_ids ) ) {
+		return null;
+	}
+
 	custom_field_cache_array_rows( $t_related_custom_field_ids );
 
 	# filter out fields not accesible by the user

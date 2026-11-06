@@ -667,6 +667,51 @@ function bugnote_get_all_bugnotes( int $p_bug_id ): array {
 }
 
 /**
+ * Cache the notes of a set of bugs with one query, for bugnote_get_all_bugnotes().
+ *
+ * @param array $p_bug_id_array List of bug identifiers to cache.
+ *
+ * @return void
+ */
+function bugnote_cache_array_rows_by_bug_ids( array $p_bug_id_array ) {
+	global $g_cache_bugnotes_by_bug_id;
+
+	$c_bug_id_array = array();
+	foreach( $p_bug_id_array as $t_bug_id ) {
+		if( !isset( $g_cache_bugnotes_by_bug_id[(int)$t_bug_id] ) ) {
+			$c_bug_id_array[(int)$t_bug_id] = (int)$t_bug_id;
+		}
+	}
+
+	if( empty( $c_bug_id_array ) ) {
+		return;
+	}
+
+	$t_bugnotes = array_fill_keys( $c_bug_id_array, array() );
+	$t_user_ids = array();
+
+	# Same order as bugnote_get_all_bugnotes(), within each bug.
+	$t_query = new DbQuery( SQL_SELECT_BUGNOTES );
+	$t_query->append_sql(
+		' WHERE ' . $t_query->sql_in( 'b.bug_id', array_values( $c_bug_id_array ) )
+		. ' ORDER BY b.bug_id, b.date_submitted ASC, b.id ASC'
+	);
+
+	while( $t_row = $t_query->fetch() ) {
+		$t_bugnote = bugnote_row_to_object( $t_row );
+		$t_bugnotes[$t_bugnote->bug_id][] = $t_bugnote;
+		$t_user_ids[$t_bugnote->reporter_id] = $t_bugnote->reporter_id;
+		bugnote_cache( $t_bugnote );
+	}
+
+	user_cache_array_rows( $t_user_ids );
+
+	foreach( $t_bugnotes as $t_bug_id => $t_notes ) {
+		$g_cache_bugnotes_by_bug_id[$t_bug_id] = $t_notes;
+	}
+}
+
+/**
  * Gets the bugnote object given its id.
  *
  * @param int $p_bugnote_id The bugnote id.
