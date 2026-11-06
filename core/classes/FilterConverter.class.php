@@ -348,8 +348,12 @@ class FilterConverter {
 						// break;
 						unset( $p_criteria[$t_field] );
 						return;
+					case META_FILTER_NONE:
+						$t_result[] = array( 'id' => '[none]' );
+						break;
 					default:
-						$t_result[] = mci_get_category( $t_value );
+						# Filters store the category name, not the id
+						$t_result[] = array( 'name' => $t_value );
 						break;
 				}
 			}
