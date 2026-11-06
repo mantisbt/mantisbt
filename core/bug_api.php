@@ -871,6 +871,8 @@ class BugData {
 $g_cache_bug = array();
 $g_cache_bug_text = array();
 $g_cache_bug_attachments = array();
+# Monitors by bug id, filled only by bug_monitor_cache_array_rows().
+$g_cache_bug_monitors = array();
 
 /**
  * Cache a database result-set containing full contents of bug_table row.
@@ -1062,6 +1064,40 @@ function bug_text_cache_row( $p_bug_id, $p_trigger_errors = true ) {
 	$g_cache_bug_text[$c_bug_id] = $t_row;
 
 	return $t_row;
+}
+
+/**
+ * Cache the bug text of a set of bugs with one query.
+ *
+ * @param array $p_bug_id_array List of bug identifiers to cache.
+ *
+ * @return void
+ *
+ * @access public
+ */
+function bug_text_cache_array_rows( array $p_bug_id_array ) {
+	global $g_cache_bug_text;
+
+	$c_bug_id_array = array();
+	foreach( $p_bug_id_array as $t_bug_id ) {
+		if( !isset( $g_cache_bug_text[(int)$t_bug_id] ) ) {
+			$c_bug_id_array[(int)$t_bug_id] = (int)$t_bug_id;
+		}
+	}
+
+	if( empty( $c_bug_id_array ) ) {
+		return;
+	}
+
+	$t_query = new DbQuery();
+	$t_query->append_sql( 'SELECT b.id AS bug_id, bt.* FROM {bug_text} bt, {bug} b
+				  WHERE ' . $t_query->sql_in( 'b.id', array_values( $c_bug_id_array ) ) . ' AND b.bug_text_id = bt.id' );
+
+	while( $t_row = $t_query->fetch() ) {
+		$c_bug_id = (int)$t_row['bug_id'];
+		unset( $t_row['bug_id'] );
+		$g_cache_bug_text[$c_bug_id] = $t_row;
+	}
 }
 
 /**
@@ -1968,6 +2004,52 @@ function bug_get_attachments( $p_bug_id ) {
 }
 
 /**
+ * Cache the attachments of a set of bugs with one query, for bug_get_attachments().
+ *
+ * @param array $p_bug_id_array List of bug identifiers to cache.
+ *
+ * @return void
+ *
+ * @access public
+ */
+function bug_attachments_cache_array_rows( array $p_bug_id_array ) {
+	global $g_cache_bug_attachments;
+
+	$c_bug_id_array = array();
+	foreach( $p_bug_id_array as $t_bug_id ) {
+		if( !isset( $g_cache_bug_attachments[(int)$t_bug_id] ) ) {
+			$c_bug_id_array[(int)$t_bug_id] = (int)$t_bug_id;
+		}
+	}
+
+	if( empty( $c_bug_id_array ) ) {
+		return;
+	}
+
+	$t_attachments = array_fill_keys( $c_bug_id_array, array() );
+	$t_user_ids = array();
+
+	$t_query = new DbQuery();
+	$t_query->append_sql( 'SELECT bug_id, id, title, diskfile, filename, filesize, file_type, date_added, user_id, bugnote_id
+		                FROM {bug_file}
+		                WHERE ' . $t_query->sql_in( 'bug_id', array_values( $c_bug_id_array ) ) . '
+		                ORDER BY bug_id, date_added' );
+
+	while( $t_row = $t_query->fetch() ) {
+		$c_bug_id = (int)$t_row['bug_id'];
+		unset( $t_row['bug_id'] );
+		$t_attachments[$c_bug_id][] = $t_row;
+		$t_user_ids[(int)$t_row['user_id']] = (int)$t_row['user_id'];
+	}
+
+	user_cache_array_rows( $t_user_ids );
+
+	foreach( $t_attachments as $t_bug_id => $t_rows ) {
+		$g_cache_bug_attachments[$t_bug_id] = $t_rows;
+	}
+}
+
+/**
  * Set the value of a bug field.
  *
  * @param int             $p_bug_id     Bug identifier.
@@ -2320,6 +2402,7 @@ function bug_monitor( $p_bug_id, $p_user_id ) {
 	db_param_push();
 	$t_query = 'INSERT INTO {bug_monitor} ( user_id, bug_id ) VALUES (' . db_param() . ',' . db_param() . ')';
 	db_query( $t_query, array( $c_user_id, $c_bug_id ) );
+	bug_monitor_clear_cache( $c_bug_id );
 
 	# log new monitoring action
 	history_log_event_special( $c_bug_id, BUG_MONITOR, $c_user_id );
@@ -2341,6 +2424,11 @@ function bug_get_monitors( $p_bug_id ) {
 		return array();
 	}
 
+	global $g_cache_bug_monitors;
+	if( isset( $g_cache_bug_monitors[(int)$p_bug_id] ) ) {
+		return $g_cache_bug_monitors[(int)$p_bug_id];
+	}
+
 	# get the bugnote data
 	db_param_push();
 	$t_query = 'SELECT user_id, enabled
@@ -2357,6 +2445,65 @@ function bug_get_monitors( $p_bug_id ) {
 	user_cache_array_rows( $t_users );
 
 	return $t_users;
+}
+
+/**
+ * Cache the monitors of a set of bugs with one query, for bug_get_monitors().
+ *
+ * @param array $p_bug_id_array List of bug identifiers to cache.
+ *
+ * @return void
+ */
+function bug_monitor_cache_array_rows( array $p_bug_id_array ) {
+	global $g_cache_bug_monitors;
+
+	$c_bug_id_array = array();
+	foreach( $p_bug_id_array as $t_bug_id ) {
+		if( !isset( $g_cache_bug_monitors[(int)$t_bug_id] ) ) {
+			$c_bug_id_array[(int)$t_bug_id] = (int)$t_bug_id;
+		}
+	}
+
+	if( empty( $c_bug_id_array ) ) {
+		return;
+	}
+
+	$t_monitors = array_fill_keys( $c_bug_id_array, array() );
+	$t_user_ids = array();
+
+	$t_query = new DbQuery();
+	$t_query->append_sql( 'SELECT m.bug_id, m.user_id
+			FROM {bug_monitor} m, {user} u
+			WHERE ' . $t_query->sql_in( 'm.bug_id', array_values( $c_bug_id_array ) ) . ' AND m.user_id = u.id
+			ORDER BY u.realname, u.username' );
+
+	while( $t_row = $t_query->fetch() ) {
+		$t_monitors[(int)$t_row['bug_id']][] = $t_row['user_id'];
+		$t_user_ids[(int)$t_row['user_id']] = (int)$t_row['user_id'];
+	}
+
+	user_cache_array_rows( $t_user_ids );
+
+	foreach( $t_monitors as $t_bug_id => $t_users ) {
+		$g_cache_bug_monitors[$t_bug_id] = $t_users;
+	}
+}
+
+/**
+ * Clear the monitors cache.
+ *
+ * @param int|null $p_bug_id A bug identifier, or null for all bugs.
+ *
+ * @return void
+ */
+function bug_monitor_clear_cache( $p_bug_id = null ) {
+	global $g_cache_bug_monitors;
+
+	if( null === $p_bug_id ) {
+		$g_cache_bug_monitors = array();
+	} else {
+		unset( $g_cache_bug_monitors[(int)$p_bug_id] );
+	}
 }
 
 /**
@@ -2385,6 +2532,7 @@ function bug_monitor_copy( $p_source_bug_id, $p_dest_bug_id ) {
 			history_log_event_special( $c_dest_bug_id, BUG_MONITOR, $t_bug_monitor['user_id'] );
 		}
 	}
+	bug_monitor_clear_cache( $c_dest_bug_id );
 }
 
 /**
@@ -2409,6 +2557,7 @@ function bug_unmonitor( $p_bug_id, $p_user_id ) {
 	}
 
 	db_query( $t_query, $t_db_query_params );
+	bug_monitor_clear_cache( $p_bug_id );
 
 	# log new un-monitor action
 	history_log_event_special( $p_bug_id, BUG_UNMONITOR, (int)$p_user_id );

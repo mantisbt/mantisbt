@@ -226,9 +226,84 @@ function mc_filter_get_issues( $p_username, $p_password, $p_project_id, $p_filte
 		return array();
 	}
 
-	$t_result = array();
+	# Load the data of all issues of the page at once, only for the selected fields.
+	# Access checks stay in mci_issue_data_as_array().
+	$t_fields = $p_fields === null ? null : array_flip( $p_fields );
+	$t_want = function( $p_name ) use ( $t_fields ) {
+		return $t_fields === null || isset( $t_fields[$p_name] );
+	};
+	$t_want_history = !ApiObjectFactory::$soap && $t_want( 'history' );
+
+	$t_bug_ids = array();
+	$t_user_ids = array();
+	$t_field_ids = array();
 	foreach( $t_rows as $t_issue_data ) {
-		$t_result[] = mci_issue_data_as_array( $t_issue_data, $t_user_id, $t_lang, $p_fields );
+		$t_bug_ids[] = (int)$t_issue_data->id;
+		$t_user_ids[] = (int)$t_issue_data->reporter_id;
+		$t_user_ids[] = (int)$t_issue_data->handler_id;
+		if( $t_want( 'custom_fields' ) ) {
+			foreach( custom_field_get_linked_ids( $t_issue_data->project_id ) as $t_field_id ) {
+				$t_field_ids[(int)$t_field_id] = (int)$t_field_id;
+			}
+		}
+	}
+
+	if( !empty( $t_bug_ids ) ) {
+		if( $t_want( 'reporter' ) || $t_want( 'handler' ) ) {
+			user_cache_array_rows( $t_user_ids );
+		}
+
+		if( $t_want( 'description' ) || $t_want( 'steps_to_reproduce' ) || $t_want( 'additional_information' ) ) {
+			bug_text_cache_array_rows( $t_bug_ids );
+		}
+
+		# Note attachments and history lines read the issue attachments too.
+		if( $t_want( 'attachments' ) || $t_want( 'notes' ) || $t_want_history ) {
+			bug_attachments_cache_array_rows( $t_bug_ids );
+		}
+
+		if( $t_want( 'notes' ) ) {
+			bugnote_cache_array_rows_by_bug_ids( $t_bug_ids );
+		}
+
+		if( $t_want( 'relationships' ) ) {
+			relationship_cache_array_rows( $t_bug_ids );
+		}
+
+		# An empty list would make custom_field_cache_array_rows() load all custom fields.
+		if( !empty( $t_field_ids ) ) {
+			custom_field_cache_array_rows( $t_field_ids );
+			custom_field_cache_values( $t_bug_ids, $t_field_ids );
+		}
+
+		if( $t_want( 'tags' ) ) {
+			tag_cache_bug_tag_rows( $t_bug_ids );
+		}
+
+		if( $t_want( 'monitors' ) ) {
+			bug_monitor_cache_array_rows( $t_bug_ids );
+		}
+
+		if( $t_want_history ) {
+			history_cache_array_rows( $t_bug_ids );
+		}
+	}
+
+	$t_result = array();
+	try {
+		foreach( $t_rows as $t_issue_data ) {
+			$t_result[] = mci_issue_data_as_array( $t_issue_data, $t_user_id, $t_lang, $p_fields );
+		}
+	} finally {
+		# Free the loaded data.
+		foreach( $t_bug_ids as $t_bug_id ) {
+			bug_text_clear_cache( $t_bug_id );
+			bug_attachments_clear_cache( $t_bug_id );
+			bugnote_clear_bug_cache( $t_bug_id );
+			bug_monitor_clear_cache( $t_bug_id );
+			history_clear_cache( $t_bug_id );
+		}
+		relationship_clear_cache();
 	}
 
 	return $t_result;
