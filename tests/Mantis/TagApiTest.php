@@ -432,4 +432,130 @@ class TagApiTest extends MantisCoreBase {
 		}
 		$this->assertSame( $t_parent_tag_id, (int)tag_get_by_name( $t_name, $t_child_id )['id'] );
 	}
+
+	/**
+	 * Run TagCopyCommand and register the created tags for cleanup.
+	 *
+	 * @param int  $p_source_project_id Project to copy the tags from.
+	 * @param int  $p_target_project_id Project to copy the tags to.
+	 * @param bool $p_inherited         Whether to also copy the tags inherited by the source project.
+	 * @return array Command response
+	 */
+	private function copyTags( int $p_source_project_id, int $p_target_project_id, bool $p_inherited = true ): array {
+		$t_result = ( new \TagCopyCommand( array(
+			'query' => array( 'source_project_id' => $p_source_project_id, 'target_project_id' => $p_target_project_id ),
+			'payload' => array( 'inherited' => $p_inherited ),
+		) ) )->execute();
+		foreach( $t_result['tag_ids'] as $t_id ) {
+			$this->tagIdsToDelete[] = $t_id;
+		}
+		tag_clear_cache();
+		return $t_result;
+	}
+
+	/**
+	 * Copying tags between projects copies the tags scoped to the source project, in either direction.
+	 *
+	 * @return void
+	 */
+	public function testCopyTagsBetweenProjects(): void {
+		$t_name = 'TagApiTest-' . uniqid();
+		$t_source_id = $this->createProject();
+		$t_target_id = $this->createProject();
+		$this->createTag( $t_name . '-a', $t_source_id );
+		$this->createTag( $t_name . '-global', ALL_PROJECTS );
+		$this->createTag( $t_name . '-b', $t_target_id );
+
+		$t_result = $this->copyTags( $t_source_id, $t_target_id );
+		$this->assertCount( 1, $t_result['tag_ids'] );
+		$this->assertSame( array(), $t_result['skipped'] );
+		$this->assertSame( $t_target_id, (int)tag_get_by_name( $t_name . '-a', $t_target_id )['project_id'] );
+		$this->assertSame( ALL_PROJECTS, (int)tag_get_by_name( $t_name . '-global', $t_target_id )['project_id'], 'Global tags are not copied.' );
+
+		$t_result = $this->copyTags( $t_target_id, $t_source_id );
+		$this->assertCount( 1, $t_result['tag_ids'] );
+		$this->assertSame( $t_source_id, (int)tag_get_by_name( $t_name . '-b', $t_source_id )['project_id'] );
+	}
+
+	/**
+	 * Tags that already exist in the target project are skipped, whatever the case of the name,
+	 * and left unchanged, while the other tags are still copied. Copying again changes nothing.
+	 *
+	 * @return void
+	 */
+	public function testCopyTagsSkipsTagsThatExistInTargetProject(): void {
+		$t_name = 'TagApiTest-' . uniqid();
+		$t_source_id = $this->createProject();
+		$t_target_id = $this->createProject();
+
+		$this->createTag( $t_name . '-new', $t_source_id );
+		$this->createTag( $t_name . '-same', $t_source_id );
+		$this->createTag( $t_name . '-case', $t_source_id );
+		$t_target_same_id = $this->createTag( $t_name . '-same', $t_target_id );
+		$t_target_case_id = $this->createTag( strtoupper( $t_name ) . '-CASE', $t_target_id );
+		tag_update( $t_target_same_id, $t_name . '-same', auth_get_current_user_id(), 'Target description' );
+
+		$t_result = $this->copyTags( $t_source_id, $t_target_id );
+
+		$this->assertCount( 1, $t_result['tag_ids'], 'Only the tag that does not exist yet is created.' );
+		$this->assertEqualsCanonicalizing( array( $t_name . '-same', $t_name . '-case' ), $t_result['skipped'] );
+		$t_new = tag_get( $t_result['tag_ids'][0] );
+		$this->assertSame( $t_name . '-new', $t_new['name'] );
+		$this->assertSame( $t_target_id, (int)$t_new['project_id'] );
+
+		# Existing tags keep their identity and content
+		$this->assertSame( $t_target_same_id, (int)tag_get_by_name( $t_name . '-same', $t_target_id )['id'] );
+		$this->assertSame( 'Target description', tag_get( $t_target_same_id )['description'] );
+		$this->assertSame( $t_target_case_id, (int)tag_get_by_name( $t_name . '-case', $t_target_id )['id'] );
+
+		# The target project has exactly one tag of each name
+		$t_target_names = array_map( 'mb_strtolower', array_column( tag_get_candidates_for_bug( 0, $t_target_id ), 'name' ) );
+		$this->assertSame( count( $t_target_names ), count( array_unique( $t_target_names ) ) );
+
+		# Copying again creates nothing and skips everything
+		$t_again = $this->copyTags( $t_source_id, $t_target_id );
+		$this->assertSame( array(), $t_again['tag_ids'] );
+		$this->assertCount( 3, $t_again['skipped'] );
+
+		# A tag with the same name in the parent or in the global scope does not prevent the copy
+		$t_other_id = $this->createProject();
+		$this->createTag( $t_name . '-new', ALL_PROJECTS );
+		$t_to_other = $this->copyTags( $t_source_id, $t_other_id );
+		$this->assertCount( 3, $t_to_other['tag_ids'] );
+		$this->assertSame( array(), $t_to_other['skipped'] );
+	}
+
+	/**
+	 * Copying the tags of a subproject also copies the ones it inherits from its parent projects,
+	 * the nearest one if a name is used twice, unless the inherited tags are excluded.
+	 * Global tags are never copied.
+	 *
+	 * @return void
+	 */
+	public function testCopyTagsIncludesInheritedTagsUnlessExcluded(): void {
+		$t_name = 'TagApiTest-' . uniqid();
+		$t_parent_id = $this->createProject();
+		$t_child_id = $this->createProject();
+		$this->addSubproject( $t_child_id, $t_parent_id );
+		$this->createTag( $t_name . '-parent', $t_parent_id );
+		$this->createTag( $t_name . '-both', $t_parent_id, 'Parent description' );
+		$this->createTag( $t_name . '-both', $t_child_id, 'Child description' );
+		$this->createTag( $t_name . '-child', $t_child_id );
+		$this->createTag( $t_name . '-global', ALL_PROJECTS );
+
+		$t_excluded_id = $this->createProject();
+		$t_result = $this->copyTags( $t_child_id, $t_excluded_id, false );
+		$this->assertCount( 2, $t_result['tag_ids'] );
+		$this->assertFalse( tag_get_by_name( $t_name . '-parent', $t_excluded_id ) );
+
+		$t_included_id = $this->createProject();
+		$t_result = $this->copyTags( $t_child_id, $t_included_id );
+		$this->assertCount( 3, $t_result['tag_ids'] );
+		$this->assertSame( array(), $t_result['skipped'] );
+		$this->assertSame( $t_included_id, (int)tag_get_by_name( $t_name . '-parent', $t_included_id )['project_id'] );
+		$t_both = tag_get_by_name( $t_name . '-both', $t_included_id );
+		$this->assertSame( $t_included_id, (int)$t_both['project_id'] );
+		$this->assertSame( 'Child description', $t_both['description'], 'The nearest tag is copied.' );
+		$this->assertSame( ALL_PROJECTS, (int)tag_get_by_name( $t_name . '-global', $t_included_id )['project_id'] );
+	}
 }
