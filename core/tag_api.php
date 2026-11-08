@@ -1337,6 +1337,44 @@ function tag_bug_detach( $p_tag_id, $p_bug_id, $p_add_history = true, $p_user_id
 }
 
 /**
+ * Make the tags attached to a bug valid for the project the bug is moved to.
+ *
+ * A tag that is available in the target project (global, or scoped to the
+ * project or to a parent it inherits tags from) is kept.  Otherwise it is
+ * replaced by the tag with the same name that is available in the target
+ * project, and detached from the bug if there is none.  No history entry is
+ * added, as these changes follow from moving the issue.
+ *
+ * @param int $p_bug_id     The bug ID.
+ * @param int $p_project_id The project the bug is moved to.
+ *
+ * @return void
+ */
+function tag_bug_move_to_project( $p_bug_id, $p_project_id ) {
+	foreach( tag_bug_get_attached( $p_bug_id ) as $t_tag_row ) {
+		if( tag_is_available_in_project( $t_tag_row['id'], $p_project_id ) ) {
+			continue;
+		}
+
+		$t_target_tag_row = tag_get_by_name( $t_tag_row['name'], $p_project_id );
+
+		db_param_push();
+		if( $t_target_tag_row === false ) {
+			$t_query = 'DELETE FROM {bug_tag} WHERE tag_id=' . db_param() . ' AND bug_id=' . db_param();
+			db_query( $t_query, array( $t_tag_row['id'], $p_bug_id ) );
+		} else if( tag_bug_is_attached( $t_target_tag_row['id'], $p_bug_id ) ) {
+			$t_query = 'DELETE FROM {bug_tag} WHERE tag_id=' . db_param() . ' AND bug_id=' . db_param();
+			db_query( $t_query, array( $t_tag_row['id'], $p_bug_id ) );
+		} else {
+			$t_query = 'UPDATE {bug_tag} SET tag_id=' . db_param() . ' WHERE tag_id=' . db_param() . ' AND bug_id=' . db_param();
+			db_query( $t_query, array( $t_target_tag_row['id'], $t_tag_row['id'], $p_bug_id ) );
+		}
+	}
+
+	tag_clear_cache_bug_tags( $p_bug_id );
+}
+
+/**
  * Detach all tags from a given bug.
  *
  * @param int  $p_bug_id      The bug ID to detach.
