@@ -460,6 +460,9 @@ function tag_attach_many( $p_bug_id, $p_tag_string, $p_tag_id = 0 ) {
  * id = -1 and the tag name, and if the name is invalid, a row is returned with
  * id = -2 and the tag name.  The resulting array is then sorted by tag name.
  *
+ * A name matches every tag with that name, whatever its project, as a filter
+ * is not bound to a single project. The result has one row per matching tag.
+ *
  * @param string $p_string Filter string to parse.
  *
  * @return array Rows of tags parsed from filter string
@@ -474,18 +477,19 @@ function tag_parse_filters( $p_string ) {
 		$t_matches = array();
 
 		if( !is_blank( $t_name ) && tag_name_is_valid( $t_name, $t_matches, $t_prefix ) ) {
-			$t_tag_row = tag_get_by_name( $t_matches[1] );
-			if( $t_tag_row !== false ) {
-				$t_filter = mb_substr( $t_name, 0, 1 );
+			$t_filter = mb_substr( $t_name, 0, 1 );
+			if( '+' == $t_filter ) {
+				$t_filter_value = 1;
+			} else if( '-' == $t_filter ) {
+				$t_filter_value = -1;
+			} else {
+				$t_filter_value = 0;
+			}
 
-				if( '+' == $t_filter ) {
-					$t_tag_row['filter'] = 1;
-				} else if( '-' == $t_filter ) {
-					$t_tag_row['filter'] = -1;
-				} else {
-					$t_tag_row['filter'] = 0;
-				}
-
+			db_param_push();
+			$t_result = db_query( 'SELECT * FROM {tag} WHERE ' . db_helper_like( 'name' ), array( $t_matches[1] ) );
+			while( $t_tag_row = db_fetch_array( $t_result ) ) {
+				$t_tag_row['filter'] = $t_filter_value;
 				$t_tags[] = $t_tag_row;
 			}
 		}
