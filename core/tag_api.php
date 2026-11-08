@@ -1023,14 +1023,31 @@ function tag_delete( $p_tag_id ) {
 /**
  * Gets the tags that are not associated with the specified bug.
  *
- * @param int $p_bug_id The bug id, if 0 returns all available tags.
+ * When a project is known, only the tags available to it are returned: global
+ * tags, tags scoped to the project and, if tags are inherited, tags scoped to
+ * its parent projects. A name is only returned once: if tags of different
+ * scopes have the same name, the nearest one to the project is returned.
  *
- * @return array List of tag rows, each with id, name, and description.
+ * @param int $p_bug_id     The bug id, if 0 returns all available tags.
+ * @param int $p_project_id The project to return tags for when there is no
+ *                          bug id, or ALL_PROJECTS for the tags of all projects.
+ *
+ * @return array List of tag rows, each with id, name, description and project_id.
  */
-function tag_get_candidates_for_bug( $p_bug_id ) {
+function tag_get_candidates_for_bug( $p_bug_id, $p_project_id = ALL_PROJECTS ) {
+	if( 0 != $p_bug_id ) {
+		$p_project_id = bug_get_field( $p_bug_id, 'project_id' );
+	}
+
 	db_param_push();
-	$t_query = 'SELECT id, name, description FROM {tag}';
+	$t_query = 'SELECT id, name, description, project_id FROM {tag}';
+	$t_conditions = array();
 	$t_params = array();
+
+	$t_scope_ids = tag_get_project_ids_in_scope( $p_project_id );
+	if( $p_project_id != ALL_PROJECTS ) {
+		$t_conditions[] = 'project_id IN (' . implode( ', ', $t_scope_ids ) . ')';
+	}
 
 	if( 0 != $p_bug_id ) {
 		$t_assoc_tags_query = 'SELECT tag_id FROM {bug_tag} WHERE bug_id = ' . db_param();
@@ -1040,34 +1057,81 @@ function tag_get_candidates_for_bug( $p_bug_id ) {
 		# Special handling for odbc_mssql which does not support bound subqueries (#14774)
 		if( config_get_global( 'db_type' ) == 'odbc_mssql' ) {
 			db_param_push();
-			$t_result = db_query( $t_assoc_tags_query, $t_params );
+			$t_result = db_query( $t_assoc_tags_query, array( $p_bug_id ) );
+			array_pop( $t_params );
 
 			$t_subquery_results = array();
 			while( $t_row = db_fetch_array( $t_result ) ) {
 				$t_subquery_results[] = (int)$t_row['tag_id'];
 			}
 			if( $t_subquery_results ) {
-				$t_where = ' WHERE id NOT IN (' . implode( ', ', $t_subquery_results ) . ')';
-			} else {
-				$t_where = '';
+				$t_conditions[] = 'id NOT IN (' . implode( ', ', $t_subquery_results ) . ')';
 			}
-			$t_params = null;
 		} else {
-			$t_where = " WHERE id NOT IN ($t_assoc_tags_query)";
+			$t_conditions[] = "id NOT IN ($t_assoc_tags_query)";
 		}
-		$t_query .= $t_where;
 	}
 
-	$t_query .= ' ORDER BY name ASC ';
+	if( $t_conditions ) {
+		$t_query .= ' WHERE ' . implode( ' AND ', $t_conditions );
+	}
+	$t_query .= ' ORDER BY name ASC';
 	$t_result = db_query( $t_query, $t_params );
 
 	$t_results_to_return = array();
+	$t_ranks = array();
 
 	while( $t_row = db_fetch_array( $t_result ) ) {
-		$t_results_to_return[] = $t_row;
+		# the nearest project tag takes precedence over a tag with the same name, global tags come last
+		$t_key = mb_strtolower( $t_row['name'] );
+		$t_rank = array_search( (int)$t_row['project_id'], $t_scope_ids, true );
+		$t_rank = $t_rank === false ? PHP_INT_MAX : $t_rank;
+		if( !isset( $t_ranks[$t_key] ) || $t_rank < $t_ranks[$t_key] ) {
+			$t_ranks[$t_key] = $t_rank;
+			$t_results_to_return[$t_key] = $t_row;
+		}
 	}
 
-	return $t_results_to_return;
+	return array_values( $t_results_to_return );
+}
+
+/**
+ * Gets the tags to offer when filtering issues.
+ *
+ * The filter looks at the issues of the project and of its subprojects, so
+ * these are the global tags, and the tags scoped to the project, to the
+ * projects it inherits tags from, and to its subprojects. For ALL_PROJECTS
+ * these are the global tags and the tags of the projects the user can access.
+ * A name is only returned once, as filtering by name matches every tag with
+ * that name.
+ *
+ * @param int $p_project_id The project being filtered, or ALL_PROJECTS.
+ *
+ * @return array List of tag rows, each with id, name, description and project_id.
+ */
+function tag_get_candidates_for_filter( $p_project_id ) {
+	if( $p_project_id == ALL_PROJECTS ) {
+		$t_project_ids = array_merge( array( ALL_PROJECTS ), current_user_get_accessible_projects() );
+	} else {
+		$t_project_ids = tag_get_project_ids_in_scope( $p_project_id );
+	}
+	foreach( $t_project_ids as $t_project_id ) {
+		$t_project_ids = array_merge( $t_project_ids, current_user_get_all_accessible_subprojects( $t_project_id ) );
+	}
+	$t_project_ids = array_unique( array_map( 'intval', $t_project_ids ) );
+
+	$t_query = 'SELECT id, name, description, project_id FROM {tag} WHERE project_id IN (' . implode( ', ', $t_project_ids ) . ') ORDER BY name ASC, project_id ASC';
+	$t_result = db_query( $t_query );
+
+	$t_results_to_return = array();
+	while( $t_row = db_fetch_array( $t_result ) ) {
+		$t_key = mb_strtolower( $t_row['name'] );
+		if( !isset( $t_results_to_return[$t_key] ) ) {
+			$t_results_to_return[$t_key] = $t_row;
+		}
+	}
+
+	return array_values( $t_results_to_return );
 }
 
 /**

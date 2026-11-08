@@ -652,10 +652,10 @@ if( $t_show_attachments ) {
 					$t_tag_string = implode(
 						config_get( 'tag_separator' ), $t_tags
 					);
-					print_tag_input( 0, $t_tag_string );
+					print_tag_input( 0, $t_tag_string, $t_project_id );
 				} else {
 					# otherwise show just the default empty string
-					print_tag_input();
+					print_tag_input( 0, '', $t_project_id );
 				}
 			?>
 		</td>
