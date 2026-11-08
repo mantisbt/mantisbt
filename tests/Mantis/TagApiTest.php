@@ -274,6 +274,101 @@ class TagApiTest extends MantisCoreBase {
 	}
 
 	/**
+	 * A tag can only be moved to a project if no issue of another project uses it.
+	 *
+	 * @return void
+	 */
+	public function testMoveTagBetweenProjects(): void {
+		$t_name = 'TagApiTest-' . uniqid();
+		$t_project_id = $this->createProject();
+		$t_other_project_id = $this->createProject();
+		$t_issue_id = $this->createIssue( $t_project_id );
+		$t_other_issue_id = $this->createIssue( $t_other_project_id );
+		$t_user_id = auth_get_current_user_id();
+
+		# Unused tags can be moved anywhere
+		$t_tag_id = $this->createTag( $t_name, ALL_PROJECTS );
+		tag_update( $t_tag_id, $t_name, $t_user_id, '', $t_project_id );
+		$this->assertSame( $t_project_id, (int)tag_get_field( $t_tag_id, 'project_id' ) );
+
+		# Used by an issue of its project: it can go global, but not to other projects
+		$this->attachTags( $t_issue_id, array( array( 'id' => $t_tag_id ) ) );
+		try {
+			tag_update( $t_tag_id, $t_name, $t_user_id, '', $t_other_project_id );
+			$this->fail( 'Tag used in another project should not be moved.' );
+		} catch( \Mantis\Exceptions\ClientException $e ) {
+			$this->assertSame( ERROR_TAG_USED_IN_OTHER_PROJECTS, $e->getCode() );
+		}
+		$this->assertSame( $t_project_id, (int)tag_get_field( $t_tag_id, 'project_id' ) );
+
+		tag_update( $t_tag_id, $t_name, $t_user_id, '', ALL_PROJECTS );
+		$this->assertSame( ALL_PROJECTS, (int)tag_get_field( $t_tag_id, 'project_id' ) );
+
+		# Used in two projects: can't be scoped to any of them
+		$this->attachTags( $t_other_issue_id, array( array( 'id' => $t_tag_id ) ) );
+		foreach( array( $t_project_id, $t_other_project_id ) as $t_target_id ) {
+			try {
+				tag_update( $t_tag_id, $t_name, $t_user_id, '', $t_target_id );
+				$this->fail( 'Tag used in two projects should stay global.' );
+			} catch( \Mantis\Exceptions\ClientException $e ) {
+				$this->assertSame( ERROR_TAG_USED_IN_OTHER_PROJECTS, $e->getCode() );
+			}
+		}
+
+		# Moving can't create a duplicate name in the target scope
+		$t_project_tag_id = $this->createTag( $t_name . '-p', $t_project_id );
+		$this->createTag( $t_name . '-p', ALL_PROJECTS );
+		try {
+			tag_update( $t_project_tag_id, $t_name . '-p', $t_user_id, '', ALL_PROJECTS );
+			$this->fail( 'Duplicate name in the target scope should be rejected.' );
+		} catch( \Mantis\Exceptions\ClientException $e ) {
+			$this->assertSame( ERROR_TAG_DUPLICATE, $e->getCode() );
+		}
+	}
+
+	/**
+	 * Moving an issue to another project keeps the tags available there, maps the other
+	 * ones by name to the tags of the target project, and removes those without a match.
+	 *
+	 * @return void
+	 */
+	public function testMovingIssueMapsOrRemovesProjectTags(): void {
+		$t_name = 'TagApiTest-' . uniqid();
+		$t_project_id = $this->createProject();
+		$t_target_project_id = $this->createProject();
+		$t_issue_id = $this->createIssue( $t_project_id );
+		$t_global_id = $this->createTag( $t_name . '-global', ALL_PROJECTS );
+		$t_mapped_id = $this->createTag( $t_name . '-mapped', $t_project_id );
+		$t_removed_id = $this->createTag( $t_name . '-removed', $t_project_id );
+		$t_target_tag_id = $this->createTag( $t_name . '-mapped', $t_target_project_id );
+		# a global tag with the name of a project tag also counts as a tag with the same name
+		$t_shadowed_id = $this->createTag( $t_name . '-shadowed', $t_project_id );
+		$t_global_shadow_id = $this->createTag( $t_name . '-shadowed', ALL_PROJECTS );
+
+		$this->attachTags( $t_issue_id, array(
+			array( 'id' => $t_global_id ),
+			array( 'id' => $t_mapped_id ),
+			array( 'id' => $t_removed_id ),
+			array( 'id' => $t_shadowed_id ),
+		) );
+
+		bug_move( $t_issue_id, $t_target_project_id );
+		tag_clear_cache_bug_tags();
+
+		$t_attached = array();
+		foreach( tag_bug_get_attached( $t_issue_id ) as $t_tag_row ) {
+			$t_attached[$t_tag_row['name']] = (int)$t_tag_row['id'];
+		}
+		$this->assertSame( array(
+			$t_name . '-global' => $t_global_id,
+			$t_name . '-mapped' => $t_target_tag_id,
+			$t_name . '-shadowed' => $t_global_shadow_id,
+		), $t_attached );
+		# the tag without match is not recreated in the target project
+		$this->assertFalse( tag_get_by_name( $t_name . '-removed', $t_target_project_id ) );
+	}
+
+	/**
 	 * Subprojects use the tags of their parent projects, nearest first, then global tags.
 	 * Tags of subprojects are not available to the parent project.
 	 *
