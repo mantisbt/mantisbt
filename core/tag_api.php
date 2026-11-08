@@ -1001,7 +1001,9 @@ function tag_ensure_available_in_project( $p_tag_id, $p_project_id ) {
 function tag_delete( $p_tag_id ) {
 	tag_ensure_exists( $p_tag_id );
 
-	access_ensure_global_level( config_get( 'tag_edit_threshold' ) );
+	if( !tag_access_has_level( config_get( 'tag_edit_threshold' ), tag_get_field( $p_tag_id, 'project_id' ) ) ) {
+		access_denied();
+	}
 
 	$t_bugs = tag_get_bugs_attached( $p_tag_id );
 	foreach( $t_bugs as $t_bug_id ) {
