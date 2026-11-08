@@ -501,19 +501,29 @@ function tag_parse_filters( $p_string ) {
 /**
  * Returns all available tags.
  *
- * @param int $p_name_filter A string to match the beginning of the tag name.
- * @param int $p_count       The number of tags to return.
- * @param int $p_offset      The offset of the result.
+ * @param int      $p_name_filter A string to match the beginning of the tag name.
+ * @param int      $p_count       The number of tags to return.
+ * @param int      $p_offset      The offset of the result.
+ * @param int|null $p_project_id  Only return the tags of this project (ALL_PROJECTS for the global tags), or null for all tags.
  *
  * @return ADORecordSet|bool Tags sorted by name, or false if the query failed.
  */
-function tag_get_all( $p_name_filter, $p_count, $p_offset ) {
+function tag_get_all( $p_name_filter, $p_count, $p_offset, $p_project_id = null ) {
 	$t_where = '';
 	$t_where_params = array();
 
+	db_param_push();
+	$t_conditions = array();
 	if( !is_blank( $p_name_filter ) ) {
-		$t_where = 'WHERE ' . db_helper_like( 'name' );
+		$t_conditions[] = db_helper_like( 'name' );
 		$t_where_params[] = $p_name_filter . '%';
+	}
+	if( $p_project_id !== null ) {
+		$t_conditions[] = 't.project_id = ' . db_param();
+		$t_where_params[] = (int)$p_project_id;
+	}
+	if( $t_conditions ) {
+		$t_where = 'WHERE ' . implode( ' AND ', $t_conditions );
 	}
 
 	$t_query = <<<SQL
@@ -530,19 +540,25 @@ function tag_get_all( $p_name_filter, $p_count, $p_offset ) {
 /**
  * Returns all unused tags (i.e. not linked to any Issue).
  *
- * @param int $p_name_filter A string to match the beginning of the tag name.
- * @param int $p_count       The number of tags to return.
- * @param int $p_offset      The offset of the result.
+ * @param int      $p_name_filter A string to match the beginning of the tag name.
+ * @param int      $p_count       The number of tags to return.
+ * @param int      $p_offset      The offset of the result.
+ * @param int|null $p_project_id  Only return the tags of this project (ALL_PROJECTS for the global tags), or null for all tags.
  *
  * @return ADORecordSet|bool Tags sorted by name, or false if the query failed.
  */
-function tag_get_unused( $p_name_filter, $p_count, $p_offset ) {
+function tag_get_unused( $p_name_filter, $p_count, $p_offset, $p_project_id = null ) {
 	$t_where = '';
 	$t_where_params = array();
 
+	db_param_push();
 	if( !is_blank( $p_name_filter ) ) {
-		$t_where = ' AND ' . db_helper_like( 'name' );
+		$t_where .= ' AND ' . db_helper_like( 'name' );
 		$t_where_params[] = $p_name_filter . '%';
+	}
+	if( $p_project_id !== null ) {
+		$t_where .= ' AND t.project_id = ' . db_param();
+		$t_where_params[] = (int)$p_project_id;
 	}
 
 	$t_query = <<< SQL
@@ -558,23 +574,29 @@ function tag_get_unused( $p_name_filter, $p_count, $p_offset ) {
 /**
  * Counts all available tags.
  *
- * @param int  $p_name_filter A string to match the beginning of the tag name.
- * @param bool $p_unused      True to filter on unused tags, False for all tags.
+ * @param int      $p_name_filter A string to match the beginning of the tag name.
+ * @param bool     $p_unused      True to filter on unused tags, False for all tags.
+ * @param int|null $p_project_id  Only count the tags of this project (ALL_PROJECTS for the global tags), or null for all tags.
  *
  * @return int
  */
-function tag_count( $p_name_filter, $p_unused = false ) {
-	$t_where = '';
+function tag_count( $p_name_filter, $p_unused = false, $p_project_id = null ) {
+	$t_conditions = array();
 	$t_where_params = array();
 
+	db_param_push();
 	if( $p_name_filter ) {
-		$t_where = ' WHERE ' . db_helper_like( 'name' );
+		$t_conditions[] = db_helper_like( 'name' );
 		$t_where_params[] = $p_name_filter . '%';
 	}
-	if( $p_unused ) {
-		$t_where .= $t_where ? ' AND ': ' WHERE ';
-		$t_where .= "bt.tag_id IS NULL";
+	if( $p_project_id !== null ) {
+		$t_conditions[] = 't.project_id = ' . db_param();
+		$t_where_params[] = (int)$p_project_id;
 	}
+	if( $p_unused ) {
+		$t_conditions[] = 'bt.tag_id IS NULL';
+	}
+	$t_where = $t_conditions ? ' WHERE ' . implode( ' AND ', $t_conditions ) : '';
 
 	$t_query = 'SELECT count(DISTINCT t.id) FROM {tag} t LEFT JOIN {bug_tag} bt ON bt.tag_id = t.id' . $t_where;
 

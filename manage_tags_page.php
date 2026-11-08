@@ -83,7 +83,7 @@ $t_per_page = 20;
 $t_offset = (( $f_page_number - 1 ) * $t_per_page );
 
 # Determine number of tags in tag table
-$t_total_tag_count = tag_count( $t_name_filter, $f_filter == TAGS_UNUSED );
+$t_total_tag_count = tag_count( $t_name_filter, $f_filter == TAGS_UNUSED, ALL_PROJECTS );
 
 # Number of pages from result
 $t_page_count = ceil( $t_total_tag_count / $t_per_page );
@@ -104,9 +104,9 @@ if( $f_page_number < 1 ) {
 
 # Retrieve Tags from table
 if( $f_filter == TAGS_UNUSED ) {
-	$t_result = tag_get_unused( $t_name_filter, $t_per_page, $t_offset );
+	$t_result = tag_get_unused( $t_name_filter, $t_per_page, $t_offset, ALL_PROJECTS );
 } else {
-	$t_result = tag_get_all( $t_name_filter, $t_per_page, $t_offset );
+	$t_result = tag_get_all( $t_name_filter, $t_per_page, $t_offset, ALL_PROJECTS );
 }
 
 layout_page_header( lang_get( 'manage_tags_link' ) );
@@ -137,17 +137,12 @@ print_manage_menu( 'manage_tags_page.php' );
 	<div class="widget-header widget-header-small">
 		<h4 class="widget-title lighter">
 			<?php print_icon( 'fa-tags', 'ace-icon' ); ?>
-			<?php echo lang_get('manage_tags_link') ?>
+			<?php echo lang_get( 'global_tags' ) ?>
 			<span class="badge"><?php echo $t_total_tag_count ?></span>
 		</h4>
 	</div>
 
 	<div class="widget-body">
-		<?php if ($t_can_edit) { ?>
-			<div class="widget-toolbox padding-8 clearfix">
-				<?php print_small_button( '#tagcreate', lang_get('tag_create') ) ?>
-			</div>
-		<?php } ?>
 	<div class="widget-main no-padding">
 	<div class="table-responsive">
 	<table class="table table-striped table-bordered table-condensed table-hover">
@@ -215,63 +210,28 @@ print_manage_menu( 'manage_tags_page.php' );
 		</div>
 	</div>
 <?php } ?>
-</div>
-</div>
-
 <?php if( $t_can_edit ) { ?>
-<div class="space-10"></div>
-	<form id="manage-tags-create-form" method="post" action="tag_create.php">
-	<div id="tagcreate" class="widget-box widget-color-blue2">
-		<div class="widget-header widget-header-small">
-			<h4 class="widget-title lighter">
-				<?php print_icon( 'fa-tag', 'ace-icon' ); ?>
-				<?php echo lang_get('tag_create') ?>
-			</h4>
-		</div>
-		<div class="widget-body">
-			<div class="widget-main no-padding">
-		<div class="form-container">
-		<div class="table-responsive">
-		<fieldset>
-			<?php echo form_security_field( 'tag_create' ); ?>
-			<table class="table table-bordered table-condensed table-striped">
-			<tr>
-				<td class="category">
-					<label for="tag-name">
-						<span class="required">*</span>
-						<?php echo lang_get( 'tag_name' ) ?>
-					</label>
-				</td>
-				<td>
-					<input type="text" id="tag-name" name="name" class="input-sm" size="40" maxlength="100" required />
-					<small><?php echo sprintf( lang_get( 'tag_separate_by' ), config_get( 'tag_separator' ) ); ?></small>
-				</td>
-			</tr>
-			<tr>
-				<td class="category">
-					<label for="tag-description">
-						<?php echo lang_get( 'description' ) ?>
-					</label>
-				</td>
-				<td>
-					<textarea class="form-control" id="tag-description" name="description" cols="80" rows="6"></textarea>
-				</td>
-			</tr>
-			</table>
-		</fieldset>
-		</div>
-		</div>
-		</div>
-			<div class="widget-toolbox padding-8 clearfix">
-				<span class="required pull-right"> * <?php echo lang_get( 'required' ); ?></span>
-				<input type="submit" name="config_set" class="btn btn-primary btn-sm btn-white btn-round"
-					   value="<?php echo lang_get('tag_create') ?>"/>
-			</div>
-		</div>
+	<div class="widget-toolbox padding-8 clearfix">
+		<form id="manage-tags-add-form" method="post" action="tag_create.php" class="form-inline">
+			<fieldset>
+				<?php echo form_security_field( 'tag_create' ) ?>
+				<input type="hidden" name="project_id" value="<?php echo ALL_PROJECTS ?>" />
+				<!--suppress HtmlFormInputWithoutLabel -->
+				<input type="text" class="input-sm" required name="name" size="32"
+					   placeholder="<?php echo string_attribute( sprintf( lang_get( 'tag_separate_by' ), config_get( 'tag_separator' ) ) ) ?>" />
+				<button class="btn btn-sm btn-primary btn-white btn-round">
+					<?php echo lang_get( 'tag_create' ) ?>
+				</button>
+				<button name="add_and_edit_tag" value="1" class="btn btn-sm btn-primary btn-white btn-round">
+					<?php echo lang_get( 'add_and_edit_tag_button' ) ?>
+				</button>
+			</fieldset>
+		</form>
 	</div>
-	</form>
-<?php
-} # End can Edit
+<?php } ?>
+</div>
+</div>
 
+<?php
 echo '</div>';
 layout_page_end();
