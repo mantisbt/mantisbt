@@ -406,7 +406,11 @@ paths:
     post:
       summary: Attach a tag to issue
       operationId: IssueTagsAdd
-      description: ''
+      description: |-
+        Tags are scoped to a project, or global. A tag given by `name` is resolved in the project
+        of the issue: a tag of the project takes precedence over a global tag with the same name,
+        and a tag that doesn't exist is created in the project of the issue. A tag given by `id`
+        must be global or belong to the project of the issue.
       tags:
         - 'Issue Tags'
       parameters:
@@ -2430,6 +2434,8 @@ components:
             properties:
               id:
                 type: number
+              name:
+                type: string
     IssueAdd:
       $ref: '#/components/schemas/Issue'
     IssueUpdate:

@@ -404,8 +404,10 @@ function tag_attach_many( $p_bug_id, $p_tag_string, $p_tag_id = 0 ) {
 
 	access_ensure_bug_level( config_get( 'tag_attach_threshold' ), $p_bug_id );
 
-	$t_tags = tag_parse_string( $p_tag_string );
-	$t_can_create = tag_can_create();
+	# Tags are resolved in, and new tags are created for, the project of the issue
+	$t_project_id = bug_get_field( $p_bug_id, 'project_id' );
+	$t_tags = tag_parse_string( $p_tag_string, $t_project_id );
+	$t_can_create = tag_can_create( null, $t_project_id );
 
 	$t_tags_create = array();
 	$t_tags_attach = array();
@@ -435,7 +437,7 @@ function tag_attach_many( $p_bug_id, $p_tag_string, $p_tag_id = 0 ) {
 	}
 
 	foreach( $t_tags_create as $t_tag_row ) {
-		$t_tag_row['id'] = tag_create( $t_tag_row['name'] );
+		$t_tag_row['id'] = tag_create( $t_tag_row['name'], null, '', $t_project_id );
 		$t_tags_attach[] = $t_tag_row;
 	}
 
@@ -1177,6 +1179,7 @@ function tag_bug_attach( $p_tag_id, $p_bug_id, $p_user_id = null ) {
 	access_ensure_bug_level( config_get( 'tag_attach_threshold' ), $p_bug_id, $p_user_id );
 
 	tag_ensure_exists( $p_tag_id );
+	tag_ensure_available_in_project( $p_tag_id, bug_get_field( $p_bug_id, 'project_id' ) );
 
 	if( tag_bug_is_attached( $p_tag_id, $p_bug_id ) ) {
 		throw new ClientException(
