@@ -698,7 +698,9 @@
 		<varlistentry>
 			<term>$g_tag_create_threshold</term>
 			<listitem>
-				<para>Access level required to create new tags.</para>
+				<para>Access level required to create new tags.  For a tag scoped to a project, this is
+					the access level of the user in that project, including when a tag is created by tagging
+					an issue.  Global tags require the global access level.</para>
 			</listitem>
 		</varlistentry>
 		<varlistentry>

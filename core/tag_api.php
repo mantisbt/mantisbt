@@ -707,44 +707,79 @@ function tag_get_field( $p_tag_id, $p_field_name ) {
 }
 
 /**
+ * Does the current user have an access level on a tag?
+ *
+ * Global tags are checked against the global access level, tags scoped to a
+ * project against the access level in that project.
+ *
+ * @param int $p_level      The access level to check, e.g. config_get( 'tag_edit_threshold' ).
+ * @param int $p_project_id The project of the tag, or ALL_PROJECTS for a global tag.
+ *
+ * @return bool
+ */
+function tag_access_has_level( $p_level, $p_project_id ) {
+	if( $p_project_id == ALL_PROJECTS ) {
+		return access_has_global_level( $p_level );
+	}
+
+	return access_has_project_level( $p_level, $p_project_id );
+}
+
+/**
  * Can the specified user create a tag?
  *
- * @param int $p_user_id The id of the user to check access rights for.
+ * @param int $p_user_id    The id of the user to check access rights for.
+ * @param int $p_project_id The project the tag is created for, or ALL_PROJECTS
+ *                          for a global tag, which requires global access.
  *
  * @return bool true: can create, false: otherwise.
  */
-function tag_can_create( $p_user_id = null ) {
-	return access_has_global_level( config_get( 'tag_create_threshold' ), $p_user_id );
+function tag_can_create( $p_user_id = null, $p_project_id = ALL_PROJECTS ) {
+	if( $p_project_id == ALL_PROJECTS ) {
+		return access_has_global_level( config_get( 'tag_create_threshold' ), $p_user_id );
+	}
+
+	return access_has_project_level( config_get( 'tag_create_threshold', null, null, $p_project_id ), $p_project_id, $p_user_id );
 }
 
 /**
  * Ensure specified user can create tags.
  *
- * @param int $p_user_id The id of the user to check access rights for.
+ * @param int $p_user_id    The id of the user to check access rights for.
+ * @param int $p_project_id The project the tag is created for, or ALL_PROJECTS for a global tag.
  *
  * @return void
  */
-function tag_ensure_can_create( $p_user_id = null ) {
-	access_ensure_global_level( config_get( 'tag_create_threshold' ), $p_user_id );
+function tag_ensure_can_create( $p_user_id = null, $p_project_id = ALL_PROJECTS ) {
+	if( !tag_can_create( $p_user_id, $p_project_id ) ) {
+		access_denied();
+	}
 }
 
 /**
  * Create a tag with the given name, creator, and description.
  *
- * Defaults to the currently logged in user, and a blank description.
+ * Defaults to the currently logged in user, a blank description, and a
+ * global tag.
  *
  * @param string $p_name        The tag name to create.
  * @param int    $p_user_id     The user ID to link the new tag to.
  * @param string $p_description A Description for the tag.
+ * @param int    $p_project_id  The project the tag is scoped to, or ALL_PROJECTS for a global tag.
  *
  * @return int Tag ID
  * @throws ClientException
  */
-function tag_create( $p_name, $p_user_id = null, $p_description = '' ) {
-	tag_ensure_can_create( $p_user_id );
+function tag_create( $p_name, $p_user_id = null, $p_description = '', $p_project_id = ALL_PROJECTS ) {
+	$p_project_id = (int)$p_project_id;
+	if( $p_project_id != ALL_PROJECTS ) {
+		project_ensure_exists( $p_project_id );
+	}
+
+	tag_ensure_can_create( $p_user_id, $p_project_id );
 
 	tag_ensure_name_is_valid( $p_name );
-	tag_ensure_unique( $p_name );
+	tag_ensure_unique( $p_name, $p_project_id );
 
 	if( null == $p_user_id ) {
 		$p_user_id = auth_get_current_user_id();
@@ -756,10 +791,10 @@ function tag_create( $p_name, $p_user_id = null, $p_description = '' ) {
 
 	db_param_push();
 	$t_query = 'INSERT INTO {tag}
-				( user_id, name, description, date_created, date_updated )
+				( user_id, name, description, date_created, date_updated, project_id )
 				VALUES
-				( ' . db_param() . ',' . db_param() . ',' . db_param() . ',' . db_param() . ',' . db_param() . ')';
-	db_query( $t_query, array( $p_user_id, trim( $p_name ), trim( $p_description ), $c_date_created, $c_date_created ) );
+				( ' . db_param() . ',' . db_param() . ',' . db_param() . ',' . db_param() . ',' . db_param() . ',' . db_param() . ')';
+	db_query( $t_query, array( $p_user_id, trim( $p_name ), trim( $p_description ), $c_date_created, $c_date_created, $p_project_id ) );
 	$t_tag_id = db_insert_id( db_get_table( 'tag' ) );
 	tag_clear_cache( $t_tag_id );
 
