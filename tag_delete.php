@@ -44,11 +44,13 @@ require_api( 'tag_api.php' );
 
 form_security_validate( 'tag_delete' );
 
-access_ensure_global_level( config_get( 'tag_edit_threshold' ) );
-
 $f_tag_id = gpc_get_int( 'tag_id' );
 tag_ensure_exists( $f_tag_id );
 $t_tag_row = tag_get( $f_tag_id );
+
+if( !tag_access_has_level( config_get( 'tag_edit_threshold' ), $t_tag_row['project_id'] ) ) {
+	access_denied();
+}
 $t_confirm_msg = sprintf( lang_get( 'tag_delete_message' ),
 	string_html_specialchars( tag_get_name( $f_tag_id ) )
 );
@@ -59,4 +61,8 @@ tag_delete( $f_tag_id );
 
 form_security_purge( 'tag_delete' );
 
-print_header_redirect( 'manage_tags_page.php' );
+if( $t_tag_row['project_id'] == ALL_PROJECTS ) {
+	print_header_redirect( 'manage_tags_page.php' );
+} else {
+	print_header_redirect( 'manage_proj_edit_page.php?project_id=' . $t_tag_row['project_id'] . '#tags' );
+}

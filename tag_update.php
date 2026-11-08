@@ -52,11 +52,11 @@ $f_tag_id = gpc_get_int( 'tag_id' );
 tag_ensure_exists( $f_tag_id );
 $t_tag_row = tag_get( $f_tag_id );
 
-$t_can_edit = access_has_global_level( config_get( 'tag_edit_threshold' ) );
+$t_can_edit = tag_access_has_level( config_get( 'tag_edit_threshold' ), $t_tag_row['project_id'] );
 if( $t_can_edit ) {
 	$f_new_user_id = gpc_get_int( 'user_id', $t_tag_row['user_id'] );
 } else {
-	$t_can_edit_own_tag = access_has_global_level( config_get( 'tag_edit_own_threshold' ) );
+	$t_can_edit_own_tag = tag_access_has_level( config_get( 'tag_edit_own_threshold' ), $t_tag_row['project_id'] );
 	if( !( $t_can_edit_own_tag && auth_get_current_user_id() == $t_tag_row['user_id'] ) ) {
 		access_denied();
 	}
@@ -66,10 +66,14 @@ if( $t_can_edit ) {
 
 $f_new_name = gpc_get_string( 'name', $t_tag_row['name'] );
 $f_new_description = gpc_get_string( 'description', $t_tag_row['description'] );
+$f_new_project_id = gpc_get_int( 'project_id', $t_tag_row['project_id'] );
 $f_redirect_page = gpc_get_string( 'redirect', 'tag_view_page.php' );
 
-tag_update( $f_tag_id, $f_new_name, $f_new_user_id, $f_new_description );
+tag_update( $f_tag_id, $f_new_name, $f_new_user_id, $f_new_description, $f_new_project_id );
 
 form_security_purge( 'tag_update' );
 
+if( $f_redirect_page == 'manage_proj_edit_page.php' ) {
+	print_header_redirect( $f_redirect_page . '?project_id=' . $t_tag_row['project_id'] . '#tags' );
+}
 print_header_redirect( $f_redirect_page . '?tag_id=' . $f_tag_id );
