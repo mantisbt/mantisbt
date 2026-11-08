@@ -5069,6 +5069,13 @@ $g_subprojects_inherit_categories = ON;
  */
 $g_subprojects_inherit_versions = ON;
 
+/**
+ * Sub-projects should inherit tags from parent projects.
+ *
+ * @global int $g_subprojects_inherit_tags
+ */
+$g_subprojects_inherit_tags = ON;
+
 #########################################
 # System Logging and Debugging Settings #
 #########################################
@@ -5685,6 +5692,7 @@ $g_public_config_names = array(
 	'string_cookie',
 	'subprojects_enabled',
 	'subprojects_inherit_categories',
+	'subprojects_inherit_tags',
 	'subprojects_inherit_versions',
 	'summary_category_include_project',
 	'tag_attach_threshold',

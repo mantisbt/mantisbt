@@ -35,6 +35,9 @@
  * @uses form_api.php
  * @uses history_api.php
  * @uses lang_api.php
+ * @uses current_user_api.php
+ * @uses project_api.php
+ * @uses project_hierarchy_api.php
  * @uses string_api.php
  * @uses user_api.php
  * @uses utility_api.php
@@ -46,11 +49,14 @@ require_api( 'authentication_api.php' );
 require_api( 'bug_api.php' );
 require_api( 'config_api.php' );
 require_api( 'constant_inc.php' );
+require_api( 'current_user_api.php' );
 require_api( 'database_api.php' );
 require_api( 'error_api.php' );
 require_api( 'form_api.php' );
 require_api( 'history_api.php' );
 require_api( 'lang_api.php' );
+require_api( 'project_api.php' );
+require_api( 'project_hierarchy_api.php' );
 require_api( 'string_api.php' );
 require_api( 'user_api.php' );
 require_api( 'utility_api.php' );
@@ -236,15 +242,26 @@ function tag_ensure_exists( $p_tag_id ) {
  * Uses a case-insensitive search of the database for existing tags with the
  * same name.
  *
- * @param string $p_name The tag name to check.
+ * Tag names only need to be unique within a scope: a project can have a tag
+ * with the same name as a global tag or as a tag of another project.
+ *
+ * @param string   $p_name       The tag name to check.
+ * @param int|null $p_project_id The scope to check (ALL_PROJECTS for global
+ *                               tags), or null to check across all scopes.
  *
  * @return bool True if name is unique
  */
-function tag_is_unique( $p_name ) {
+function tag_is_unique( $p_name, $p_project_id = null ) {
 	$c_name = trim( $p_name );
 
+	db_param_push();
 	$t_query = 'SELECT id FROM {tag} WHERE ' . db_helper_like( 'name' );
-	$t_result = db_query( $t_query, array( $c_name ) );
+	$t_params = array( $c_name );
+	if( $p_project_id !== null ) {
+		$t_query .= ' AND project_id = ' . db_param();
+		$t_params[] = (int)$p_project_id;
+	}
+	$t_result = db_query( $t_query, $t_params );
 
 	if( db_result( $t_result ) ) {
 		return false;
@@ -255,13 +272,14 @@ function tag_is_unique( $p_name ) {
 /**
  * Ensure that a name is unique.
  *
- * @param string $p_name The tag name to check.
+ * @param string   $p_name       The tag name to check.
+ * @param int|null $p_project_id The scope to check, see tag_is_unique().
  *
  * @return void
  * @throws ClientException
  */
-function tag_ensure_unique( $p_name ) {
-	if( !tag_is_unique( $p_name ) ) {
+function tag_ensure_unique( $p_name, $p_project_id = null ) {
+	if( !tag_is_unique( $p_name, $p_project_id ) ) {
 		throw new ClientException(
 			"Tag '$p_name' already exists",
 			ERROR_TAG_DUPLICATE,
@@ -332,11 +350,12 @@ function tag_cmp_name( array $p_tag1, array $p_tag2 ) {
  * id = -1 and the tag name, and if the name is invalid, a row is returned with
  * id = -2 and the tag name.  The resulting array is then sorted by tag name.
  *
- * @param string $p_string Input string to parse.
+ * @param string   $p_string     Input string to parse.
+ * @param int|null $p_project_id Project the tags are meant for, see tag_get_by_name().
  *
  * @return array Rows of tags parsed from input string
  */
-function tag_parse_string( $p_string ) {
+function tag_parse_string( $p_string, $p_project_id = null ) {
 	$t_tags = array();
 
 	$t_strings = explode( config_get( 'tag_separator' ), $p_string );
@@ -347,7 +366,7 @@ function tag_parse_string( $p_string ) {
 		}
 
 		$t_matches = array();
-		$t_tag_row = tag_get_by_name( $t_name );
+		$t_tag_row = tag_get_by_name( $t_name, $p_project_id );
 		if( $t_tag_row !== false ) {
 			$t_tags[] = $t_tag_row;
 		} else {
@@ -597,24 +616,74 @@ function tag_get_name( $p_tag_id ) {
 }
 
 /**
+ * Get the projects whose tags can be used on issues of a project.
+ *
+ * This is the project itself and, when $g_subprojects_inherit_tags is ON, its parent
+ * projects. The nearest project comes first, so the order gives the precedence when
+ * several tags have the same name.
+ *
+ * ALL_PROJECTS, which stands for the global tags, is always the last one.
+ *
+ * @param int $p_project_id The project ID, or ALL_PROJECTS.
+ *
+ * @return int[] Project ids, from the nearest project to ALL_PROJECTS.
+ */
+function tag_get_project_ids_in_scope( $p_project_id ) {
+	if( $p_project_id == ALL_PROJECTS ) {
+		return array( ALL_PROJECTS );
+	}
+
+	if( config_get( 'subprojects_inherit_tags', null, null, $p_project_id ) ) {
+		# the hierarchy lists ALL_PROJECTS among the parents, but not as the last one
+		$t_project_ids = array_diff( array_map( 'intval', project_hierarchy_inheritance( $p_project_id ) ), array( ALL_PROJECTS ) );
+	} else {
+		$t_project_ids = array( (int)$p_project_id );
+	}
+
+	$t_project_ids[] = ALL_PROJECTS;
+	return array_values( $t_project_ids );
+}
+
+/**
  * Return a tag row for the given name.
  *
- * @param string $p_name The tag name to retrieve from the database.
+ * When a project is given, the tags available to that project are searched:
+ * its own tag with that name, then the one of its parent projects (if tags are
+ * inherited), then the global one. The nearest tag takes precedence.
+ *
+ * @param string   $p_name       The tag name to retrieve from the database.
+ * @param int|null $p_project_id The project to resolve the name for
+ *                               (ALL_PROJECTS only matches global tags), or
+ *                               null to search tags of any project, global
+ *                               tags first.
  *
  * @return array|false Tag row
  */
-function tag_get_by_name( $p_name ) {
+function tag_get_by_name( $p_name, $p_project_id = null ) {
 	db_param_push();
 	$t_query = 'SELECT * FROM {tag} WHERE ' . db_helper_like( 'name' );
-	$t_result = db_query( $t_query, array( $p_name ) );
-
-	$t_row = db_fetch_array( $t_result );
-
-	if( !$t_row ) {
-		return false;
+	if( $p_project_id === null ) {
+		$t_query .= ' ORDER BY project_id ASC, id ASC';
+		$t_result = db_query( $t_query, array( $p_name ), 1 );
+		return db_fetch_array( $t_result );
 	}
 
-	return $t_row;
+	$t_project_ids = tag_get_project_ids_in_scope( $p_project_id );
+	$t_query .= ' AND project_id IN (' . implode( ', ', $t_project_ids ) . ')';
+	$t_result = db_query( $t_query, array( $p_name ) );
+
+	# the nearest project wins, and global tags come last
+	$t_best_row = false;
+	$t_best_rank = PHP_INT_MAX;
+	while( $t_row = db_fetch_array( $t_result ) ) {
+		$t_rank = array_search( (int)$t_row['project_id'], $t_project_ids, true );
+		if( $t_rank < $t_best_rank ) {
+			$t_best_row = $t_row;
+			$t_best_rank = $t_rank;
+		}
+	}
+
+	return $t_best_row;
 }
 
 /**
