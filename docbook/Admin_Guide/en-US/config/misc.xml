@@ -706,13 +706,16 @@
 		<varlistentry>
 			<term>$g_tag_edit_threshold</term>
 			<listitem>
-				<para>Access level required to edit tag names and descriptions.</para>
+				<para>Access level required to edit and delete tags, and to move them between projects.
+					For a tag scoped to a project, this is the access level of the user in that project.
+					Global tags require the global access level.</para>
 			</listitem>
 		</varlistentry>
 		<varlistentry>
 			<term>$g_tag_edit_own_threshold</term>
 			<listitem>
-				<para>Access level required to edit descriptions by the creating user.</para>
+				<para>Access level required to edit tags by the creating user.  For a tag scoped to a
+					project, this is the access level of the user in that project.</para>
 			</listitem>
 		</varlistentry>
 

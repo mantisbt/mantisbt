@@ -809,17 +809,23 @@ function tag_create( $p_name, $p_user_id = null, $p_description = '', $p_project
  * @param int    $p_user_id     The user ID to set when updating the tag.
  *                              Note: This replaces the existing user id.
  * @param string $p_description An updated description for the tag.
+ * @param int|null $p_project_id The project to move the tag to, ALL_PROJECTS
+ *                              to make it global, or null to keep its scope.
  *
  * @return bool
  * @throws ClientException
  */
-function tag_update( $p_tag_id, $p_name, $p_user_id, $p_description ) {
+function tag_update( $p_tag_id, $p_name, $p_user_id, $p_description, $p_project_id = null ) {
 	$t_tag_row = tag_get( $p_tag_id );
 	$t_tag_name = $t_tag_row['name'];
 
+	$t_project_id = $p_project_id === null ? (int)$t_tag_row['project_id'] : (int)$p_project_id;
+	$t_move = $t_project_id != (int)$t_tag_row['project_id'];
+
 	if( $t_tag_name == $p_name &&
 		 $t_tag_row['description'] == $p_description &&
-		 $t_tag_row['user_id'] == $p_user_id ) {
+		 $t_tag_row['user_id'] == $p_user_id &&
+		 !$t_move ) {
 		# nothing has changed
 		return true;
 	}
@@ -831,22 +837,31 @@ function tag_update( $p_tag_id, $p_name, $p_user_id, $p_description ) {
 	} else {
 		$t_update_level = config_get( 'tag_edit_threshold' );
 	}
-	access_ensure_global_level( $t_update_level );
+	if( !tag_access_has_level( $t_update_level, $t_tag_row['project_id'] ) ) {
+		access_denied();
+	}
 
 	tag_ensure_name_is_valid( $p_name );
 
 	# Do not allow assigning a tag to a user who is not allowed to create one
-	if( !access_has_global_level( config_get( 'tag_create_threshold' ), $p_user_id ) ) {
+	if( !tag_can_create( $p_user_id, $t_project_id ) ) {
 		throw new ClientException(
 			"Access denied",
 			ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS
 		);
 	}
 
-	$t_rename = false;
-	if( mb_strtolower( $p_name ) != mb_strtolower( $t_tag_name ) ) {
-		tag_ensure_unique( $p_name );
-		$t_rename = true;
+	$t_rename = mb_strtolower( $p_name ) != mb_strtolower( $t_tag_name );
+
+	if( $t_move ) {
+		tag_ensure_can_move_to_project( $p_tag_id, $t_project_id );
+		# Moving a tag creates it in the new scope
+		tag_ensure_can_create( null, $t_project_id );
+	}
+
+	# Names must be unique in the (new) scope of the tag
+	if( $t_rename || $t_move ) {
+		tag_ensure_unique( $p_name, $t_project_id );
 	}
 
 	$c_date_updated = db_now();
@@ -856,9 +871,10 @@ function tag_update( $p_tag_id, $p_name, $p_user_id, $p_description ) {
 					SET user_id=' . db_param() . ',
 						name=' . db_param() . ',
 						description=' . db_param() . ',
-						date_updated=' . db_param() . '
+						date_updated=' . db_param() . ',
+						project_id=' . db_param() . '
 					WHERE id=' . db_param();
-	db_query( $t_query, array( (int)$p_user_id, $p_name, $p_description, $c_date_updated, $p_tag_id ) );
+	db_query( $t_query, array( (int)$p_user_id, $p_name, $p_description, $c_date_updated, $t_project_id, $p_tag_id ) );
 
 	if( $t_rename ) {
 		$t_bugs = tag_get_bugs_attached( $p_tag_id );
@@ -871,6 +887,107 @@ function tag_update( $p_tag_id, $p_name, $p_user_id, $p_description ) {
 	tag_clear_cache( $p_tag_id );
 
 	return true;
+}
+
+/**
+ * Get the ids of the projects that have issues using a tag.
+ *
+ * @param int $p_tag_id The tag ID to check.
+ *
+ * @return int[] Project ids.
+ */
+function tag_get_project_ids_used( $p_tag_id ) {
+	db_param_push();
+	$t_query = 'SELECT DISTINCT b.project_id FROM {bug_tag} bt JOIN {bug} b ON b.id = bt.bug_id WHERE bt.tag_id = ' . db_param();
+	$t_result = db_query( $t_query, array( (int)$p_tag_id ) );
+
+	$t_project_ids = array();
+	while( $t_row = db_fetch_array( $t_result ) ) {
+		$t_project_ids[] = (int)$t_row['project_id'];
+	}
+	return $t_project_ids;
+}
+
+/**
+ * Determine if a tag can be moved to a project, or made global.
+ *
+ * A tag can always be made global. It can only be scoped to a project if every
+ * issue using it belongs to that project, or to a subproject that inherits its tags.
+ *
+ * @param int $p_tag_id     The tag ID to check.
+ * @param int $p_project_id The target project, or ALL_PROJECTS for global.
+ *
+ * @return bool True if the tag can be moved
+ */
+function tag_can_move_to_project( $p_tag_id, $p_project_id ) {
+	if( $p_project_id == ALL_PROJECTS ) {
+		return true;
+	}
+
+	foreach( tag_get_project_ids_used( $p_tag_id ) as $t_used_project_id ) {
+		if( !in_array( (int)$p_project_id, tag_get_project_ids_in_scope( $t_used_project_id ), true ) ) {
+			return false;
+		}
+	}
+	return true;
+}
+
+/**
+ * Ensure a tag can be moved to a project, or made global.
+ *
+ * @param int $p_tag_id     The tag ID to check.
+ * @param int $p_project_id The target project, or ALL_PROJECTS for global.
+ *
+ * @return void
+ * @throws ClientException
+ */
+function tag_ensure_can_move_to_project( $p_tag_id, $p_project_id ) {
+	if( $p_project_id != ALL_PROJECTS ) {
+		project_ensure_exists( $p_project_id );
+	}
+
+	if( !tag_can_move_to_project( $p_tag_id, $p_project_id ) ) {
+		$t_name = tag_get_name( $p_tag_id );
+		throw new ClientException(
+			"Tag '$t_name' is attached to issues in other projects",
+			ERROR_TAG_USED_IN_OTHER_PROJECTS,
+			array( $t_name )
+		);
+	}
+}
+
+/**
+ * Determine if a tag can be used on issues of a project: it is either global,
+ * scoped to that project, or scoped to a parent project (if tags are inherited).
+ *
+ * @param int $p_tag_id     The tag ID to check.
+ * @param int $p_project_id The project ID to check.
+ *
+ * @return bool True if the tag is available in the project
+ */
+function tag_is_available_in_project( $p_tag_id, $p_project_id ) {
+	$t_tag_project_id = (int)tag_get_field( $p_tag_id, 'project_id' );
+	return in_array( $t_tag_project_id, tag_get_project_ids_in_scope( $p_project_id ), true );
+}
+
+/**
+ * Ensure a tag can be used on issues of a project.
+ *
+ * @param int $p_tag_id     The tag ID to check.
+ * @param int $p_project_id The project ID to check.
+ *
+ * @return void
+ * @throws ClientException
+ */
+function tag_ensure_available_in_project( $p_tag_id, $p_project_id ) {
+	if( !tag_is_available_in_project( $p_tag_id, $p_project_id ) ) {
+		$t_name = tag_get_name( $p_tag_id );
+		throw new ClientException(
+			"Tag '$t_name' is not available in project $p_project_id",
+			ERROR_TAG_NOT_IN_PROJECT,
+			array( $t_name )
+		);
+	}
 }
 
 /**
