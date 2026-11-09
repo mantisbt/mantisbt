@@ -1394,10 +1394,15 @@ class BugFilterQuery extends DbQuery {
 		$t_where = array();
 
 		if( count( $t_tags_always ) ) {
+			# A name can match several tags (of different projects), the issue must have any of them
+			$t_tag_ids_by_name = array();
 			foreach( $t_tags_always as $t_tag_row ) {
-				$t_tag_alias = 'bug_tag_alias_alw_' . $t_tag_row['id'];
+				$t_tag_ids_by_name[mb_strtolower( $t_tag_row['name'] )][] = (int)$t_tag_row['id'];
+			}
+			foreach( $t_tag_ids_by_name as $t_tag_ids ) {
+				$t_tag_alias = 'bug_tag_alias_alw_' . $t_tag_ids[0];
 				$t_join_inc = 'LEFT JOIN {bug_tag} ' . $t_tag_alias . ' ON ' . $t_tag_alias . '.bug_id = {bug}.id'
-					. ' AND ' . $t_tag_alias . '.tag_id = ' . $this->param( (int)$t_tag_row['id'] )
+					. ' AND ' . $this->sql_in( $t_tag_alias . '.tag_id', $t_tag_ids )
 					. $t_tag_projects_clause;
 				$this->add_join( $t_join_inc );
 				$t_where[] = $t_tag_alias . '.tag_id IS NOT NULL';

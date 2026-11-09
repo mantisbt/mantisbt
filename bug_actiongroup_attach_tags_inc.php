@@ -70,37 +70,30 @@ function action_attach_tags_print_fields() {
  * @return string|null On failure: the reason for tags failing validation for the given bug. On success: null.
  */
 function action_attach_tags_validate( $p_bug_id ) {
-	global $g_action_attach_tags_tags;
-	global $g_action_attach_tags_attach;
-	global $g_action_attach_tags_create;
-
 	$t_can_attach = access_has_bug_level( config_get( 'tag_attach_threshold' ), $p_bug_id );
 	if( !$t_can_attach ) {
 		return lang_get( 'tag_attach_denied' );
 	}
 
-	if( !isset( $g_action_attach_tags_tags ) ) {
-		if( !isset( $g_action_attach_tags_attach ) ) {
-			$g_action_attach_tags_attach = array();
-			$g_action_attach_tags_create = array();
-		}
-		$g_action_attach_tags_tags = tag_parse_string( gpc_get_string( 'tag_string' ) );
-		foreach ( $g_action_attach_tags_tags as $t_tag_row ) {
-			if( $t_tag_row['id'] == -1 ) {
-				$g_action_attach_tags_create[$t_tag_row['name']] = $t_tag_row;
-			} else if( $t_tag_row['id'] >= 0 ) {
-				$g_action_attach_tags_attach[$t_tag_row['name']] = $t_tag_row;
-			}
+	# Tag names are resolved in the project of each issue, so they are classified for every issue
+	$t_tags_attach = array();
+	$t_tags_create = array();
+	$t_project_id = bug_get_field( $p_bug_id, 'project_id' );
+	foreach ( tag_parse_string( gpc_get_string( 'tag_string' ), $t_project_id ) as $t_tag_row ) {
+		if( $t_tag_row['id'] == -1 ) {
+			$t_tags_create[$t_tag_row['name']] = $t_tag_row;
+		} else if( $t_tag_row['id'] >= 0 ) {
+			$t_tags_attach[$t_tag_row['name']] = $t_tag_row;
 		}
 	}
 
 	$t_can_create = access_has_bug_level( config_get( 'tag_create_threshold' ), $p_bug_id );
-	if( count( $g_action_attach_tags_create ) > 0 && !$t_can_create ) {
+	if( count( $t_tags_create ) > 0 && !$t_can_create ) {
 		return lang_get( 'tag_create_denied' );
 	}
 
-	if( count( $g_action_attach_tags_create ) == 0 &&
-		count( $g_action_attach_tags_attach ) == 0 ) {
+	if( count( $t_tags_create ) == 0 &&
+		count( $t_tags_attach ) == 0 ) {
 		return lang_get( 'tag_none_attached' );
 	}
 
@@ -113,18 +106,18 @@ function action_attach_tags_validate( $p_bug_id ) {
  * @return null Previous validation ensures that this function doesn't fail. Therefore we can always return null to indicate no errors occurred.
  */
 function action_attach_tags_process( $p_bug_id ) {
-	global $g_action_attach_tags_attach, $g_action_attach_tags_create;
-
-	foreach( $g_action_attach_tags_create as $t_tag_row ) {
-		$g_action_attach_tags_attach[] = array( 'name' => $t_tag_row['name'] );
+	# Attach by name, so that each issue gets the tags of its own project
+	$t_tags = array();
+	foreach( tag_parse_string( gpc_get_string( 'tag_string' ), bug_get_field( $p_bug_id, 'project_id' ) ) as $t_tag_row ) {
+		if( $t_tag_row['id'] != -2 ) {
+			$t_tags[] = array( 'name' => $t_tag_row['name'] );
+		}
 	}
-
-	$g_action_attach_tags_create = array();
 
 	$t_data = array(
 		'query' => array( 'issue_id' => $p_bug_id ),
 		'payload' => array(
-			'tags' => $g_action_attach_tags_attach
+			'tags' => $t_tags
 		)
 	);
 

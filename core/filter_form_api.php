@@ -1808,7 +1808,7 @@ function print_filter_tag_string( ?array $p_filter = null ) {
 		<input type="hidden" id="tag_separator" value="<?php echo config_get( 'tag_separator' )?>" />
 		<input class="input-xs" type="text" name="<?php echo FILTER_PROPERTY_TAG_STRING;?>" id="<?php echo FILTER_PROPERTY_TAG_STRING;?>" size="25" value="<?php echo string_attribute( $t_tag_string )?>" />
 		<select class="input-xs" <?php echo helper_get_tab_index()?> name="<?php echo FILTER_PROPERTY_TAG_SELECT;?>" id="<?php echo FILTER_PROPERTY_TAG_SELECT;?>">
-			<?php print_tag_option_list();?>
+			<?php print_tag_option_list( 0, helper_get_current_project(), true );?>
 		</select>
 		<?php
 }
