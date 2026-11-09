@@ -205,6 +205,104 @@ if( file_exists( config_get_global( 'config_path' ) . 'custom_relationships_inc.
 }
 
 /**
+ * Cache the relationships of a set of bugs with two queries,
+ * for relationship_get_all_src() and relationship_get_all_dest().
+ *
+ * @param array $p_bug_id_array List of bug identifiers to cache.
+ *
+ * @return void
+ * @throws ClientException if a bug does not exist.
+ */
+function relationship_cache_array_rows( array $p_bug_id_array ) {
+	global $g_cache_relationships_src, $g_cache_relationships_dest;
+
+	$c_bug_id_array = array();
+	foreach( $p_bug_id_array as $t_bug_id ) {
+		$c_bug_id = (int)$t_bug_id;
+		if( !isset( $g_cache_relationships_src[$c_bug_id] ) || !isset( $g_cache_relationships_dest[$c_bug_id] ) ) {
+			$c_bug_id_array[$c_bug_id] = $c_bug_id;
+		}
+	}
+
+	if( empty( $c_bug_id_array ) ) {
+		return;
+	}
+
+	$t_ids = array_values( $c_bug_id_array );
+	bug_cache_array_rows( $t_ids );
+
+	$t_src = array_fill_keys( $t_ids, array() );
+	$t_dest = array_fill_keys( $t_ids, array() );
+	$t_related_bug_ids = array();
+
+	# Same queries and order as relationship_get_all_src() and relationship_get_all_dest().
+	$t_query = new DbQuery();
+	$t_query->append_sql( 'SELECT {bug_relationship}.id, {bug_relationship}.relationship_type,
+				{bug_relationship}.source_bug_id, {bug_relationship}.destination_bug_id,
+				{bug}.project_id
+				FROM {bug_relationship}
+				INNER JOIN {bug} ON {bug_relationship}.destination_bug_id = {bug}.id
+				WHERE ' . $t_query->sql_in( 'source_bug_id', $t_ids ) . '
+				ORDER BY relationship_type, {bug_relationship}.id' );
+	while( $t_row = $t_query->fetch() ) {
+		$c_src_bug_id = (int)$t_row['source_bug_id'];
+		$t_relationship = new BugRelationshipData;
+		$t_relationship->id = $t_row['id'];
+		$t_relationship->src_bug_id = $t_row['source_bug_id'];
+		$t_relationship->src_project_id = bug_get_field( $c_src_bug_id, 'project_id' );
+		$t_relationship->dest_bug_id = $t_row['destination_bug_id'];
+		$t_relationship->dest_project_id = $t_row['project_id'];
+		$t_relationship->type = $t_row['relationship_type'];
+		$t_src[$c_src_bug_id][] = $t_relationship;
+		$t_related_bug_ids[] = (int)$t_row['destination_bug_id'];
+	}
+
+	$t_query = new DbQuery();
+	$t_query->append_sql( 'SELECT {bug_relationship}.id, {bug_relationship}.relationship_type,
+				{bug_relationship}.source_bug_id, {bug_relationship}.destination_bug_id,
+				{bug}.project_id
+				FROM {bug_relationship}
+				INNER JOIN {bug} ON {bug_relationship}.source_bug_id = {bug}.id
+				WHERE ' . $t_query->sql_in( 'destination_bug_id', $t_ids ) . '
+				ORDER BY relationship_type, {bug_relationship}.id' );
+	while( $t_row = $t_query->fetch() ) {
+		$c_dest_bug_id = (int)$t_row['destination_bug_id'];
+		$t_relationship = new BugRelationshipData;
+		$t_relationship->id = $t_row['id'];
+		$t_relationship->src_bug_id = $t_row['source_bug_id'];
+		$t_relationship->src_project_id = $t_row['project_id'];
+		$t_relationship->dest_bug_id = $t_row['destination_bug_id'];
+		$t_relationship->dest_project_id = bug_get_field( $c_dest_bug_id, 'project_id' );
+		$t_relationship->type = $t_row['relationship_type'];
+		$t_dest[$c_dest_bug_id][] = $t_relationship;
+		$t_related_bug_ids[] = (int)$t_row['source_bug_id'];
+	}
+
+	if( !empty( $t_related_bug_ids ) ) {
+		bug_cache_array_rows( array_unique( $t_related_bug_ids ) );
+	}
+
+	foreach( $t_ids as $t_bug_id ) {
+		$g_cache_relationships_src[$t_bug_id] = $t_src[$t_bug_id];
+		$g_cache_relationships_dest[$t_bug_id] = $t_dest[$t_bug_id];
+	}
+}
+
+/**
+ * Clear the relationship cache.
+ *
+ * A relationship belongs to two bugs, so the whole cache is cleared.
+ *
+ * @return void
+ */
+function relationship_clear_cache() {
+	global $g_cache_relationships_src, $g_cache_relationships_dest;
+
+	$g_cache_relationships_src = array();
+	$g_cache_relationships_dest = array();
+}
+
+/**
  * Ensure that specified relationship type is valid.
  *
  * @param int $p_relationship_type The relationship type id.
@@ -296,6 +394,7 @@ function relationship_add( $p_src_bug_id, $p_dest_bug_id, $p_relationship_type, 
 				( ' . db_param() . ',' . db_param() . ',' . db_param() . ')';
 	$t_param = relationship_prepare_for_assignment( $p_src_bug_id, $p_dest_bug_id, $p_relationship_type );
 	db_query( $t_query, $t_param );
+	relationship_clear_cache();
 
 	$t_relationship_id = db_insert_id( db_get_table( 'bug_relationship' ) );
 
@@ -332,6 +431,7 @@ function relationship_update( $p_relationship_id, $p_src_bug_id, $p_dest_bug_id,
 	$t_param = relationship_prepare_for_assignment( $p_src_bug_id, $p_dest_bug_id, $p_relationship_type );
 	$t_param[] = (int)$p_relationship_id;
 	db_query( $t_query, $t_param );
+	relationship_clear_cache();
 
 	history_log_event_special( $p_src_bug_id, BUG_REPLACE_RELATIONSHIP, $p_relationship_type, $p_dest_bug_id );
 	history_log_event_special( $p_dest_bug_id, BUG_REPLACE_RELATIONSHIP, relationship_get_complementary_type( $p_relationship_type ), $p_src_bug_id );
@@ -385,6 +485,7 @@ function relationship_delete( $p_relationship_id, $p_send_email = true ) {
 	db_param_push();
 	$t_query = 'DELETE FROM {bug_relationship} WHERE id=' . db_param();
 	db_query( $t_query, array( (int)$p_relationship_id ) );
+	relationship_clear_cache();
 
 	$t_src_bug_id = $t_relationship->src_bug_id;
 	$t_dest_bug_id = $t_relationship->dest_bug_id;
