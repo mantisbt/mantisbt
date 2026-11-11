@@ -1476,9 +1476,10 @@ function print_manage_user_sort_link( $p_page, $p_string, $p_field, $p_dir, $p_s
  * @param string $p_field   The field to sort.
  * @param string $p_dir     The sort direction - either ASC or DESC.
  * @param string $p_sort_by The field to sort by.
+ * @param string $p_search  Search terms to preserve in the link.
  * @return void
  */
-function print_manage_project_sort_link( $p_page, $p_string, $p_field, $p_dir, $p_sort_by ) {
+function print_manage_project_sort_link( $p_page, $p_string, $p_field, $p_dir, $p_sort_by, $p_search = '' ) {
 	if( $p_sort_by == $p_field ) {
 		# If this is the selected field flip the order
 		if( 'ASC' == $p_dir || ASCENDING == $p_dir ) {
@@ -1491,13 +1492,15 @@ function print_manage_project_sort_link( $p_page, $p_string, $p_field, $p_dir, $
 		$t_dir = 'ASC';
 	}
 
-	print_link(
-		helper_url_combine( $p_page, [
-			'sort' => $p_field,
-			'dir' => $t_dir
-		] ),
-		$p_string
-	);
+	$t_query = [
+		'sort' => $p_field,
+		'dir' => $t_dir
+	];
+	if( !is_blank( $p_search ) ) {
+		$t_query['search'] = $p_search;
+	}
+
+	print_link( helper_url_combine( $p_page, $t_query ), $p_string );
 }
 
 /**
