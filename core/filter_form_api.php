@@ -32,6 +32,7 @@
  * @uses gpc_api.php
  * @uses helper_api.php
  * @uses html_api.php
+ * @uses icon_api.php
  * @uses lang_api.php
  * @uses logging_api.php
  * @uses print_api.php
@@ -55,6 +56,7 @@ require_api( 'filter_constants_inc.php' );
 require_api( 'gpc_api.php' );
 require_api( 'helper_api.php' );
 require_api( 'html_api.php' );
+require_api( 'icon_api.php' );
 require_api( 'lang_api.php' );
 require_api( 'logging_api.php' );
 require_api( 'print_api.php' );
@@ -1404,43 +1406,86 @@ function print_filter_values_do_filter_by_date( array $p_filter ) {
 		echo '<input type="hidden" name="', FILTER_PROPERTY_DATE_SUBMITTED_END_DAY, '" value="', string_attribute( $t_filter[FILTER_PROPERTY_DATE_SUBMITTED_END_DAY] ), '" />';
 		echo '<input type="hidden" name="', FILTER_PROPERTY_DATE_SUBMITTED_END_YEAR, '" value="', string_attribute( $t_filter[FILTER_PROPERTY_DATE_SUBMITTED_END_YEAR] ), '" />';
 
-		$t_chars = preg_split( '//', config_get( 'short_date_format' ), -1, PREG_SPLIT_NO_EMPTY );
-		$t_time = mktime( 0, 0, 0, $t_filter[FILTER_PROPERTY_DATE_SUBMITTED_START_MONTH], $t_filter[FILTER_PROPERTY_DATE_SUBMITTED_START_DAY], $t_filter[FILTER_PROPERTY_DATE_SUBMITTED_START_YEAR] );
-		foreach( $t_chars as $t_char ) {
-			if( strcasecmp( $t_char, 'M' ) == 0 ) {
-				echo ' ';
-				echo lang_get( 'month_' . strtolower ( date( 'F', $t_time ) ) );
-			}
-			if( strcasecmp( $t_char, 'D' ) == 0 ) {
-				echo ' ';
-				echo date( 'd', $t_time );
-			}
-			if( strcasecmp( $t_char, 'Y' ) == 0 ) {
-				echo ' ';
-				echo date( 'Y', $t_time );
-			}
+		$t_start_rel = !empty( $t_filter[FILTER_PROPERTY_DATE_SUBMITTED_START_RELATIVE] ) ? $t_filter[FILTER_PROPERTY_DATE_SUBMITTED_START_RELATIVE] : null;
+		$t_end_rel = !empty( $t_filter[FILTER_PROPERTY_DATE_SUBMITTED_END_RELATIVE] ) ? $t_filter[FILTER_PROPERTY_DATE_SUBMITTED_END_RELATIVE] : null;
+		if( null !== $t_start_rel || null !== $t_end_rel ) {
+			echo '<input type="hidden" name="', FILTER_PROPERTY_FILTER_BY_DATE_SUBMITTED, '_relative" value="on" />';
+			print_filter_hidden_relative_inputs( FILTER_PROPERTY_DATE_SUBMITTED_START_RELATIVE, $t_start_rel );
+			print_filter_hidden_relative_inputs( FILTER_PROPERTY_DATE_SUBMITTED_END_RELATIVE, $t_end_rel );
+			echo ' ', filter_relative_date_icon();
+		}
+
+		if( null !== $t_start_rel ) {
+			echo ' ', filter_relative_date_display( $t_start_rel );
+		} else {
+			echo ' ', filter_format_short_date( mktime( 0, 0, 0, $t_filter[FILTER_PROPERTY_DATE_SUBMITTED_START_MONTH], $t_filter[FILTER_PROPERTY_DATE_SUBMITTED_START_DAY], $t_filter[FILTER_PROPERTY_DATE_SUBMITTED_START_YEAR] ) );
 		}
 
 		echo ' - ';
 
-		$t_time = mktime( 0, 0, 0, $t_filter[FILTER_PROPERTY_DATE_SUBMITTED_END_MONTH], $t_filter[FILTER_PROPERTY_DATE_SUBMITTED_END_DAY], $t_filter[FILTER_PROPERTY_DATE_SUBMITTED_END_YEAR] );
-		foreach( $t_chars as $t_char ) {
-			if( strcasecmp( $t_char, 'M' ) == 0 ) {
-				echo ' ';
-				echo lang_get( 'month_' . strtolower ( date( 'F', $t_time ) ) );
-			}
-			if( strcasecmp( $t_char, 'D' ) == 0 ) {
-				echo ' ';
-				echo date( 'd', $t_time );
-			}
-			if( strcasecmp( $t_char, 'Y' ) == 0 ) {
-				echo ' ';
-				echo date( 'Y', $t_time );
-			}
+		if( null !== $t_end_rel ) {
+			echo filter_relative_date_display( $t_end_rel );
+		} else {
+			echo filter_format_short_date( mktime( 0, 0, 0, $t_filter[FILTER_PROPERTY_DATE_SUBMITTED_END_MONTH], $t_filter[FILTER_PROPERTY_DATE_SUBMITTED_END_DAY], $t_filter[FILTER_PROPERTY_DATE_SUBMITTED_END_YEAR] ) );
 		}
 	} else {
 		echo lang_get( 'no' );
 	}
+}
+
+/**
+ * Print the two control rows shared by the built-in date filters: the checkbox
+ * that turns the field on, and the select that chooses fixed or relative dates.
+ *
+ * These are separate concerns and are deliberately separate controls. The
+ * checkbox is the field's on/off switch and keeps the name these filters have
+ * always submitted, so an unchecked field still means "do not filter by this
+ * date". The select only says which kind of bounds the field uses; it defaults
+ * to fixed and never turns the field on by itself.
+ *
+ * The checkbox carries the name these filters have always submitted, and is
+ * paired with a hidden input of the same name so an unchecked box still posts
+ * a value. That is what keeps a field "off": in static mode every field is
+ * rendered and submitted, so without the checkbox an untouched date field
+ * would turn its filter on. In dynamic mode an unexpanded field submits
+ * nothing at all and the stored value carries through instead.
+ *
+ * @param string  $p_enable_field  Filter property holding the field's on/off flag.
+ * @param string  $p_label         Lang string key for the checkbox label.
+ * @param boolean $p_enabled       Whether the field is currently filtering.
+ * @param boolean $p_relative_mode Whether the field is in relative mode.
+ * @return void
+ */
+function print_filter_date_type_row( $p_enable_field, $p_label, $p_enabled, $p_relative_mode ) {
+	# Fixed is the default; a stored relative descriptor is what selects relative.
+	$t_type = $p_relative_mode ? FILTER_DATE_TYPE_RELATIVE : FILTER_DATE_TYPE_FIXED;
+	$t_options = array(
+		FILTER_DATE_TYPE_FIXED => lang_get( 'date_type_fixed' ),
+		FILTER_DATE_TYPE_RELATIVE => lang_get( 'date_type_relative' ),
+	);
+?>
+		<tr>
+			<td colspan="2">
+				<input type="hidden" name="<?php echo $p_enable_field ?>" value="<?php echo OFF ?>" />
+				<label>
+					<input class="input-xs ace js_rd_enable" type="checkbox"
+						name="<?php echo $p_enable_field ?>"
+						<?php check_checked( $p_enabled, true ) ?> />
+					<span class="lbl padding-6 small"><?php echo lang_get( $p_label ) ?></span>
+				</label>
+			</td>
+		</tr>
+		<tr>
+			<td><?php echo lang_get( 'date_type_label' ) ?></td>
+			<td>
+				<select class="input-xs js_rd_type" name="<?php echo $p_enable_field ?>_type">
+<?php	foreach( $t_options as $t_value => $t_label ) { ?>
+					<option value="<?php echo $t_value ?>"<?php check_selected( $t_type, $t_value ) ?>><?php echo string_attribute( $t_label ) ?></option>
+<?php	} ?>
+				</select>
+			</td>
+		</tr>
+<?php
 }
 
 /**
@@ -1457,33 +1502,54 @@ function print_filter_do_filter_by_date( $p_hide_checkbox = false, ?array $p_fil
 	if( null === $p_filter ) {
 		$p_filter = $g_filter;
 	}
+
+	# Relative mode is encoded by the presence of a descriptor for either endpoint.
+	$t_start_relative = !empty( $p_filter[FILTER_PROPERTY_DATE_SUBMITTED_START_RELATIVE] ) ? $p_filter[FILTER_PROPERTY_DATE_SUBMITTED_START_RELATIVE] : null;
+	$t_end_relative = !empty( $p_filter[FILTER_PROPERTY_DATE_SUBMITTED_END_RELATIVE] ) ? $p_filter[FILTER_PROPERTY_DATE_SUBMITTED_END_RELATIVE] : null;
+	$t_relative_mode = ( null !== $t_start_relative ) || ( null !== $t_end_relative );
+	$t_enabled = gpc_string_to_bool( $p_filter[FILTER_PROPERTY_FILTER_BY_DATE_SUBMITTED] );
+
+	# Callers that hide the mode controls get the fixed rows and nothing else, so
+	# the field stays fixed-mode whatever the filter holds - honouring a descriptor
+	# there would hide the fixed rows and leave the table with no date inputs.
+	if( $p_hide_checkbox ) {
+		$t_relative_mode = false;
+	}
+
+	# Only the selected mode's rows are shown; the other mode's rows are hidden
+	# rather than merely disabled, which keeps the field compact. The initial
+	# state is rendered here because the filter form is also inserted by AJAX
+	# (return_dynamic_filters.php), where no change event fires for the
+	# mode handler in common.js to react to.
+	#
+	# Visibility tracks the mode, and the mode defaults to fixed, so a field that
+	# is not filtering still shows its fixed date inputs, disabled, as these
+	# filters have always done. Whether the inputs are enabled is a separate
+	# question, answered by the enable checkbox.
+	$t_fixed_row_style = $t_relative_mode ? ' style="display:none"' : '';
+	$t_relative_row_style = $t_relative_mode ? '' : ' style="display:none"';
+	$t_menu_disabled = ( $t_enabled && !$t_relative_mode ) ? '' : ' disabled="disabled" ';
+	$t_relative_disabled = ( $t_enabled && $t_relative_mode ) ? '' : ' disabled="disabled" ';
+
+	# Without the mode controls the field is fixed-mode only, and its inputs are
+	# the whole field, so they are always live.
+	if( $p_hide_checkbox ) {
+		$t_menu_disabled = '';
+	}
 ?>
 		<table>
 <?php
-	$t_menu_disabled =  '';
 	if( !$p_hide_checkbox ) {
-?>
-		<tr>
-			<td colspan="2">
-				<input type="hidden" name="<?php echo FILTER_PROPERTY_FILTER_BY_DATE_SUBMITTED ?>" value="<?php echo OFF ?>" />
-				<label>
-					<input class="input-xs ace js_switch_date_inputs_trigger" type="checkbox" id="use_date_filters" class="input-xs"
-						name="<?php echo FILTER_PROPERTY_FILTER_BY_DATE_SUBMITTED ?>"
-						<?php check_checked( gpc_string_to_bool( $p_filter[FILTER_PROPERTY_FILTER_BY_DATE_SUBMITTED] ), true ) ?> />
-					<span class="lbl padding-6 small"><?php echo lang_get( 'use_date_filters' )?></span>
-				</label>
-			</td>
-		</tr>
-<?php
-
-		if( ON != $p_filter[FILTER_PROPERTY_FILTER_BY_DATE_SUBMITTED] ) {
-			$t_menu_disabled = ' disabled="disabled" ';
-		}
+		print_filter_date_type_row(
+			FILTER_PROPERTY_FILTER_BY_DATE_SUBMITTED,
+			'use_date_filters',
+			$t_enabled,
+			$t_relative_mode );
 	}
 ?>
 
 		<!-- Start date -->
-		<tr>
+		<tr class="js_rd_row_fixed"<?php echo $t_fixed_row_style ?>>
 			<td>
 			<?php echo lang_get( 'start_date_label' )?>
 			</td>
@@ -1492,17 +1558,17 @@ function print_filter_do_filter_by_date( $p_hide_checkbox = false, ?array $p_fil
 			$t_chars = preg_split( '//', config_get( 'short_date_format' ), -1, PREG_SPLIT_NO_EMPTY );
 	foreach( $t_chars as $t_char ) {
 		if( strcasecmp( $t_char, 'M' ) == 0 ) {
-			echo '<select class="input-xs" name="', FILTER_PROPERTY_DATE_SUBMITTED_START_MONTH, '"', $t_menu_disabled, '>';
+			echo '<select class="input-xs js_rd_fixed" name="', FILTER_PROPERTY_DATE_SUBMITTED_START_MONTH, '"', $t_menu_disabled, '>';
 			print_month_option_list( $p_filter[FILTER_PROPERTY_DATE_SUBMITTED_START_MONTH] );
 			print "</select>\n";
 		}
 		if( strcasecmp( $t_char, 'D' ) == 0 ) {
-			echo '<select class="input-xs" name="', FILTER_PROPERTY_DATE_SUBMITTED_START_DAY, '"', $t_menu_disabled, '>';
+			echo '<select class="input-xs js_rd_fixed" name="', FILTER_PROPERTY_DATE_SUBMITTED_START_DAY, '"', $t_menu_disabled, '>';
 			print_day_option_list( $p_filter[FILTER_PROPERTY_DATE_SUBMITTED_START_DAY] );
 			print "</select>\n";
 		}
 		if( strcasecmp( $t_char, 'Y' ) == 0 ) {
-			echo '<select class="input-xs" name="', FILTER_PROPERTY_DATE_SUBMITTED_START_YEAR, '"', $t_menu_disabled, '>';
+			echo '<select class="input-xs js_rd_fixed" name="', FILTER_PROPERTY_DATE_SUBMITTED_START_YEAR, '"', $t_menu_disabled, '>';
 			print_year_option_list( $p_filter[FILTER_PROPERTY_DATE_SUBMITTED_START_YEAR] );
 			print "</select>\n";
 		}
@@ -1511,7 +1577,7 @@ function print_filter_do_filter_by_date( $p_hide_checkbox = false, ?array $p_fil
 			</td>
 		</tr>
 		<!-- End date -->
-		<tr>
+		<tr class="js_rd_row_fixed"<?php echo $t_fixed_row_style ?>>
 			<td>
 			<?php echo lang_get( 'end_date_label' )?>
 			</td>
@@ -1520,17 +1586,17 @@ function print_filter_do_filter_by_date( $p_hide_checkbox = false, ?array $p_fil
 			$t_chars = preg_split( '//', config_get( 'short_date_format' ), -1, PREG_SPLIT_NO_EMPTY );
 	foreach( $t_chars as $t_char ) {
 		if( strcasecmp( $t_char, 'M' ) == 0 ) {
-			echo '<select class="input-xs" name="', FILTER_PROPERTY_DATE_SUBMITTED_END_MONTH, '"', $t_menu_disabled, '>';
+			echo '<select class="input-xs js_rd_fixed" name="', FILTER_PROPERTY_DATE_SUBMITTED_END_MONTH, '"', $t_menu_disabled, '>';
 			print_month_option_list( $p_filter[FILTER_PROPERTY_DATE_SUBMITTED_END_MONTH] );
 			print "</select>\n";
 		}
 		if( strcasecmp( $t_char, 'D' ) == 0 ) {
-			echo '<select class="input-xs" name="', FILTER_PROPERTY_DATE_SUBMITTED_END_DAY, '"', $t_menu_disabled, '>';
+			echo '<select class="input-xs js_rd_fixed" name="', FILTER_PROPERTY_DATE_SUBMITTED_END_DAY, '"', $t_menu_disabled, '>';
 			print_day_option_list( $p_filter[FILTER_PROPERTY_DATE_SUBMITTED_END_DAY] );
 			print "</select>\n";
 		}
 		if( strcasecmp( $t_char, 'Y' ) == 0 ) {
-			echo '<select class="input-xs" name="', FILTER_PROPERTY_DATE_SUBMITTED_END_YEAR, '"', $t_menu_disabled, '>';
+			echo '<select class="input-xs js_rd_fixed" name="', FILTER_PROPERTY_DATE_SUBMITTED_END_YEAR, '"', $t_menu_disabled, '>';
 			print_year_option_list( $p_filter[FILTER_PROPERTY_DATE_SUBMITTED_END_YEAR] );
 			print "</select>\n";
 		}
@@ -1538,6 +1604,30 @@ function print_filter_do_filter_by_date( $p_hide_checkbox = false, ?array $p_fil
 	?>
 			</td>
 		</tr>
+<?php
+	if( !$p_hide_checkbox ) {
+?>
+		<!-- Relative start date -->
+		<tr class="js_rd_row_relative"<?php echo $t_relative_row_style ?>>
+			<td>
+			<?php echo lang_get( 'start_date_label' )?>
+			</td>
+			<td class="nowrap">
+			<?php print_filter_relative_date_inputs( FILTER_PROPERTY_DATE_SUBMITTED_START_RELATIVE, $t_relative_disabled, $t_start_relative ); ?>
+			</td>
+		</tr>
+		<!-- Relative end date -->
+		<tr class="js_rd_row_relative"<?php echo $t_relative_row_style ?>>
+			<td>
+			<?php echo lang_get( 'end_date_label' )?>
+			</td>
+			<td>
+			<?php print_filter_relative_date_inputs( FILTER_PROPERTY_DATE_SUBMITTED_END_RELATIVE, $t_relative_disabled, $t_end_relative ); ?>
+			</td>
+		</tr>
+<?php
+	}
+?>
 		</table>
 		<?php
 }
@@ -1560,42 +1650,190 @@ function print_filter_values_do_filter_by_last_updated_date( array $p_filter ) {
 		echo '<input type="hidden" name="', FILTER_PROPERTY_LAST_UPDATED_END_DAY, '" value="', string_attribute( $t_filter[FILTER_PROPERTY_LAST_UPDATED_END_DAY] ), '" />';
 		echo '<input type="hidden" name="', FILTER_PROPERTY_LAST_UPDATED_END_YEAR, '" value="', string_attribute( $t_filter[FILTER_PROPERTY_LAST_UPDATED_END_YEAR] ), '" />';
 
-		$t_chars = preg_split( '//', config_get( 'short_date_format' ), -1, PREG_SPLIT_NO_EMPTY );
-		$t_time = mktime( 0, 0, 0, $t_filter[FILTER_PROPERTY_LAST_UPDATED_START_MONTH], $t_filter[FILTER_PROPERTY_LAST_UPDATED_START_DAY], $t_filter[FILTER_PROPERTY_LAST_UPDATED_START_YEAR] );
-		foreach( $t_chars as $t_char ) {
-			if( strcasecmp( $t_char, 'M' ) == 0 ) {
-				echo ' ';
-				echo lang_get( 'month_' . strtolower (date( 'F', $t_time ) ) );
-			}
-			if( strcasecmp( $t_char, 'D' ) == 0 ) {
-				echo ' ';
-				echo date( 'd', $t_time );
-			}
-			if( strcasecmp( $t_char, 'Y' ) == 0 ) {
-				echo ' ';
-				echo date( 'Y', $t_time );
-			}
+		$t_start_rel = !empty( $t_filter[FILTER_PROPERTY_LAST_UPDATED_START_RELATIVE] ) ? $t_filter[FILTER_PROPERTY_LAST_UPDATED_START_RELATIVE] : null;
+		$t_end_rel = !empty( $t_filter[FILTER_PROPERTY_LAST_UPDATED_END_RELATIVE] ) ? $t_filter[FILTER_PROPERTY_LAST_UPDATED_END_RELATIVE] : null;
+		if( null !== $t_start_rel || null !== $t_end_rel ) {
+			echo '<input type="hidden" name="', FILTER_PROPERTY_FILTER_BY_LAST_UPDATED_DATE, '_relative" value="on" />';
+			print_filter_hidden_relative_inputs( FILTER_PROPERTY_LAST_UPDATED_START_RELATIVE, $t_start_rel );
+			print_filter_hidden_relative_inputs( FILTER_PROPERTY_LAST_UPDATED_END_RELATIVE, $t_end_rel );
+			echo ' ', filter_relative_date_icon();
+		}
+
+		if( null !== $t_start_rel ) {
+			echo ' ', filter_relative_date_display( $t_start_rel );
+		} else {
+			echo ' ', filter_format_short_date( mktime( 0, 0, 0, $t_filter[FILTER_PROPERTY_LAST_UPDATED_START_MONTH], $t_filter[FILTER_PROPERTY_LAST_UPDATED_START_DAY], $t_filter[FILTER_PROPERTY_LAST_UPDATED_START_YEAR] ) );
 		}
 
 		echo ' - ';
 
-		$t_time = mktime( 0, 0, 0, $t_filter[FILTER_PROPERTY_LAST_UPDATED_END_MONTH], $t_filter[FILTER_PROPERTY_LAST_UPDATED_END_DAY], $t_filter[FILTER_PROPERTY_LAST_UPDATED_END_YEAR] );
-		foreach( $t_chars as $t_char ) {
-			if( strcasecmp( $t_char, 'M' ) == 0 ) {
-				echo ' ';
-				echo lang_get( 'month_' . strtolower ( date( 'F', $t_time ) ) );
-			}
-			if( strcasecmp( $t_char, 'D' ) == 0 ) {
-				echo ' ';
-				echo date( 'd', $t_time );
-			}
-			if( strcasecmp( $t_char, 'Y' ) == 0 ) {
-				echo ' ';
-				echo date( 'Y', $t_time );
-			}
+		if( null !== $t_end_rel ) {
+			echo filter_relative_date_display( $t_end_rel );
+		} else {
+			echo filter_format_short_date( mktime( 0, 0, 0, $t_filter[FILTER_PROPERTY_LAST_UPDATED_END_MONTH], $t_filter[FILTER_PROPERTY_LAST_UPDATED_END_DAY], $t_filter[FILTER_PROPERTY_LAST_UPDATED_END_YEAR] ) );
 		}
 	} else {
 		echo lang_get( 'no' );
+	}
+}
+
+/**
+ * Print the relative-date input cluster (anchor + signed offset + unit) for a
+ * single date filter endpoint.
+ *
+ * These inputs capture a relative expression such as "today - 7 days" as a
+ * counterpart to the fixed year/month/day selects. The submitted values are
+ * assembled into a relative date descriptor by filter_gpc_get_relative_descriptor().
+ * For the built-in date fields each control carries the js_rd_relative class, by
+ * which the mode handler in common.js enables or disables the group as the date
+ * type select changes. Custom date fields reuse these inputs but are driven by
+ * their own handler, which selects them by name prefix because the operator
+ * governs the two endpoints separately.
+ *
+ * @param string     $p_name_prefix Form-field name prefix for this endpoint.
+ * @param string     $p_disabled    Disabled attribute markup (or empty string).
+ * @param array|null $p_descriptor  Stored descriptor to pre-select, or null for defaults.
+ * @return void
+ */
+function print_filter_relative_date_inputs( $p_name_prefix, $p_disabled = '', ?array $p_descriptor = null ) {
+	if( null === $p_descriptor ) {
+		$p_descriptor = filter_relative_descriptor_default( $p_name_prefix );
+	}
+	$t_parts = filter_relative_descriptor_to_parts( $p_descriptor );
+	# Taken from filter_relative_date_anchors() so the form cannot offer an anchor
+	# the resolver does not know; each label is the anchor's own lang string.
+	$t_anchors = array();
+	foreach( array_keys( filter_relative_date_anchors() ) as $t_anchor ) {
+		$t_anchors[$t_anchor] = lang_get( 'relative_date_anchor_' . $t_anchor );
+	}
+	# As for the anchors: the set comes from filter_relative_date_units(), keyed by
+	# the code the form field carries. The lang strings are the plural of the unit
+	# name - relative_date_unit_days, _weeks, _months, _years.
+	$t_units = array();
+	foreach( filter_relative_date_units() as $t_unit => $t_code ) {
+		$t_units[$t_code] = lang_get( 'relative_date_unit_' . $t_unit . 's' );
+	}
+?>
+			<select class="input-xs js_rd_relative" name="<?php echo $p_name_prefix ?>_anchor"<?php echo $p_disabled ?>>
+<?php	foreach( $t_anchors as $t_value => $t_label ) { ?>
+				<option value="<?php echo $t_value ?>"<?php check_selected( $t_parts['anchor'], $t_value ) ?>><?php echo string_attribute( $t_label ) ?></option>
+<?php	} ?>
+			</select>
+			<select class="input-xs js_rd_relative" name="<?php echo $p_name_prefix ?>_sign"<?php echo $p_disabled ?>>
+				<option value="-"<?php check_selected( $t_parts['sign'], '-' ) ?>>&minus;</option>
+				<option value="+"<?php check_selected( $t_parts['sign'], '+' ) ?>>+</option>
+			</select>
+			<input type="number" class="input-xs js_rd_relative" name="<?php echo $p_name_prefix ?>_num" value="<?php echo (int)$t_parts['num'] ?>" min="0" max="<?php echo FILTER_RELATIVE_DATE_MAX_OFFSET ?>" style="width: 56px"<?php echo $p_disabled ?> />
+			<select class="input-xs js_rd_relative" name="<?php echo $p_name_prefix ?>_unit"<?php echo $p_disabled ?>>
+<?php	foreach( $t_units as $t_value => $t_label ) { ?>
+				<option value="<?php echo $t_value ?>"<?php check_selected( $t_parts['unit'], $t_value ) ?>><?php echo string_attribute( $t_label ) ?></option>
+<?php	} ?>
+			</select>
+<?php
+}
+
+/**
+ * Format a timestamp with the configured 'short_date_format', using the
+ * localized month name. Only the M/D/Y placeholders of the format are honoured
+ * (any separators are dropped), matching how the built-in date filters have
+ * always rendered their endpoints in the read-only filter view.
+ *
+ * @param integer $p_timestamp Unix timestamp.
+ * @return string Formatted date, e.g. "2026 July 23".
+ */
+function filter_format_short_date( $p_timestamp ) {
+	$t_chars = preg_split( '//', config_get( 'short_date_format' ), -1, PREG_SPLIT_NO_EMPTY );
+	$t_parts = array();
+	foreach( $t_chars as $t_char ) {
+		if( strcasecmp( $t_char, 'M' ) == 0 ) {
+			$t_parts[] = lang_get( 'month_' . strtolower( date( 'F', $p_timestamp ) ) );
+		} elseif( strcasecmp( $t_char, 'D' ) == 0 ) {
+			$t_parts[] = date( 'd', $p_timestamp );
+		} elseif( strcasecmp( $t_char, 'Y' ) == 0 ) {
+			$t_parts[] = date( 'Y', $p_timestamp );
+		}
+	}
+	return implode( ' ', $t_parts );
+}
+
+/**
+ * Describe a relative date descriptor in words, in the order the form lays out
+ * its inputs: "start of month -1 month". An offset of zero is the anchor alone,
+ * "today"; an offset from today is the offset alone, "-7 days".
+ *
+ * @param array $p_descriptor Relative date descriptor.
+ * @return string Plain-text description, not HTML-escaped.
+ */
+function filter_relative_descriptor_label( array $p_descriptor ) {
+	$t_descriptor = filter_relative_descriptor_normalize( $p_descriptor );
+	$t_anchor = lang_get( 'relative_date_anchor_' . $t_descriptor['anchor'] );
+
+	$t_offset = $t_descriptor['offset'];
+	if( 0 === $t_offset ) {
+		return $t_anchor;
+	}
+
+	$t_count = abs( $t_offset );
+	$t_step = ( $t_offset < 0 ? '-' : '+' ) . $t_count . ' '
+		. lang_get( 'relative_date_unit_' . $t_descriptor['unit'] . ( 1 === $t_count ? '' : 's' ) );
+
+	return 'today' === $t_descriptor['anchor'] ? $t_step : $t_anchor . ' ' . $t_step;
+}
+
+/**
+ * Render a relative date endpoint for the read-only filter view as the date it
+ * resolves to as of now, e.g. "2026 July 23", with the expression behind it,
+ * e.g. "-7 days", in a tooltip. The field as a whole is marked relative by
+ * filter_relative_date_icon(), printed before its dates.
+ *
+ * The date is always resolved from the descriptor here, never read from the
+ * filter's year/month/day (or timestamp) slots: those are only refreshed when
+ * the filter is submitted, so for a saved filter loaded later they hold the
+ * date it had when it was saved, not the one the query will actually use.
+ *
+ * @param array       $p_descriptor  Relative date descriptor.
+ * @param string|null $p_date_format Date format for the resolved date; null
+ *                                   uses the localized short-date rendering of
+ *                                   filter_format_short_date().
+ * @return string HTML for the endpoint.
+ */
+function filter_relative_date_display( array $p_descriptor, $p_date_format = null ) {
+	$t_timestamp = filter_relative_descriptor_to_date( $p_descriptor );
+	$t_date = ( null === $p_date_format )
+		? filter_format_short_date( $t_timestamp )
+		: date( $p_date_format, $t_timestamp );
+
+	# Styled like the dotted underline MantisBT already gives hover details
+	# elsewhere, such as the resolution behind a related issue's status.
+	return '<span class="relative-date" title="' . string_attribute( filter_relative_descriptor_label( $p_descriptor ) ) . '">'
+		. string_html_specialchars( $t_date )
+		. '</span>';
+}
+
+/**
+ * The icon that marks a date field in the read-only filter view as relative,
+ * printed once before its dates.
+ *
+ * @return string HTML for the icon.
+ */
+function filter_relative_date_icon() {
+	return icon_get( 'fa-repeat', 'grey' );
+}
+
+/**
+ * Emit a relative date descriptor as hidden form inputs (one per part), so the
+ * read-only filter view re-posts the descriptor and preserves relative mode.
+ *
+ * @param string     $p_prefix     Field-name prefix for this endpoint.
+ * @param array|null $p_descriptor Relative date descriptor, or null.
+ * @return void
+ */
+function print_filter_hidden_relative_inputs( $p_prefix, $p_descriptor ) {
+	if( empty( $p_descriptor ) || !is_array( $p_descriptor ) ) {
+		return;
+	}
+	foreach( filter_relative_descriptor_to_parts( $p_descriptor ) as $t_key => $t_value ) {
+		echo '<input type="hidden" name="', string_attribute( $p_prefix . '_' . $t_key ), '" value="', string_attribute( $t_value ), '" />';
 	}
 }
 
@@ -1613,33 +1851,44 @@ function print_filter_do_filter_by_last_updated_date( $p_hide_checkbox = false, 
 	if( null === $p_filter ) {
 		$p_filter = $g_filter;
 	}
+
+	# Relative mode is encoded by the presence of a descriptor for either endpoint.
+	$t_start_relative = !empty( $p_filter[FILTER_PROPERTY_LAST_UPDATED_START_RELATIVE] ) ? $p_filter[FILTER_PROPERTY_LAST_UPDATED_START_RELATIVE] : null;
+	$t_end_relative = !empty( $p_filter[FILTER_PROPERTY_LAST_UPDATED_END_RELATIVE] ) ? $p_filter[FILTER_PROPERTY_LAST_UPDATED_END_RELATIVE] : null;
+	$t_relative_mode = ( null !== $t_start_relative ) || ( null !== $t_end_relative );
+	$t_enabled = gpc_string_to_bool( $p_filter[FILTER_PROPERTY_FILTER_BY_LAST_UPDATED_DATE] );
+
+	# See print_filter_do_filter_by_date(): hiding the mode controls also means
+	# fixed mode only, so the table cannot render with no date inputs at all.
+	if( $p_hide_checkbox ) {
+		$t_relative_mode = false;
+	}
+
+	# See print_filter_do_filter_by_date() for why the inactive mode's rows are
+	# hidden here rather than only disabled, why visibility tracks the mode
+	# rather than whether the field is enabled, and why the mode select is a
+	# separate control from the enable checkbox.
+	$t_fixed_row_style = $t_relative_mode ? ' style="display:none"' : '';
+	$t_relative_row_style = $t_relative_mode ? '' : ' style="display:none"';
+	$t_menu_disabled = ( $t_enabled && !$t_relative_mode ) ? '' : ' disabled="disabled" ';
+	$t_relative_disabled = ( $t_enabled && $t_relative_mode ) ? '' : ' disabled="disabled" ';
+	if( $p_hide_checkbox ) {
+		$t_menu_disabled = '';
+	}
 ?>
 		<table>
 <?php
-	$t_menu_disabled =  '';
 	if( !$p_hide_checkbox ) {
-?>
-		<tr>
-			<td colspan="2">
-				<input type="hidden" name="<?php echo FILTER_PROPERTY_FILTER_BY_LAST_UPDATED_DATE ?>" value="<?php echo OFF ?>" />
-				<label>
-					<input class="input-xs ace js_switch_date_inputs_trigger" type="checkbox" id="use_last_updated_date_filters" class="input-xs"
-						name="<?php echo FILTER_PROPERTY_FILTER_BY_LAST_UPDATED_DATE ?>"
-						<?php check_checked( gpc_string_to_bool( $p_filter[FILTER_PROPERTY_FILTER_BY_LAST_UPDATED_DATE] ), true ) ?> />
-					<span class="lbl padding-6 small"><?php echo lang_get( 'use_last_updated_date_filters' )?></span>
-				</label>
-			</td>
-		</tr>
-<?php
-
-		if( ON != $p_filter[FILTER_PROPERTY_FILTER_BY_LAST_UPDATED_DATE] ) {
-			$t_menu_disabled = ' disabled="disabled" ';
-		}
+		print_filter_date_type_row(
+			FILTER_PROPERTY_FILTER_BY_LAST_UPDATED_DATE,
+			'use_last_updated_date_filters',
+			$t_enabled,
+			$t_relative_mode );
 	}
 ?>
 
 		<!-- Start date -->
-		<tr>
+		<tr class="js_rd_row_fixed"<?php echo $t_fixed_row_style ?>>
 			<td>
 			<?php echo lang_get( 'start_date_label' )?>
 			</td>
@@ -1648,17 +1897,17 @@ function print_filter_do_filter_by_last_updated_date( $p_hide_checkbox = false, 
 			$t_chars = preg_split( '//', config_get( 'short_date_format' ), -1, PREG_SPLIT_NO_EMPTY );
 	foreach( $t_chars as $t_char ) {
 		if( strcasecmp( $t_char, 'M' ) == 0 ) {
-			echo '<select class="input-xs" name="', FILTER_PROPERTY_LAST_UPDATED_START_MONTH, '"', $t_menu_disabled, '>';
+			echo '<select class="input-xs js_rd_fixed" name="', FILTER_PROPERTY_LAST_UPDATED_START_MONTH, '"', $t_menu_disabled, '>';
 			print_month_option_list( $p_filter[FILTER_PROPERTY_LAST_UPDATED_START_MONTH] );
 			print "</select>\n";
 		}
 		if( strcasecmp( $t_char, 'D' ) == 0 ) {
-			echo '<select class="input-xs" name="', FILTER_PROPERTY_LAST_UPDATED_START_DAY, '"', $t_menu_disabled, '>';
+			echo '<select class="input-xs js_rd_fixed" name="', FILTER_PROPERTY_LAST_UPDATED_START_DAY, '"', $t_menu_disabled, '>';
 			print_day_option_list( $p_filter[FILTER_PROPERTY_LAST_UPDATED_START_DAY] );
 			print "</select>\n";
 		}
 		if( strcasecmp( $t_char, 'Y' ) == 0 ) {
-			echo '<select class="input-xs" name="', FILTER_PROPERTY_LAST_UPDATED_START_YEAR, '"', $t_menu_disabled, '>';
+			echo '<select class="input-xs js_rd_fixed" name="', FILTER_PROPERTY_LAST_UPDATED_START_YEAR, '"', $t_menu_disabled, '>';
 			print_year_option_list( $p_filter[FILTER_PROPERTY_LAST_UPDATED_START_YEAR] );
 			print "</select>\n";
 		}
@@ -1667,7 +1916,7 @@ function print_filter_do_filter_by_last_updated_date( $p_hide_checkbox = false, 
 			</td>
 		</tr>
 		<!-- End date -->
-		<tr>
+		<tr class="js_rd_row_fixed"<?php echo $t_fixed_row_style ?>>
 			<td>
 			<?php echo lang_get( 'end_date_label' )?>
 			</td>
@@ -1676,17 +1925,17 @@ function print_filter_do_filter_by_last_updated_date( $p_hide_checkbox = false, 
 			$t_chars = preg_split( '//', config_get( 'short_date_format' ), -1, PREG_SPLIT_NO_EMPTY );
 	foreach( $t_chars as $t_char ) {
 		if( strcasecmp( $t_char, 'M' ) == 0 ) {
-			echo '<select class="input-xs" name="', FILTER_PROPERTY_LAST_UPDATED_END_MONTH, '"', $t_menu_disabled, '>';
+			echo '<select class="input-xs js_rd_fixed" name="', FILTER_PROPERTY_LAST_UPDATED_END_MONTH, '"', $t_menu_disabled, '>';
 			print_month_option_list( $p_filter[FILTER_PROPERTY_LAST_UPDATED_END_MONTH] );
 			print "</select>\n";
 		}
 		if( strcasecmp( $t_char, 'D' ) == 0 ) {
-			echo '<select class="input-xs" name="', FILTER_PROPERTY_LAST_UPDATED_END_DAY, '"', $t_menu_disabled, '>';
+			echo '<select class="input-xs js_rd_fixed" name="', FILTER_PROPERTY_LAST_UPDATED_END_DAY, '"', $t_menu_disabled, '>';
 			print_day_option_list( $p_filter[FILTER_PROPERTY_LAST_UPDATED_END_DAY] );
 			print "</select>\n";
 		}
 		if( strcasecmp( $t_char, 'Y' ) == 0 ) {
-			echo '<select class="input-xs" name="', FILTER_PROPERTY_LAST_UPDATED_END_YEAR, '"', $t_menu_disabled, '>';
+			echo '<select class="input-xs js_rd_fixed" name="', FILTER_PROPERTY_LAST_UPDATED_END_YEAR, '"', $t_menu_disabled, '>';
 			print_year_option_list( $p_filter[FILTER_PROPERTY_LAST_UPDATED_END_YEAR] );
 			print "</select>\n";
 		}
@@ -1694,6 +1943,30 @@ function print_filter_do_filter_by_last_updated_date( $p_hide_checkbox = false, 
 	?>
 			</td>
 		</tr>
+<?php
+	if( !$p_hide_checkbox ) {
+?>
+		<!-- Relative start date -->
+		<tr class="js_rd_row_relative"<?php echo $t_relative_row_style ?>>
+			<td>
+			<?php echo lang_get( 'start_date_label' )?>
+			</td>
+			<td class="nowrap">
+			<?php print_filter_relative_date_inputs( FILTER_PROPERTY_LAST_UPDATED_START_RELATIVE, $t_relative_disabled, $t_start_relative ); ?>
+			</td>
+		</tr>
+		<!-- Relative end date -->
+		<tr class="js_rd_row_relative"<?php echo $t_relative_row_style ?>>
+			<td>
+			<?php echo lang_get( 'end_date_label' )?>
+			</td>
+			<td>
+			<?php print_filter_relative_date_inputs( FILTER_PROPERTY_LAST_UPDATED_END_RELATIVE, $t_relative_disabled, $t_end_relative ); ?>
+			</td>
+		</tr>
+<?php
+	}
+?>
 		</table>
 		<?php
 }
@@ -2072,6 +2345,30 @@ function print_filter_values_custom_field_date( array $p_filter, $p_field_id ) {
 		$p_filter['custom_fields'][$p_field_id][2] = 0;
 	}
 	$t_end = date( $t_short_date_format, $p_filter['custom_fields'][$p_field_id][2] );
+
+	# Relative mode: descriptors replace the displayed dates with the dates they
+	# resolve to now, each carrying its expression as a tooltip. The
+	# stored timestamps are not used, both because they go stale (see
+	# filter_relative_date_display()) and because they carry the operator's
+	# day-boundary offset; resolving the descriptor yields the plain calendar date
+	# the boundary was derived from.
+	$t_relative = isset( $p_filter[FILTER_PROPERTY_CUSTOM_FIELDS_RELATIVE][$p_field_id] )
+		? $p_filter[FILTER_PROPERTY_CUSTOM_FIELDS_RELATIVE][$p_field_id]
+		: null;
+	$t_start_rel = ( is_array( $t_relative ) && !empty( $t_relative['start'] ) ) ? $t_relative['start'] : null;
+	$t_end_rel = ( is_array( $t_relative ) && !empty( $t_relative['end'] ) ) ? $t_relative['end'] : null;
+	$t_relative_mode = ( null !== $t_start_rel ) || ( null !== $t_end_rel );
+	if( null !== $t_start_rel ) {
+		$t_start = filter_relative_date_display( $t_start_rel, $t_short_date_format );
+	}
+	if( null !== $t_end_rel ) {
+		$t_end = filter_relative_date_display( $t_end_rel, $t_short_date_format );
+	}
+	# Single-endpoint operators display the 'start' endpoint when relative.
+	$t_single = ( null !== $t_start_rel ) ? $t_start : $t_end;
+	# A relative field is marked once, before its dates.
+	$t_icon = $t_relative_mode ? filter_relative_date_icon() . ' ' : '';
+
 	switch( $p_filter['custom_fields'][$p_field_id][0] ) {
 		case CUSTOM_FIELD_DATE_ANY:
 			echo lang_get( 'any' );
@@ -2081,34 +2378,40 @@ function print_filter_values_custom_field_date( array $p_filter, $p_field_id ) {
 			break;
 		case CUSTOM_FIELD_DATE_BETWEEN:
 			echo lang_get( 'between_date' ) . '<br>';
-			echo $t_start . '<br>' . $t_end;
+			echo $t_icon, $t_start . '<br>' . $t_end;
 			break;
 		case CUSTOM_FIELD_DATE_ONORBEFORE:
 			echo lang_get( 'on_or_before_date' ) . '<br>';
-			echo $t_end;
+			echo $t_icon, $t_single;
 			break;
 		case CUSTOM_FIELD_DATE_BEFORE:
 			echo lang_get( 'before_date' ) . '<br>';
-			echo $t_end;
+			echo $t_icon, $t_single;
 			break;
 		case CUSTOM_FIELD_DATE_ON:
 			echo lang_get( 'on_date' ) . '<br>';
-			echo $t_start;
+			echo $t_icon, $t_start;
 			break;
 		case CUSTOM_FIELD_DATE_AFTER:
 			echo lang_get( 'after_date' ) . '<br>';
-			echo $t_start;
+			echo $t_icon, $t_start;
 			break;
 		case CUSTOM_FIELD_DATE_ONORAFTER:
 			echo lang_get( 'on_or_after_date' ) . '<br>';
-			echo $t_start;
+			echo $t_icon, $t_start;
 			break;
 	}
 	# print hidden inputs
 	$t_cf = $p_filter['custom_fields'][$p_field_id];
 	echo '<input type="hidden" name="custom_field_' . $p_field_id . '_control" value="' . $t_cf[0] . '">';
-	echo '<input type="hidden" name="custom_field_' . $p_field_id . '_start_timestamp" value="' . $t_cf[1] . '">';
-	echo '<input type="hidden" name="custom_field_' . $p_field_id . '_end_timestamp" value="' . $t_cf[2] . '">';
+	if( $t_relative_mode ) {
+		echo '<input type="hidden" name="custom_field_' . $p_field_id . '_relative" value="on">';
+		print_filter_hidden_relative_inputs( 'custom_field_' . $p_field_id . '_start_relative', $t_start_rel );
+		print_filter_hidden_relative_inputs( 'custom_field_' . $p_field_id . '_end_relative', $t_end_rel );
+	} else {
+		echo '<input type="hidden" name="custom_field_' . $p_field_id . '_start_timestamp" value="' . $t_cf[1] . '">';
+		echo '<input type="hidden" name="custom_field_' . $p_field_id . '_end_timestamp" value="' . $t_cf[2] . '">';
+	}
 }
 
 
@@ -2357,9 +2660,33 @@ function print_filter_custom_field_date( $p_field_id, ?array $p_filter = null ) 
 			break;
 	}
 
+	# Relative mode is encoded by the presence of a descriptor for this field.
+	# Fixed mode is the default. The operator (control) determines which
+	# endpoints are active; the mode determines which set of inputs (fixed
+	# year/month/day vs relative anchor/offset/unit) is enabled for them.
+	$t_relative = isset( $p_filter[FILTER_PROPERTY_CUSTOM_FIELDS_RELATIVE][$p_field_id] )
+		? $p_filter[FILTER_PROPERTY_CUSTOM_FIELDS_RELATIVE][$p_field_id]
+		: null;
+	$t_start_desc = ( is_array( $t_relative ) && !empty( $t_relative['start'] ) ) ? $t_relative['start'] : null;
+	$t_end_desc = ( is_array( $t_relative ) && !empty( $t_relative['end'] ) ) ? $t_relative['end'] : null;
+	$t_relative_mode = ( null !== $t_start_desc ) || ( null !== $t_end_desc );
+
+	# Compose mode with the operator's active-endpoint mask.
+	$t_fixed_start_disable = $t_relative_mode ? true : $t_start_disable;
+	$t_fixed_end_disable = $t_relative_mode ? true : $t_end_disable;
+	$t_rel_start_disabled_attr = ( !$t_relative_mode || $t_start_disable ) ? ' disabled="disabled" ' : '';
+	$t_rel_end_disabled_attr = ( !$t_relative_mode || $t_end_disable ) ? ' disabled="disabled" ' : '';
+
+	# Only the selected mode's rows are shown, as for the built-in date fields.
+	# The operator still governs which endpoints within the visible mode are
+	# enabled, so a row can be visible but disabled.
+	$t_fixed_row_style = $t_relative_mode ? ' style="display:none"' : '';
+	$t_relative_row_style = $t_relative_mode ? '' : ' style="display:none"';
+
+	$t_cf_name = 'custom_field_' . string_html_specialchars( $p_field_id );
+
 	echo '<table><tr><td>' . "\n";
-	echo '<select class="input-xs" size="1" name="custom_field_'
-		. string_html_specialchars( $p_field_id ) . '_control">' . "\n";
+	echo '<select class="input-xs" size="1" name="' . $t_cf_name . '_control">' . "\n";
 	echo '<option value="' . CUSTOM_FIELD_DATE_ANY . '"';
 	check_selected( (int)$p_filter['custom_fields'][$p_field_id][0], CUSTOM_FIELD_DATE_ANY );
 	echo '>' . lang_get( 'any' ) . '</option>' . "\n";
@@ -2386,11 +2713,28 @@ function print_filter_custom_field_date( $p_field_id, ?array $p_filter = null ) 
 	echo '>' . lang_get( 'on_or_after_date' ) . '</option>' . "\n";
 	echo '</select>' . "\n";
 
+	# Fixed / relative mode select, matching the built-in date filters. Here the
+	# operator select above is the field's on/off switch (ANY means "do not
+	# filter"), so this only chooses the kind of bounds. Fixed is the default.
 	echo "</td></tr>\n<tr><td>";
+	echo '<select class="input-xs js_cf_date_mode" name="' . $t_cf_name . '_relative">' . "\n";
+	echo '<option value="' . OFF . '"';
+	check_selected( $t_relative_mode, false );
+	echo '>' . lang_get( 'date_type_fixed' ) . '</option>' . "\n";
+	echo '<option value="' . ON . '"';
+	check_selected( $t_relative_mode, true );
+	echo '>' . lang_get( 'date_type_relative' ) . '</option>' . "\n";
+	echo '</select>' . "\n";
 
-	print_date_selection_set( 'custom_field_' . $p_field_id . '_start', config_get( 'short_date_format' ), $t_start, $t_start_disable, false, $t_sel_start_year, $t_sel_end_year, "input-xs" );
-	print "</td></tr>\n<tr><td>";
-	print_date_selection_set( 'custom_field_' . $p_field_id . '_end', config_get( 'short_date_format' ), $t_end, $t_end_disable, false, $t_sel_start_year, $t_sel_end_year, "input-xs" );
+	echo '</td></tr>' . "\n" . '<tr class="js_cf_row_fixed"' . $t_fixed_row_style . '><td>';
+
+	print_date_selection_set( $t_cf_name . '_start', config_get( 'short_date_format' ), $t_start, $t_fixed_start_disable, false, $t_sel_start_year, $t_sel_end_year, "input-xs" );
+	print '</td></tr>' . "\n" . '<tr class="js_cf_row_fixed"' . $t_fixed_row_style . '><td>';
+	print_date_selection_set( $t_cf_name . '_end', config_get( 'short_date_format' ), $t_end, $t_fixed_end_disable, false, $t_sel_start_year, $t_sel_end_year, "input-xs" );
+	print '</td></tr>' . "\n" . '<tr class="js_cf_row_relative"' . $t_relative_row_style . '><td>';
+	print_filter_relative_date_inputs( $t_cf_name . '_start_relative', $t_rel_start_disabled_attr, $t_start_desc );
+	print '</td></tr>' . "\n" . '<tr class="js_cf_row_relative"' . $t_relative_row_style . '><td>';
+	print_filter_relative_date_inputs( $t_cf_name . '_end_relative', $t_rel_end_disabled_attr, $t_end_desc );
 	print "</td></tr>\n</table>";
 }
 
