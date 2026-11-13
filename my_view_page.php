@@ -53,7 +53,6 @@ require_api( 'lang_api.php' );
 require_api( 'print_api.php' );
 require_api( 'user_api.php' );
 require_api( 'layout_api.php' );
-require_css( 'status_config.php' );
 
 const TIMELINE_INC_ALLOW = true;
 

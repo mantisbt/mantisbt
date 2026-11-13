@@ -102,11 +102,11 @@ function get_section_begin_mcwt( $p_section_name ) {
 	echo '<thead>';
 	echo '<tr>';
 	echo '<th class="bold" width="40%" rowspan="2">' . lang_get( 'perm_rpt_capability' ) . '</th>';
-	echo '<th class="bold" style="text-align:center"  width="40%" colspan="' . count( $g_access_levels ) . '">' . lang_get( 'allowed_access_levels' ) . '</th>';
-	echo '<th class="bold" style="text-align:center" rowspan="2">&#160;' . lang_get( 'alter_level' ) . '&#160;</th>';
+	echo '<th class="bold center" width="40%" colspan="' . count( $g_access_levels ) . '">' . lang_get( 'allowed_access_levels' ) . '</th>';
+	echo '<th class="bold center" rowspan="2">&#160;' . lang_get( 'alter_level' ) . '&#160;</th>';
 	echo '</tr><tr>';
 	foreach( $g_access_levels as $t_access_level => $t_access_label ) {
-		echo '<th class="bold" style="text-align:center">&#160;' . string_attribute( MantisEnum::getLabel( lang_get( 'access_levels_enum_string' ), $t_access_level ) ) . '&#160;</th>';
+		echo '<th class="bold center">&#160;' . string_attribute( MantisEnum::getLabel( lang_get( 'access_levels_enum_string' ), $t_access_level ) ) . '&#160;</th>';
 	}
 	echo '</tr>' . "\n";
 	echo '</thead>';
