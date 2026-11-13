@@ -123,6 +123,8 @@ function mci_issue_get_history( $p_issue_id, $p_user_id, $p_lang ) {
 			case BUG_DELETE_SPONSORSHIP:      # Deprecated, not exposed in REST API
 			case BUG_REVISION_DROPPED:        # Not Supported
 			case BUGNOTE_REVISION_DROPPED:    # Not Supported
+			case BUGNOTE_MOVED_TO:            # Not Supported
+			case BUGNOTE_MOVED_FROM:          # Not Supported
 				$t_skip = true;
 				break;
 		}
