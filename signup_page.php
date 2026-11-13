@@ -92,7 +92,7 @@ $t_public_key = crypto_generate_uri_safe_nonce( 64 );
 			<label for="email-field" class="block clearfix">
 				<span class="block input-icon input-icon-right">
 					<input id="email-field" name="email" type="text" placeholder="<?php echo lang_get( 'email_label' ) ?>"
-						size="32" maxlength="64" class="form-control">
+						size="32" maxlength="<?php echo DB_FIELD_SIZE_EMAIL;?>" class="form-control">
 					<?php print_icon( 'fa-envelope', 'ace-icon' ); ?>
 				</span>
 			</label>
