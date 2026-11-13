@@ -1403,18 +1403,28 @@ function file_move_bug_attachments( $p_bug_id, $p_project_id_to ) {
 		return;
 	}
 
-	$t_path_from = project_get_field( $t_project_id_from, 'file_path' );
-	if( is_blank( $t_path_from ) ) {
-		$t_path_from = config_get_global( 'absolute_path_default_upload_folder' );
-	}
-	file_ensure_valid_upload_path( $t_path_from );
 	$t_path_to = project_get_field( $p_project_id_to, 'file_path' );
 	if( is_blank( $t_path_to ) ) {
 		$t_path_to = config_get_global( 'absolute_path_default_upload_folder' );
 	}
 	file_ensure_valid_upload_path( $t_path_to );
-	if( $t_path_from == $t_path_to ) {
-		return;
+
+	# Each attachment's source is the folder it was actually written to, not
+	# the source project's configured path: a project's file_path can be
+	# changed at any time without moving the files already on disk, and the
+	# two then disagree.
+	$t_default_path_from = project_get_field( $t_project_id_from, 'file_path' );
+	if( is_blank( $t_default_path_from ) ) {
+		$t_default_path_from = config_get_global( 'absolute_path_default_upload_folder' );
+	}
+
+	db_param_push();
+	$t_query_attachments = 'SELECT id, folder, diskfile FROM {bug_file}
+	                                 WHERE bug_id=' . db_param();
+	$t_attachment_rows = array();
+	$t_result = db_query( $t_query_attachments, array( (int)$p_bug_id ) );
+	while( $t_attachment_row = db_fetch_array( $t_result ) ) {
+		$t_attachment_rows[] = $t_attachment_row;
 	}
 
 	# Initialize the update query to update a single row
@@ -1425,14 +1435,22 @@ function file_move_bug_attachments( $p_bug_id, $p_project_id_to ) {
 	                                 WHERE bug_id=' . db_param() . '
 	                                 AND id =' . db_param();
 
-	$t_attachment_rows = bug_get_attachments( $p_bug_id );
 	$t_attachments_count = count( $t_attachment_rows );
 	for( $i = 0; $i < $t_attachments_count; $i++ ) {
 		$t_row = $t_attachment_rows[$i];
 		$t_basename = basename( $t_row['diskfile'] );
 
+		$t_path_from = $t_row['folder'];
+		if( is_blank( $t_path_from ) ) {
+			$t_path_from = $t_default_path_from;
+		}
+
 		$t_disk_file_name_from = file_path_combine( $t_path_from, $t_basename );
 		$t_disk_file_name_to = file_path_combine( $t_path_to, $t_basename );
+
+		if( $t_disk_file_name_from == $t_disk_file_name_to ) {
+			continue;
+		}
 
 		if( !file_exists( $t_disk_file_name_to ) ) {
 			chmod( $t_disk_file_name_from, 0775 );
