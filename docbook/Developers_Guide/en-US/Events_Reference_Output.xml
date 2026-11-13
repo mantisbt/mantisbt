@@ -493,6 +493,25 @@ return array(
 			</blockquote>
 		</blockquote>
 
+		<blockquote id="dev.eventref.output.layout.navbar.buttons.filter">
+			<title>EVENT_LAYOUT_NAVBAR_BUTTONS_FILTER (Chained)</title>
+			<blockquote>
+				<para>
+					This event allows plugins to change buttons in MantisBT navbar.
+				</para>
+
+				<itemizedlist>
+					<title>Parameters</title>
+					<listitem><para>&lt;Array&gt;: list of default buttons in navbar</para></listitem>
+				</itemizedlist>
+
+				<itemizedlist>
+					<title>Return Value</title>
+					<listitem><para>&lt;Array&gt;: list of effective buttons in navbar.</para></listitem>
+				</itemizedlist>
+			</blockquote>
+		</blockquote>
+
 		<blockquote id="dev.eventref.output.layout.contentbegin">
 			<title>EVENT_LAYOUT_CONTENT_BEGIN (Output)</title>
 			<blockquote>
