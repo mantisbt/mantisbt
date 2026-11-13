@@ -67,6 +67,9 @@ sudo chmod 777 $MANTIS_CONFIG
 cat <<-EOF >> $MANTIS_CONFIG
 
 	# Configs required to ensure all PHPUnit tests are executed
+	\$g_path = "http://$HOSTNAME:$PORT/";
+	\$g_wiki_enable = ON;
+	\$g_wiki_engine = 'dokuwiki';
 	\$g_allow_no_category = ON;
 	\$g_due_date_update_threshold = DEVELOPER;
 	\$g_due_date_view_threshold = DEVELOPER;
