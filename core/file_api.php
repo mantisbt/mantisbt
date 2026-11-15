@@ -1478,55 +1478,81 @@ function file_move_bug_attachments( $p_bug_id, $p_project_id_to ) {
  * @throws Exception
  */
 function file_copy_attachments( $p_source_bug_id, $p_dest_bug_id ) {
-	db_param_push();
-	$t_query = 'SELECT * FROM {bug_file} WHERE bug_id = ' . db_param()
-		. ' AND (bugnote_id IS NULL OR bugnote_id = 0)';
-	$t_result = db_query( $t_query, array( $p_source_bug_id ) );
-	$t_count = db_num_rows( $t_result );
-
 	$t_project_id = bug_get_field( $p_source_bug_id, 'project_id' );
 
-	for( $i = 0;$i < $t_count;$i++ ) {
-		$t_bug_file = db_fetch_array( $t_result );
+	# Get all the source bug's attachments
+	$t_query = new DbQuery();
+	$t_query->sql( <<<ENDSQL
+		SELECT * FROM {bug_file} 
+		WHERE bug_id = {$t_query->param( $p_source_bug_id )}
+		AND (bugnote_id IS NULL OR bugnote_id = 0)
+		ENDSQL
+	);
 
-		# prepare the new diskfile name and then copy the file
-		$t_source_file = $t_bug_file['folder'] . $t_bug_file['diskfile'];
-		if( ( config_get( 'file_upload_method' ) == DISK ) ) {
-			$t_source_file = file_normalize_attachment_path( $t_source_file, $t_project_id );
-			$t_file_path = dirname( $t_source_file ) . DIRECTORY_SEPARATOR;
-		} else {
-			$t_file_path = $t_bug_file['folder'];
-		}
-		$t_new_diskfile_name = file_generate_unique_name( $t_file_path );
-		$t_new_diskfile_location = $t_file_path . $t_new_diskfile_name;
-		$t_new_file_name = file_get_display_name( $t_bug_file['filename'] );
-		if( ( config_get( 'file_upload_method' ) == DISK ) ) {
-			# Skip copy operation if file does not exist (i.e. target bug will have missing attachment)
-			# @todo maybe we should trigger an error instead in this case ?
-			if( file_exists( $t_source_file ) ) {
-				copy( $t_source_file, $t_new_diskfile_location );
-				chmod( $t_new_diskfile_location, config_get( 'attachments_file_permissions' ) );
-			}
-		}
+	# Copy the attachments to the target bug
+	foreach( $t_query->fetch_all() as $t_file ) {
+		file_copy( $t_file, $t_project_id, $p_dest_bug_id );
+	}
+}
 
-		db_param_push();
-		$t_query = 'INSERT INTO {bug_file} (
+/**
+ * Copies a file.
+ *
+ * @param array    $p_bug_file        Bug file table row.
+ * @param int      $p_project_id      Source project id.
+ * @param int      $p_dest_bug_id     Target bug id.
+ * @param int|null $p_dest_bugnote_id Optional bugnote id, to copy a note attachment.
+ *
+ * @return void
+ * @throws Exception
+ */
+function file_copy( array $p_bug_file, int $p_project_id, int $p_dest_bug_id, int $p_dest_bugnote_id = null ) {
+	$t_upload_method = config_get( 'file_upload_method' );
+	$t_bugnote_id = $p_dest_bugnote_id ?? $p_bug_file['bugnote_id'];
+
+	# prepare the new diskfile name and then copy the file
+	$t_source_file = $p_bug_file['folder'] . $p_bug_file['diskfile'];
+	if( ( $t_upload_method == DISK ) ) {
+		$t_source_file = file_normalize_attachment_path( $t_source_file, $p_project_id );
+		$t_file_path = dirname( $t_source_file ) . DIRECTORY_SEPARATOR;
+	} else {
+		$t_file_path = $p_bug_file['folder'];
+	}
+	$t_new_diskfile_name = file_generate_unique_name( $t_file_path );
+	$t_new_diskfile_location = $t_file_path . $t_new_diskfile_name;
+	$t_new_file_name = file_get_display_name( $p_bug_file['filename'] );
+	if( $t_upload_method == DISK ) {
+		# Skip copy operation if file does not exist (i.e. target bug will have missing attachment)
+		# @todo maybe we should trigger an error instead in this case ?
+		if( file_exists( $t_source_file ) ) {
+			copy( $t_source_file, $t_new_diskfile_location );
+			chmod( $t_new_diskfile_location, config_get( 'attachments_file_permissions' ) );
+		}
+	}
+
+	$t_query = new DbQuery();
+	$t_query->sql( <<<ENDSQL
+		INSERT INTO {bug_file} (
 				bug_id, title, description, diskfile, filename, folder,
 				filesize, file_type, date_added, user_id, content, bugnote_id
 			)
-			VALUES ( '
-			. db_param() . ', ' . db_param() . ', ' . db_param() . ', '
-			. db_param() . ', ' . db_param() . ', ' . db_param() . ', '
-			. db_param() . ', ' . db_param() . ', ' . db_param() . ', '
-			. db_param() . ', ' . db_param() . ', ' . db_param() .
-			')';
-		db_query( $t_query, array(
-			$p_dest_bug_id, $t_bug_file['title'], $t_bug_file['description'],
-			$t_new_diskfile_name, $t_new_file_name, $t_file_path,
-			$t_bug_file['filesize'], $t_bug_file['file_type'], $t_bug_file['date_added'],
-			$t_bug_file['user_id'], $t_bug_file['content'], $t_bug_file['bugnote_id']
-		) );
-	}
+		VALUES (
+			{$t_query->param( $p_dest_bug_id )},
+			{$t_query->param( $p_bug_file['title'] )},
+			{$t_query->param( $p_bug_file['description'] )},
+			{$t_query->param( $t_new_diskfile_name )},
+			{$t_query->param( $t_new_file_name )},
+			{$t_query->param( $t_file_path )},
+			{$t_query->param( $p_bug_file['filesize'] )},
+			{$t_query->param( $p_bug_file['file_type'] )},
+			{$t_query->param( $p_bug_file['date_added'] )},
+			{$t_query->param( $p_bug_file['user_id'] )},
+			{$t_query->param( $p_bug_file['content'] )},
+			{$t_query->param( $t_bugnote_id )}
+			)
+		ENDSQL
+	);
+	$t_query->execute();
 }
 
 /**
