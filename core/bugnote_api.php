@@ -41,6 +41,8 @@
  * @uses mention_api.php
  * @uses user_api.php
  * @uses utility_api.php
+ *
+ * @noinspection PhpIllegalPsrClassPathInspection
  */
 
 require_api( 'access_api.php' );
@@ -347,6 +349,7 @@ function bugnote_add( $p_bug_id, $p_bugnote_text, $p_time_tracking = '0:00', $p_
  *
  * @return array User ids that received mentioned emails.
  * @access public
+ * @throws ClientException
  */
 function bugnote_process_mentions( $p_bug_id, $p_bugnote_id, $p_bugnote_text ) {
 	# Process the mentions that have access to the issue note
