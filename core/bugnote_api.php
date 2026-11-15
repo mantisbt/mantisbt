@@ -360,6 +360,40 @@ function bugnote_add( $p_bug_id, $p_bugnote_text, $p_time_tracking = '0:00', $p_
 	return $t_bugnote_id;
 }
 
+
+/**
+ * Clone a bugnote.
+ *
+ * @param BugnoteData|int $p_bugnote_id    Bugnote to copy.
+ * @param int             $p_target_bug_id Bug in which to copy the bugnote.
+ * @param bool            $p_copy_files    If true, bugnote attachments will be copied.
+ *
+ * @return int Id of the cloned bugnote.
+ * @throws ClientException
+ */
+function bugnote_copy( $p_bugnote, int  $p_target_bug_id, bool $p_copy_files ): int {
+	$t_bugnote = is_int( $p_bugnote ) ? bugnote_get( $p_bugnote ) : $p_bugnote;
+	$t_source_bug_id = $t_bugnote->bug_id;
+	$t_source_project_id = bug_get_field( $t_source_bug_id, 'project_id' );
+	$t_bugnote->bug_id = $p_target_bug_id;
+	$t_new_bugnote_id = $t_bugnote->create();
+
+	if( $p_copy_files ) {
+		$t_query = new DbQuery();
+		$t_query->sql( <<<ENDSQL
+			SELECT * FROM {bug_file}
+			WHERE bug_id = $t_source_bug_id AND bugnote_id = $t_bugnote->id
+			ENDSQL
+		);
+
+		foreach( $t_query->fetch_all() as $t_file ) {
+			file_copy( $t_file, $t_source_project_id, $p_target_bug_id, $t_new_bugnote_id );
+		}
+	}
+
+	return $t_new_bugnote_id;
+}
+
 /**
  * Process mentions in bugnote, typically after its added.
  *
