@@ -1463,9 +1463,12 @@ function file_move_bug_attachments( $p_bug_id, $p_project_id_to ) {
 }
 
 /**
- * Copies all attachments from the source bug to the destination bug
+ * Copies all attachments from the source bug to the destination bug.
  *
  * Does not perform history logging and does not perform access checks.
+ *
+ * Only issue-level attachments (bugnote_id == 0 or null) are copied, files
+ * attached to bugnotes are ignored.
  *
  * @param int $p_source_bug_id Source Bug.
  * @param int $p_dest_bug_id   Destination Bug.
@@ -1476,7 +1479,8 @@ function file_move_bug_attachments( $p_bug_id, $p_project_id_to ) {
  */
 function file_copy_attachments( $p_source_bug_id, $p_dest_bug_id ) {
 	db_param_push();
-	$t_query = 'SELECT * FROM {bug_file} WHERE bug_id = ' . db_param();
+	$t_query = 'SELECT * FROM {bug_file} WHERE bug_id = ' . db_param()
+		. ' AND (bugnote_id IS NULL OR bugnote_id = 0)';
 	$t_result = db_query( $t_query, array( $p_source_bug_id ) );
 	$t_count = db_num_rows( $t_result );
 
