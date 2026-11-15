@@ -141,6 +141,51 @@ class BugnoteData {
 	 * Bugnote Text id
 	 */
 	public $bugnote_text_id;
+
+	/**
+	 * Insert a new bugnote into the database.
+	 *
+	 * @return int Bugnote Id
+	 * @throws ClientException
+	 */
+	public function create() {
+		# insert bugnote text
+		$t_bugnote_text_table = db_get_table( 'bugnote_text' );
+		$t_query = new DbQuery();
+		$t_query->sql( <<<SQL
+			INSERT INTO $t_bugnote_text_table
+			    ( note ) 
+			VALUES ( {$t_query->param( $this->note )} )
+			SQL
+		);
+		$t_query->execute();
+		$t_bugnote_text_id = db_insert_id( $t_bugnote_text_table );
+
+		# Create the bugnote
+		$t_bugnote_table = db_get_table( 'bugnote' );
+		$t_query = new DbQuery();
+		$t_query->sql( <<<SQL
+			INSERT INTO {bugnote}
+				(bug_id, reporter_id, bugnote_text_id, view_state, date_submitted, 
+				 last_modified, note_type, note_attr, time_tracking)
+			VALUES ( 
+				{$t_query->param( $this->bug_id )},
+				{$t_query->param( $this->reporter_id )},
+				{$t_query->param( $t_bugnote_text_id )},
+				{$t_query->param( $this->view_state )},
+				{$t_query->param( $this->date_submitted )},
+				{$t_query->param( $this->last_modified )},
+				{$t_query->param( $this->note_type )},
+				{$t_query->param( $this->note_attr )},
+				{$t_query->param( $this->time_tracking )}
+				)
+			SQL
+		);
+		$t_query->execute();
+
+		# get bugnote id
+		return db_insert_id( $t_bugnote_table );
+	}
 }
 
 /**
@@ -248,18 +293,21 @@ function bugnote_is_user_reporter( $p_bugnote_id, $p_user_id ) {
  * @access public
  */
 function bugnote_add( $p_bug_id, $p_bugnote_text, $p_time_tracking = '0:00', $p_private = false, $p_type = BUGNOTE, $p_attr = '', $p_user_id = null, $p_send_email = true, $p_date_submitted = 0, $p_last_modified = 0, $p_skip_bug_update = false, $p_log_history = true, $p_trigger_event = true ) {
-	$c_bug_id = (int)$p_bug_id;
-	$c_time_tracking = helper_duration_to_minutes( $p_time_tracking );
-	$c_type = (int)$p_type;
-	$c_date_submitted = $p_date_submitted <= 0 ? db_now() : (int)$p_date_submitted;
-	$c_last_modified = $p_last_modified <= 0 ? db_now() : (int)$p_last_modified;
+	$t_bugnote = new BugnoteData();
+	$t_bugnote->bug_id = (int)$p_bug_id;
+	$t_bugnote->reporter_id = $p_user_id ?? auth_get_current_user_id();
+	$t_bugnote->note_type = (int)$p_type;
+	$t_bugnote->note_attr = $p_attr;
+	$t_bugnote->date_submitted = $p_date_submitted <= 0 ? db_now() : (int)$p_date_submitted;
+	$t_bugnote->last_modified = $p_last_modified <= 0 ? db_now() : (int)$p_last_modified;
+	$t_bugnote->time_tracking = helper_duration_to_minutes( $p_time_tracking );
 
 	antispam_check();
 
 	if( REMINDER !== $p_type ) {
 		# Check if this is a time-tracking note
 		$t_time_tracking_enabled = config_get( 'time_tracking_enabled' );
-		if( ON == $t_time_tracking_enabled && $c_time_tracking > 0 ) {
+		if( ON == $t_time_tracking_enabled && $t_bugnote->time_tracking > 0 ) {
 			$t_time_tracking_without_note = config_get( 'time_tracking_without_note' );
 			if( is_blank( $p_bugnote_text ) && OFF == $t_time_tracking_without_note ) {
 				throw new ClientException(
@@ -268,61 +316,33 @@ function bugnote_add( $p_bug_id, $p_bugnote_text, $p_time_tracking = '0:00', $p_
 					array( lang_get( 'bugnote' ) ) );
 			}
 
-			$c_type = TIME_TRACKING;
+			$t_bugnote->note_type = TIME_TRACKING;
 		}
 	}
 
 	# Event integration
-	$t_bugnote_text = event_signal( 'EVENT_BUGNOTE_DATA', $p_bugnote_text, $c_bug_id );
+	$t_bugnote_text = event_signal( 'EVENT_BUGNOTE_DATA', $p_bugnote_text, $t_bugnote->bug_id );
 
 	helper_ensure_longtext_length_valid( $t_bugnote_text, 'bugnote' );
 
 	# MySQL 4-bytes UTF-8 chars workaround #21101
-	$t_bugnote_text = db_mysql_fix_utf8( $t_bugnote_text );
-
-	# insert bugnote text
-	db_param_push();
-	$t_query = 'INSERT INTO {bugnote_text} ( note ) VALUES ( ' . db_param() . ' )';
-	db_query( $t_query, array( $t_bugnote_text ) );
-
-	# retrieve bugnote text id number
-	$t_bugnote_text_id = db_insert_id( db_get_table( 'bugnote_text' ) );
-
-	# get user information
-	if( $p_user_id === null ) {
-		$p_user_id = auth_get_current_user_id();
-	}
+	$t_bugnote->note = db_mysql_fix_utf8( $t_bugnote_text );
 
 	# Check for private bugnotes.
-	if( $p_private && access_has_bug_level( config_get( 'set_view_status_threshold' ), $p_bug_id, $p_user_id ) ) {
-		$t_view_state = VS_PRIVATE;
+	if( $p_private && access_has_bug_level( config_get( 'set_view_status_threshold' ), $p_bug_id, $t_bugnote->reporter_id ) ) {
+		$t_bugnote->view_state = VS_PRIVATE;
 	} else {
-		$t_view_state = VS_PUBLIC;
+		$t_bugnote->view_state = VS_PUBLIC;
 	}
 
-	# insert bugnote info
-	db_param_push();
-	$t_query = 'INSERT INTO {bugnote}
-			(bug_id, reporter_id, bugnote_text_id, view_state, date_submitted, last_modified, note_type, note_attr, time_tracking)
-		VALUES ('
-		. db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', '
-		. db_param() . ', ' . db_param() . ', ' . db_param() . ', ' . db_param() . ', '
-		. db_param() . ' )';
-	$t_params = array(
-		$c_bug_id, $p_user_id, $t_bugnote_text_id, $t_view_state,
-		$c_date_submitted, $c_last_modified, $c_type, $p_attr,
-		$c_time_tracking );
-	db_query( $t_query, $t_params );
-
-	# get bugnote id
-	$t_bugnote_id = db_insert_id( db_get_table( 'bugnote' ) );
+	$t_bugnote_id = $t_bugnote->create();
 
 	# update bug last updated
 	if( !$p_skip_bug_update ) {
 		bug_update_date( $p_bug_id );
 	}
 
-	# log new bug
+	# log new bugnote creation
 	if( $p_log_history ) {
 		history_log_event_special( $p_bug_id, BUGNOTE_ADDED, bugnote_format_id( $t_bugnote_id ) );
 	}
