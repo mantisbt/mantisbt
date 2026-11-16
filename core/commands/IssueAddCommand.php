@@ -84,6 +84,18 @@ class IssueAddCommand extends Command {
 	private $files = array();
 
 	/**
+	 * Cloning options.
+	 *
+	 * Array keys:
+	 * - master_issue_id (int)
+	 * - relationship_type (int, one of the BUG_* relationship constants)
+	 * - copy_notes (bool)
+	 * - copy_files (bool)
+	 * @var array
+	 */
+	private array $clone_info;
+
+	/**
 	 * Constructor
 	 *
 	 * @param array $p_data The command data.
@@ -98,16 +110,23 @@ class IssueAddCommand extends Command {
 	 */
 	protected function validate() {
 		$this->user_id = auth_get_current_user_id();
-		$t_clone_info = $this->option( 'clone_info', array() );
 
 		$t_issue = $this->payload( 'issue' );
 
-		if( isset( $t_clone_info['master_issue_id'] ) ) {
-			if( bug_is_readonly( $t_clone_info['master_issue_id'] ) ) {
+		# Initialize clone info with default values.
+		$this->clone_info = $this->option( 'clone_info', array() );
+		$this->clone_info['master_issue_id'] ??= 0;
+		if( $this->clone_info['master_issue_id'] ) {
+			settype( $this->clone_info['master_issue_id'], 'int' );
+			$this->clone_info['copy_notes'] ??= false;
+			$this->clone_info['copy_files'] ??= false;
+			$this->clone_info['relationship_type'] ??= BUG_REL_ANY;
+
+			if( bug_is_readonly( $this->clone_info['master_issue_id'] ) ) {
 				throw new ClientException(
-					sprintf( "Master issue '%d' is read-only", $t_clone_info['master_issue_id'] ),
+					sprintf( "Master issue '%d' is read-only", $this->clone_info['master_issue_id'] ),
 					ERROR_BUG_READ_ONLY_ACTION_DENIED,
-					array( $t_clone_info['master_issue_id'] )
+					array( $this->clone_info['master_issue_id'] )
 				);
 			}
 		}
@@ -410,9 +429,8 @@ class IssueAddCommand extends Command {
 			mci_issue_set_monitors( $t_issue_id, $this->user_id, $t_issue['monitors'] );
 		}
 
-		$t_clone_info = $this->option( 'clone_info', array() );
-		if( isset( $t_clone_info['master_issue_id'] ) ) {
-			$t_master_issue_id = (int)$t_clone_info['master_issue_id'];
+		if( $this->clone_info['master_issue_id'] ) {
+			$t_master_issue_id = $this->clone_info['master_issue_id'];
 
 			# it's a child generation... let's create the relationship and add some lines in the history
 
@@ -424,7 +442,7 @@ class IssueAddCommand extends Command {
 			history_log_event_special( $t_master_issue_id, BUG_CLONED_TO, '', $t_issue_id );
 
 			# copy notes from parent
-			if( isset( $t_clone_info['copy_notes'] ) &&  $t_clone_info['copy_notes'] ) {
+			if( $this->clone_info['copy_notes'] ) {
 				$t_parent_bugnotes = bugnote_get_all_bugnotes( $t_master_issue_id );
 
 				foreach ( $t_parent_bugnotes as $t_parent_bugnote ) {
@@ -448,12 +466,16 @@ class IssueAddCommand extends Command {
 			}
 
 			# copy attachments from parent
-			if( isset( $t_clone_info['copy_files'] ) &&  $t_clone_info['copy_files'] ) {
+			if( $this->clone_info['copy_files'] ) {
 				file_copy_attachments( $t_master_issue_id, $t_issue_id );
 			}
 
-			if( isset( $t_clone_info['relationship_type'] ) &&  $t_clone_info['relationship_type'] > BUG_REL_ANY ) {
-				relationship_add( $t_issue_id, $t_master_issue_id, $t_clone_info['relationship_type'], /* email for source */ false );
+			if( $this->clone_info['relationship_type'] > BUG_REL_ANY ) {
+				relationship_add( $t_issue_id,
+					$t_master_issue_id,
+					$this->clone_info['relationship_type'],
+					false
+				);
 			}
 		}
 
