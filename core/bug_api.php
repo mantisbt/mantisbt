@@ -1456,6 +1456,8 @@ function bug_copy( $p_bug_id, $p_target_project_id = null, $p_copy_custom_fields
 	history_log_event_special( $t_new_bug_id, BUG_CREATED_FROM, '', $t_bug_id );
 	history_log_event_special( $t_bug_id, BUG_CLONED_TO, '', $t_new_bug_id );
 
+	bug_update_date( $t_bug_id );
+
 	return $t_new_bug_id;
 }
 
