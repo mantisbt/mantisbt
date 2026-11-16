@@ -443,25 +443,14 @@ class IssueAddCommand extends Command {
 
 			# copy notes from parent
 			if( $this->clone_info['copy_notes'] ) {
-				$t_parent_bugnotes = bugnote_get_all_bugnotes( $t_master_issue_id );
-
-				foreach ( $t_parent_bugnotes as $t_parent_bugnote ) {
-					$t_private = $t_parent_bugnote->view_state == VS_PRIVATE;
-
-					bugnote_add(
-						$t_issue_id,
-						$t_parent_bugnote->note,
-						$t_parent_bugnote->time_tracking,
-						$t_private,
-						$t_parent_bugnote->note_type,
-						$t_parent_bugnote->note_attr,
-						$t_parent_bugnote->reporter_id,
-						false,
-						0,
-						0,
-						false );
-
-					# Note: we won't trigger mentions in the clone scenario.
+				$t_parent_bugnotes = bugnote_get_all_visible_bugnotes(
+					$t_master_issue_id,
+					'ASC',
+					0,
+					$this->user_id
+				);
+				foreach( $t_parent_bugnotes as $t_bug_note ) {
+					bugnote_copy( $t_bug_note->id, $t_issue_id, $this->clone_info['copy_files'] );
 				}
 			}
 

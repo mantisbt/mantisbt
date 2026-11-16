@@ -1352,6 +1352,7 @@ function bug_copy( $p_bug_id, $p_target_project_id = null, $p_copy_custom_fields
 
 	$t_bug_id = (int)$p_bug_id;
 	$t_target_project_id = (int)$p_target_project_id;
+	$t_current_user_id = auth_get_current_user_id();
 
 	$t_bug_data = bug_get( $t_bug_id, true );
 
@@ -1361,7 +1362,7 @@ function bug_copy( $p_bug_id, $p_target_project_id = null, $p_copy_custom_fields
 	}
 
 	$t_bug_data->project_id = $t_target_project_id;
-	$t_bug_data->reporter_id = auth_get_current_user_id();
+	$t_bug_data->reporter_id = $t_current_user_id;
 	$t_bug_data->date_submitted = db_now();
 	$t_bug_data->last_updated = db_now();
 
@@ -1411,37 +1412,9 @@ function bug_copy( $p_bug_id, $p_target_project_id = null, $p_copy_custom_fields
 
 	# Copy bugnotes
 	if( $p_copy_bugnotes ) {
-		db_param_push();
-		$t_query = 'SELECT * FROM {bugnote} WHERE bug_id=' . db_param();
-		$t_result = db_query( $t_query, array( $t_bug_id ) );
-
-		while( $t_bug_note = db_fetch_array( $t_result ) ) {
-			$t_bugnote_text_id = $t_bug_note['bugnote_text_id'];
-
-			db_param_push();
-			$t_query2 = 'SELECT * FROM {bugnote_text} WHERE id=' . db_param();
-			$t_result2 = db_query( $t_query2, array( $t_bugnote_text_id ) );
-
-			$t_bugnote_text_insert_id = -1;
-			if( $t_bugnote_text = db_fetch_array( $t_result2 ) ) {
-				db_param_push();
-				$t_query2 = 'INSERT INTO {bugnote_text}
-							   ( note )
-							   VALUES ( ' . db_param() . ' )';
-				db_query( $t_query2, array( $t_bugnote_text['note'] ) );
-				$t_bugnote_text_insert_id = db_insert_id( db_get_table( 'bugnote_text' ) );
-			}
-
-			db_param_push();
-			$t_query2 = 'INSERT INTO {bugnote}
-						   ( bug_id, reporter_id, bugnote_text_id, view_state, date_submitted, last_modified )
-						   VALUES ( ' . db_param() . ',
-						   			' . db_param() . ',
-						   			' . db_param() . ',
-						   			' . db_param() . ',
-						   			' . db_param() . ',
-						   			' . db_param() . ')';
-			db_query( $t_query2, array( $t_new_bug_id, $t_bug_note['reporter_id'], $t_bugnote_text_insert_id, $t_bug_note['view_state'], $t_bug_note['date_submitted'], $t_bug_note['last_modified'] ) );
+		$t_bugnotes = bugnote_get_all_visible_bugnotes( $t_bug_id, 'ASC', 0, $t_current_user_id );
+		foreach( $t_bugnotes as $t_bug_note ) {
+			bugnote_copy( $t_bug_note->id, $t_new_bug_id, $p_copy_attachments );
 		}
 	}
 
