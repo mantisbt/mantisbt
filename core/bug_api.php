@@ -1950,7 +1950,7 @@ function bug_get_attachments( $p_bug_id ) {
 
 	db_param_push();
 
-	$t_query = 'SELECT id, title, diskfile, filename, filesize, file_type, date_added, user_id, bugnote_id
+	$t_query = 'SELECT id, title, folder, diskfile, filename, filesize, file_type, date_added, user_id, bugnote_id
 		                FROM {bug_file}
 		                WHERE bug_id=' . db_param() . '
 		                ORDER BY date_added';
