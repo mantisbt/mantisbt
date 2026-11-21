@@ -156,4 +156,11 @@ function compress_disable() {
 	global $g_compression_started;
 
 	$g_compression_started = false;
+
+	# compress_handler_is_enabled() may have turned on zlib.output_compression
+	# instead of installing the handler; switch that off as well, which is only
+	# possible while the headers have not been sent yet.
+	if( !headers_sent() && ini_get( 'zlib.output_compression' ) ) {
+		ini_set( 'zlib.output_compression', 0 );
+	}
 }
