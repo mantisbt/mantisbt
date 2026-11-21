@@ -1,0 +1,28 @@
+{
+	auto_https off
+}
+
+http://mailpit.localhost {
+	reverse_proxy mailpit:8025
+}
+
+http://localhost, http://mantis.localhost, http://127.0.0.1 {
+	root * /srv
+	encode gzip
+
+	# MantisBT REST API: equivalent of api/rest/.htaccess
+	# (Slim front-controller — route everything that isn't an existing file
+	# under /api/rest/ to /api/rest/index.php).
+	@rest_api {
+		path /api/rest /api/rest/*
+		not file
+	}
+	rewrite @rest_api /api/rest/index.php
+
+	# Block direct access to internals (mirrors restcore/.htaccess).
+	@blocked path /api/rest/restcore/* /core/* /library/* /lang/* /vendor/*
+	respond @blocked 403
+
+	php_fastcgi php:9000
+	file_server
+}
