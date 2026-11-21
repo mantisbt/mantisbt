@@ -2373,6 +2373,148 @@ components:
                 type: string
         language:
           type: string
+    FilterCollection:
+      type: object
+      required: [filters]
+      properties:
+        filters:
+          type: array
+          items:
+            $ref: '#/components/schemas/Filter'
+    Filter:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 12
+        name:
+          type: string
+          example: Submitted last week
+        owner:
+          allOf:
+            - $ref: '#/components/schemas/UserRef'
+          description: The user who saved the filter. Omitted when the owner is the user making the request.
+        public:
+          type: boolean
+        project:
+          $ref: '#/components/schemas/ProjectRef'
+        criteria:
+          $ref: '#/components/schemas/FilterCriteria'
+        url:
+          type: string
+          description: Link to the issue list with the filter applied. Empty when the filter has no criteria.
+    FilterCriteria:
+      type: object
+      description: |-
+        The criteria the filter matches issues on. Only criteria that narrow down the results are
+        included. The date criteria are described below; other criteria are returned as stored.
+      properties:
+        created_at:
+          allOf:
+            - $ref: '#/components/schemas/FilterDateRange'
+          description: Matches issues submitted within the range. Present only when filtering by date submitted.
+        updated_at:
+          allOf:
+            - $ref: '#/components/schemas/FilterDateRange'
+          description: Matches issues last updated within the range. Present only when filtering by last updated date.
+        custom_fields:
+          type: array
+          items:
+            $ref: '#/components/schemas/FilterCustomField'
+      additionalProperties: true
+    FilterDateRange:
+      type: object
+      description: An inclusive range of days. Either both ends are fixed dates, or both are relative dates.
+      required: [from, to]
+      properties:
+        from:
+          $ref: '#/components/schemas/FilterDate'
+        to:
+          $ref: '#/components/schemas/FilterDate'
+    FilterDate:
+      description: |-
+        One end of a date range. A fixed end is a date. A relative end is the relative date that
+        defines it, together with the date it resolves to at the time of the request.
+      oneOf:
+        - type: string
+          format: date
+          example: '2026-09-01'
+        - allOf:
+            - $ref: '#/components/schemas/RelativeDate'
+            - type: object
+              required: [date]
+              properties:
+                date:
+                  type: string
+                  format: date
+                  description: The date the relative date resolves to at the time of the request.
+                  example: '2026-09-10'
+    FilterCustomField:
+      type: object
+      required: [field, value]
+      properties:
+        field:
+          $ref: '#/components/schemas/ObjectRef'
+        value:
+          type: array
+          description: |-
+            The values to match. `[none]` matches issues where the field has no value.
+
+            For a date custom field, the value is `[control, start, end]`. `control` is the
+            comparison: 1 none, 2 between, 3 on or before, 4 before, 5 on, 6 after, 7 on or after.
+            A field that is not narrowing down the results is not included at all, so the "any"
+            comparison never appears.
+            `start` and `end` are Unix timestamps; a bound the comparison does not use holds `1`,
+            or `2147483647` for an open-ended range. A relative bound is the relative date that
+            defines it, together with the timestamp it resolves to at the time of the request.
+          items:
+            oneOf:
+              - type: string
+              - type: integer
+              - allOf:
+                  - $ref: '#/components/schemas/RelativeDate'
+                  - type: object
+                    required: [timestamp]
+                    properties:
+                      timestamp:
+                        type: integer
+                        description: The Unix timestamp the relative date resolves to at the time of the request.
+                        example: 1788998400
+          example:
+            - 2
+            - anchor: today
+              offset: -7
+              unit: day
+              timestamp: 1788998400
+            - anchor: today
+              offset: 0
+              unit: day
+              timestamp: 1789689599
+    RelativeDate:
+      type: object
+      description: |-
+        A date relative to when the filter is run, `offset` units away from `anchor`. For example,
+        anchor `today`, offset `-7` and unit `day` is a week ago.
+
+        An offset expressed in the anchor's own unit moves to another period rather than shifting
+        the date: anchor `end_of_month`, offset `-1` and unit `month` is the last day of the
+        previous month, whatever its length.
+      required: [anchor, offset, unit]
+      properties:
+        anchor:
+          type: string
+          enum: [today, start_of_month, end_of_month, start_of_year, end_of_year]
+          example: today
+        offset:
+          type: integer
+          minimum: -999
+          maximum: 999
+          description: Number of units before (negative) or after (positive) the anchor; 0 is the anchor itself.
+          example: -7
+        unit:
+          type: string
+          enum: [day, week, month, year]
+          example: day
     ConfigSet:
       type: object
       properties:
@@ -3039,6 +3181,7 @@ components:
               - $ref: '#/components/schemas/TokenResponse'
               - $ref: '#/components/schemas/ConfigResponse'
               - $ref: '#/components/schemas/LocalizedStringsResponse'
+              - $ref: '#/components/schemas/FilterCollection'
               - $ref: '#/components/schemas/GenericResponse'
       headers:
         ETag:

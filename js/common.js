@@ -359,50 +359,69 @@ $(document).ready( function() {
 
 	setBugLabel();
 
-	/* Handle standard filter date fields */
-	$(document).on('change', '.js_switch_date_inputs_trigger', function() {
-		$(this).closest('table')
-				.find('select')
-				.prop('disabled', !$(this).prop('checked'));
+	/* Built-in date filters (Date Submitted, Last Updated). Two controls, two
+	   separate concerns: a checkbox says whether the field filters at all, and
+	   a select picks fixed or relative bounds.
+
+	   Which rows are shown follows the select, so only one set of date inputs is
+	   ever on screen, and fixed is the default. Whether those inputs are enabled
+	   follows the checkbox, which is what keeps an unchecked date filter out of
+	   the submitted form - the long-standing behaviour of these filters, where
+	   the inputs stay visible but disabled until the field is actually used. */
+	function updateDateFilterInputs(table) {
+		var $table = $(table);
+		var on = $table.find('.js_rd_enable').prop('checked');
+		var relative = 'relative' === $table.find('.js_rd_type').val();
+		$table.find('.js_rd_fixed').prop('disabled', !on || relative);
+		$table.find('.js_rd_relative').prop('disabled', !on || !relative);
+		$table.find('.js_rd_row_fixed').toggle(!relative);
+		$table.find('.js_rd_row_relative').toggle(relative);
+	}
+
+	$(document).on('change', '.js_rd_enable, .js_rd_type', function() {
+		updateDateFilterInputs($(this).closest('table'));
 	});
 
-	/* Handle custom field of date type */
-	$(document).on('change', 'select[name^=custom_field_][name$=_control]', function() {
-		var table = $(this).closest('table');
-		switch(this.value) {
+	/* Handle custom field of date type. The operator (control) select decides
+	   which endpoints (start/end) are active; the fixed/relative mode decides
+	   which set of inputs is enabled for them. The two compose:
+	       enabled = active-mode inputs ∩ operator-allowed endpoints. */
+	function updateCfDateInputs(table) {
+		var $table = $(table);
+		var op = $table.find('select[name$=_control]').val();
+		var relative = '1' === $table.find('.js_cf_date_mode').val();
+		var startOn = false, endOn = false;
+		switch(op) {
 			case '2': // between
-				$(table).find("select[name*=_start_year]").prop('disabled', false);
-				$(table).find("select[name*=_start_month]").prop('disabled', false);
-				$(table).find("select[name*=_start_day]").prop('disabled', false);
-				$(table).find("select[name*=_end_year]").prop('disabled', false);
-				$(table).find("select[name*=_end_month]").prop('disabled', false);
-				$(table).find("select[name*=_end_day]").prop('disabled', false);
+				startOn = true; endOn = true;
 				break;
-
 			case '3': // on or before
 			case '4': // before
 			case '5': // on
 			case '6': // after
 			case '7': // on or after
-				$(table).find("select[name*=_start_year]").prop('disabled', false);
-				$(table).find("select[name*=_start_month]").prop('disabled', false);
-				$(table).find("select[name*=_start_day]").prop('disabled', false);
-				$(table).find("select[name*=_end_year]").prop('disabled', true);
-				$(table).find("select[name*=_end_month]").prop('disabled', true);
-				$(table).find("select[name*=_end_day]").prop('disabled', true);
+				startOn = true; endOn = false;
 				break;
-
-			case '0': // any
-			case '1': // none
-			default:
-				$(table).find("select[name*=_start_year]").prop('disabled', true);
-				$(table).find("select[name*=_start_month]").prop('disabled', true);
-				$(table).find("select[name*=_start_day]").prop('disabled', true);
-				$(table).find("select[name*=_end_year]").prop('disabled', true);
-				$(table).find("select[name*=_end_month]").prop('disabled', true);
-				$(table).find("select[name*=_end_day]").prop('disabled', true);
+			default: // any / none
+				startOn = false; endOn = false;
 				break;
 		}
+		/* Fixed year/month/day selects */
+		$table.find("select[name*=_start_year], select[name*=_start_month], select[name*=_start_day]")
+				.prop('disabled', relative || !startOn);
+		$table.find("select[name*=_end_year], select[name*=_end_month], select[name*=_end_day]")
+				.prop('disabled', relative || !endOn);
+		/* Relative anchor/offset/unit inputs */
+		$table.find("[name*=_start_relative]").prop('disabled', !relative || !startOn);
+		$table.find("[name*=_end_relative]").prop('disabled', !relative || !endOn);
+		/* Only the active mode's rows are shown. The operator still decides which
+		   of the visible rows are enabled, so a row can be visible but disabled. */
+		$table.find('.js_cf_row_fixed').toggle(!relative);
+		$table.find('.js_cf_row_relative').toggle(relative);
+	}
+
+	$(document).on('change', 'select[name^=custom_field_][name$=_control], .js_cf_date_mode', function() {
+		updateCfDateInputs($(this).closest('table'));
 	});
 
 	$(document).on('change', '#tag_select', function() {
