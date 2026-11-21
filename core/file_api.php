@@ -469,6 +469,60 @@ function file_normalize_attachment_path( $p_diskfile, $p_project_id ) {
 }
 
 /**
+ * Determines the full path to an attachment held on disk.
+ *
+ * The `folder` column records where the file was actually written, which is
+ * not necessarily where the current configuration would put it: a project's
+ * file path can be changed at any time and existing attachments are not moved.
+ * When `folder` is set and the file is there, it wins; otherwise we fall back
+ * to deriving the path from configuration, which also covers rows predating
+ * the `folder` column and files that have been relocated by hand.
+ *
+ * @param array $p_file_row    A {bug_file} or {project_file} row. The
+ *                             `diskfile` column is required, `folder` is used
+ *                             when present.
+ * @param int   $p_project_id  The project the attachment belongs to.
+ *
+ * @return string The full path to the attachment.
+ */
+function file_get_disk_path( array $p_file_row, $p_project_id ) {
+	$t_diskfile = $p_file_row['diskfile'];
+	$t_basename = basename( $t_diskfile );
+
+	if( !empty( $p_file_row['folder'] ) ) {
+		$t_path = $p_file_row['folder'] . $t_basename;
+		if( file_exists( $t_path ) ) {
+			return $t_path;
+		}
+	}
+
+	# A reorganisation interrupted between moving a file and recording its new
+	# location leaves it in the subdirectory the configured layout calls for,
+	# while folder still names the old one. Look there before giving up, so
+	# that an interrupted run does not make attachments unreachable.
+	$t_subdirectory = file_subdirectory_path( $t_basename );
+	if( $t_subdirectory !== '' ) {
+		$t_upload_paths = array();
+		if( $p_project_id != ALL_PROJECTS ) {
+			$t_upload_paths[] = project_get_field( $p_project_id, 'file_path' );
+		}
+		$t_upload_paths[] = config_get_global( 'absolute_path_default_upload_folder' );
+
+		foreach( $t_upload_paths as $t_upload_path ) {
+			if( is_blank( $t_upload_path ) ) {
+				continue;
+			}
+			$t_path = file_path_combine( $t_upload_path, $t_subdirectory . $t_basename );
+			if( file_exists( $t_path ) ) {
+				return $t_path;
+			}
+		}
+	}
+
+	return file_normalize_attachment_path( $t_diskfile, $p_project_id );
+}
+
+/**
  * Gets an array of attachments that are visible to the currently logged in user.
  *
  * Each element of the array contains the following:
@@ -514,7 +568,7 @@ function file_get_visible_attachments( $p_bug_id ) {
 		$t_id = (int)$t_row['id'];
 		$t_filename = $t_row['filename'];
 		$t_filesize = (int)$t_row['filesize'];
-		$t_diskfile = file_normalize_attachment_path( $t_row['diskfile'], bug_get_field( $p_bug_id, 'project_id' ) );
+		$t_diskfile = file_get_disk_path( $t_row, bug_get_field( $p_bug_id, 'project_id' ) );
 		$t_date_added = $t_row['date_added'];
 
 		$t_attachment = array();
@@ -580,7 +634,7 @@ function file_delete_attachments( $p_bug_id ) {
 
 	# Delete files from disk
 	db_param_push();
-	$t_query = 'SELECT diskfile, filename FROM {bug_file} WHERE bug_id=' . db_param();
+	$t_query = 'SELECT folder, diskfile, filename FROM {bug_file} WHERE bug_id=' . db_param();
 	$t_result = db_query( $t_query, array( $p_bug_id ) );
 
 	$t_file_count = db_num_rows( $t_result );
@@ -592,7 +646,7 @@ function file_delete_attachments( $p_bug_id ) {
 		for( $i = 0; $i < $t_file_count; $i++ ) {
 			$t_row = db_fetch_array( $t_result );
 
-			$t_local_diskfile = file_normalize_attachment_path( $t_row['diskfile'], bug_get_field( $p_bug_id, 'project_id' ) );
+			$t_local_diskfile = file_get_disk_path( $t_row, bug_get_field( $p_bug_id, 'project_id' ) );
 			file_delete_local( $t_local_diskfile );
 		}
 	}
@@ -657,7 +711,7 @@ function file_delete_project_files( $p_project_id ) {
 	if( DISK == $t_method ) {
 		# Delete files from disk
 		db_param_push();
-		$t_query = 'SELECT diskfile, filename FROM {project_file} WHERE project_id=' . db_param();
+		$t_query = 'SELECT folder, diskfile, filename FROM {project_file} WHERE project_id=' . db_param();
 		$t_result = db_query( $t_query, array( (int)$p_project_id ) );
 
 		$t_file_count = db_num_rows( $t_result );
@@ -665,7 +719,7 @@ function file_delete_project_files( $p_project_id ) {
 		for( $i = 0;$i < $t_file_count;$i++ ) {
 			$t_row = db_fetch_array( $t_result );
 
-			$t_local_diskfile = file_normalize_attachment_path( $t_row['diskfile'], $p_project_id );
+			$t_local_diskfile = file_get_disk_path( $t_row, $p_project_id );
 			file_delete_local( $t_local_diskfile );
 		}
 	}
@@ -734,6 +788,7 @@ function file_delete( $p_file_id, $p_table = 'bug', $p_bugnote_id = 0 ) {
 	$c_file_id = (int)$p_file_id;
 	$t_filename = file_get_field( $p_file_id, 'filename', $p_table );
 	$t_diskfile = file_get_field( $p_file_id, 'diskfile', $p_table );
+	$t_folder = file_get_field( $p_file_id, 'folder', $p_table );
 
 	if( $p_table == 'bug' ) {
 		$t_bug_id = file_get_field( $p_file_id, 'bug_id', $p_table );
@@ -743,7 +798,10 @@ function file_delete( $p_file_id, $p_table = 'bug', $p_bugnote_id = 0 ) {
 	}
 
 	if( DISK == $t_upload_method ) {
-		$t_local_disk_file = file_normalize_attachment_path( $t_diskfile, $t_project_id );
+		$t_local_disk_file = file_get_disk_path(
+			array( 'folder' => $t_folder, 'diskfile' => $t_diskfile ),
+			$t_project_id
+		);
 		if( file_exists( $t_local_disk_file ) ) {
 			file_delete_local( $t_local_disk_file );
 		}
@@ -830,6 +888,92 @@ function file_generate_unique_name( $p_filepath ) {
 	} while( !diskfile_is_name_unique( $t_string, $p_filepath ) );
 
 	return $t_string;
+}
+
+/**
+ * Builds the subdirectory an attachment is stored under, relative to the
+ * upload directory.
+ *
+ * Attachments are spread over subdirectories named after the leading
+ * characters of the disk file name, so that installations with very large
+ * numbers of attachments do not end up with a single enormous directory.
+ * Deriving the subdirectory from the name itself rather than from a separate
+ * hash keeps the mapping reversible: a file can be located from its name alone
+ * without consulting the database.
+ *
+ * Returns an empty string when subdirectories are disabled, or when the name
+ * is too short to satisfy the configured depth. Only the leading run of
+ * hexadecimal characters is used: names are normally 32 character hashes, but
+ * an installation may hold other formats, such as UUIDs imported from another
+ * tracker, and the separators in those must not end up in directory names.
+ *
+ * @param string $p_filename The disk file name.
+ *
+ * @return string The relative subdirectory, with a trailing directory
+ *                separator, or an empty string.
+ */
+function file_subdirectory_path( $p_filename ) {
+	$t_depth = (int)config_get_global( 'file_upload_subdirectory_depth' );
+	$t_width = (int)config_get_global( 'file_upload_subdirectory_width' );
+
+	if( $t_depth < 1 || $t_width < 1 ) {
+		return '';
+	}
+
+	if( !preg_match( '/^[0-9a-fA-F]+/', $p_filename, $t_matches ) ) {
+		return '';
+	}
+	$t_usable = $t_matches[0];
+
+	if( strlen( $t_usable ) < $t_depth * $t_width ) {
+		return '';
+	}
+
+	$t_path = '';
+	for( $i = 0; $i < $t_depth; $i++ ) {
+		$t_path .= substr( $t_usable, $i * $t_width, $t_width ) . DIRECTORY_SEPARATOR;
+	}
+
+	return $t_path;
+}
+
+/**
+ * Determines the directory an attachment should be written to, creating it if
+ * necessary.
+ *
+ * New subdirectories inherit the upload directory's permissions, so that a
+ * setup granting access to, say, a backup account keeps working below it.
+ *
+ * @param string $p_upload_path The project's upload path, with a trailing
+ *                              directory separator.
+ * @param string $p_filename    The disk file name.
+ *
+ * @return string The directory to write to, with a trailing directory separator.
+ *
+ * @throws ServiceException
+ */
+function file_ensure_upload_subdirectory( $p_upload_path, $p_filename ) {
+	$t_subdirectory = file_subdirectory_path( $p_filename );
+	if( $t_subdirectory === '' ) {
+		return $p_upload_path;
+	}
+
+	$t_path = $p_upload_path . $t_subdirectory;
+	if( !is_dir( $t_path ) ) {
+		$t_mode = @fileperms( $p_upload_path );
+		$t_mode = ( $t_mode === false ) ? 0700 : ( $t_mode & 0777 );
+
+		# Concurrent uploads race to create the same subdirectory, so a failure
+		# only matters if the directory still is not there afterwards.
+		if( !@mkdir( $t_path, $t_mode, true ) && !is_dir( $t_path ) ) {
+			throw new ServiceException(
+				"Unable to create upload directory '$t_path'",
+				ERROR_FILE_INVALID_UPLOAD_PATH
+			);
+		}
+	}
+
+	return $t_path;
 }
 
 /**
@@ -990,6 +1134,7 @@ function file_add( $p_bug_id, array $p_file, $p_table = 'bug', $p_title = '', $p
 	switch( $t_method ) {
 		case DISK:
 			file_ensure_valid_upload_path( $t_file_path );
+			$t_file_path = file_ensure_upload_subdirectory( $t_file_path, $t_unique_name );
 
 			$t_disk_file_name = $t_file_path . $t_unique_name;
 			if( !file_exists( $t_disk_file_name ) ) {
@@ -1351,7 +1496,7 @@ function file_get_content( $p_file_id, $p_type = 'bug' ) {
 
 	switch( config_get( 'file_upload_method' ) ) {
 		case DISK:
-			$t_local_disk_file = file_normalize_attachment_path( $t_row['diskfile'], $t_project_id );
+			$t_local_disk_file = file_get_disk_path( $t_row, $t_project_id );
 
 			if( file_exists( $t_local_disk_file ) ) {
 				$t_file_info_type = file_get_mime_type( $t_local_disk_file );
@@ -1488,7 +1633,7 @@ function file_copy_attachments( $p_source_bug_id, $p_dest_bug_id ) {
 		# prepare the new diskfile name and then copy the file
 		$t_source_file = $t_bug_file['folder'] . $t_bug_file['diskfile'];
 		if( ( config_get( 'file_upload_method' ) == DISK ) ) {
-			$t_source_file = file_normalize_attachment_path( $t_source_file, $t_project_id );
+			$t_source_file = file_get_disk_path( $t_bug_file, $t_project_id );
 			$t_file_path = dirname( $t_source_file ) . DIRECTORY_SEPARATOR;
 		} else {
 			$t_file_path = $t_bug_file['folder'];
