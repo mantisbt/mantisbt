@@ -225,12 +225,12 @@ function get_section_begin_for_email( $p_section_name ) {
 	echo '<thead>' . "\n";
 	echo '<tr>' . "\n";
 	echo '<th width="30%" rowspan="2">' . lang_get( 'message' ) . '</th>';
-	echo '<th class="bold" style="text-align:center" rowspan="2">&#160;' . lang_get( 'issue_reporter' ) . '&#160;</th>' . "\n";
-	echo '<th class="bold" style="text-align:center" rowspan="2">&#160;' . lang_get( 'issue_handler' ) . '&#160;</th>' . "\n";
-	echo '<th class="bold" style="text-align:center" rowspan="2">&#160;' . lang_get( 'users_monitoring_bug' ) . '&#160;</th>' . "\n";
-	echo '<th class="bold" style="text-align:center" rowspan="2">&#160;' . lang_get( 'users_added_bugnote' ) . '&#160;</th>' . "\n";
-	echo '<th class="bold" style="text-align:center" rowspan="2">&#160;' . lang_get( 'category_assigned_to' ) . '&#160;</th>' . "\n";
-	echo '<th class="bold" style="text-align:center" colspan="' . count( $t_access_levels ) . '">&#160;' . lang_get( 'email_notify_users' ) . '&#160;</th>' . "\n";
+	echo '<th class="bold center" rowspan="2">&#160;' . lang_get( 'issue_reporter' ) . '&#160;</th>' . "\n";
+	echo '<th class="bold center" rowspan="2">&#160;' . lang_get( 'issue_handler' ) . '&#160;</th>' . "\n";
+	echo '<th class="bold center" rowspan="2">&#160;' . lang_get( 'users_monitoring_bug' ) . '&#160;</th>' . "\n";
+	echo '<th class="bold center" rowspan="2">&#160;' . lang_get( 'users_added_bugnote' ) . '&#160;</th>' . "\n";
+	echo '<th class="bold center" rowspan="2">&#160;' . lang_get( 'category_assigned_to' ) . '&#160;</th>' . "\n";
+	echo '<th class="bold center" colspan="' . count( $t_access_levels ) . '">&#160;' . lang_get( 'email_notify_users' ) . '&#160;</th>' . "\n";
 	echo '  </tr><tr>' . "\n";
 
 	foreach( $t_access_levels as $t_access_level ) {
