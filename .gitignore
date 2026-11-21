@@ -11,6 +11,7 @@ docbook/*/tmp
 
 # Local docbook from release tarballs
 doc/en-US
+doc/phpdoc
 
 # Untracked plugins
 plugins/*
