@@ -23,6 +23,9 @@
  * @link http://www.mantisbt.org
  */
 
+use GuzzleHttp\Client;
+use GuzzleHttp\Exception\GuzzleException;
+
 $g_show_all = false;
 $g_show_errors = false;
 
@@ -152,19 +155,26 @@ function check_print_section_header_row( $p_heading ) {
 }
 
 /**
- * Print Check result - information only
+ * Print Check result - information only.
  *
  * @param string $p_description Description.
  * @param string $p_info        Information.
+ * @param string $p_message     Additional information, to be printed below the
+ *                              description.
+ *                              Note: will not be printed if equal to $p_info.
+ *
  * @return void
  */
-function check_print_info_row( $p_description, $p_info = null ) {
+function check_print_info_row( $p_description, $p_info = null, $p_message = '' ) {
 	global $g_show_all;
 	if( !$g_show_all ) {
 		return;
 	}
 	echo "\t" . '<tr>' . "\n\t\t";
-	echo '<td class="description">' . $p_description . '</td>' . "\n";
+	echo '<td class="description">'
+		. $p_description
+		. ( !empty( $p_message ) && $p_info != $p_message ? '<br><em>' . $p_message . '</em>' : '' )
+		. '</td>' . "\n";
 	echo "\t\t" . '<td class="info">' . $p_info . '</td>' . "\n";
 	echo "\t" . '</tr>' . "\n";
 }
