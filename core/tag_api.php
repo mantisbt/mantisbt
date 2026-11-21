@@ -65,16 +65,26 @@ $g_cache_tags = array();
 # bugs with no tags will be stored as 'false'.
 $g_cache_bug_tags = array();
 
+# cache tag rows found by name, indexed by the name as requested.
+# names that don't exist are not cached, so a tag created later is found.
+$g_cache_tags_by_name = array();
+
 /**
  * Clear the tag definition cache (or just the given id if specified).
  *
+ * The tag-by-name cache is always cleared in full, since a write to any tag
+ * can change which name maps to which row.
+ *
  * @global array $g_cache_tags
+ * @global array $g_cache_tags_by_name
  * @param int|null $p_tag_id Tag id, or null to clear all tag cache entries.
  *
  * @return void
  */
 function tag_clear_cache( $p_tag_id = null ) {
-	global $g_cache_tags;
+	global $g_cache_tags, $g_cache_tags_by_name;
+
+	$g_cache_tags_by_name = array();
 
 	if( null === $p_tag_id ) {
 		$g_cache_tags = array();
@@ -604,6 +614,12 @@ function tag_get_name( $p_tag_id ) {
  * @return array|false Tag row
  */
 function tag_get_by_name( $p_name ) {
+	global $g_cache_tags_by_name;
+
+	if( isset( $g_cache_tags_by_name[$p_name] ) ) {
+		return $g_cache_tags_by_name[$p_name];
+	}
+
 	db_param_push();
 	$t_query = 'SELECT * FROM {tag} WHERE ' . db_helper_like( 'name' );
 	$t_result = db_query( $t_query, array( $p_name ) );
@@ -613,6 +629,8 @@ function tag_get_by_name( $p_name ) {
 	if( !$t_row ) {
 		return false;
 	}
+
+	$g_cache_tags_by_name[$p_name] = $t_row;
 
 	return $t_row;
 }
