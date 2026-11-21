@@ -43,7 +43,7 @@ jobs:
           - 8.2
           - 8.1
         experimental: [false]
-        include:
+#        include:
 #          - php: 8.6
 #            DB: mysqli
 #            experimental: true
