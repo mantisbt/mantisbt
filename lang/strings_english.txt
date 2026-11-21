@@ -182,6 +182,7 @@ $s_select_option = '(select)';
 # bug_actiongroup_page.php : mass treatment
 $s_bug_actiongroup_access = 'You did not have appropriate permissions to perform that action.';
 $s_bug_actiongroup_status = 'This issue cannot be changed to the requested status';
+$s_bug_actiongroup_same_status = 'You tried to set status the issue was already in';
 $s_bug_actiongroup_category = 'This issue cannot be changed to the requested category';
 $s_bug_actiongroup_handler = 'The requested user is not allowed to handle this issue';
 $s_bug_actiongroup_version = 'The requested version does not exist in this issue\'s project';
