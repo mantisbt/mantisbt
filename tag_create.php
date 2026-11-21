@@ -32,8 +32,6 @@
  * @noinspection PhpUnhandledExceptionInspection
  */
 
-use Mantis\Exceptions\ClientException;
-
 require_once( 'core.php' );
 require_api( 'authentication_api.php' );
 require_api( 'error_api.php' );
@@ -45,26 +43,37 @@ require_api( 'tag_api.php' );
 form_security_validate( 'tag_create' );
 
 $f_tag_name = gpc_get_string( 'name' );
-$f_tag_description = gpc_get_string( 'description' );
+$f_tag_description = gpc_get_string( 'description', '' );
+$f_project_id = gpc_get_int( 'project_id', ALL_PROJECTS );
+$f_add_and_edit = gpc_get_bool( 'add_and_edit_tag' );
 
 $t_tag_user = auth_get_current_user_id();
 
-if( !is_null( $f_tag_name ) ) {
-	$t_tags = tag_parse_string( $f_tag_name );
-	foreach ( $t_tags as $t_tag_row ) {
-		switch( $t_tag_row['id'] ) {
-			case -1:
-				tag_create( $t_tag_row['name'], $t_tag_user, $f_tag_description );
-				break;
-			case -2:
-				throw new ClientException( "Invalid tag name '{$t_tag_row['name']}'",
-					ERROR_TAG_NAME_INVALID,
-					[ $t_tag_row['name'] ]
-				);
-		}
+# The names are separated by the tag separator.  Validate them all before creating any.
+$t_names = array();
+foreach( explode( config_get( 'tag_separator' ), $f_tag_name ) as $t_name ) {
+	$t_name = trim( $t_name );
+	if( is_blank( $t_name ) ) {
+		continue;
+	}
+	tag_ensure_name_is_valid( $t_name );
+	$t_names[] = $t_name;
+}
+
+# Tags that already exist in the scope are left unchanged
+$t_tag_ids = array();
+foreach( $t_names as $t_name ) {
+	if( tag_is_unique( $t_name, $f_project_id ) ) {
+		$t_tag_ids[] = tag_create( $t_name, $t_tag_user, $f_tag_description, $f_project_id );
 	}
 }
 
 form_security_purge( 'tag_create' );
 
-print_header_redirect( 'manage_tags_page.php' );
+if( $f_add_and_edit && !empty( $t_tag_ids ) ) {
+	print_header_redirect( 'tag_update_page.php?tag_id=' . $t_tag_ids[0] );
+} else if( $f_project_id == ALL_PROJECTS ) {
+	print_header_redirect( 'manage_tags_page.php' );
+} else {
+	print_header_redirect( 'manage_proj_edit_page.php?project_id=' . $f_project_id . '#tags' );
+}

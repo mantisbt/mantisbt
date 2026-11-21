@@ -111,6 +111,12 @@ if( $t_manage_tags ) {
 	</tr>
 	<tr>
 		<td class="category">
+			<?php echo lang_get( 'tag_project' ) ?>
+		</td>
+		<td><?php echo string_display_line( $t_tag_row['project_id'] == ALL_PROJECTS ? lang_get( 'all_projects' ) : project_get_name( $t_tag_row['project_id'], false ) ) ?></td>
+	</tr>
+	<tr>
+		<td class="category">
 			<?php echo lang_get( 'description' ) ?>
 		</td>
 		<td><?php echo $t_description ?></td>

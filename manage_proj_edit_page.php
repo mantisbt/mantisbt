@@ -42,6 +42,7 @@
  * @uses project_api.php
  * @uses project_hierarchy_api.php
  * @uses string_api.php
+ * @uses tag_api.php
  * @uses user_api.php
  * @uses utility_api.php
  * @uses version_api.php
@@ -67,6 +68,7 @@ require_api( 'print_api.php' );
 require_api( 'project_api.php' );
 require_api( 'project_hierarchy_api.php' );
 require_api( 'string_api.php' );
+require_api( 'tag_api.php' );
 require_api( 'user_api.php' );
 require_api( 'utility_api.php' );
 require_api( 'version_api.php' );
@@ -543,6 +545,136 @@ print_manage_menu( 'manage_proj_edit_page.php' );
 	</form>
 </div>
 </div>
+</div>
+</div>
+
+<!-- TAGS -->
+<div class="col-md-12 col-xs-12">
+<div class="space-10"></div>
+<div id="tags" class="form-container">
+	<div class="widget-box widget-color-blue2">
+		<div class="widget-header widget-header-small">
+			<h4 class="widget-title lighter">
+				<?php print_icon( 'fa-tags', 'ace-icon' ); ?>
+				<?php echo lang_get( 'tags' ); ?>
+			</h4>
+		</div>
+		<div class="widget-toolbox padding-8 clearfix">
+	<form id="manage-project-tag-copy-form" method="post" action="manage_proj_tag_copy.php" class="form-inline">
+		<fieldset>
+			<?php echo form_security_field( 'manage_proj_tag_copy' ) ?>
+			<input type="hidden" name="project_id" value="<?php echo $f_project_id ?>" />
+			<!--suppress HtmlFormInputWithoutLabel -->
+			<select name="other_project_id" class="input-sm" required>
+				<option selected disabled value=""><?php echo '[', lang_get( 'select_project_button' ), ']' ?></option>
+				<?php print_project_option_list( null, false, $f_project_id ); ?>
+			</select>
+			<button name="copy_from" class="btn btn-sm btn-primary btn-white btn-round" value="1">
+				<?php echo lang_get( 'copy_tags_from' ) ?>
+			</button>
+			<button name="copy_to" class="btn btn-sm btn-primary btn-white btn-round" value="1">
+				<?php echo lang_get( 'copy_tags_to' ) ?>
+			</button>
+			<div class="padding-left-8 inline">
+			<input type="checkbox" class="ace" id="tags_exclude_inherited" name="exclude_inherited">
+			<label for="tags_exclude_inherited" class="lbl">
+				<?php echo lang_get( 'exclude_inherited' ); ?>
+			</label>
+			</div>
+		</fieldset>
+	</form>
+	</div>
+		<div class="widget-body">
+		<div class="widget-main no-padding">
+<?php
+	# Tags of the project, followed by the ones inherited from its parent projects
+	# (global tags are managed in the Manage Tags page)
+	$t_tag_rows = array();
+	foreach( array_reverse( array_diff( tag_get_project_ids_in_scope( $f_project_id ), array( ALL_PROJECTS ) ) ) as $t_tag_project_id ) {
+		$t_result = tag_get_all( '', -1, -1, $t_tag_project_id );
+		while( $t_tag_row = db_fetch_array( $t_result ) ) {
+			$t_tag_rows[] = $t_tag_row;
+		}
+	}
+	$t_can_edit_tags = access_has_project_level( config_get( 'tag_edit_threshold' ), $f_project_id );
+
+	if( count( $t_tag_rows ) > 0 ) {
+?>
+	<div class="table-responsive">
+		<table class="table table-striped table-bordered table-condensed">
+		<thead>
+			<tr>
+				<th><?php echo lang_get( 'tag_name' ) ?></th>
+				<th><?php echo lang_get( 'description' ) ?></th>
+				<th class="center"><?php echo lang_get( 'tag_stats_attached' ) ?></th>
+				<th class="center"><?php echo lang_get( 'actions' ) ?></th>
+			</tr>
+		</thead>
+		<tbody>
+<?php
+		$t_security_token = form_security_token( 'tag_delete' );
+		foreach( $t_tag_rows as $t_tag_row ) {
+			$t_inherited = $t_tag_row['project_id'] != $f_project_id;
+			$t_tag_name = string_attribute( $t_tag_row['name'] );
+			if( $t_inherited ) {
+				$t_tag_name .= ' (' . string_attribute( project_get_name( $t_tag_row['project_id'], false ) ) . ')';
+			}
+?>
+			<tr>
+				<td><?php echo $t_tag_name ?></td>
+				<td><?php echo string_attribute( $t_tag_row['description'] ) ?></td>
+				<td class="center"><?php echo (int)$t_tag_row['num'] ?></td>
+				<td class="center">
+					<div class="inline">
+<?php
+			if( !$t_inherited && $t_can_edit_tags ) {
+				$t_param = array( 'tag_id' => $t_tag_row['id'] );
+				print_form_button(
+					'tag_update_page.php',
+					lang_get( 'edit' ),
+					$t_param,
+					OFF
+				);
+				print_form_button(
+					'tag_delete.php',
+					lang_get( 'delete' ),
+					$t_param,
+					$t_security_token
+				);
+			}
+?>
+					</div>
+				</td>
+			</tr>
+<?php
+		} # end for loop
+?>
+		</tbody>
+	</table>
+	</div>
+<?php
+	}
+?>
+	</div>
+	</div>
+	<div class="widget-toolbox padding-8 clearfix">
+	<form id="manage-project-add-tag-form" method="post" action="tag_create.php" class="form-inline">
+		<fieldset>
+			<?php echo form_security_field( 'tag_create' ) ?>
+			<input type="hidden" name="project_id" value="<?php echo $f_project_id ?>" />
+			<!--suppress HtmlFormInputWithoutLabel -->
+			<input type="text" class="input-sm" required name="name" size="32"
+				   placeholder="<?php echo string_attribute( sprintf( lang_get( 'tag_separate_by' ), config_get( 'tag_separator' ) ) ) ?>" />
+			<button class="btn btn-sm btn-primary btn-white btn-round">
+				<?php echo lang_get( 'tag_create' ) ?>
+			</button>
+			<button name="add_and_edit_tag" value="1" class="btn btn-sm btn-primary btn-white btn-round">
+				<?php echo lang_get( 'add_and_edit_tag_button' ) ?>
+			</button>
+		</fieldset>
+	</form>
+	</div>
+	</div>
 </div>
 </div>
 

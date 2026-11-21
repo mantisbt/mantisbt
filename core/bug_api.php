@@ -1504,6 +1504,8 @@ function bug_move( $p_bug_id, $p_target_project_id ) {
 	# Move the issue to the new project.
 	bug_set_field( $p_bug_id, 'project_id', $p_target_project_id );
 
+	tag_bug_move_to_project( $p_bug_id, $p_target_project_id );
+
 	# Update the category if needed
 	$t_category_id = bug_get_field( $p_bug_id, 'category_id' );
 

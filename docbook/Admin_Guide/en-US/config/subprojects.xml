@@ -26,6 +26,16 @@
 			</listitem>
 		</varlistentry>
 		<varlistentry>
+			<term>$g_subprojects_inherit_tags</term>
+			<listitem>
+				<para>
+					Whether sub-projects should inherit tags from parent projects.  For project X which
+					is a sub-project of A and B, issues of X can use the tags scoped to X, A and B, as well as
+					global tags.  The default value is ON.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
 			<term>$g_subprojects_inherit_categories</term>
 			<listitem>
 				<para>

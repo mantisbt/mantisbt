@@ -229,8 +229,8 @@ class IssueAddCommand extends Command {
 		# Validate tags and make sure user is allowed to create them if needed
 		if( isset( $t_issue['tags'] ) && is_array( $t_issue['tags'] ) ) {
 			foreach( $t_issue['tags'] as $t_tag ) {
-				$t_tag_id = $this->get_tag_id( $t_tag );
-				if( $t_tag_id === false && !tag_can_create( $this->user_id ) ) {
+				$t_tag_id = $this->get_tag_id( $t_tag, $t_project_id );
+				if( $t_tag_id === false && !tag_can_create( $this->user_id, $t_project_id ) ) {
 					throw new ClientException(
 						sprintf( "User '%d' can't create tag '%s'.", $this->user_id, $t_tag['name'] ),
 						ERROR_TAG_NOT_FOUND,
@@ -386,8 +386,9 @@ class IssueAddCommand extends Command {
 		if( isset( $t_issue['tags'] ) && is_array( $t_issue['tags'] ) ) {
 			$t_tags = array();
 			foreach( $t_issue['tags'] as $t_tag ) {
-				if( $this->get_tag_id( $t_tag ) === false ) {
-					$t_tag['id'] = tag_create( $t_tag['name'], $this->user_id );
+				if( $this->get_tag_id( $t_tag, $this->issue->project_id ) === false ) {
+					# New tags are scoped to the project of the issue
+					$t_tag['id'] = tag_create( $t_tag['name'], $this->user_id, '', $this->issue->project_id );
 					log_event( LOG_WEBSERVICE,
 						"created new tag '" . $t_tag['name'] . "' id '" . $t_tag['id'] . "'"
 					);
@@ -505,10 +506,11 @@ class IssueAddCommand extends Command {
 	 * false if not found.
 	 *
 	 * @param array $p_tag Tag element
+	 * @param integer $p_project_id Project the issue is reported in; names are resolved in this project
 	 * @return integer|false Tag ID or false if tag does not exist
 	 * @throws ClientException
 	 */
-	private function get_tag_id( array $p_tag ) {
+	private function get_tag_id( array $p_tag, $p_project_id ) {
 		if( isset( $p_tag['id'] ) ) {
 			$t_tag_id = $p_tag['id'];
 			if( !tag_exists( $t_tag_id ) ) {
@@ -518,6 +520,7 @@ class IssueAddCommand extends Command {
 					array( $t_tag_id )
 				);
 			}
+			tag_ensure_available_in_project( $t_tag_id, $p_project_id );
 		} elseif( isset( $p_tag['name'] ) ) {
 			$t_matches = array();
 			if( !tag_name_is_valid( $p_tag['name'], $t_matches )) {
@@ -527,7 +530,7 @@ class IssueAddCommand extends Command {
 					array( $p_tag['name'] )
 				);
 			}
-			$t_existing_tag = tag_get_by_name( $p_tag['name'] );
+			$t_existing_tag = tag_get_by_name( $p_tag['name'], $p_project_id );
 			$t_tag_id = $t_existing_tag === false ? false : $t_existing_tag['id'];
 		} else {
 			throw new ClientException(

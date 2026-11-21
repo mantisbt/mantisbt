@@ -35,6 +35,9 @@
  * @uses form_api.php
  * @uses history_api.php
  * @uses lang_api.php
+ * @uses current_user_api.php
+ * @uses project_api.php
+ * @uses project_hierarchy_api.php
  * @uses string_api.php
  * @uses user_api.php
  * @uses utility_api.php
@@ -46,11 +49,14 @@ require_api( 'authentication_api.php' );
 require_api( 'bug_api.php' );
 require_api( 'config_api.php' );
 require_api( 'constant_inc.php' );
+require_api( 'current_user_api.php' );
 require_api( 'database_api.php' );
 require_api( 'error_api.php' );
 require_api( 'form_api.php' );
 require_api( 'history_api.php' );
 require_api( 'lang_api.php' );
+require_api( 'project_api.php' );
+require_api( 'project_hierarchy_api.php' );
 require_api( 'string_api.php' );
 require_api( 'user_api.php' );
 require_api( 'utility_api.php' );
@@ -236,15 +242,26 @@ function tag_ensure_exists( $p_tag_id ) {
  * Uses a case-insensitive search of the database for existing tags with the
  * same name.
  *
- * @param string $p_name The tag name to check.
+ * Tag names only need to be unique within a scope: a project can have a tag
+ * with the same name as a global tag or as a tag of another project.
+ *
+ * @param string   $p_name       The tag name to check.
+ * @param int|null $p_project_id The scope to check (ALL_PROJECTS for global
+ *                               tags), or null to check across all scopes.
  *
  * @return bool True if name is unique
  */
-function tag_is_unique( $p_name ) {
+function tag_is_unique( $p_name, $p_project_id = null ) {
 	$c_name = trim( $p_name );
 
+	db_param_push();
 	$t_query = 'SELECT id FROM {tag} WHERE ' . db_helper_like( 'name' );
-	$t_result = db_query( $t_query, array( $c_name ) );
+	$t_params = array( $c_name );
+	if( $p_project_id !== null ) {
+		$t_query .= ' AND project_id = ' . db_param();
+		$t_params[] = (int)$p_project_id;
+	}
+	$t_result = db_query( $t_query, $t_params );
 
 	if( db_result( $t_result ) ) {
 		return false;
@@ -255,13 +272,14 @@ function tag_is_unique( $p_name ) {
 /**
  * Ensure that a name is unique.
  *
- * @param string $p_name The tag name to check.
+ * @param string   $p_name       The tag name to check.
+ * @param int|null $p_project_id The scope to check, see tag_is_unique().
  *
  * @return void
  * @throws ClientException
  */
-function tag_ensure_unique( $p_name ) {
-	if( !tag_is_unique( $p_name ) ) {
+function tag_ensure_unique( $p_name, $p_project_id = null ) {
+	if( !tag_is_unique( $p_name, $p_project_id ) ) {
 		throw new ClientException(
 			"Tag '$p_name' already exists",
 			ERROR_TAG_DUPLICATE,
@@ -332,11 +350,12 @@ function tag_cmp_name( array $p_tag1, array $p_tag2 ) {
  * id = -1 and the tag name, and if the name is invalid, a row is returned with
  * id = -2 and the tag name.  The resulting array is then sorted by tag name.
  *
- * @param string $p_string Input string to parse.
+ * @param string   $p_string     Input string to parse.
+ * @param int|null $p_project_id Project the tags are meant for, see tag_get_by_name().
  *
  * @return array Rows of tags parsed from input string
  */
-function tag_parse_string( $p_string ) {
+function tag_parse_string( $p_string, $p_project_id = null ) {
 	$t_tags = array();
 
 	$t_strings = explode( config_get( 'tag_separator' ), $p_string );
@@ -347,7 +366,7 @@ function tag_parse_string( $p_string ) {
 		}
 
 		$t_matches = array();
-		$t_tag_row = tag_get_by_name( $t_name );
+		$t_tag_row = tag_get_by_name( $t_name, $p_project_id );
 		if( $t_tag_row !== false ) {
 			$t_tags[] = $t_tag_row;
 		} else {
@@ -385,8 +404,10 @@ function tag_attach_many( $p_bug_id, $p_tag_string, $p_tag_id = 0 ) {
 
 	access_ensure_bug_level( config_get( 'tag_attach_threshold' ), $p_bug_id );
 
-	$t_tags = tag_parse_string( $p_tag_string );
-	$t_can_create = tag_can_create();
+	# Tags are resolved in, and new tags are created for, the project of the issue
+	$t_project_id = bug_get_field( $p_bug_id, 'project_id' );
+	$t_tags = tag_parse_string( $p_tag_string, $t_project_id );
+	$t_can_create = tag_can_create( null, $t_project_id );
 
 	$t_tags_create = array();
 	$t_tags_attach = array();
@@ -416,7 +437,7 @@ function tag_attach_many( $p_bug_id, $p_tag_string, $p_tag_id = 0 ) {
 	}
 
 	foreach( $t_tags_create as $t_tag_row ) {
-		$t_tag_row['id'] = tag_create( $t_tag_row['name'] );
+		$t_tag_row['id'] = tag_create( $t_tag_row['name'], null, '', $t_project_id );
 		$t_tags_attach[] = $t_tag_row;
 	}
 
@@ -439,6 +460,9 @@ function tag_attach_many( $p_bug_id, $p_tag_string, $p_tag_id = 0 ) {
  * id = -1 and the tag name, and if the name is invalid, a row is returned with
  * id = -2 and the tag name.  The resulting array is then sorted by tag name.
  *
+ * A name matches every tag with that name, whatever its project, as a filter
+ * is not bound to a single project. The result has one row per matching tag.
+ *
  * @param string $p_string Filter string to parse.
  *
  * @return array Rows of tags parsed from filter string
@@ -453,18 +477,19 @@ function tag_parse_filters( $p_string ) {
 		$t_matches = array();
 
 		if( !is_blank( $t_name ) && tag_name_is_valid( $t_name, $t_matches, $t_prefix ) ) {
-			$t_tag_row = tag_get_by_name( $t_matches[1] );
-			if( $t_tag_row !== false ) {
-				$t_filter = mb_substr( $t_name, 0, 1 );
+			$t_filter = mb_substr( $t_name, 0, 1 );
+			if( '+' == $t_filter ) {
+				$t_filter_value = 1;
+			} else if( '-' == $t_filter ) {
+				$t_filter_value = -1;
+			} else {
+				$t_filter_value = 0;
+			}
 
-				if( '+' == $t_filter ) {
-					$t_tag_row['filter'] = 1;
-				} else if( '-' == $t_filter ) {
-					$t_tag_row['filter'] = -1;
-				} else {
-					$t_tag_row['filter'] = 0;
-				}
-
+			db_param_push();
+			$t_result = db_query( 'SELECT * FROM {tag} WHERE ' . db_helper_like( 'name' ), array( $t_matches[1] ) );
+			while( $t_tag_row = db_fetch_array( $t_result ) ) {
+				$t_tag_row['filter'] = $t_filter_value;
 				$t_tags[] = $t_tag_row;
 			}
 		}
@@ -476,19 +501,29 @@ function tag_parse_filters( $p_string ) {
 /**
  * Returns all available tags.
  *
- * @param int $p_name_filter A string to match the beginning of the tag name.
- * @param int $p_count       The number of tags to return.
- * @param int $p_offset      The offset of the result.
+ * @param int      $p_name_filter A string to match the beginning of the tag name.
+ * @param int      $p_count       The number of tags to return.
+ * @param int      $p_offset      The offset of the result.
+ * @param int|null $p_project_id  Only return the tags of this project (ALL_PROJECTS for the global tags), or null for all tags.
  *
  * @return ADORecordSet|bool Tags sorted by name, or false if the query failed.
  */
-function tag_get_all( $p_name_filter, $p_count, $p_offset ) {
+function tag_get_all( $p_name_filter, $p_count, $p_offset, $p_project_id = null ) {
 	$t_where = '';
 	$t_where_params = array();
 
+	db_param_push();
+	$t_conditions = array();
 	if( !is_blank( $p_name_filter ) ) {
-		$t_where = 'WHERE ' . db_helper_like( 'name' );
+		$t_conditions[] = db_helper_like( 'name' );
 		$t_where_params[] = $p_name_filter . '%';
+	}
+	if( $p_project_id !== null ) {
+		$t_conditions[] = 't.project_id = ' . db_param();
+		$t_where_params[] = (int)$p_project_id;
+	}
+	if( $t_conditions ) {
+		$t_where = 'WHERE ' . implode( ' AND ', $t_conditions );
 	}
 
 	$t_query = <<<SQL
@@ -505,19 +540,25 @@ function tag_get_all( $p_name_filter, $p_count, $p_offset ) {
 /**
  * Returns all unused tags (i.e. not linked to any Issue).
  *
- * @param int $p_name_filter A string to match the beginning of the tag name.
- * @param int $p_count       The number of tags to return.
- * @param int $p_offset      The offset of the result.
+ * @param int      $p_name_filter A string to match the beginning of the tag name.
+ * @param int      $p_count       The number of tags to return.
+ * @param int      $p_offset      The offset of the result.
+ * @param int|null $p_project_id  Only return the tags of this project (ALL_PROJECTS for the global tags), or null for all tags.
  *
  * @return ADORecordSet|bool Tags sorted by name, or false if the query failed.
  */
-function tag_get_unused( $p_name_filter, $p_count, $p_offset ) {
+function tag_get_unused( $p_name_filter, $p_count, $p_offset, $p_project_id = null ) {
 	$t_where = '';
 	$t_where_params = array();
 
+	db_param_push();
 	if( !is_blank( $p_name_filter ) ) {
-		$t_where = ' AND ' . db_helper_like( 'name' );
+		$t_where .= ' AND ' . db_helper_like( 'name' );
 		$t_where_params[] = $p_name_filter . '%';
+	}
+	if( $p_project_id !== null ) {
+		$t_where .= ' AND t.project_id = ' . db_param();
+		$t_where_params[] = (int)$p_project_id;
 	}
 
 	$t_query = <<< SQL
@@ -533,23 +574,29 @@ function tag_get_unused( $p_name_filter, $p_count, $p_offset ) {
 /**
  * Counts all available tags.
  *
- * @param int  $p_name_filter A string to match the beginning of the tag name.
- * @param bool $p_unused      True to filter on unused tags, False for all tags.
+ * @param int      $p_name_filter A string to match the beginning of the tag name.
+ * @param bool     $p_unused      True to filter on unused tags, False for all tags.
+ * @param int|null $p_project_id  Only count the tags of this project (ALL_PROJECTS for the global tags), or null for all tags.
  *
  * @return int
  */
-function tag_count( $p_name_filter, $p_unused = false ) {
-	$t_where = '';
+function tag_count( $p_name_filter, $p_unused = false, $p_project_id = null ) {
+	$t_conditions = array();
 	$t_where_params = array();
 
+	db_param_push();
 	if( $p_name_filter ) {
-		$t_where = ' WHERE ' . db_helper_like( 'name' );
+		$t_conditions[] = db_helper_like( 'name' );
 		$t_where_params[] = $p_name_filter . '%';
 	}
-	if( $p_unused ) {
-		$t_where .= $t_where ? ' AND ': ' WHERE ';
-		$t_where .= "bt.tag_id IS NULL";
+	if( $p_project_id !== null ) {
+		$t_conditions[] = 't.project_id = ' . db_param();
+		$t_where_params[] = (int)$p_project_id;
 	}
+	if( $p_unused ) {
+		$t_conditions[] = 'bt.tag_id IS NULL';
+	}
+	$t_where = $t_conditions ? ' WHERE ' . implode( ' AND ', $t_conditions ) : '';
 
 	$t_query = 'SELECT count(DISTINCT t.id) FROM {tag} t LEFT JOIN {bug_tag} bt ON bt.tag_id = t.id' . $t_where;
 
@@ -597,24 +644,74 @@ function tag_get_name( $p_tag_id ) {
 }
 
 /**
+ * Get the projects whose tags can be used on issues of a project.
+ *
+ * This is the project itself and, when $g_subprojects_inherit_tags is ON, its parent
+ * projects. The nearest project comes first, so the order gives the precedence when
+ * several tags have the same name.
+ *
+ * ALL_PROJECTS, which stands for the global tags, is always the last one.
+ *
+ * @param int $p_project_id The project ID, or ALL_PROJECTS.
+ *
+ * @return int[] Project ids, from the nearest project to ALL_PROJECTS.
+ */
+function tag_get_project_ids_in_scope( $p_project_id ) {
+	if( $p_project_id == ALL_PROJECTS ) {
+		return array( ALL_PROJECTS );
+	}
+
+	if( config_get( 'subprojects_inherit_tags', null, null, $p_project_id ) ) {
+		# the hierarchy lists ALL_PROJECTS among the parents, but not as the last one
+		$t_project_ids = array_diff( array_map( 'intval', project_hierarchy_inheritance( $p_project_id ) ), array( ALL_PROJECTS ) );
+	} else {
+		$t_project_ids = array( (int)$p_project_id );
+	}
+
+	$t_project_ids[] = ALL_PROJECTS;
+	return array_values( $t_project_ids );
+}
+
+/**
  * Return a tag row for the given name.
  *
- * @param string $p_name The tag name to retrieve from the database.
+ * When a project is given, the tags available to that project are searched:
+ * its own tag with that name, then the one of its parent projects (if tags are
+ * inherited), then the global one. The nearest tag takes precedence.
+ *
+ * @param string   $p_name       The tag name to retrieve from the database.
+ * @param int|null $p_project_id The project to resolve the name for
+ *                               (ALL_PROJECTS only matches global tags), or
+ *                               null to search tags of any project, global
+ *                               tags first.
  *
  * @return array|false Tag row
  */
-function tag_get_by_name( $p_name ) {
+function tag_get_by_name( $p_name, $p_project_id = null ) {
 	db_param_push();
 	$t_query = 'SELECT * FROM {tag} WHERE ' . db_helper_like( 'name' );
-	$t_result = db_query( $t_query, array( $p_name ) );
-
-	$t_row = db_fetch_array( $t_result );
-
-	if( !$t_row ) {
-		return false;
+	if( $p_project_id === null ) {
+		$t_query .= ' ORDER BY project_id ASC, id ASC';
+		$t_result = db_query( $t_query, array( $p_name ), 1 );
+		return db_fetch_array( $t_result );
 	}
 
-	return $t_row;
+	$t_project_ids = tag_get_project_ids_in_scope( $p_project_id );
+	$t_query .= ' AND project_id IN (' . implode( ', ', $t_project_ids ) . ')';
+	$t_result = db_query( $t_query, array( $p_name ) );
+
+	# the nearest project wins, and global tags come last
+	$t_best_row = false;
+	$t_best_rank = PHP_INT_MAX;
+	while( $t_row = db_fetch_array( $t_result ) ) {
+		$t_rank = array_search( (int)$t_row['project_id'], $t_project_ids, true );
+		if( $t_rank < $t_best_rank ) {
+			$t_best_row = $t_row;
+			$t_best_rank = $t_rank;
+		}
+	}
+
+	return $t_best_row;
 }
 
 /**
@@ -638,44 +735,79 @@ function tag_get_field( $p_tag_id, $p_field_name ) {
 }
 
 /**
+ * Does the current user have an access level on a tag?
+ *
+ * Global tags are checked against the global access level, tags scoped to a
+ * project against the access level in that project.
+ *
+ * @param int $p_level      The access level to check, e.g. config_get( 'tag_edit_threshold' ).
+ * @param int $p_project_id The project of the tag, or ALL_PROJECTS for a global tag.
+ *
+ * @return bool
+ */
+function tag_access_has_level( $p_level, $p_project_id ) {
+	if( $p_project_id == ALL_PROJECTS ) {
+		return access_has_global_level( $p_level );
+	}
+
+	return access_has_project_level( $p_level, $p_project_id );
+}
+
+/**
  * Can the specified user create a tag?
  *
- * @param int $p_user_id The id of the user to check access rights for.
+ * @param int $p_user_id    The id of the user to check access rights for.
+ * @param int $p_project_id The project the tag is created for, or ALL_PROJECTS
+ *                          for a global tag, which requires global access.
  *
  * @return bool true: can create, false: otherwise.
  */
-function tag_can_create( $p_user_id = null ) {
-	return access_has_global_level( config_get( 'tag_create_threshold' ), $p_user_id );
+function tag_can_create( $p_user_id = null, $p_project_id = ALL_PROJECTS ) {
+	if( $p_project_id == ALL_PROJECTS ) {
+		return access_has_global_level( config_get( 'tag_create_threshold' ), $p_user_id );
+	}
+
+	return access_has_project_level( config_get( 'tag_create_threshold', null, null, $p_project_id ), $p_project_id, $p_user_id );
 }
 
 /**
  * Ensure specified user can create tags.
  *
- * @param int $p_user_id The id of the user to check access rights for.
+ * @param int $p_user_id    The id of the user to check access rights for.
+ * @param int $p_project_id The project the tag is created for, or ALL_PROJECTS for a global tag.
  *
  * @return void
  */
-function tag_ensure_can_create( $p_user_id = null ) {
-	access_ensure_global_level( config_get( 'tag_create_threshold' ), $p_user_id );
+function tag_ensure_can_create( $p_user_id = null, $p_project_id = ALL_PROJECTS ) {
+	if( !tag_can_create( $p_user_id, $p_project_id ) ) {
+		access_denied();
+	}
 }
 
 /**
  * Create a tag with the given name, creator, and description.
  *
- * Defaults to the currently logged in user, and a blank description.
+ * Defaults to the currently logged in user, a blank description, and a
+ * global tag.
  *
  * @param string $p_name        The tag name to create.
  * @param int    $p_user_id     The user ID to link the new tag to.
  * @param string $p_description A Description for the tag.
+ * @param int    $p_project_id  The project the tag is scoped to, or ALL_PROJECTS for a global tag.
  *
  * @return int Tag ID
  * @throws ClientException
  */
-function tag_create( $p_name, $p_user_id = null, $p_description = '' ) {
-	tag_ensure_can_create( $p_user_id );
+function tag_create( $p_name, $p_user_id = null, $p_description = '', $p_project_id = ALL_PROJECTS ) {
+	$p_project_id = (int)$p_project_id;
+	if( $p_project_id != ALL_PROJECTS ) {
+		project_ensure_exists( $p_project_id );
+	}
+
+	tag_ensure_can_create( $p_user_id, $p_project_id );
 
 	tag_ensure_name_is_valid( $p_name );
-	tag_ensure_unique( $p_name );
+	tag_ensure_unique( $p_name, $p_project_id );
 
 	if( null == $p_user_id ) {
 		$p_user_id = auth_get_current_user_id();
@@ -687,10 +819,10 @@ function tag_create( $p_name, $p_user_id = null, $p_description = '' ) {
 
 	db_param_push();
 	$t_query = 'INSERT INTO {tag}
-				( user_id, name, description, date_created, date_updated )
+				( user_id, name, description, date_created, date_updated, project_id )
 				VALUES
-				( ' . db_param() . ',' . db_param() . ',' . db_param() . ',' . db_param() . ',' . db_param() . ')';
-	db_query( $t_query, array( $p_user_id, trim( $p_name ), trim( $p_description ), $c_date_created, $c_date_created ) );
+				( ' . db_param() . ',' . db_param() . ',' . db_param() . ',' . db_param() . ',' . db_param() . ',' . db_param() . ')';
+	db_query( $t_query, array( $p_user_id, trim( $p_name ), trim( $p_description ), $c_date_created, $c_date_created, $p_project_id ) );
 	$t_tag_id = db_insert_id( db_get_table( 'tag' ) );
 	tag_clear_cache( $t_tag_id );
 
@@ -705,17 +837,23 @@ function tag_create( $p_name, $p_user_id = null, $p_description = '' ) {
  * @param int    $p_user_id     The user ID to set when updating the tag.
  *                              Note: This replaces the existing user id.
  * @param string $p_description An updated description for the tag.
+ * @param int|null $p_project_id The project to move the tag to, ALL_PROJECTS
+ *                              to make it global, or null to keep its scope.
  *
  * @return bool
  * @throws ClientException
  */
-function tag_update( $p_tag_id, $p_name, $p_user_id, $p_description ) {
+function tag_update( $p_tag_id, $p_name, $p_user_id, $p_description, $p_project_id = null ) {
 	$t_tag_row = tag_get( $p_tag_id );
 	$t_tag_name = $t_tag_row['name'];
 
+	$t_project_id = $p_project_id === null ? (int)$t_tag_row['project_id'] : (int)$p_project_id;
+	$t_move = $t_project_id != (int)$t_tag_row['project_id'];
+
 	if( $t_tag_name == $p_name &&
 		 $t_tag_row['description'] == $p_description &&
-		 $t_tag_row['user_id'] == $p_user_id ) {
+		 $t_tag_row['user_id'] == $p_user_id &&
+		 !$t_move ) {
 		# nothing has changed
 		return true;
 	}
@@ -727,22 +865,31 @@ function tag_update( $p_tag_id, $p_name, $p_user_id, $p_description ) {
 	} else {
 		$t_update_level = config_get( 'tag_edit_threshold' );
 	}
-	access_ensure_global_level( $t_update_level );
+	if( !tag_access_has_level( $t_update_level, $t_tag_row['project_id'] ) ) {
+		access_denied();
+	}
 
 	tag_ensure_name_is_valid( $p_name );
 
 	# Do not allow assigning a tag to a user who is not allowed to create one
-	if( !access_has_global_level( config_get( 'tag_create_threshold' ), $p_user_id ) ) {
+	if( !tag_can_create( $p_user_id, $t_project_id ) ) {
 		throw new ClientException(
 			"Access denied",
 			ERROR_USER_DOES_NOT_HAVE_REQ_ACCESS
 		);
 	}
 
-	$t_rename = false;
-	if( mb_strtolower( $p_name ) != mb_strtolower( $t_tag_name ) ) {
-		tag_ensure_unique( $p_name );
-		$t_rename = true;
+	$t_rename = mb_strtolower( $p_name ) != mb_strtolower( $t_tag_name );
+
+	if( $t_move ) {
+		tag_ensure_can_move_to_project( $p_tag_id, $t_project_id );
+		# Moving a tag creates it in the new scope
+		tag_ensure_can_create( null, $t_project_id );
+	}
+
+	# Names must be unique in the (new) scope of the tag
+	if( $t_rename || $t_move ) {
+		tag_ensure_unique( $p_name, $t_project_id );
 	}
 
 	$c_date_updated = db_now();
@@ -752,9 +899,10 @@ function tag_update( $p_tag_id, $p_name, $p_user_id, $p_description ) {
 					SET user_id=' . db_param() . ',
 						name=' . db_param() . ',
 						description=' . db_param() . ',
-						date_updated=' . db_param() . '
+						date_updated=' . db_param() . ',
+						project_id=' . db_param() . '
 					WHERE id=' . db_param();
-	db_query( $t_query, array( (int)$p_user_id, $p_name, $p_description, $c_date_updated, $p_tag_id ) );
+	db_query( $t_query, array( (int)$p_user_id, $p_name, $p_description, $c_date_updated, $t_project_id, $p_tag_id ) );
 
 	if( $t_rename ) {
 		$t_bugs = tag_get_bugs_attached( $p_tag_id );
@@ -770,6 +918,107 @@ function tag_update( $p_tag_id, $p_name, $p_user_id, $p_description ) {
 }
 
 /**
+ * Get the ids of the projects that have issues using a tag.
+ *
+ * @param int $p_tag_id The tag ID to check.
+ *
+ * @return int[] Project ids.
+ */
+function tag_get_project_ids_used( $p_tag_id ) {
+	db_param_push();
+	$t_query = 'SELECT DISTINCT b.project_id FROM {bug_tag} bt JOIN {bug} b ON b.id = bt.bug_id WHERE bt.tag_id = ' . db_param();
+	$t_result = db_query( $t_query, array( (int)$p_tag_id ) );
+
+	$t_project_ids = array();
+	while( $t_row = db_fetch_array( $t_result ) ) {
+		$t_project_ids[] = (int)$t_row['project_id'];
+	}
+	return $t_project_ids;
+}
+
+/**
+ * Determine if a tag can be moved to a project, or made global.
+ *
+ * A tag can always be made global. It can only be scoped to a project if every
+ * issue using it belongs to that project, or to a subproject that inherits its tags.
+ *
+ * @param int $p_tag_id     The tag ID to check.
+ * @param int $p_project_id The target project, or ALL_PROJECTS for global.
+ *
+ * @return bool True if the tag can be moved
+ */
+function tag_can_move_to_project( $p_tag_id, $p_project_id ) {
+	if( $p_project_id == ALL_PROJECTS ) {
+		return true;
+	}
+
+	foreach( tag_get_project_ids_used( $p_tag_id ) as $t_used_project_id ) {
+		if( !in_array( (int)$p_project_id, tag_get_project_ids_in_scope( $t_used_project_id ), true ) ) {
+			return false;
+		}
+	}
+	return true;
+}
+
+/**
+ * Ensure a tag can be moved to a project, or made global.
+ *
+ * @param int $p_tag_id     The tag ID to check.
+ * @param int $p_project_id The target project, or ALL_PROJECTS for global.
+ *
+ * @return void
+ * @throws ClientException
+ */
+function tag_ensure_can_move_to_project( $p_tag_id, $p_project_id ) {
+	if( $p_project_id != ALL_PROJECTS ) {
+		project_ensure_exists( $p_project_id );
+	}
+
+	if( !tag_can_move_to_project( $p_tag_id, $p_project_id ) ) {
+		$t_name = tag_get_name( $p_tag_id );
+		throw new ClientException(
+			"Tag '$t_name' is attached to issues in other projects",
+			ERROR_TAG_USED_IN_OTHER_PROJECTS,
+			array( $t_name )
+		);
+	}
+}
+
+/**
+ * Determine if a tag can be used on issues of a project: it is either global,
+ * scoped to that project, or scoped to a parent project (if tags are inherited).
+ *
+ * @param int $p_tag_id     The tag ID to check.
+ * @param int $p_project_id The project ID to check.
+ *
+ * @return bool True if the tag is available in the project
+ */
+function tag_is_available_in_project( $p_tag_id, $p_project_id ) {
+	$t_tag_project_id = (int)tag_get_field( $p_tag_id, 'project_id' );
+	return in_array( $t_tag_project_id, tag_get_project_ids_in_scope( $p_project_id ), true );
+}
+
+/**
+ * Ensure a tag can be used on issues of a project.
+ *
+ * @param int $p_tag_id     The tag ID to check.
+ * @param int $p_project_id The project ID to check.
+ *
+ * @return void
+ * @throws ClientException
+ */
+function tag_ensure_available_in_project( $p_tag_id, $p_project_id ) {
+	if( !tag_is_available_in_project( $p_tag_id, $p_project_id ) ) {
+		$t_name = tag_get_name( $p_tag_id );
+		throw new ClientException(
+			"Tag '$t_name' is not available in project $p_project_id",
+			ERROR_TAG_NOT_IN_PROJECT,
+			array( $t_name )
+		);
+	}
+}
+
+/**
  * Delete a tag with the given ID.
  *
  * @param int $p_tag_id The tag ID to delete.
@@ -780,7 +1029,9 @@ function tag_update( $p_tag_id, $p_name, $p_user_id, $p_description ) {
 function tag_delete( $p_tag_id ) {
 	tag_ensure_exists( $p_tag_id );
 
-	access_ensure_global_level( config_get( 'tag_edit_threshold' ) );
+	if( !tag_access_has_level( config_get( 'tag_edit_threshold' ), tag_get_field( $p_tag_id, 'project_id' ) ) ) {
+		access_denied();
+	}
 
 	$t_bugs = tag_get_bugs_attached( $p_tag_id );
 	foreach( $t_bugs as $t_bug_id ) {
@@ -798,14 +1049,31 @@ function tag_delete( $p_tag_id ) {
 /**
  * Gets the tags that are not associated with the specified bug.
  *
- * @param int $p_bug_id The bug id, if 0 returns all available tags.
+ * When a project is known, only the tags available to it are returned: global
+ * tags, tags scoped to the project and, if tags are inherited, tags scoped to
+ * its parent projects. A name is only returned once: if tags of different
+ * scopes have the same name, the nearest one to the project is returned.
  *
- * @return array List of tag rows, each with id, name, and description.
+ * @param int $p_bug_id     The bug id, if 0 returns all available tags.
+ * @param int $p_project_id The project to return tags for when there is no
+ *                          bug id, or ALL_PROJECTS for the tags of all projects.
+ *
+ * @return array List of tag rows, each with id, name, description and project_id.
  */
-function tag_get_candidates_for_bug( $p_bug_id ) {
+function tag_get_candidates_for_bug( $p_bug_id, $p_project_id = ALL_PROJECTS ) {
+	if( 0 != $p_bug_id ) {
+		$p_project_id = bug_get_field( $p_bug_id, 'project_id' );
+	}
+
 	db_param_push();
-	$t_query = 'SELECT id, name, description FROM {tag}';
+	$t_query = 'SELECT id, name, description, project_id FROM {tag}';
+	$t_conditions = array();
 	$t_params = array();
+
+	$t_scope_ids = tag_get_project_ids_in_scope( $p_project_id );
+	if( $p_project_id != ALL_PROJECTS ) {
+		$t_conditions[] = 'project_id IN (' . implode( ', ', $t_scope_ids ) . ')';
+	}
 
 	if( 0 != $p_bug_id ) {
 		$t_assoc_tags_query = 'SELECT tag_id FROM {bug_tag} WHERE bug_id = ' . db_param();
@@ -815,34 +1083,81 @@ function tag_get_candidates_for_bug( $p_bug_id ) {
 		# Special handling for odbc_mssql which does not support bound subqueries (#14774)
 		if( config_get_global( 'db_type' ) == 'odbc_mssql' ) {
 			db_param_push();
-			$t_result = db_query( $t_assoc_tags_query, $t_params );
+			$t_result = db_query( $t_assoc_tags_query, array( $p_bug_id ) );
+			array_pop( $t_params );
 
 			$t_subquery_results = array();
 			while( $t_row = db_fetch_array( $t_result ) ) {
 				$t_subquery_results[] = (int)$t_row['tag_id'];
 			}
 			if( $t_subquery_results ) {
-				$t_where = ' WHERE id NOT IN (' . implode( ', ', $t_subquery_results ) . ')';
-			} else {
-				$t_where = '';
+				$t_conditions[] = 'id NOT IN (' . implode( ', ', $t_subquery_results ) . ')';
 			}
-			$t_params = null;
 		} else {
-			$t_where = " WHERE id NOT IN ($t_assoc_tags_query)";
+			$t_conditions[] = "id NOT IN ($t_assoc_tags_query)";
 		}
-		$t_query .= $t_where;
 	}
 
-	$t_query .= ' ORDER BY name ASC ';
+	if( $t_conditions ) {
+		$t_query .= ' WHERE ' . implode( ' AND ', $t_conditions );
+	}
+	$t_query .= ' ORDER BY name ASC';
 	$t_result = db_query( $t_query, $t_params );
 
 	$t_results_to_return = array();
+	$t_ranks = array();
 
 	while( $t_row = db_fetch_array( $t_result ) ) {
-		$t_results_to_return[] = $t_row;
+		# the nearest project tag takes precedence over a tag with the same name, global tags come last
+		$t_key = mb_strtolower( $t_row['name'] );
+		$t_rank = array_search( (int)$t_row['project_id'], $t_scope_ids, true );
+		$t_rank = $t_rank === false ? PHP_INT_MAX : $t_rank;
+		if( !isset( $t_ranks[$t_key] ) || $t_rank < $t_ranks[$t_key] ) {
+			$t_ranks[$t_key] = $t_rank;
+			$t_results_to_return[$t_key] = $t_row;
+		}
 	}
 
-	return $t_results_to_return;
+	return array_values( $t_results_to_return );
+}
+
+/**
+ * Gets the tags to offer when filtering issues.
+ *
+ * The filter looks at the issues of the project and of its subprojects, so
+ * these are the global tags, and the tags scoped to the project, to the
+ * projects it inherits tags from, and to its subprojects. For ALL_PROJECTS
+ * these are the global tags and the tags of the projects the user can access.
+ * A name is only returned once, as filtering by name matches every tag with
+ * that name.
+ *
+ * @param int $p_project_id The project being filtered, or ALL_PROJECTS.
+ *
+ * @return array List of tag rows, each with id, name, description and project_id.
+ */
+function tag_get_candidates_for_filter( $p_project_id ) {
+	if( $p_project_id == ALL_PROJECTS ) {
+		$t_project_ids = array_merge( array( ALL_PROJECTS ), current_user_get_accessible_projects() );
+	} else {
+		$t_project_ids = tag_get_project_ids_in_scope( $p_project_id );
+	}
+	foreach( $t_project_ids as $t_project_id ) {
+		$t_project_ids = array_merge( $t_project_ids, current_user_get_all_accessible_subprojects( $t_project_id ) );
+	}
+	$t_project_ids = array_unique( array_map( 'intval', $t_project_ids ) );
+
+	$t_query = 'SELECT id, name, description, project_id FROM {tag} WHERE project_id IN (' . implode( ', ', $t_project_ids ) . ') ORDER BY name ASC, project_id ASC';
+	$t_result = db_query( $t_query );
+
+	$t_results_to_return = array();
+	while( $t_row = db_fetch_array( $t_result ) ) {
+		$t_key = mb_strtolower( $t_row['name'] );
+		if( !isset( $t_results_to_return[$t_key] ) ) {
+			$t_results_to_return[$t_key] = $t_row;
+		}
+	}
+
+	return array_values( $t_results_to_return );
 }
 
 /**
@@ -954,6 +1269,7 @@ function tag_bug_attach( $p_tag_id, $p_bug_id, $p_user_id = null ) {
 	access_ensure_bug_level( config_get( 'tag_attach_threshold' ), $p_bug_id, $p_user_id );
 
 	tag_ensure_exists( $p_tag_id );
+	tag_ensure_available_in_project( $p_tag_id, bug_get_field( $p_bug_id, 'project_id' ) );
 
 	if( tag_bug_is_attached( $p_tag_id, $p_bug_id ) ) {
 		throw new ClientException(
@@ -1040,6 +1356,44 @@ function tag_bug_detach( $p_tag_id, $p_bug_id, $p_add_history = true, $p_user_id
 	bug_update_date( $p_bug_id );
 
 	return true;
+}
+
+/**
+ * Make the tags attached to a bug valid for the project the bug is moved to.
+ *
+ * A tag that is available in the target project (global, or scoped to the
+ * project or to a parent it inherits tags from) is kept.  Otherwise it is
+ * replaced by the tag with the same name that is available in the target
+ * project, and detached from the bug if there is none.  No history entry is
+ * added, as these changes follow from moving the issue.
+ *
+ * @param int $p_bug_id     The bug ID.
+ * @param int $p_project_id The project the bug is moved to.
+ *
+ * @return void
+ */
+function tag_bug_move_to_project( $p_bug_id, $p_project_id ) {
+	foreach( tag_bug_get_attached( $p_bug_id ) as $t_tag_row ) {
+		if( tag_is_available_in_project( $t_tag_row['id'], $p_project_id ) ) {
+			continue;
+		}
+
+		$t_target_tag_row = tag_get_by_name( $t_tag_row['name'], $p_project_id );
+
+		db_param_push();
+		if( $t_target_tag_row === false ) {
+			$t_query = 'DELETE FROM {bug_tag} WHERE tag_id=' . db_param() . ' AND bug_id=' . db_param();
+			db_query( $t_query, array( $t_tag_row['id'], $p_bug_id ) );
+		} else if( tag_bug_is_attached( $t_target_tag_row['id'], $p_bug_id ) ) {
+			$t_query = 'DELETE FROM {bug_tag} WHERE tag_id=' . db_param() . ' AND bug_id=' . db_param();
+			db_query( $t_query, array( $t_tag_row['id'], $p_bug_id ) );
+		} else {
+			$t_query = 'UPDATE {bug_tag} SET tag_id=' . db_param() . ' WHERE tag_id=' . db_param() . ' AND bug_id=' . db_param();
+			db_query( $t_query, array( $t_target_tag_row['id'], $t_tag_row['id'], $p_bug_id ) );
+		}
+	}
+
+	tag_clear_cache_bug_tags( $p_bug_id );
 }
 
 /**
