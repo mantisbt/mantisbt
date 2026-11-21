@@ -1200,11 +1200,12 @@ function bug_is_user_handler( $p_bug_id, $p_user_id ) {
  */
 function bug_is_readonly( $p_bug_id ) {
 	$t_status = bug_get_field( $p_bug_id, 'status' );
-	if( $t_status < config_get( 'bug_readonly_status_threshold', null, null, bug_get_field( $p_bug_id, 'project_id' ) ) ) {
+	$t_project_id = bug_get_field( $p_bug_id, 'project_id' );
+	if( $t_status < config_get( 'bug_readonly_status_threshold', null, null, $t_project_id ) ) {
 		return false;
 	}
 
-	if( access_has_bug_level( config_get( 'update_readonly_bug_threshold' ), $p_bug_id ) ) {
+	if( access_has_bug_level( config_get( 'update_readonly_bug_threshold', null, null, $t_project_id ), $p_bug_id ) ) {
 		return false;
 	}
 

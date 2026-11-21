@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<phpdocumentor
+        configVersion="3"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="https://www.phpdoc.org"
+        xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/phpDocumentor/phpDocumentor/master/data/xsd/phpdoc.xsd"
+        >
+    <paths>
+        <output>doc/phpdoc</output>
+        <cache>doc/phpdoc/.cache</cache>
+    </paths>
+    <version number="2.x">
+        <api format="php">
+            <source>
+                <path>.</path>
+                <path>plugins/Gravatar</path>
+                <path>plugins/MantisCoreFormatting</path>
+                <path>plugins/MantisGraph</path>
+                <path>plugins/XmlImportExport</path>
+            </source>
+            <ignore>
+                <path>.github</path>
+                <path>doc*</path>
+                <path>plugins/**/*</path>
+                <path>tests/**/*</path>
+                <path>tools/**/*</path>
+                <path>vendor</path>
+            </ignore>
+            <default-package-name>MantisBT</default-package-name>
+        </api>
+    </version>
+</phpdocumentor>

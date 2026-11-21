@@ -58,3 +58,4 @@ $s_plugin_format_syntax_highlighting_plugin_copy_to_clipboard_success = '✓ Kop
 $s_plugin_format_syntax_highlighting_plugin_show_language_name = 'Sprooch weisen';
 $s_plugin_format_syntax_highlighting_plugin_line_numbers_name = 'Zeilennummeren';
 $s_plugin_format_syntax_highlighting_plugin_line_numbers_desc = 'Zeilennummere weisen.';
+$s_plugin_format_syntax_highlighting_plugin_show_invisibles_name = 'Espacë weisen';

@@ -144,6 +144,9 @@ function mci_file_add( $p_id, $p_name, $p_content, $p_file_type, $p_table, $p_ti
 		'date_added'  => db_now(),
 		'user_id'     => (int)$p_user_id,
 	);
+	if( 'bug' == $p_table ) {
+		$t_param['bugnote_id'] = null;
+	}
 	# Oracle has to update BLOBs separately
 	if( !db_is_oracle() ) {
 		$t_param['content'] = $c_content;
