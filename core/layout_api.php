@@ -84,7 +84,6 @@ function layout_page_header_begin( $p_page_title = '' ) {
 
 	html_title( $p_page_title );
 	layout_head_meta();
-	html_css();
 	layout_head_css();
 	html_rss_link();
 
@@ -123,6 +122,11 @@ function layout_page_header_end( $p_page_id = null) {
 	global $g_error_send_page_header;
 
 	event_signal( 'EVENT_LAYOUT_RESOURCES' );
+
+	# A second chance to output the requested styles and scripts
+	html_css();
+	html_head_javascript();
+
 	html_head_end();
 
 	if ( $p_page_id === null ) {
@@ -275,6 +279,14 @@ function layout_head_meta() {
 function layout_head_css() {
 	$t_cache_key = helper_generate_cache_key();
 
+	# default.css by default
+	html_css_link( config_get_global( 'css_include_file' ), $t_cache_key );
+
+	# Add right-to-left css if needed, rtl.css by default
+	if( lang_get( 'directionality' ) == 'rtl' ) {
+		html_css_link( config_get_global( 'css_rtl_include_file' ), $t_cache_key );
+	}
+
 	# bootstrap & fontawesome
 	if ( config_get_global( 'cdn_enabled' ) == ON ) {
 		html_css_cdn_link( 'https://stackpath.bootstrapcdn.com/bootstrap/' . BOOTSTRAP_VERSION . '/css/bootstrap.min.css',BOOTSTRAP_HASH_CSS );
@@ -300,6 +312,9 @@ function layout_head_css() {
 		html_css_link( 'ace-rtl.min.css', $t_cache_key );
 	}
 	html_css_link( 'ace-mantis.css', $t_cache_key );
+
+	# The initial output of the requested styles
+	html_css();
 
 	# Set font preference
 	layout_user_font_preference();
