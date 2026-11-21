@@ -1022,16 +1022,16 @@
         },
         {
             "name": "slim/slim",
-            "version": "3.13.0",
+            "version": "3.13.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/slimphp/Slim.git",
-                "reference": "f899a6e0be000b9e56d164a4241aa60ab8f33c7f"
+                "reference": "80d113e7083dea02e47261965f9c9f939d786a51"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/slimphp/Slim/zipball/f899a6e0be000b9e56d164a4241aa60ab8f33c7f",
-                "reference": "f899a6e0be000b9e56d164a4241aa60ab8f33c7f",
+                "url": "https://api.github.com/repos/slimphp/Slim/zipball/80d113e7083dea02e47261965f9c9f939d786a51",
+                "reference": "80d113e7083dea02e47261965f9c9f939d786a51",
                 "shasum": ""
             },
             "require": {
@@ -1094,7 +1094,7 @@
             ],
             "support": {
                 "issues": "https://github.com/slimphp/Slim/issues",
-                "source": "https://github.com/slimphp/Slim/tree/3.13.0"
+                "source": "https://github.com/slimphp/Slim/tree/3.13.1"
             },
             "funding": [
                 {
@@ -1106,7 +1106,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-04-28T08:53:26+00:00"
+            "time": "2026-11-15T16:47:46+00:00"
         },
         {
             "name": "symfony/deprecation-contracts",
