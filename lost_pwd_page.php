@@ -103,7 +103,7 @@ layout_login_page_begin( $t_form_title );
 				<span class="block input-icon input-icon-right">
 					<input id="email-field" name="email" type="text"
 						   placeholder="<?php echo lang_get( 'email' ) ?>"
-						   size="32" maxlength="64" class="form-control <?php echo $t_email_field_autofocus; ?>">
+						   size="32" maxlength="<?php echo DB_FIELD_SIZE_EMAIL;?>" class="form-control <?php echo $t_email_field_autofocus; ?>">
 					<?php print_icon( 'fa-envelope', 'ace-icon' ); ?>
 				</span>
 				</label>
