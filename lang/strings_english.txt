@@ -926,6 +926,7 @@ $s_add_project_button = 'Add Project';
 $s_projects_title = 'Projects';
 $s_projects_title_label = 'Projects';
 $s_name = 'Name';
+$s_search_project_hint = 'Name or Description';
 
 # manage_proj_update.php
 $s_project_updated_msg = 'Project has been successfully updated...';
