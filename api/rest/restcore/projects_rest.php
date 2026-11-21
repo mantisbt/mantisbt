@@ -278,10 +278,19 @@ function rest_projects_get( \Slim\Http\Request $p_request, \Slim\Http\Response $
 /**
  * A method to get project version(s).
  *
+ * Optional query parameters to filter the list of versions (ignored when
+ * a specific version_id is requested):
+ * - released: true for released versions only, false for unreleased ones
+ * - obsolete: true to include obsolete versions
+ * - inherit: true to include versions inherited from parent projects
+ * Parameters that are not specified fall back to VersionGetCommand defaults.
+ *
  * @param \Slim\Http\Request $p_request   The request.
  * @param \Slim\Http\Response $p_response The response.
  * @param array $p_args Arguments
  * @return \Slim\Http\Response The augmented response.
+ *
+ * @throws ClientException
  */
 function rest_project_version_get( \Slim\Http\Request $p_request, \Slim\Http\Response $p_response, array $p_args ) {
 	$t_project_id = $p_args['id'] ?? $p_request->getParam( 'id' );
@@ -298,6 +307,20 @@ function rest_project_version_get( \Slim\Http\Request $p_request, \Slim\Http\Res
 			'version_id' => $t_version_id
 		)
 	);
+
+	foreach( array( 'released', 'obsolete', 'inherit' ) as $t_param ) {
+		$t_value = $p_request->getQueryParam( $t_param );
+		if( $t_value === null ) {
+			continue;
+		}
+		if( !is_string( $t_value ) ) {
+			throw new ClientException(
+				"Invalid value for '$t_param'",
+				ERROR_INVALID_FIELD_VALUE,
+				array( $t_param ) );
+		}
+		$t_data['query'][$t_param] = gpc_string_to_bool( $t_value );
+	}
 
 	$t_command = new VersionGetCommand( $t_data );
 	$t_result = $t_command->execute();

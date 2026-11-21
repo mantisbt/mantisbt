@@ -119,6 +119,55 @@ class RestProjectVersionTest extends RestBase {
 	}
 
 	/**
+	 * Test that obsolete versions are only returned when requested.
+	 *
+	 * @return void
+	 */
+	public function testProjectGetVersionsObsoleteFilter() {
+		$t_version = $this->createVersion();
+		$this->patchVersion( $t_version['id'], array( 'obsolete' => true ) );
+
+		$this->assertNotContains( $t_version['id'], $this->getVersionIds() );
+		$this->assertNotContains( $t_version['id'], $this->getVersionIds( 'obsolete=0' ) );
+		$this->assertNotContains( $t_version['id'], $this->getVersionIds( 'obsolete=false' ) );
+		$this->assertContains( $t_version['id'], $this->getVersionIds( 'obsolete=1' ) );
+		$this->assertContains( $t_version['id'], $this->getVersionIds( 'obsolete=true' ) );
+	}
+
+	/**
+	 * Test filtering versions by released status.
+	 *
+	 * @return void
+	 */
+	public function testProjectGetVersionsReleasedFilter() {
+		$t_unreleased = $this->createVersion();
+		$t_released = $this->createVersion();
+		$this->patchVersion( $t_released['id'], array( 'released' => true ) );
+
+		$t_ids = $this->getVersionIds();
+		$this->assertContains( $t_unreleased['id'], $t_ids );
+		$this->assertContains( $t_released['id'], $t_ids );
+
+		$t_ids = $this->getVersionIds( 'released=1' );
+		$this->assertNotContains( $t_unreleased['id'], $t_ids );
+		$this->assertContains( $t_released['id'], $t_ids );
+
+		$t_ids = $this->getVersionIds( 'released=0' );
+		$this->assertContains( $t_unreleased['id'], $t_ids );
+		$this->assertNotContains( $t_released['id'], $t_ids );
+	}
+
+	/**
+	 * Test that a non-scalar filter value is rejected.
+	 *
+	 * @return void
+	 */
+	public function testProjectGetVersionsInvalidFilter() {
+		$t_response = $this->builder()->get( $this->ver_base_url . '?obsolete[]=1' )->send();
+		$this->assertEquals( HTTP_STATUS_BAD_REQUEST, $t_response->getStatusCode() );
+	}
+
+	/**
 	 * Test getting versions for a project that doesn't exist.
 	 *
 	 * @return void
@@ -329,6 +378,34 @@ class RestProjectVersionTest extends RestBase {
 	 */
 	private function versionName() {
 		return 'Test Version ' . rand( 1, 1000000 );
+	}
+
+	/**
+	 * Update a version and validate that the update succeeded.
+	 *
+	 * @param integer $p_version_id The version id.
+	 * @param array   $p_patch      The fields to update.
+	 * @return void
+	 */
+	private function patchVersion( $p_version_id, array $p_patch ) {
+		$t_response = $this->builder()->patch( $this->ver_base_url . $p_version_id, $p_patch )->send();
+		$this->assertEquals( HTTP_STATUS_SUCCESS, $t_response->getStatusCode() );
+	}
+
+	/**
+	 * Get the ids of the test project's versions.
+	 *
+	 * @param string $p_query Optional query string, e.g. 'obsolete=1'.
+	 * @return array The version ids
+	 */
+	private function getVersionIds( $p_query = '' ) {
+		$t_url = $this->ver_base_url . ( $p_query === '' ? '' : '?' . $p_query );
+		$t_response = $this->builder()->get( $t_url )->send();
+		$this->assertEquals( HTTP_STATUS_SUCCESS, $t_response->getStatusCode() );
+		$t_result = json_decode( $t_response->getBody(), true );
+		$this->assertTrue( isset( $t_result['versions'] ) );
+
+		return array_column( $t_result['versions'], 'id' );
 	}
 
 	/**
