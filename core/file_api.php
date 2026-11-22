@@ -1506,7 +1506,7 @@ function file_copy_attachments( $p_source_bug_id, $p_dest_bug_id ) {
  * @return void
  * @throws Exception
  */
-function file_copy( array $p_bug_file, int $p_project_id, int $p_dest_bug_id, int $p_dest_bugnote_id = null ) {
+function file_copy( array $p_bug_file, int $p_project_id, int $p_dest_bug_id, ?int $p_dest_bugnote_id = null ) {
 	$t_upload_method = config_get( 'file_upload_method' );
 	$t_bugnote_id = $p_dest_bugnote_id ?? $p_bug_file['bugnote_id'];
 
