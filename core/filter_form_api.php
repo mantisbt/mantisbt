@@ -1237,7 +1237,9 @@ function print_filter_show_profile( ?array $p_filter = null ) {
  * @return void
  */
 function print_filter_values_per_page( array $p_filter ) {
-	echo ( $p_filter[FILTER_PROPERTY_ISSUES_PER_PAGE] == 0 ) ? lang_get( 'all' ) : string_attribute( $p_filter[FILTER_PROPERTY_ISSUES_PER_PAGE] );
+	echo $p_filter[FILTER_PROPERTY_ISSUES_PER_PAGE] == 0
+			? lang_get( 'all' )
+			: string_attribute( $p_filter[FILTER_PROPERTY_ISSUES_PER_PAGE] );
 	print_filter_hidden_input( $p_filter, FILTER_PROPERTY_ISSUES_PER_PAGE );
 }
 
@@ -1254,9 +1256,13 @@ function print_filter_per_page( ?array $p_filter = null ) {
 	if( null === $p_filter ) {
 		$p_filter = $g_filter;
 	}
-	?><!-- Number of bugs per page -->
-		<input class="input-xs" type="text" name="<?php echo FILTER_PROPERTY_ISSUES_PER_PAGE;?>" size="3" maxlength="7" value="<?php echo $p_filter[FILTER_PROPERTY_ISSUES_PER_PAGE]?>" />
-		<?php
+	$fn_const = 'constant';
+	echo <<<HTML
+		<!-- Number of bugs per page -->
+		<input class="input-xs" type="text" name="{$fn_const(FILTER_PROPERTY_ISSUES_PER_PAGE)}" 
+			   size="3" maxlength="7" value="{$p_filter[FILTER_PROPERTY_ISSUES_PER_PAGE]}" 
+		/>
+		HTML;
 }
 
 /**
