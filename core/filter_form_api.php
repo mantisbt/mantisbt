@@ -17,6 +17,21 @@
 /**
  * Filter print helper functions API
  *
+ * The following functions each print out filter field inputs. They are derived
+ * from view_filters_page.php. The functions follow a strict naming convention:
+ *
+ *     print_filter_[filter_name]
+ *
+ * Where [filter_name] is the same as the "name" of the form element for that
+ * filter. The controller depends upon this naming convention at the end
+ * of the script.
+ *
+ * @todo Print functions should be abstracted.  Many of these functions
+ *       are virtually identical except for the property name.
+ *       Perhaps this code could be made simpler by refactoring into a
+ *       class to avoid all those calls to global (which are pretty ugly)
+ *       These functions could also be shared by view_filters_page.php
+ *
  * @package CoreAPI
  * @subpackage FilterAPI
  * @copyright Copyright 2016  MantisBT Team - mantisbt-dev@lists.sourceforge.net
@@ -64,24 +79,6 @@ require_api( 'user_api.php' );
 
 
 /**
- * @internal The following functions each print out filter field inputs.
- *      They are derived from view_filters_page.php
- *      The functions follow a strict naming convention:
- *
- *      print_filter_[filter_name]
- *
- *      Where [filter_name] is the same as the "name" of the form element for
- *      that filter. This naming convention is depended upon by the controller
- *      at the end of the script.
- *
- * @todo print functions should be abstracted.  Many of these functions
- *      are virtually identical except for the property name.
- *      Perhaps this code could be made simpler by refactoring into a
- *      class to avoid all those calls to global (which are pretty ugly)
- *      These functions could also be shared by view_filters_page.php
- */
-
-/**
  * Returns HTML for each filter field, to be used in filter form.
  *
  * $p_filter_target is a field name to match any of "the print_filter_..."
@@ -90,10 +87,10 @@ require_api( 'user_api.php' );
  * if the option is disabled, returns the current value and a hidden input for
  * that value.
  *
- * @param array   $p_filter        Filter array
- * @param string  $p_filter_target Filter field name
- * @param boolean $p_show_inputs   True to return a visible form input or false
- *                                 for a text value.
+ * @param array  $p_filter        Filter array
+ * @param string $p_filter_target Filter field name
+ * @param bool   $p_show_inputs   True to return a visible form input or false
+ *                                for a text value.
  *
  * @return string The html content for the field requested
  *
@@ -136,7 +133,9 @@ function filter_form_get_input( array $p_filter, $p_filter_target, $p_show_input
 
 /**
  * Return the input modifier to be used for advanced filters.
- * @param array $p_filter	Filter array to use
+ *
+ * @param array $p_filter Filter array to use
+ *
  * @return string
  */
 function filter_select_modifier( array $p_filter ) {
@@ -153,6 +152,7 @@ function filter_select_modifier( array $p_filter ) {
  * @param array $p_filter Filter array
  *
  * @return void
+ * @throws ClientException
  */
 function print_filter_values_reporter_id( array $p_filter ) {
 	$t_filter = $p_filter;
@@ -199,7 +199,8 @@ function print_filter_values_reporter_id( array $p_filter ) {
  * @param array|null $p_filter Filter array
  *
  * @return void
- * @global array     $g_filter
+ * @throws ClientException
+ * @global array $g_filter
  */
 function print_filter_reporter_id( ?array $p_filter = null ) {
 	global $g_filter;
@@ -236,6 +237,7 @@ function print_filter_reporter_id( ?array $p_filter = null ) {
  * @param array $p_filter Filter array
  *
  * @return void
+ * @throws ClientException
  */
 function print_filter_values_user_monitor( array $p_filter ) {
 	$t_filter = $p_filter;
@@ -285,7 +287,8 @@ function print_filter_values_user_monitor( array $p_filter ) {
  * @param array|null $p_filter Filter array
  *
  * @return void
- * @global array     $g_filter
+ * @throws ClientException
+ * @global array $g_filter
  */
 function print_filter_user_monitor( ?array $p_filter = null ) {
 	global $g_filter;
@@ -319,6 +322,7 @@ function print_filter_user_monitor( ?array $p_filter = null ) {
  * @param array $p_filter Filter array
  *
  * @return void
+ * @throws ClientException
  */
 function print_filter_values_handler_id( array $p_filter ) {
 	$t_filter = $p_filter;
@@ -365,7 +369,8 @@ function print_filter_values_handler_id( array $p_filter ) {
  * @param array|null $p_filter Filter array
  *
  * @return void
- * @global array     $g_filter
+ * @throws ClientException
+ * @global array $g_filter
  */
 function print_filter_handler_id( ?array $p_filter = null ) {
 	global $g_filter;
@@ -440,7 +445,7 @@ function print_filter_values_show_category( array $p_filter ) {
  * @param array|null $p_filter Filter array
  *
  * @return void
- * @global array     $g_filter
+ * @global array $g_filter
  */
 function print_filter_show_category( ?array $p_filter = null ) {
 	global $g_filter;
@@ -474,7 +479,7 @@ function print_filter_values_platform( array $p_filter ) {
  * @param array|null $p_filter
  *
  * @return void
- * @global array     $g_filter
+ * @global array $g_filter
  */
 function print_filter_platform( ?array $p_filter = null ) {
 	global $g_filter;
@@ -510,7 +515,7 @@ function print_filter_values_os( array $p_filter ) {
  * @param array|null $p_filter Filter array
  *
  * @return void
- * @global array     $g_filter
+ * @global array $g_filter
  */
 function print_filter_os( ?array $p_filter = null ) {
 	global $g_filter;
@@ -543,7 +548,7 @@ function print_filter_values_os_build( array $p_filter ) {
  * @param array|null $p_filter Filter array
  *
  * @return void
- * @global array     $g_filter
+ * @global array $g_filter
  */
 function print_filter_os_build( ?array $p_filter = null ) {
 	global $g_filter;
@@ -603,7 +608,7 @@ function print_filter_values_show_severity( array $p_filter ) {
  * @param array|null $p_filter Filter array
  *
  * @return void
- * @global array     $g_filter
+ * @global array $g_filter
  */
 function print_filter_show_severity( ?array $p_filter = null ) {
 	global $g_filter;
@@ -620,7 +625,9 @@ function print_filter_show_severity( ?array $p_filter = null ) {
 
 /**
  * Print the current value of this filter field, as visible string, and as a hidden form input.
- * @param array $p_filter	Filter array
+ *
+ * @param array $p_filter Filter array
+ *
  * @return void
  */
 function print_filter_values_show_reproducibility( array $p_filter ) {
@@ -655,10 +662,12 @@ function print_filter_values_show_reproducibility( array $p_filter ) {
 }
 
 /**
- * print the reproducibility field
- * @global array $g_filter
+ * print the reproducibility field.
+ *
  * @param array|null $p_filter Filter array
+ *
  * @return void
+ * @global array $g_filter
  */
 function print_filter_show_reproducibility( ?array $p_filter = null ) {
 	global $g_filter;
@@ -717,7 +726,7 @@ function print_filter_values_show_resolution( array $p_filter ) {
  * @param array|null $p_filter Filter array
  *
  * @return void
- * @global array     $g_filter
+ * @global array $g_filter
  */
 function print_filter_show_resolution( ?array $p_filter = null ) {
 	global $g_filter;
@@ -776,7 +785,7 @@ function print_filter_values_show_status( array $p_filter ) {
  * @param array|null $p_filter Filter array
  *
  * @return void
- * @global array     $g_filter
+ * @global array $g_filter
  */
 function print_filter_show_status( ?array $p_filter = null ) {
 	global $g_filter;
@@ -839,7 +848,7 @@ function print_filter_values_hide_status( array $p_filter ) {
  * @param array|null $p_filter Filter array
  *
  * @return void
- * @global array     $g_filter
+ * @global array $g_filter
  */
 function print_filter_hide_status( ?array $p_filter = null ) {
 	global $g_filter;
@@ -901,7 +910,7 @@ function print_filter_values_show_build( array $p_filter ) {
  * @param array|null $p_filter Filter array
  *
  * @return void
- * @global array     $g_filter
+ * @global array $g_filter
  */
 function print_filter_show_build( ?array $p_filter = null ) {
 	global $g_filter;
@@ -964,7 +973,7 @@ function print_filter_values_show_version( array $p_filter ) {
  * @param array|null $p_filter Filter array
  *
  * @return void
- * @global array     $g_filter
+ * @global array $g_filter
  */
 function print_filter_show_version( ?array $p_filter = null ) {
 	global $g_filter;
@@ -1028,7 +1037,7 @@ function print_filter_values_show_fixed_in_version( array $p_filter ) {
  * @param array|null $p_filter Filter array
  *
  * @return void
- * @global array     $g_filter
+ * @global array $g_filter
  */
 function print_filter_show_fixed_in_version( ?array $p_filter = null ) {
 	global $g_filter;
@@ -1092,7 +1101,7 @@ function print_filter_values_show_target_version( array $p_filter ) {
  * @param array|null $p_filter Filter array
  *
  * @return void
- * @global array     $g_filter
+ * @global array $g_filter
  */
 function print_filter_show_target_version( ?array $p_filter = null ) {
 	global $g_filter;
@@ -1153,7 +1162,7 @@ function print_filter_values_show_priority( array $p_filter ) {
  * @param array|null $p_filter Filter array
  *
  * @return void
- * @global array     $g_filter
+ * @global array $g_filter
  */
 function print_filter_show_priority( ?array $p_filter = null ) {
 	global $g_filter;
@@ -1214,7 +1223,7 @@ function print_filter_values_show_profile( array $p_filter ) {
  * @param array|null $p_filter Filter array
  *
  * @return void
- * @global array     $g_filter
+ * @global array $g_filter
  */
 function print_filter_show_profile( ?array $p_filter = null ) {
 	global $g_filter;
@@ -1249,7 +1258,7 @@ function print_filter_values_per_page( array $p_filter ) {
  * @param array|null $p_filter Filter array
  *
  * @return void
- * @global array     $g_filter
+ * @global array $g_filter
  */
 function print_filter_per_page( ?array $p_filter = null ) {
 	global $g_filter;
@@ -1290,7 +1299,7 @@ function print_filter_values_view_state( array $p_filter ) {
  * @param array|null $p_filter Filter array
  *
  * @return void
- * @global array     $g_filter
+ * @global array $g_filter
  */
 function print_filter_view_state( ?array $p_filter = null ) {
 	global $g_filter;
@@ -1338,7 +1347,7 @@ function print_filter_values_sticky_issues( array $p_filter ) {
  * @param array|null $p_filter Filter array
  *
  * @return void
- * @global array     $g_filter
+ * @global array $g_filter
  */
 function print_filter_sticky_issues( ?array $p_filter = null ) {
 	global $g_filter;
@@ -1375,7 +1384,7 @@ function print_filter_values_highlight_changed( array $p_filter ) {
  * @param array|null $p_filter Filter array
  *
  * @return void
- * @global array     $g_filter
+ * @global array $g_filter
  */
 function print_filter_highlight_changed( ?array $p_filter = null ) {
 	global $g_filter;
@@ -1447,11 +1456,11 @@ function print_filter_values_do_filter_by_date( array $p_filter ) {
 /**
  * Print filter by date fields.
  *
- * @param boolean    $p_hide_checkbox Hide data filter checkbox.
+ * @param bool       $p_hide_checkbox Hide data filter checkbox.
  * @param array|null $p_filter        Filter array
  *
  * @return void
- * @global array     $g_filter
+ * @global array $g_filter
  */
 function print_filter_do_filter_by_date( $p_hide_checkbox = false, ?array $p_filter = null ) {
 	global $g_filter;
@@ -1603,11 +1612,11 @@ function print_filter_values_do_filter_by_last_updated_date( array $p_filter ) {
 /**
  * Print filter by last update date fields.
  *
- * @param boolean    $p_hide_checkbox Hide data filter checkbox.
+ * @param bool       $p_hide_checkbox Hide data filter checkbox.
  * @param array|null $p_filter        Filter array
  *
  * @return void
- * @global array     $g_filter
+ * @global array $g_filter
  */
 function print_filter_do_filter_by_last_updated_date( $p_hide_checkbox = false, ?array $p_filter = null ) {
 	global $g_filter;
@@ -1705,7 +1714,6 @@ function print_filter_do_filter_by_last_updated_date( $p_hide_checkbox = false, 
  * @param array $p_filter Filter array
  *
  * @return void
- * @throws ClientException
  */
 function print_filter_values_do_filter_by_due_date( array $p_filter ) {
 	$t_filter = $p_filter;
@@ -1788,7 +1796,7 @@ function print_filter_values_do_filter_by_due_date( array $p_filter ) {
  * @param array|null $p_filter        Filter array
  *
  * @return void
- * @global array     $g_filter
+ * @global array $g_filter
  */
 function print_filter_do_filter_by_due_date( $p_hide_checkbox = false, ?array $p_filter = null ) {
 	global $g_filter;
@@ -1886,9 +1894,13 @@ function print_filter_do_filter_by_due_date( $p_hide_checkbox = false, ?array $p
 }
 
 /**
- * Print the current value of this filter field, as visible string, and as a hidden form input.
- * @param array $p_filter	Filter array
+ * Print the current value of this filter field, as visible string, and as a
+ * hidden form input.
+ *
+ * @param array $p_filter Filter array
+ *
  * @return void
+ * @throws ClientException
  */
 function print_filter_values_relationship_type( array $p_filter ) {
 	$t_filter = $p_filter;
@@ -1937,7 +1949,7 @@ function print_filter_values_relationship_type( array $p_filter ) {
  * @param array|null $p_filter Filter array
  *
  * @return void
- * @global array     $g_filter
+ * @global array $g_filter
  */
 function print_filter_relationship_type( ?array $p_filter = null ) {
 	global $g_filter;
@@ -1973,7 +1985,8 @@ function print_filter_values_tag_string( array $p_filter ) {
  * @param array|null $p_filter Filter array
  *
  * @return void
- * @global array     $g_filter
+ * @throws ClientException
+ * @global array $g_filter
  */
 function print_filter_tag_string( ?array $p_filter = null ) {
 	global $g_filter;
@@ -2003,6 +2016,7 @@ function print_filter_tag_string( ?array $p_filter = null ) {
  * @param array $p_filter Filter array
  *
  * @return void
+ * @throws ClientException
  */
 function print_filter_values_note_user_id( array $p_filter ) {
 	$t_filter = $p_filter;
@@ -2049,7 +2063,8 @@ function print_filter_values_note_user_id( array $p_filter ) {
  * @param array|null $p_filter Filter array
  *
  * @return void
- * @global array     $g_filter
+ * @throws ClientException
+ * @global array $g_filter
  */
 function print_filter_note_user_id( ?array $p_filter = null ) {
 	global $g_filter;
@@ -2079,7 +2094,7 @@ function print_filter_note_user_id( ?array $p_filter = null ) {
 /**
  * Print the filter field's current value as a visible string and a hidden form input.
  *
- * @param array  $p_filter        Filter array
+ * @param array $p_filter        Filter array
  * @param string $p_field_name    Field name
  * @param object $p_filter_object Filter object
  *
@@ -2134,7 +2149,7 @@ function print_filter_values_plugin_field( array $p_filter, $p_field_name, $p_fi
  * @param array|null $p_filter        Filter array
  *
  * @return void
- * @global array     $g_filter
+ * @global array $g_filter
  */
 function print_filter_plugin_field( $p_field_name, $p_filter_object, ?array $p_filter = null ) {
 	global $g_filter;
@@ -2203,10 +2218,11 @@ function print_filter_plugin_field( $p_field_name, $p_filter_object, ?array $p_f
 /**
  * Print the filter field's current value as a visible string and a hidden form input.
  *
- * @param array $p_filter Filter array
- * @param integer $p_field_id Custom field id
+ * @param array $p_filter   Filter array
+ * @param int   $p_field_id Custom field id
  *
  * @return void
+ * @throws ClientException
  */
 function print_filter_values_custom_field( array $p_filter, $p_field_id ) {
 	if( CUSTOM_FIELD_TYPE_DATE == custom_field_type( $p_field_id ) ) {
@@ -2301,11 +2317,12 @@ function print_filter_values_custom_field_date( array $p_filter, $p_field_id ) {
  *
  * This function does not validate permissions
  *
- * @param integer    $p_field_id Custom field id
+ * @param int        $p_field_id Custom field id
  * @param array|null $p_filter   Filter array
  *
  * @return void
- * @global array     $g_filter
+ * @throws ClientException
+ * @global array $g_filter
  */
 function print_filter_custom_field( $p_field_id, ?array $p_filter = null ) {
 	global $g_filter;
@@ -2404,7 +2421,7 @@ function print_filter_values_show_sort( array $p_filter ) {
  * @param array|null $p_filter Filter array
  *
  * @return void
- * @global array     $g_filter
+ * @global array $g_filter
  */
 function print_filter_show_sort( ?array $p_filter = null ) {
 	global $g_filter;
@@ -2483,11 +2500,12 @@ function print_filter_show_sort( ?array $p_filter = null ) {
 /**
  * Print custom field date fields.
  *
- * @param integer    $p_field_id Custom field identifier.
+ * @param int        $p_field_id Custom field identifier.
  * @param array|null $p_filter   Filter array
  *
  * @return void
- * @global array     $g_filter
+ * @throws ClientException
+ * @global array $g_filter
  */
 function print_filter_custom_field_date( $p_field_id, ?array $p_filter = null ) {
 	global $g_filter;
@@ -2588,6 +2606,7 @@ function print_filter_custom_field_date( $p_field_id, ?array $p_filter = null ) 
  * @param array $p_filter Filter array
  *
  * @return void
+ * @throws ClientException
  */
 function print_filter_values_project_id( array $p_filter ) {
 	$t_filter = $p_filter;
@@ -2626,7 +2645,7 @@ function print_filter_values_project_id( array $p_filter ) {
  * @param array|null $p_filter Filter array
  *
  * @return void
- * @global array     $g_filter
+ * @global array $g_filter
  */
 function print_filter_project_id( ?array $p_filter = null ) {
 	global $g_filter;
@@ -2689,7 +2708,7 @@ function print_filter_values_projection( array $p_filter ) {
  * @param array|null $p_filter Filter array
  *
  * @return void
- * @global array     $g_filter
+ * @global array $g_filter
  */
 function print_filter_projection( ?array $p_filter = null ) {
 	global $g_filter;
@@ -2731,7 +2750,7 @@ function print_filter_values_match_type( array $p_filter ) {
  * @param array|null $p_filter Filter array
  *
  * @return void
- * @global array     $g_filter
+ * @global array $g_filter
  */
 function print_filter_match_type( ?array $p_filter = null ) {
 	global $g_filter;
@@ -2807,18 +2826,18 @@ function print_multivalue_field( $p_field_name, $p_field_value ) {
  * not available on the client, and the form was rendered with dynamic fields.
  * By default, the fallback is the current page.
  *
- * @param array   $p_filter               Filter array to show.
- * @param boolean $p_for_screen           Type of output
- * @param boolean $p_static               Whether to print a static form (no
- *                                        dynamic fields)
- * @param string  $p_static_fallback_page Page name to use as javascript
- *                                        fallback
- * @param boolean $p_show_search          Whether to render the search field
- *                                        inside the general fields area. If
- *                                        false, the text search should be
- *                                        managed externally.
+ * @param array  $p_filter               Filter array to show.
+ * @param bool   $p_for_screen           Type of output
+ * @param bool   $p_static               Whether to print a static form (no
+ *                                       dynamic fields)
+ * @param string $p_static_fallback_page Page name to use as javascript
+ *                                       fallback
+ * @param bool   $p_show_search          Whether to render the search field
+ *                                       inside the general fields area. If
+ *                                       false, the text search should be
+ *                                       managed externally.
  * @return void
- * @throws StateException
+ * @throws StateException|ClientException
  */
 function filter_form_draw_inputs( $p_filter, $p_for_screen = true, $p_static = false, $p_static_fallback_page = null, $p_show_search = true ) {
 
@@ -3247,8 +3266,9 @@ class FilterBoxGridLayout extends TableGridLayout {
 
 	/**
 	 * Prints HTML code for TD cell representing the Item header
-	 * @param TableFieldsItem $p_item Item to display
-	 * @param integer $p_colspan Colspan attribute for cell
+	 *
+	 * @param TableFieldsItem $p_item    Item to display
+	 * @param int             $p_colspan Colspan attribute for cell
 	 */
 	protected function render_td_item_header( TableFieldsItem $p_item, $p_colspan ) {
 		echo '<td class="small-caption category ' . $p_item->attr_class . '"';
@@ -3264,9 +3284,10 @@ class FilterBoxGridLayout extends TableGridLayout {
 	}
 
 	/**
-	 * Prints HTML code for TD cell representing the Item content
-	 * @param TableFieldsItem $p_item Item to display
-	 * @param integer $p_colspan Colspan attribute for cell
+	 * Prints HTML code for TD cell representing the Item content.
+	 *
+	 * @param TableFieldsItem $p_item    Item to display
+	 * @param int             $p_colspan Colspan attribute for cell
 	 */
 	protected function render_td_item_content( TableFieldsItem $p_item, $p_colspan ) {
 		echo '<td class="small-caption ' . $p_item->attr_class . '"';
@@ -3282,8 +3303,9 @@ class FilterBoxGridLayout extends TableGridLayout {
 	}
 
 	/**
-	 * Prints HTML code for an empty TD cell, of header type
-	 * @param integer $p_colspan Colspan attribute for cell
+	 * Prints HTML code for an empty TD cell, of header type.
+	 *
+	 * @param int $p_colspan Colspan attribute for cell
 	 */
 	protected function render_td_empty_header( $p_colspan ) {
 		echo '<td class="small-caption category"';
@@ -3315,7 +3337,7 @@ function print_filter_values_search( array $p_filter ) {
  * @param array|null $p_filter Filter array
  *
  * @return void
- * @global array     $g_filter
+ * @global array $g_filter
  */
 function print_filter_search( ?array $p_filter = null ) {
 	global $g_filter;
