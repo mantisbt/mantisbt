@@ -646,14 +646,14 @@ function print_filter_values_show_reproducibility( array $p_filter ) {
 			} else {
 				$t_this_string = get_enum_element( 'reproducibility', $t_current );
 			}
-			if( $t_first_flag != true ) {
+			if( !$t_first_flag ) {
 				$t_output = $t_output . '<br />';
 			} else {
 				$t_first_flag = false;
 			}
 			$t_output = $t_output . string_display_line( $t_this_string );
 		}
-		if( true == $t_any_found ) {
+		if( $t_any_found ) {
 			echo lang_get( 'any' );
 		} else {
 			echo $t_output;
@@ -1909,16 +1909,11 @@ function print_filter_values_relationship_type( array $p_filter ) {
 	$c_rel_type = $t_filter[FILTER_PROPERTY_RELATIONSHIP_TYPE];
 	$c_rel_bug = $t_filter[FILTER_PROPERTY_RELATIONSHIP_BUG];
 	if( BUG_REL_ANY == $c_rel_type ) {
-		switch ( $c_rel_bug ) {
-			case META_FILTER_NONE:
-				echo lang_get( 'none' );
-				break;
-			case META_FILTER_ANY:
-				echo lang_get( 'any' );
-				break;
-			default:
-				echo lang_get( 'any' ),' ' , lang_get( 'with' ), ' ', $c_rel_bug;
-		}
+		echo match( $c_rel_bug ) {
+			META_FILTER_NONE => lang_get( 'none' ),
+			META_FILTER_ANY => lang_get( 'any' ),
+			default => lang_get( 'any' ) . ' ' . lang_get( 'with' ) . ' ' . $c_rel_bug,
+		};
 	} elseif( BUG_REL_NONE == $c_rel_type ) {
 		echo lang_get( 'none' );
 		switch ( $c_rel_bug ) {
@@ -1930,16 +1925,11 @@ function print_filter_values_relationship_type( array $p_filter ) {
 		}
 	} else {
 		echo relationship_get_description_for_history( $c_rel_type ) . ' ';
-		switch ( $c_rel_bug ) {
-			case META_FILTER_NONE:
-				echo lang_get( 'none' );
-				break;
-			case META_FILTER_ANY:
-				echo lang_get( 'any' );
-				break;
-			default:
-				echo $c_rel_bug;
-		}
+		echo match( $c_rel_bug ) {
+			META_FILTER_NONE => lang_get( 'none' ),
+			META_FILTER_ANY => lang_get( 'any' ),
+			default => $c_rel_bug,
+		};
 	}
 }
 
@@ -2732,15 +2722,10 @@ function print_filter_projection( ?array $p_filter = null ) {
  */
 function print_filter_values_match_type( array $p_filter ) {
 	$t_filter = $p_filter;
-	switch( $t_filter[FILTER_PROPERTY_MATCH_TYPE] ) {
-		case FILTER_MATCH_ANY:
-			echo lang_get( 'filter_match_any' );
-			break;
-		case FILTER_MATCH_ALL:
-		default:
-			echo lang_get( 'filter_match_all' );
-			break;
-	}
+	echo match( $t_filter[FILTER_PROPERTY_MATCH_TYPE] ) {
+		FILTER_MATCH_ANY => lang_get( 'filter_match_any' ),
+		default => lang_get( 'filter_match_all' ),
+	};
 	print_filter_hidden_input( $t_filter, FILTER_PROPERTY_MATCH_TYPE );
 }
 
