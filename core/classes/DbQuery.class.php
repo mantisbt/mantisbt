@@ -267,11 +267,11 @@ class DbQuery {
 	 *
 	 * At this point all preprocessing and value binding has been performed.
 	 *
-	 * @param int $p_limit  Limit value
-	 * @param int $p_offset Offset value
+	 * @param int $p_limit  Limit value.
+	 * @param int $p_offset Offset value.
 	 *
-	 * @return ADORecordSet|bool ADOdb result set or false if the query failed.
-	 * @throws ClientException
+	 * @return ADORecordSet ADOdb result set.
+	 * @throws ClientException if the query failed.
 	 */
 	protected function db_execute( $p_limit = null, $p_offset = null ) {
 		global $g_db;
@@ -324,7 +324,7 @@ class DbQuery {
 			# If not logging the queries the actual text is not needed
 			$t_query_text = '';
 		}
-		array_push( $g_queries_array, array( $t_query_text, $this->db_query_time ) );
+		$g_queries_array[] = array( $t_query_text, $this->db_query_time );
 	}
 
 	/**
@@ -602,7 +602,6 @@ class DbQuery {
 			# if this part is litereal, do not change
 			if( $t_is_literal ) {
 				$t_new_query .= $t_part;
-				continue;
 			} else {
 				# if there is "CAST" delimiter, flag the counter
 				if( preg_match( '/^CAST\s*\($/i', $t_part ) ) {
@@ -623,14 +622,13 @@ class DbQuery {
 					continue;
 				}
 				$t_new_query .= $t_part;
-				continue;
 			}
 		}
 		$t_query = $t_new_query;
 
 		# Remove null bind variables in insert statements for default values support
 		if( is_array( $this->db_param_array ) ) {
-			preg_match( '/^[\s\n\r]*insert[\s\n\r]+(into){0,1}[\s\n\r]+(?P<table>[a-z0-9_]+)[\s\n\r]*\([\s\n\r]*[\s\n\r]*(?P<fields>[a-z0-9_,\s\n\r]+)[\s\n\r]*\)[\s\n\r]*values[\s\n\r]*\([\s\n\r]*(?P<values>[:a-z0-9_,\s\n\r]+)\)/i', $t_query, $t_matches );
+			preg_match( '/^[\s\n\r]*insert[\s\n\r]+(into)?[\s\n\r]+(?P<table>[a-z0-9_]+)[\s\n\r]*\([\s\n\r]*[\s\n\r]*(?P<fields>[a-z0-9_,\s\n\r]+)[\s\n\r]*\)[\s\n\r]*values[\s\n\r]*\([\s\n\r]*(?P<values>[:a-z0-9_,\s\n\r]+)\)/i', $t_query, $t_matches );
 
 			if( isset( $t_matches['values'] ) ) { #if statement is a INSERT INTO ... (...) VALUES(...)
 				# iterates non-empty bind variables
@@ -641,12 +639,12 @@ class DbQuery {
 				//for( $t_arr_index = 0; $t_arr_index < count( $this->db_param_array ); $t_arr_index++ ) {
 				foreach( $this->db_param_array as $t_arr_index => $t_arr_value ) {
 					# inserting fieldname search
-					if( preg_match( '/^[\s\n\r]*([a-z0-9_]+)[\s\n\r]*,{0,1}([\d\D]*)\z/i', $t_fields_left, $t_fieldmatch ) ) {
+					if( preg_match( '/^[\s\n\r]*([a-z0-9_]+)[\s\n\r]*,?([\d\D]*)\z/i', $t_fields_left, $t_fieldmatch ) ) {
 						$t_fields_left = $t_fieldmatch[2];
 						$t_fields_arr[$i] = $t_fieldmatch[1];
 					}
 					# inserting bindvar name search
-					if( preg_match( '/^[\s\n\r]*(:[a-z0-9_]+)[\s\n\r]*,{0,1}([\d\D]*)\z/i', $t_values_left, $t_valuematch ) ) {
+					if( preg_match( '/^[\s\n\r]*(:[a-z0-9_]+)[\s\n\r]*,?([\d\D]*)\z/i', $t_values_left, $t_valuematch ) ) {
 						$t_values_left = $t_valuematch[2];
 						$t_values_arr[$i] = $t_valuematch[1];
 					}
@@ -705,18 +703,18 @@ class DbQuery {
 				}
 
 				# Replace "var1=''" by "var1 IS NULL"
-				while( preg_match( '/^(?P<before_empty_literal>[\d\D]*[\s\n\r(]+([a-z0-9_]*[\s\n\r]*\.){0,1}[\s\n\r]*[a-z0-9_]+)[\s\n\r]*=[\s\n\r]*\'\'(?P<after_empty_literal>[\s\n\r]*[\d\D]*\z)/i', $t_templated_query, $t_matches ) > 0 ) {
+				while( preg_match( '/^(?P<before_empty_literal>[\d\D]*[\s\n\r(]+([a-z0-9_]*[\s\n\r]*\.)?[\s\n\r]*[a-z0-9_]+)[\s\n\r]*=[\s\n\r]*\'\'(?P<after_empty_literal>[\s\n\r]*[\d\D]*\z)/i', $t_templated_query, $t_matches ) > 0 ) {
 					$t_templated_query = $t_matches['before_empty_literal'] . ' IS NULL ' . $t_matches['after_empty_literal'];
 				}
 				# Replace "var1!=''" and "var1<>''" by "var1 IS NOT NULL"
-				while( preg_match( '/^(?P<before_empty_literal>[\d\D]*[\s\n\r(]+([a-z0-9_]*[\s\n\r]*\.){0,1}[\s\n\r]*[a-z0-9_]+)[\s\n\r]*(![\s\n\r]*=|<[\s\n\r]*>)[\s\n\r]*\'\'(?P<after_empty_literal>[\s\n\r]*[\d\D]*\z)/i', $t_templated_query, $t_matches ) > 0 ) {
+				while( preg_match( '/^(?P<before_empty_literal>[\d\D]*[\s\n\r(]+([a-z0-9_]*[\s\n\r]*\.)?[\s\n\r]*[a-z0-9_]+)[\s\n\r]*(![\s\n\r]*=|<[\s\n\r]*>)[\s\n\r]*\'\'(?P<after_empty_literal>[\s\n\r]*[\d\D]*\z)/i', $t_templated_query, $t_matches ) > 0 ) {
 					$t_templated_query = $t_matches['before_empty_literal'] . ' IS NOT NULL ' . $t_matches['after_empty_literal'];
 				}
 
 				$t_query = $t_templated_query;
 				# Process input bind variable array to replace "WHERE fld=:12"
 				# by "WHERE fld IS NULL" if :12 is empty
-				while( preg_match( '/^(?P<before_var>[\d\D]*[\s\n\r(]+)(?P<var_name>([a-z0-9_]*[\s\n\r]*\.){0,1}[\s\n\r]*[a-z0-9_]+)(?P<dividers>[\s\n\r]*=[\s\n\r]*:)(?P<bind_name>[0-9]+)(?P<after_var>[\s\n\r]*[\d\D]*\z)/i', $t_templated_query, $t_matches ) > 0 ) {
+				while( preg_match( '/^(?P<before_var>[\d\D]*[\s\n\r(]+)(?P<var_name>([a-z0-9_]*[\s\n\r]*\.)?[\s\n\r]*[a-z0-9_]+)(?P<dividers>[\s\n\r]*=[\s\n\r]*:)(?P<bind_name>[0-9]+)(?P<after_var>[\s\n\r]*[\d\D]*\z)/i', $t_templated_query, $t_matches ) > 0 ) {
 					$t_bind_num = $t_matches['bind_name'];
 
 					$t_search_substr = $t_matches['before_var'] . $t_matches['var_name'] . $t_matches['dividers'] . $t_matches['bind_name'] . $t_matches['after_var'];
@@ -748,7 +746,7 @@ class DbQuery {
 					#Replace "SET fld1=:1" to "SET fld1=DEFAULT" if bind array value is empty
 					$t_removed_set_where_parsing = $t_removed_set_where;
 
-					while( preg_match( '/^(?P<before_var>[\d\D]*[\s\n\r,]+)(?P<var_name>([a-z0-9_]*[\s\n\r]*\.){0,1}[\s\n\r]*[a-z0-9_]+)(?P<dividers>[\s\n\r]*=[\s\n\r]*:)(?P<bind_name>[0-9]+)(?P<after_var>[,\s\n\r]*[\d\D]*\z)/i', $t_removed_set_where_parsing, $t_matches ) > 0 ) {
+					while( preg_match( '/^(?P<before_var>[\d\D]*[\s\n\r,]+)(?P<var_name>([a-z0-9_]*[\s\n\r]*\.)?[\s\n\r]*[a-z0-9_]+)(?P<dividers>[\s\n\r]*=[\s\n\r]*:)(?P<bind_name>[0-9]+)(?P<after_var>[,\s\n\r]*[\d\D]*\z)/i', $t_removed_set_where_parsing, $t_matches ) > 0 ) {
 						$t_bind_num = $t_matches['bind_name'];
 						$t_search_substr = $t_matches['before_var'] . $t_matches['var_name'] . $t_matches['dividers'] . $t_matches['bind_name'] ;
 						$t_replace_substr = $t_matches['before_var'] . $t_matches['var_name'] . $t_matches['dividers'] . $t_matches['bind_name'] ;
@@ -869,12 +867,7 @@ class DbQuery {
 				$t_value = false;
 			}
 		} else {
-			if( isset( $this->current_row[$p_index_or_name] ) ) {
-				# get the value by column name
-				$t_value = $this->current_row[$p_index_or_name];
-			} else {
-				$t_value = false;
-			}
+			$t_value = $this->current_row[$p_index_or_name] ?? false;
 		}
 		return $t_value;
 	}
