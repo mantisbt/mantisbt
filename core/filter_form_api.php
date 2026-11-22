@@ -1237,9 +1237,8 @@ function print_filter_show_profile( ?array $p_filter = null ) {
  * @return void
  */
 function print_filter_values_per_page( array $p_filter ) {
-	$t_filter = $p_filter;
-	echo ( $t_filter[FILTER_PROPERTY_ISSUES_PER_PAGE] == 0 ) ? lang_get( 'all' ) : string_attribute( $t_filter[FILTER_PROPERTY_ISSUES_PER_PAGE] );
-	print_filter_hidden_input( $t_filter, FILTER_PROPERTY_ISSUES_PER_PAGE );
+	echo ( $p_filter[FILTER_PROPERTY_ISSUES_PER_PAGE] == 0 ) ? lang_get( 'all' ) : string_attribute( $p_filter[FILTER_PROPERTY_ISSUES_PER_PAGE] );
+	print_filter_hidden_input( $p_filter, FILTER_PROPERTY_ISSUES_PER_PAGE );
 }
 
 /**
@@ -1268,14 +1267,13 @@ function print_filter_per_page( ?array $p_filter = null ) {
  * @return void
  */
 function print_filter_values_view_state( array $p_filter ) {
-	$t_filter = $p_filter;
-	if( VS_PUBLIC === $t_filter[FILTER_PROPERTY_VIEW_STATE] ) {
+	if( VS_PUBLIC === $p_filter[FILTER_PROPERTY_VIEW_STATE] ) {
 		echo lang_get( 'public' );
-	} else if( VS_PRIVATE === $t_filter[FILTER_PROPERTY_VIEW_STATE] ) {
+	} else if( VS_PRIVATE === $p_filter[FILTER_PROPERTY_VIEW_STATE] ) {
 		echo lang_get( 'private' );
 	} else {
 		echo lang_get( 'any' );
-		$t_filter[FILTER_PROPERTY_VIEW_STATE] = META_FILTER_ANY;
+		$p_filter[FILTER_PROPERTY_VIEW_STATE] = META_FILTER_ANY;
 	}
 	print_filter_hidden_input( $p_filter, FILTER_PROPERTY_VIEW_STATE );
 }
