@@ -163,6 +163,48 @@ class RestFiltersTest extends RestBase
 	}
 
 	/**
+	 * Test case for GET /filters/:id endpoint with a filter on categories,
+	 * including a name that starts with a number and [none].
+	 *
+	 * @return void
+	 */
+	public function testGetFilterWithCategories() {
+		$t_filter = filter_create_any();
+		$t_filter[FILTER_PROPERTY_CATEGORY_ID] = array(
+			'Desarrollo de Software',
+			'06. WM - Work Management',
+			META_FILTER_NONE,
+		);
+		$t_filter_id = $this->createTestFilter( $t_filter );
+
+		$t_filters = $this->getFilters( $t_filter_id );
+
+		$this->assertCount( 1, $t_filters );
+		$this->assertEquals(
+			array(
+				array( 'name' => 'Desarrollo de Software' ),
+				array( 'name' => '06. WM - Work Management' ),
+				array( 'id' => '[none]' ),
+			),
+			$t_filters[0]['criteria']['category'],
+			'Categories are returned by name, and [none] by id'
+		);
+	}
+
+	/**
+	 * Test case for GET /filters endpoint with a public filter on a category.
+	 *
+	 * @return void
+	 */
+	public function testGetAllFiltersWithCategory() {
+		$t_filter = filter_create_any();
+		$t_filter[FILTER_PROPERTY_CATEGORY_ID] = array( 'Desarrollo de Software' );
+		$this->createTestFilter( $t_filter, true );
+
+		$this->getFilters();
+	}
+
+	/**
 	 * Test case for GET /filters/:id endpoint with invalid Filter Id.
 	 *
 	 * @return void
