@@ -486,7 +486,7 @@ foreach( $t_related_custom_field_ids as $t_custom_field_id ) {
 
 				printf( '%s (%s) <span class="italic-small">%s</span><br>%s',
 					string_html_specialchars( $t_attachment['display_name'] ),
-					number_format( $t_attachment['size'] ) . ' ' . lang_get( 'bytes' ),
+					get_size_info( $t_attachment['size'] ),
 					date( $t_date_format, $t_attachment['date_added'] ),
 					$t_path . $c_download_url
 				);
