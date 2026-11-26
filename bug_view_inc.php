@@ -89,8 +89,6 @@ require_api( 'tag_api.php' );
 require_api( 'utility_api.php' );
 require_api( 'version_api.php' );
 
-require_css( 'status_config.php' );
-
 /**
  * Variables defined in parent script including this one.
  * @var string $t_mantis_dir

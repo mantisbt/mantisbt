@@ -3,7 +3,7 @@ var form_fields = new Array();
 var serialized_form_fields = new Array();
 $(document).ready(function(){
 	$('#filter-toggle').on('click', function (event) {
-		$('#filter-bar-queries').toggle();
+		$('#filter-bar-queries').toggleClass('hide');
 	});
 
 	$('#filter-bar-search-txt').on('change', function (event) {
