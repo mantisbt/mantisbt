@@ -14,8 +14,10 @@ import tempfile
 options = "hcdv:s:"
 long_options = ["help", "clean", "docbook", "version=", "suffix="]
 
-# Absolute path to docbook-manual.py
-manualscript = path.dirname(path.abspath(__file__)) + '/docbook-manual.py'
+# Absolute path to helper scripts
+builds_dir = path.dirname(path.abspath(__file__))
+dump_eol_script = builds_dir + '/download_endoflife_data.php'
+manualscript = builds_dir + '/docbook-manual.py'
 
 # List of files and dirs to exclude from the release tarball
 exclude_list = (
@@ -291,6 +293,11 @@ def main():
                    fr"s/(g_version_suffix\s*=\s*)'.*'/\1'{version_suffix}'/",
                    path.join(release_dir, "config_defaults_inc.php")]
         subprocess.run(sed_cmd, check=True)
+
+    # Download local end-of-life data for offline use
+#     print(os.curdir)
+#     subprocess.call( 'php -r "echo getcwd();"', shell=True )
+    subprocess.call( f'php {dump_eol_script}', shell=True )
 
     # Build documentation for release
     if build_docbook:
