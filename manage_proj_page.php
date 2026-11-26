@@ -65,12 +65,69 @@ auth_reauthenticate();
 
 $f_sort	= gpc_get_string( 'sort', 'name' );
 $f_dir	= gpc_get_string( 'dir', 'ASC' );
+$f_search = trim( gpc_get_string( 'search', '' ) );
 
 if( 'ASC' == $f_dir ) {
 	$t_direction = ASCENDING;
 } else {
 	$t_direction = DESCENDING;
 }
+
+# Break up search terms by spacing or quoting, paying attention to negation
+# (same syntax as the Manage Users page): term => true if negated
+$t_search_terms = [];
+preg_match_all( "/-?([^'\"\s]+|\"[^\"]+\"|'[^']+')/", $f_search, $t_matches, PREG_SET_ORDER );
+foreach( $t_matches as $t_match ) {
+	$t_search_terms[trim( $t_match[1], "\'\"" )] = ( $t_match[0][0] == '-' );
+}
+
+$t_manage_project_threshold = config_get( 'manage_project_threshold' );
+
+/**
+ * Determine whether a project row must be displayed when filtering.
+ *
+ * A project is shown if the user can manage it and its name or description
+ * matches all search terms, or if any of its subprojects is shown, so that
+ * matching subprojects keep their place in the hierarchy.
+ *
+ * @param integer $p_project_id Project id.
+ * @param array   $p_terms      Search terms (term => true if negated).
+ * @param integer $p_threshold  Access level needed to manage the project.
+ * @param array   $p_cache      Results already computed (project id => bool).
+ * @return boolean
+ */
+function manage_proj_page_is_visible( $p_project_id, array $p_terms, $p_threshold, array &$p_cache ) {
+	if( isset( $p_cache[$p_project_id] ) ) {
+		return $p_cache[$p_project_id];
+	}
+
+	$t_visible = false;
+	if( access_has_project_level( $p_threshold, $p_project_id ) ) {
+		$t_project = project_get_row( $p_project_id );
+		$t_visible = true;
+		foreach( $p_terms as $t_term => $t_negate ) {
+			$t_found = mb_stripos( $t_project['name'], $t_term ) !== false
+				|| mb_stripos( $t_project['description'], $t_term ) !== false;
+			if( $t_found == $t_negate ) {
+				$t_visible = false;
+				break;
+			}
+		}
+	}
+
+	if( !$t_visible ) {
+		foreach( project_hierarchy_get_subprojects( $p_project_id, true ) as $t_subproject_id ) {
+			if( manage_proj_page_is_visible( $t_subproject_id, $p_terms, $p_threshold, $p_cache ) ) {
+				$t_visible = true;
+				break;
+			}
+		}
+	}
+
+	return $p_cache[$p_project_id] = $t_visible;
+}
+
+$t_visibility_cache = [];
 
 layout_page_header( lang_get( 'manage_projects_link' ) );
 
@@ -93,6 +150,7 @@ print_manage_menu( 'manage_proj_page.php' );
 	<div class="widget-body">
 	<div class="widget-main no-padding">
 	<div class="widget-toolbox padding-8 clearfix">
+		<div class="pull-left">
 		<?php
 		# Check the user's global access level before allowing project creation
 		if( access_has_global_level ( config_get( 'create_project_threshold' ) ) ) {
@@ -104,6 +162,25 @@ print_manage_menu( 'manage_proj_page.php' );
 				'btn btn-primary btn-white btn-round'
 			);
 		} ?>
+		</div>
+		<div class="pull-right">
+		<form id="manage-proj-filter" method="get" action="manage_proj_page.php" class="form-inline">
+			<fieldset>
+				<?php # CSRF protection not required here - form does not result in modifications ?>
+				<input type="hidden" name="sort" value="<?php echo string_attribute( $f_sort ) ?>" />
+				<input type="hidden" name="dir" value="<?php echo ASCENDING == $t_direction ? 'ASC' : 'DESC' ?>" />
+				<label for="search">
+					<input id="search" type="text" size="45" name="search" class="input-sm"
+						value="<?php echo string_attribute( $f_search ) ?>"
+						placeholder="<?php echo lang_get( 'search_project_hint' ) ?>"
+					/>
+				</label>
+				<input type="submit" class="btn btn-primary btn-sm btn-white btn-round"
+					value="<?php echo lang_get( 'filter_button' ) ?>"
+				/>
+			</fieldset>
+		</form>
+		</div>
 	</div>
 	<div class="table-responsive">
 	<table class="table table-striped table-bordered table-condensed table-hover">
@@ -114,7 +191,8 @@ print_manage_menu( 'manage_proj_page.php' );
 						'manage_proj_page.php', lang_get( 'name' ),
 						'name',
 						$t_direction,
-						$f_sort
+						$f_sort,
+						$f_search
 					);
 					print_sort_icon( $t_direction, $f_sort, 'name' ); ?>
 				</th>
@@ -124,7 +202,8 @@ print_manage_menu( 'manage_proj_page.php' );
 						lang_get( 'status' ),
 						'status',
 						$t_direction,
-						$f_sort
+						$f_sort,
+						$f_search
 					);
 					print_sort_icon( $t_direction, $f_sort, 'status' ); ?>
 				</th>
@@ -134,7 +213,8 @@ print_manage_menu( 'manage_proj_page.php' );
 						lang_get( 'enabled' ),
 						'enabled',
 						$t_direction,
-						$f_sort
+						$f_sort,
+						$f_search
 					);
 					print_sort_icon( $t_direction, $f_sort, 'enabled' ); ?>
 				</th>
@@ -144,7 +224,8 @@ print_manage_menu( 'manage_proj_page.php' );
 						lang_get( 'view_status' ),
 						'view_state',
 						$t_direction,
-						$f_sort
+						$f_sort,
+						$f_search
 					);
 					print_sort_icon( $t_direction, $f_sort, 'view_state' ); ?>
 				</th>
@@ -154,7 +235,8 @@ print_manage_menu( 'manage_proj_page.php' );
 						lang_get( 'description' ),
 						'description',
 						$t_direction,
-						$f_sort
+						$f_sort,
+						$f_search
 					);
 					print_sort_icon( $t_direction, $f_sort, 'description' ); ?>
 				</th>
@@ -163,11 +245,14 @@ print_manage_menu( 'manage_proj_page.php' );
 
 		<tbody>
 <?php
-		$t_manage_project_threshold = config_get( 'manage_project_threshold' );
 		$t_projects = user_get_accessible_projects( auth_get_current_user_id(), true );
 		$t_full_projects = array();
 		foreach ( $t_projects as $t_project_id ) {
-			$t_full_projects[] = project_get_row( $t_project_id );
+			if( empty( $t_search_terms )
+				|| manage_proj_page_is_visible( $t_project_id, $t_search_terms, $t_manage_project_threshold, $t_visibility_cache )
+			) {
+				$t_full_projects[] = project_get_row( $t_project_id );
+			}
 		}
 		$t_projects = multi_sort( $t_full_projects, $f_sort, $t_direction );
 		$t_stack = array( $t_projects );
@@ -207,7 +292,11 @@ print_manage_menu( 'manage_proj_page.php' );
 			if( 0 < count( $t_subprojects ) ) {
 				$t_full_projects = array();
 				foreach ( $t_subprojects as $t_project_id ) {
-					$t_full_projects[] = project_get_row( $t_project_id );
+					if( empty( $t_search_terms )
+						|| manage_proj_page_is_visible( $t_project_id, $t_search_terms, $t_manage_project_threshold, $t_visibility_cache )
+					) {
+						$t_full_projects[] = project_get_row( $t_project_id );
+					}
 				}
 				$t_subprojects = multi_sort( $t_full_projects, $f_sort, $t_direction );
 				array_unshift( $t_stack, $t_subprojects );
