@@ -414,10 +414,11 @@ function print_tag_attach_form( $p_bug_id, $p_string = '' ) {
  *                          otherwise tags attached to the given bug will
  *                          be excluded.
  * @param string  $p_string Default contents of the input box.
+ * @param integer $p_project_id Project to list the tags of when there is no bug id.
  *
  * @return void
  */
-function print_tag_input( $p_bug_id = 0, $p_string = '' ) {
+function print_tag_input( $p_bug_id = 0, $p_string = '', $p_project_id = ALL_PROJECTS ) {
 ?>
 	<label class="inline small">
 		<?php printf( lang_get( 'tag_separate_by' ), config_get( 'tag_separator' ) )?>
@@ -427,7 +428,7 @@ function print_tag_input( $p_bug_id = 0, $p_string = '' ) {
 		   class="input-sm" size="40" <?php echo helper_get_tab_index(); ?>
 		   value="<?php echo string_attribute( $p_string )?>" />
 	<select class="input-sm" <?php echo helper_get_tab_index()?> name="tag_select" id="tag_select">
-		<?php print_tag_option_list( $p_bug_id );?>
+		<?php print_tag_option_list( $p_bug_id, $p_project_id );?>
 	</select>
 <?php
 }
@@ -466,12 +467,20 @@ function print_tagging_errors_table( $p_tags_failed ) {
 
 /**
  * Print the drop-down combo-box of existing tags.
- * When passed a bug ID, the option list will not contain any tags attached to the given bug.
- * @param integer $p_bug_id A bug identifier.
+ * When passed a bug ID, the option list will not contain any tags attached to the given bug,
+ * and only has the tags available in the project of the bug.
+ * Otherwise, it has the tags available in the given project, or all tags for ALL_PROJECTS.
+ * With $p_filter, it has the tags to filter issues of the given project and its subprojects.
+ * A tag name is listed once, as selecting it adds the name to the tag input.
+ * @param integer $p_bug_id     A bug identifier.
+ * @param integer $p_project_id A project identifier, used when there is no bug identifier.
+ * @param boolean $p_filter     True to list the tags for filtering issues.
  * @return void
  */
-function print_tag_option_list( $p_bug_id = 0 ) {
-	$t_rows = tag_get_candidates_for_bug( $p_bug_id );
+function print_tag_option_list( $p_bug_id = 0, $p_project_id = ALL_PROJECTS, $p_filter = false ) {
+	$t_rows = $p_filter
+		? tag_get_candidates_for_filter( $p_project_id )
+		: tag_get_candidates_for_bug( $p_bug_id, $p_project_id );
 
 	echo '<option value="0">', string_html_specialchars( lang_get( 'tag_existing' ) ), '</option>';
 	foreach ( $t_rows as $t_row ) {

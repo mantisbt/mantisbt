@@ -216,6 +216,66 @@ http://www.example.com/mantisbt/project_page.php?project_id=1
         </para>
     </section>
 
+    <section id="admin.project.tags">
+        <title>Tags</title>
+
+        <para>
+            Tags are free-form labels that can be attached to issues and used to filter them.  A tag is either
+            <emphasis>global</emphasis> or <emphasis>scoped to a project</emphasis>.  Global tags can be used on
+            issues of any project, while a project tag can only be used on issues of that project and, if
+            $g_subprojects_inherit_tags is ON, of its sub-projects.
+        </para>
+
+        <itemizedlist>
+            <listitem><para>
+                Global tags are managed from <emphasis>Manage &gt; Tags</emphasis>.  Tags scoped to a project are
+                managed from the <emphasis>Tags</emphasis> section of the <emphasis>Manage Project</emphasis> page,
+                below the categories.  Like for categories, several tags can be added at once by separating their names
+                with $g_tag_separator, and <emphasis>Add and Edit Tag</emphasis> opens the edit page of the new tag.
+                Like categories and versions, tags can be copied from or to another project.
+                Global tags are not copied.  The tags inherited from parent projects are copied too, unless
+                <emphasis>Exclude inherited</emphasis> is checked.  Tags whose names already exist in the target
+                project are left unchanged.
+            </para></listitem>
+            <listitem><para>
+                When an issue is tagged with a name that doesn't exist yet, the tag is created in the project of the
+                issue.  This applies to the web interface, group actions, the REST API and the SOAP API.  It requires
+                $g_tag_create_threshold in that project.
+            </para></listitem>
+            <listitem><para>
+                When a name exists as several tags that are available to the project of the issue, the nearest
+                one is used: the tag of the project, then the tags of its parent projects (if inherited), then the
+                global tag.
+            </para></listitem>
+            <listitem><para>
+                Tag names must be unique within a project, or among global tags.  The same name can be used for a
+                global tag and for tags of different projects.
+            </para></listitem>
+            <listitem><para>
+                A tag can be moved to a project, or made global, from the <emphasis>Update Tag</emphasis> page.  A
+                tag can always be made global, but it can only be scoped to a project if all the issues using it
+                belong to that project, or to sub-projects that inherit its tags.
+            </para></listitem>
+            <listitem><para>
+                When an issue is moved to another project, its tags that are available in the target project are kept.
+                A tag that is not available is replaced by the tag with the same name that is available in the
+                target project.  If there is none, the tag is removed from the issue.
+            </para></listitem>
+            <listitem><para>
+                In the View Issues filter, the tags offered for a project are the global tags, the tags of the
+                project and of its parent projects (if inherited), and the tags of its sub-projects.  For
+                <emphasis>All Projects</emphasis>, the tags of all the projects the user can access are offered.
+                Filtering by a tag name matches the issues having any tag with that name.
+            </para></listitem>
+        </itemizedlist>
+
+        <para>
+            Access to tags is controlled by the $g_tag_*_threshold configuration options.  The create, edit and
+            delete thresholds of a project tag are checked against the access level of the user in that project,
+            while those of a global tag are checked against the global access level of the user.
+        </para>
+    </section>
+
     <section id="admin.project.timetracking">
         <title>Time Tracking</title>
 

@@ -388,6 +388,7 @@
    <xsd:element name="user_id" type="tns:AccountData" minOccurs="0"/>
    <xsd:element name="name" type="xsd:string" minOccurs="0"/>
    <xsd:element name="description" type="xsd:string" minOccurs="0"/>
+   <xsd:element name="project" type="tns:ObjectRef" minOccurs="0"/>
    <xsd:element name="date_created" type="xsd:dateTime" minOccurs="0"/>
    <xsd:element name="date_updated" type="xsd:dateTime" minOccurs="0"/>
   </xsd:all>

@@ -56,6 +56,9 @@ function mc_tag_get_all( $p_username, $p_password, $p_page_number, $p_per_page )
 		$t_tag['user_id'] = mci_account_get_array_by_id( $t_tag['user_id'] );
 		$t_tag['date_created'] = ApiObjectFactory::datetime( $t_tag['date_created'] );
 		$t_tag['date_updated'] = ApiObjectFactory::datetime( $t_tag['date_updated'] );
+		# Global tags have no project
+		$t_tag['project'] = $t_tag['project_id'] == ALL_PROJECTS ? null : mci_project_as_array_by_id( $t_tag['project_id'] );
+		unset( $t_tag['project_id'] );
 		$t_results[] = $t_tag;
 	}
 
@@ -73,6 +76,8 @@ function mc_tag_get_all( $p_username, $p_password, $p_page_number, $p_per_page )
 /**
  * Creates a tag
  *
+ * The tag is global unless a project is specified.
+ *
  * @param string   $p_username The user's username.
  * @param string   $p_password The user's password.
  * @param stdClass $p_tag      The tag to create.
@@ -85,13 +90,18 @@ function mc_tag_add( $p_username, $p_password, stdClass $p_tag ) {
 		return mci_fault_login_failed();
 	}
 
-	if( !access_has_global_level( config_get( 'tag_create_threshold' ) ) ) {
-		return mci_fault_access_denied( $t_user_id );
-	}
-
 	$t_valid_matches = array();
 
 	$p_tag = ApiObjectFactory::objectToArray( $p_tag );
+
+	$t_project_id = isset( $p_tag['project'] ) ? mci_get_project_id( $p_tag['project'] ) : ALL_PROJECTS;
+	if( $t_project_id != ALL_PROJECTS && !project_exists( $t_project_id ) ) {
+		return ApiObjectFactory::faultNotFound( 'No project with id ' . $t_project_id );
+	}
+
+	if( !tag_can_create( $t_user_id, $t_project_id ) ) {
+		return mci_fault_access_denied( $t_user_id );
+	}
 
 	$t_tag_name = $p_tag['name'];
 	$t_tag_description = array_key_exists( 'description', $p_tag ) ? $p_tag['description'] : '';
@@ -100,13 +110,13 @@ function mc_tag_add( $p_username, $p_password, stdClass $p_tag ) {
 		return ApiObjectFactory::faultBadRequest( 'Invalid tag name : "' . $t_tag_name . '"' );
 	}
 
-	$t_matching_by_name = tag_get_by_name( $t_tag_name );
-	if( $t_matching_by_name != false ) {
+	if( !tag_is_unique( $t_tag_name, $t_project_id ) ) {
+		$t_matching_by_name = tag_get_by_name( $t_tag_name, $t_project_id );
 		return ApiObjectFactory::faultConflict( 'A tag with the same name already exists , id: ' . $t_matching_by_name['id'] );
 	}
 
 	log_event( LOG_WEBSERVICE, 'creating tag \'' . $t_tag_name . '\' for user \'' . $t_user_id . '\'' );
-	return tag_create( $t_tag_name, $t_user_id, $t_tag_description );
+	return tag_create( $t_tag_name, $t_user_id, $t_tag_description, $t_project_id );
 }
 
 /**
@@ -167,7 +177,7 @@ function mci_tag_set_for_issue ( $p_issue_id, array $p_tags, $p_user_id ) {
 				);
 			}
 		} else if( isset( $t_tag['name'] ) ) {
-			$t_get_tag = tag_get_by_name( $t_tag['name'] );
+			$t_get_tag = tag_get_by_name( $t_tag['name'], bug_get_field( $p_issue_id, 'project_id' ) );
 			if( $t_get_tag === false ) {
 				throw new ClientException(
 					"Tag '{$t_tag['name']}' not found.",

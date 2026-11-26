@@ -215,7 +215,7 @@ function mci_issue_get_history( $p_issue_id, $p_user_id, $p_lang ) {
 			switch( $p_type ) {
 				case TAG_ATTACHED:
 				case TAG_DETACHED:
-					$t_tag = tag_get_by_name( $p_value );
+					$t_tag = tag_get_by_name( $p_value, bug_get_field( $p_issue_id, 'project_id' ) );
 					if( $t_tag === false ) {
 						return array( 'name' => $p_value );
 					}

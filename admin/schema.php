@@ -912,6 +912,11 @@ $g_upgrade[214] = array( 'UpdateFunction', 'delete_orphaned_private_filters' );
 # Delete table print preferences table (unused since 2009)
 $g_upgrade[215] = array( 'DropTableSQL', array( db_get_table( 'user_print_pref' ) ) );
 
+# Scope tags to projects. 0 (ALL_PROJECTS) means the tag is global.
+$g_upgrade[216] = array( 'AddColumnSQL', array( db_get_table( 'tag' ), "
+	project_id				I		UNSIGNED NOTNULL DEFAULT '0'" ) );
+$g_upgrade[217] = array( 'CreateIndexSQL', array( 'idx_tag_project_name', db_get_table( 'tag' ), 'project_id, name', array( 'UNIQUE' ) ) );
+
 # ----------------------------------------------------------------------------
 # End of schema definition, clear local variables
 #

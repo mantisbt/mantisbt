@@ -57,6 +57,11 @@ class TagAttachCommand extends Command {
 	private $user_id;
 
 	/**
+	 * @var integer id of the project of the issue.  Tags are resolved in, and new tags are created for, this project.
+	 */
+	private $project_id;
+
+	/**
 	 * @var array Array of tag names to be added.
 	 */
 	private $tagsToCreate = array();
@@ -81,8 +86,8 @@ class TagAttachCommand extends Command {
 		$this->user_id = auth_get_current_user_id();
 		bug_ensure_exists( $this->issue_id );
 
-		$t_project_id = bug_get_field( $this->issue_id, 'project_id' );
-		$t_tag_attach_threshold = config_get( 'tag_attach_threshold', null, null, $t_project_id );
+		$this->project_id = bug_get_field( $this->issue_id, 'project_id' );
+		$t_tag_attach_threshold = config_get( 'tag_attach_threshold', null, null, $this->project_id );
 
 		if( !access_has_bug_level( $t_tag_attach_threshold, $this->issue_id, $this->user_id ) ) {
 			throw new ClientException( 'Access denied to attach tags', ERROR_ACCESS_DENIED );
@@ -93,14 +98,15 @@ class TagAttachCommand extends Command {
 			throw new ClientException( 'Invalid tags array', ERROR_INVALID_FIELD_VALUE, array( 'tags' ) );
 		}
 
-		$t_can_create = access_has_global_level( config_get( 'tag_create_threshold' ) );
+		$t_can_create = tag_can_create( $this->user_id, $this->project_id );
 
 		foreach( $t_tags as $t_tag ) {
 			if( isset( $t_tag['id'] ) ) {
 				tag_ensure_exists( $t_tag['id'] );
+				tag_ensure_available_in_project( $t_tag['id'], $this->project_id );
 				$this->tagsToAttach[] = (int)$t_tag['id'];
 			} else if( isset( $t_tag['name'] ) ) {
-				$t_tag_row = tag_get_by_name( $t_tag['name'] );
+				$t_tag_row = tag_get_by_name( $t_tag['name'], $this->project_id );
 				if( $t_tag_row === false ) {
 					if( $t_can_create ) {
 						if( !in_array( $t_tag['name'], $this->tagsToCreate ) ) {
@@ -140,7 +146,7 @@ class TagAttachCommand extends Command {
 
 		# Create new tags and then attach them
 		foreach( $this->tagsToCreate as $t_tag_name ) {
-			$t_tag_id = tag_create( $t_tag_name, $this->user_id );
+			$t_tag_id = tag_create( $t_tag_name, $this->user_id, '', $this->project_id );
 			if( !tag_bug_is_attached( $t_tag_id, $this->issue_id ) ) {
 				tag_bug_attach( $t_tag_id, $this->issue_id, $this->user_id );
 				$t_attached_tags[] = tag_get( $t_tag_id );

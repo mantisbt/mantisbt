@@ -70,9 +70,16 @@ $t_redirect_page = parse_url(
 $t_name = string_attribute( $t_tag_row['name'] );
 $t_description = string_display( $t_tag_row['description'] );
 
-if( !( access_has_global_level( config_get( 'tag_edit_threshold' ) )
+if( $t_redirect_page == 'manage_proj_edit_page.php' ) {
+	$t_return_url = $t_redirect_page . '?project_id=' . $t_tag_row['project_id'] . '#tags';
+} else {
+	$t_return_url = $t_redirect_page . '?tag_id=' . $f_tag_id;
+}
+
+$t_can_edit = tag_access_has_level( config_get( 'tag_edit_threshold' ), $t_tag_row['project_id'] );
+if( !( $t_can_edit
 	|| ( auth_get_current_user_id() == $t_tag_row['user_id'] )
-		&& access_has_global_level( config_get( 'tag_edit_own_threshold' ) ) ) ) {
+		&& tag_access_has_level( config_get( 'tag_edit_own_threshold' ), $t_tag_row['project_id'] ) ) ) {
 	access_denied();
 }
 
@@ -93,7 +100,7 @@ layout_page_begin();
 		<div class="widget-body">
 		<div class="widget-main no-padding">
 		<div class="widget-toolbox padding-8 clearfix">
-			<?php print_link_button( $t_redirect_page . '?tag_id=' . $f_tag_id,
+			<?php print_link_button( $t_return_url,
 				lang_get( 'tag_update_return' ),
 				'btn-sm pull-right' );
 			?>
@@ -135,8 +142,39 @@ layout_page_begin();
 				</td>
 			</tr>
 			<tr>
+				<td class="category">
+					<label for="tag-project-id"><?php echo lang_get( 'tag_project' ) ?></label>
+				</td>
+				<td>
+					<select id="tag-project-id" name="project_id" class="input-sm" <?php echo helper_get_tab_index() ?>>
+<?php
+	# A tag can only be scoped to a project if all the issues using it belong to that project or its subprojects
+	$t_tag_project_id = (int)$t_tag_row['project_id'];
+	$t_used_project_ids = tag_get_project_ids_used( $f_tag_id );
+	$t_target_ids = array( ALL_PROJECTS );
+	foreach( user_get_all_accessible_projects() as $t_project_id ) {
+		if( $t_project_id == $t_tag_project_id || tag_can_move_to_project( $f_tag_id, $t_project_id ) ) {
+			$t_target_ids[] = (int)$t_project_id;
+		}
+	}
+	foreach( array_unique( $t_target_ids ) as $t_project_id ) {
+		$t_project_name = $t_project_id == ALL_PROJECTS ? lang_get( 'all_projects' ) : project_get_name( $t_project_id, false );
+		echo '<option value="', $t_project_id, '"';
+		check_selected( $t_tag_project_id, $t_project_id );
+		echo '>', string_attribute( $t_project_name ), '</option>';
+	}
+?>
+					</select>
+<?php
+	if( count( $t_used_project_ids ) > 1 ) {
+		echo '<small>', lang_get( 'tag_project_locked' ), '</small>';
+	}
+?>
+				</td>
+			</tr>
+			<tr>
 				<?php
-				if( access_has_global_level( config_get( 'tag_edit_threshold' ) ) ) {
+				if( $t_can_edit ) {
 					echo '<td class="category">', lang_get( 'owner' ), '</td>';
 					echo '<td><select ', helper_get_tab_index(), ' id="tag-user-id" name="user_id" class="input-sm">';
 					print_user_option_list( (int)$t_tag_row['user_id'],

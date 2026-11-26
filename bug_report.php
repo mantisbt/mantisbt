@@ -115,7 +115,7 @@ if( !is_blank( $f_tag_string ) ) {
 	$t_tag_string = is_blank( $t_tag_string ) ? $f_tag_string : ',' . $f_tag_string;
 }
 
-$t_tags = tag_parse_string( $t_tag_string );
+$t_tags = tag_parse_string( $t_tag_string, $t_project_id );
 if( !empty( $t_tags ) ) {
 	$t_issue['tags'] = array();
 	foreach( $t_tags as $t_tag ) {
