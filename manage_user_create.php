@@ -72,10 +72,14 @@ if( $f_password != $f_password_verify ) {
 }
 
 # Password won't be sent by email. It is entered by the admin
-# Now, if the password is empty, confirm that that is what we wanted
-if( is_blank( $f_password ) && (
-	ON != config_get( 'send_reset_password' ) ||
-	ON != config_get( 'enable_email_notification' ) )
+# Now, if the password is empty, confirm that that is what we wanted.
+# With LDAP authentication the local password is never used, so the form does
+# not offer the field and there is nothing to confirm.
+if( is_blank( $f_password )
+	&& LDAP != config_get_global( 'login_method' )
+	&& (
+		ON != config_get( 'send_reset_password' ) ||
+		ON != config_get( 'enable_email_notification' ) )
 ) {
 	helper_ensure_confirmed(
 		lang_get( 'empty_password_sure_msg' ),
